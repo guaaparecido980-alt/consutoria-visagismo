@@ -21,8 +21,8 @@
             background-clip: text;
         }
         .bg-gold { background-color: #a08c5c; }
-        .faq-item { border: 1px solid #27272a; transition: all 0.3s ease; }
-        .faq-item:hover { border-color: #dccfa1; background-color: #0f0f0f; transform: scale(1.01); }
+        .faq-item { border: 1px solid #27272a; transition: all 0.3s ease; background-color: #0a0a0a; }
+        .faq-item:hover { border-color: #dccfa1; background-color: #111; transform: scale(1.01); }
         .faq-item:hover summary { color: #dccfa1; }
         #modal-politica { display: none; position: fixed; inset: 0; z-index: 100; background-color: #050505; overflow-y: auto; }
         .btn-animate { animation: pulse 2s infinite; }
@@ -39,21 +39,21 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <span class="text-xl font-bold tracking-widest gold-gradient-text uppercase">Wagner Alves</span>
             <nav class="flex gap-4 md:gap-8 text-[10px] md:text-sm font-medium tracking-widest text-zinc-400">
-                <a href="#inicio" class="hover:text-gold transition uppercase">Início</a>
-                <a href="#transformacoes" class="hover:text-gold transition uppercase">Transformações</a>
-                <a href="#sobre" class="hover:text-gold transition uppercase">Sobre</a>
-                <a href="#contato" class="hover:text-gold transition uppercase">Contato</a>
-                <a href="#duvidas" class="hover:text-gold transition uppercase">Dúvidas</a>
+                <a href="#inicio" class="hover:text-gold transition uppercase font-bold">Início</a>
+                <a href="#transformacoes" class="hover:text-gold transition uppercase font-bold text-center">Transformações</a>
+                <a href="#sobre" class="hover:text-gold transition uppercase font-bold">Sobre</a>
+                <a href="#contato" class="hover:text-gold transition uppercase font-bold">Contato</a>
+                <a href="#duvidas" class="hover:text-gold transition uppercase font-bold">Dúvidas</a>
             </nav>
         </div>
     </header>
 
-    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-32 pb-12 px-6 text-center md:text-left">
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-32 pb-12 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div data-aos="fade-up" data-aos-duration="1000">
+            <div data-aos="fade-up" data-aos-duration="1000" class="text-center md:text-left">
                 <h1 class="text-5xl md:text-8xl leading-tight font-medium text-white mb-8">Sua imagem está<br><span class="gold-gradient-text italic font-bold">sabotando</span> sua autoridade?</h1>
-                <p class="text-zinc-400 text-2xl mb-10">Consultoria de Visagismo Masculino em Curitiba com expertise de <span class="text-white font-bold">20 anos</span>.</p>
-                <a href="https://wa.me/5541999682982" class="btn-animate inline-block bg-white text-black px-10 py-5 rounded-lg font-black text-xl hover:bg-zinc-200 transition">QUERO MINHA MELHOR VERSÃO</a>
+                <p class="text-zinc-400 text-2xl mb-10 leading-relaxed">Consultoria de Visagismo Masculino em Curitiba com expertise de <span class="text-white font-bold text-3xl">20 anos</span>.</p>
+                <a href="https://wa.me/5541999682982" class="btn-animate inline-block bg-white text-black px-12 py-5 rounded-lg font-black text-xl hover:bg-zinc-200 transition">QUERO MINHA MELHOR VERSÃO</a>
             </div>
             <div class="flex justify-center" data-aos="zoom-in" data-aos-duration="1200">
                 <img src="./foto-wagner.jpg" class="w-full max-w-md rounded-[2.5rem] border-2 border-[#a08c5c]/50 shadow-2xl">
@@ -63,20 +63,20 @@
 
     <section id="transformacoes" class="py-28 bg-[#0a0a0a]">
         <div class="max-w-7xl mx-auto px-6 text-center mb-20" data-aos="fade-up">
-            <h2 class="text-6xl text-white mb-6">A Transformação</h2>
+            <h2 class="text-6xl text-white mb-6 italic">A Transformação</h2>
             <div class="w-32 h-1 bg-gold mx-auto"></div>
         </div>
         <div class="grid md:grid-cols-3 gap-12 max-w-7xl mx-auto px-6">
             <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-                <img src="./antes-depois-ia-1.png" class="rounded-3xl border border-zinc-800 mb-6">
+                <img src="./antes-depois-ia-1.png" class="rounded-3xl border border-zinc-800 mb-6 shadow-lg">
                 <h3 class="text-4xl gold-gradient-text font-bold uppercase">Autoridade</h3>
             </div>
             <div class="text-center" data-aos="fade-up" data-aos-delay="300">
-                <img src="./antes-depois-ia-2.png" class="rounded-3xl border border-zinc-800 mb-6">
+                <img src="./antes-depois-ia-2.png" class="rounded-3xl border border-zinc-800 mb-6 shadow-lg">
                 <h3 class="text-4xl gold-gradient-text font-bold uppercase">Confiança</h3>
             </div>
             <div class="text-center" data-aos="fade-up" data-aos-delay="500">
-                <img src="./antes-depois-ia-3.png" class="rounded-3xl border border-zinc-800 mb-6">
+                <img src="./antes-depois-ia-3.png" class="rounded-3xl border border-zinc-800 mb-6 shadow-lg">
                 <h3 class="text-4xl gold-gradient-text font-bold uppercase">Harmonia</h3>
             </div>
         </div>
@@ -85,15 +85,15 @@
     <section id="sobre" class="py-28 bg-[#050505]">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="relative group" data-aos="fade-right">
-                <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 grayscale">
+                <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 grayscale shadow-2xl">
                 <div class="absolute -bottom-4 -right-4 bg-gold px-6 py-2 rounded-lg font-bold text-black text-sm uppercase">20 Anos de Experiência</div>
             </div>
-            <div data-aos="fade-left">
-                <h2 class="text-6xl text-white italic font-medium mb-6">O Consultor</h2>
-                <div class="w-24 h-1 bg-gold mb-10"></div>
+            <div data-aos="fade-left" class="space-y-8">
+                <h2 class="text-6xl text-white italic font-medium leading-tight">O Consultor</h2>
+                <div class="w-24 h-1 bg-gold"></div>
                 <div class="space-y-6 text-zinc-300 text-xl leading-relaxed text-justify">
-                    <p>Com uma trajetória sólida de <span class="text-white font-bold">20 anos</span>, Wagner Alves transcende a barbearia convencional. Sua expertise domina a complexa ciência do <span class="gold-gradient-text font-bold">Visagismo Masculino</span>.</p>
-                    <p>Cada análise técnica é um mergulho profundo nas proporções áureas, resultando em uma imagem que comunica <span class="text-white font-bold italic">autoridade imediata e sofisticação natural</span>.</p>
+                    <p>Com uma trajetória sólida de <span class="text-white font-bold text-2xl">20 anos de excelência</span>, Wagner Alves transcende a barbearia convencional para entregar uma mentoria de imagem estratégica única.</p>
+                    <p>Seu método une as proporções áureas ao comportamento humano, criando uma <span class="text-white font-bold italic underline decoration-gold">assinatura visual exclusiva</span> para homens de sucesso.</p>
                 </div>
             </div>
         </div>
@@ -103,13 +103,23 @@
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="space-y-12" data-aos="fade-right">
                 <h2 class="text-6xl text-white italic font-medium">Localização</h2>
-                <div class="space-y-8">
-                    <div class="flex gap-6 items-center"><i class="fas fa-map-marker-alt text-gold text-3xl w-10"></i> <p class="text-2xl">Rua Jacarezinho, 21 - Mercês, Curitiba</p></div>
-                    <div class="flex gap-6 items-center"><i class="fas fa-phone-alt text-gold text-3xl w-10"></i> <p class="text-2xl">(41) 99968-2982</p></div>
+                <div class="space-y-10">
+                    <div class="flex gap-6 items-center">
+                        <i class="fas fa-map-marker-alt text-gold text-3xl w-10 text-center"></i> 
+                        <p class="text-2xl text-zinc-100">Rua Jacarezinho, 21 - Mercês, Curitiba</p>
+                    </div>
+                    <div class="flex gap-6 items-center">
+                        <i class="fas fa-phone-alt text-gold text-3xl w-10 text-center"></i> 
+                        <p class="text-2xl text-zinc-100">(41) 99968-2982</p>
+                    </div>
+                    <div class="flex gap-6 items-center">
+                        <i class="fas fa-envelope text-gold text-3xl w-10 text-center"></i> 
+                        <p class="text-xl text-zinc-100 font-light">Wagnerbarbeiro15@gmail.com</p>
+                    </div>
                 </div>
             </div>
-            <div class="w-full h-[400px] rounded-3xl overflow-hidden border-2 border-zinc-800 shadow-2xl" data-aos="zoom-in">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.456673539956!2d-49.29747752371426!3d-25.42296433256087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce40916e78807%3A0xe54d6350f555132d!2sR.%20Jacarezinho%2C%2021%20-%20Merc%C3%AAs%2C%20Curitiba%20-%20PR%2C%2080710-150!5e0!3m2!1spt-BR!2sbr!4v1711654400000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="w-full h-[450px] rounded-3xl overflow-hidden border-2 border-zinc-800 shadow-2xl" data-aos="zoom-in">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.415849852233!2d-49.294154424610115!3d-25.424367377565773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce4080e461875%3A0x6a0532f831346f05!2sRua%20Jacarezinho%2C%2021%20-%20Merc%C3%AAs%2C%20Curitiba%20-%20PR%2C%2080710-150!5e0!3m2!1spt-BR!2sbr!4v1711928000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -118,42 +128,42 @@
         <div class="max-w-4xl mx-auto px-6">
             <h2 class="text-6xl text-white mb-20 italic text-center" data-aos="fade-up">Dúvidas Frequentes</h2>
             <div class="space-y-5">
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                <details class="faq-item group rounded-2xl" data-aos="fade-up" data-aos-delay="100">
                     <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
                         O Visagismo é apenas para o corte?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
                     <div class="px-7 pb-7 text-zinc-400 text-lg">Não. O visagismo analisa o rosto, barba, sobrancelhas e até óculos para criar um visual coerente com sua autoridade.</div>
                 </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+                <details class="faq-item group rounded-2xl" data-aos="fade-up" data-aos-delay="200">
                     <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
                         Quanto tempo dura a sessão?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
                     <div class="px-7 pb-7 text-zinc-400 text-lg">Uma sessão de consultoria estratégica leva em média 60 a 90 minutos de atenção técnica exclusiva.</div>
                 </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                <details class="faq-item group rounded-2xl" data-aos="fade-up" data-aos-delay="300">
                     <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
                         Onde é o atendimento?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
                     <div class="px-7 pb-7 text-zinc-400 text-lg">O atendimento é realizado de forma privada na Rua Jacarezinho, 21 - Mercês, Curitiba.</div>
                 </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up" data-aos-delay="400">
+                <details class="faq-item group rounded-2xl" data-aos="fade-up" data-aos-delay="400">
                     <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
                         Qual a diferença entre barbeiro e visagista?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
                     <div class="px-7 pb-7 text-zinc-400 text-lg">O barbeiro executa. O visagista planeja. Estudamos sua imagem para que ela trabalhe a seu favor.</div>
                 </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up" data-aos-delay="500">
+                <details class="faq-item group rounded-2xl" data-aos="fade-up" data-aos-delay="500">
                     <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
                         Ajuda na escolha de óculos?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
                     <div class="px-7 pb-7 text-zinc-400 text-lg">Com certeza. O formato da armação é crucial para equilibrar as linhas do rosto e reforçar a liderança.</div>
                 </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up" data-aos-delay="600">
+                <details class="faq-item group rounded-2xl" data-aos="fade-up" data-aos-delay="600">
                     <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
                         Formas de pagamento?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
@@ -170,12 +180,12 @@
             <button onclick="abrirPolitica()" class="hover:text-gold transition">Política de Privacidade</button>
             <a href="https://wa.me/5541999682982" class="hover:text-gold transition">WhatsApp</a>
         </nav>
-        <p class="text-zinc-700 text-[10px] uppercase">© 2026 - Visagismo Masculino Curitiba</p>
+        <p class="text-zinc-700 text-[10px] uppercase tracking-widest">© 2026 - Visagismo Masculino Curitiba</p>
     </footer>
 
     <div id="modal-politica">
         <div class="max-w-3xl mx-auto px-6 py-20">
-            <button onclick="fecharPolitica()" class="text-gold mb-12 text-xl font-bold"><i class="fas fa-arrow-left"></i> VOLTAR</button>
+            <button onclick="fecharPolitica()" class="text-gold mb-12 text-xl font-bold hover:underline"><i class="fas fa-arrow-left"></i> VOLTAR PARA O SITE</button>
             <h2 class="text-5xl text-white mb-10 font-bold italic">Política de Privacidade</h2>
             <p class="text-zinc-400 text-xl leading-relaxed">Seus dados são confidenciais e usados apenas para agendamentos via WhatsApp. Respeitamos a LGPD.</p>
         </div>
@@ -187,7 +197,9 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ once: true, duration: 800 });
+        // Inicialização Garantida
+        AOS.init({ once: true, duration: 800, disable: 'mobile' });
+        
         function abrirPolitica() { document.getElementById('modal-politica').style.display = 'block'; document.body.style.overflow = 'hidden'; }
         function fecharPolitica() { document.getElementById('modal-politica').style.display = 'none'; document.body.style.overflow = 'auto'; }
     </script>
