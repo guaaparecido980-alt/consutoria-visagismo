@@ -60,14 +60,12 @@
                 <img src="./logo.png" alt="" class="h-8 object-contain" onerror="this.style.display='none'">
                 <span class="text-xl md:text-2xl font-bold tracking-widest gold-gradient-text uppercase">Wagner Alves</span>
             </div>
-            
             <nav class="hidden md:flex gap-10 text-[10px] font-black tracking-[0.2em] uppercase">
                 <a href="#inicio" class="hover:text-gold transition text-white">Início</a>
                 <a href="#depoimentos" class="hover:text-gold transition text-white">Feedbacks</a>
                 <a href="#sobre" class="hover:text-gold transition text-white">O Consultor</a>
                 <a href="#contato" class="hover:text-gold transition text-white">Localização</a>
             </nav>
-
             <button onclick="toggleMenu()" class="md:hidden text-gold text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
@@ -82,20 +80,20 @@
         <a href="#contato" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Localização</a>
     </div>
 
-    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center w-full relative z-10 text-center md:text-left">
+    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 overflow-hidden text-center md:text-left">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center w-full relative z-10">
             
             <div class="flex justify-center order-1 md:order-2" data-aos="zoom-in">
                 <img src="./foto-wagner.jpg" class="w-full max-w-[300px] md:max-w-md rounded-[3rem] border border-white/10 shadow-2xl mx-auto md:mx-0">
             </div>
             
             <div class="space-y-8 flex flex-col items-center md:items-start order-2 md:order-1" data-aos="fade-up">
-                <h1 class="text-5xl md:text-8xl leading-[1] font-medium text-white italic flex flex-col items-center md:items-start">revele o que há de <span class="gold-gradient-text font-black">melhor em você.</span></h1>
-                <p class="text-zinc-500 text-lg md:text-2xl leading-relaxed max-w-md mx-auto md:mx-0 text-justify md:text-left">Mentor de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica e visagismo estratégico para homens que buscam o topo. Alinhe sua imagem ao seu sucesso há 24 anos.</p>
+                <h1 class="text-5xl md:text-8xl leading-[1] font-medium text-white italic flex flex-col items-center md:items-start">Revele o que há de <span class="gold-gradient-text font-black">melhor em você.</span></h1>
+                <p class="text-zinc-500 text-lg md:text-2xl leading-relaxed max-w-md mx-auto md:mx-0 text-center md:text-left">Estrategista de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica de 24 anos para quem busca o topo, <span class="text-white font-bold underline decoration-gold/50">alinhando sua imagem ao seu sucesso.</span></p>
                 
                 <div class="flex flex-col items-center md:items-start gap-4 w-full">
                     <a href="https://wa.me/5541999682982" class="btn-premium inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto text-center uppercase tracking-widest shadow-lg mx-auto md:mx-0">Agendar Consultoria</a>
-                    <p class="text-gold/60 text-[10px] uppercase tracking-[0.3em] font-bold text-center w-full md:text-left md:ml-4">Vagas limitadas para este mês</p>
+                    <p class="text-gold/60 text-[10px] uppercase tracking-[0.3em] font-bold text-center w-full md:text-left">Vagas limitadas para este mês</p>
                 </div>
             </div>
         </div>
@@ -139,7 +137,7 @@
             
             <div class="flex justify-center relative w-full order-1 md:order-1" data-aos="fade-up">
                 <img src="./ia-metodo-wagner.png" class="rounded-[3rem] w-full max-w-[340px] md:max-w-full grayscale border border-white/5 shadow-2xl mx-auto">
-                <div class="absolute -bottom-5 right-4 md:-bottom-10 md:-right-10 bg-black/80 backdrop-blur-xl border border-gold/30 px-6 py-3 rounded-2xl font-black text-gold text-xs md:text-lg uppercase">24 Anos de História</div>
+                <div class="absolute -bottom-5 right-4 md:-bottom-10 md:-right-10 bg-black/80 backdrop-blur-xl border border-gold/30 px-6 py-3 rounded-2xl font-black text-gold text-sm md:text-lg uppercase">24 Anos de História</div>
             </div>
             
             <div data-aos="fade-up" class="space-y-8 text-center md:text-left order-2 md:order-2 flex flex-col items-center md:items-start">
@@ -160,8 +158,8 @@
         </div>
     </section>
 
-    <section id="contato" class="py-24 bg-[#080808] border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center text-center md:text-left">
+    <section id="contato" class="py-24 bg-[#080808] border-y border-white/5 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center text-center md:text-left">
             <div class="space-y-10 flex flex-col items-center md:items-start">
                 <h2 class="text-5xl md:text-6xl text-white italic font-bold uppercase text-center">Localização</h2>
                 <div class="space-y-6 text-zinc-400 flex flex-col items-center md:items-start">
@@ -211,7 +209,7 @@
     <footer class="py-20 border-t border-white/5 bg-[#050505] text-center px-6">
         <p class="text-3xl font-black gold-gradient-text uppercase tracking-[0.4em] mb-10 italic">Wagner Alves</p>
         <div class="flex flex-col items-center gap-6">
-            <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-[10px] font-black tracking-[0.3em] mb-10 underline decoration-zinc-800">Política de Privacidade</button>
+            <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-[10px] font-black tracking-[0.3em]">Política de Privacidade</button>
             <p class="text-zinc-800 text-[10px] uppercase tracking-widest font-bold italic text-center">© 2026 - Estrategista de Imagem Masculina - Curitiba</p>
         </div>
     </footer>
@@ -225,7 +223,7 @@
     </div>
 
     <a href="https://wa.me/5541999682982" class="fixed bottom-6 right-6 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50 wa-pulse">
-        <i class="fab fa-whatsapp text-3xl text-white"></i>
+        <i class="fab fa-whatsapp text-4xl text-white"></i>
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
