@@ -12,70 +12,90 @@
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
         .text-gold { color: #dccfa1; }
         .bg-gold { background-color: #a08c5c; }
-        .gold-gradient { background: linear-gradient(135deg, #a08c5c 0%, #dccfa1 50%, #a08c5c 100%); }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #a08c5c 0%, #dccfa1 50%, #a08c5c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
     </style>
 </head>
-<body class="text-zinc-100">
+<body class="text-zinc-100 antialiased">
 
     <header class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-zinc-800">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-xl font-bold tracking-widest text-gold text-white">WAGNER ALVES</span>
-            <a href="https://wa.me/5541999999999" class="bg-gold text-white px-6 py-2 rounded-full font-bold hover:scale-105 transition">AGENDAR JÁ</a>
+            <span class="text-xl font-bold tracking-widest text-white">WAGNER ALVES</span>
+            <a href="https://wa.me/5541999999999" class="bg-gold text-white px-6 py-2 rounded-full font-bold hover:scale-105 transition text-sm">AGENDAR JÁ</a>
         </div>
     </header>
 
-    <section class="relative min-h-screen flex items-center justify-center pt-20">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center z-10 py-12">
+    <section class="relative min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center z-10 py-12">
             <div class="space-y-8">
-                <h1 class="text-5xl md:text-7xl leading-tight text-white">Sua imagem está <span class="text-gold italic">sabotando</span> sua autoridade?</h1>
-                <p class="text-zinc-400 text-xl">Consultoria de Visagismo Masculino de Alto Padrão em Curitiba.</p>
-                <a href="https://wa.me/5541999999999" class="inline-block gold-gradient text-black px-10 py-4 rounded-lg font-extrabold text-lg hover:scale-105 transition">QUERO MINHA MELHOR VERSÃO</a>
+                <h1 class="text-6xl md:text-8xl leading-tight font-medium text-white">Sua imagem está <span class="gold-gradient-text italic font-bold">sabotando</span> sua autoridade?</h1>
+                <p class="text-zinc-400 text-xl leading-relaxed">Consultoria de Visagismo Masculino em Curitiba. Alinhamento de imagem para homens de alto impacto.</p>
+                <a href="https://wa.me/5541999999999" class="inline-block bg-white text-black px-12 py-5 rounded-lg font-bold text-xl hover:scale-105 transition shadow-2xl">QUERO MINHA MELHOR VERSÃO</a>
             </div>
             <div class="relative flex justify-center">
-                <img src="./foto-wagner.jpg" alt="Wagner Alves" class="w-full max-w-md rounded-3xl border-2 border-[#a08c5c]/30 shadow-2xl">
-                <div class="absolute -bottom-6 -left-6 bg-zinc-900 border border-[#a08c5c] p-4 rounded-xl hidden md:block shadow-lg">
-                    <p class="text-2xl font-bold text-gold">+3000</p>
-                    <p class="text-[10px] uppercase">Horas de Atendimento</p>
+                <img src="foto-wagner.jpg" alt="Wagner Alves" class="w-full max-w-md rounded-3xl border-2 border-[#a08c5c]/30 shadow-2xl">
+                <div class="absolute -bottom-8 -left-8 bg-black border border-zinc-800 p-6 rounded-2xl hidden md:block">
+                    <p class="text-4xl font-bold text-white">+3000</p>
+                    <p class="text-xs uppercase tracking-widest text-zinc-500">Horas de Atendimento</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 bg-zinc-900/50">
-        <div class="max-w-7xl mx-auto px-6 text-center mb-16">
-            <h2 class="text-4xl text-white italic">O Método Visagista</h2>
-            <div class="w-24 h-1 bg-gold mx-auto mt-4"></div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center mb-20">
-            <img src="./ia-metodo-wagner.png" class="rounded-3xl shadow-xl grayscale hover:grayscale-0 transition duration-1000">
+    <section class="py-28 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center mb-20">
+            <img src="ia-metodo-wagner.png" class="rounded-3xl shadow-xl grayscale hover:grayscale-0 transition duration-1000">
             <div class="space-y-6">
-                <p class="text-zinc-400 text-lg leading-relaxed text-left">Não é apenas um corte. É um estudo técnico das suas proporções faciais e temperamento para construir uma imagem que comunica liderança, competência e valor.</p>
-            </div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-            <div class="space-y-4">
-                <img src="./antes-depois-ia-1.png" class="rounded-xl w-full border border-zinc-800">
-                <h3 class="text-2xl text-gold">Autoridade</h3>
-            </div>
-            <div class="space-y-4">
-                <img src="./antes-depois-ia-2.png" class="rounded-xl w-full border border-zinc-800">
-                <h3 class="text-2xl text-gold">Confiança</h3>
-            </div>
-            <div class="space-y-4">
-                <img src="./antes-depois-ia-3.png" class="rounded-xl w-full border border-zinc-800">
-                <h3 class="text-2xl text-gold">Harmonia</h3>
+                <h2 class="text-5xl text-white italic">O Método Visagista</h2>
+                <div class="w-24 h-1 bg-gold mt-4"></div>
+                <p class="text-zinc-400 text-lg leading-relaxed pt-4">Não é apenas um corte. É um estudo técnico das suas proporções faciais e temperamento para construir uma imagem que comunica liderança, competência e valor.</p>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 border-t border-zinc-800 text-center text-zinc-600">
-        <p class="tracking-widest font-bold text-gold mb-2">WAGNER ALVES</p>
-        <p class="text-xs">&copy; 2026 - Especialista em Visagismo Masculino.</p>
+    <section class="py-28 px-6 bg-[#050505]">
+        <div class="max-w-7xl mx-auto text-center mb-20">
+            <h2 class="text-5xl text-white">A Transformação</h2>
+            <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+            
+            <div class="bg-[#0a0a0a] p-8 rounded-2xl border border-zinc-800 space-y-6">
+                <img src="antes-depois-ia-1.png" class="rounded-xl w-full border border-zinc-800 shadow-lg">
+                <h3 class="text-4xl font-serif text-center gold-gradient-text pt-4">Autoridade</h3>
+                <p class="text-zinc-400 text-sm text-center px-4">Posicionamento visual para líderes, executivos e homens de negócios.</p>
+            </div>
+            
+            <div class="bg-[#0a0a0a] p-8 rounded-2xl border border-zinc-800 space-y-6">
+                <img src="antes-depois-ia-2.png" class="rounded-xl w-full border border-zinc-800 shadow-lg">
+                <h3 class="text-4xl font-serif text-center gold-gradient-text pt-4">Confiança</h3>
+                <p class="text-zinc-400 text-sm text-center px-4">Um visual autêntico que reflete sua verdadeira personalidade e propósito.</p>
+            </div>
+            
+            <div class="bg-[#0a0a0a] p-8 rounded-2xl border border-zinc-800 space-y-6">
+                <img src="antes-depois-ia-3.png" class="rounded-xl w-full border border-zinc-800 shadow-lg">
+                <h3 class="text-4xl font-serif text-center gold-gradient-text pt-4">Harmonia</h3>
+                <p class="text-zinc-400 text-sm text-center px-4">Equilíbrio perfeito entre cabelo, barba e óculos para um visual impecável.</p>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="py-16 border-t border-zinc-800 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-600">
+            <p class="text-2xl font-bold tracking-widest text-white mb-2">WAGNER ALVES</p>
+            <p class="text-xs">&copy; 2026 - Especialista em Visagismo Masculino.</p>
+        </div>
     </footer>
 
-    <a href="https://wa.me/5541999999999" class="fixed bottom-8 right-8 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition">
-        <i class="fab fa-whatsapp text-4xl text-white"></i>
+    <a href="https://wa.me/5541999999999" class="fixed bottom-8 right-8 bg-[#25D366] w-20 h-20 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition z-50">
+        <i class="fab fa-whatsapp text-5xl text-white"></i>
     </a>
 
 </body>
