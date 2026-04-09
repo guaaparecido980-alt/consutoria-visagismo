@@ -14,8 +14,30 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
-        :root { --gold: #a08c5c; --gold-light: #f1e4bc; }
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f4f4f5; overflow-x: hidden; width: 100%; }
+        :root { --gold: #a08c5c; --gold-light: #f1e4bc; --navy: #1a233a; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #050505; 
+            color: #f4f4f5; 
+            overflow-x: hidden; 
+            width: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(26, 35, 58, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(160, 140, 92, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
         
         .gold-gradient-text {
@@ -26,18 +48,21 @@
         .highlight-gold { color: #f1e4bc; font-weight: 700; }
 
         .btn-premium {
-            background: linear-gradient(135deg, #1a233a 0%, #0f172a 100%);
-            color: var(--gold-light); border: 1px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.4s;
+            background: rgba(26, 35, 58, 0.8);
+            backdrop-filter: blur(10px);
+            color: var(--gold-light); 
+            border: 1px solid rgba(160, 140, 92, 0.5);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5), inset 0 0 10px rgba(160, 140, 92, 0.2);
+            transition: 0.4s;
         }
-        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(160, 140, 92, 0.3); }
+        .btn-premium:hover { transform: translateY(-3px); border-color: var(--gold-light); box-shadow: 0 0 30px rgba(160, 140, 92, 0.4); }
 
         .marquee-container { display: flex; overflow: hidden; width: 100%; }
         .logos-slide { display: flex; white-space: nowrap; animation: slide 30s infinite linear; }
         @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         
         .swiper { width: 100%; padding-bottom: 60px !important; }
-        .video-card { border-radius: 2.5rem; overflow: hidden; background: #000; border: 1px solid rgba(160, 140, 92, 0.1); }
+        .video-card { border-radius: 2.5rem; overflow: hidden; background: rgba(255,255,255,0.02); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.5s; }
         .video-card video { width: 100%; aspect-ratio: 9/16; object-fit: cover; }
         
         .nav-container { display: flex; justify-content: center; gap: 30px; margin-top: -20px; z-index: 20; position: relative; }
@@ -46,7 +71,7 @@
             width: 55px !important; height: 55px !important; border-radius: 50%; border: 1px solid var(--gold);
         }
 
-        .faq-item { border: 1px solid rgba(160, 140, 92, 0.1); background: rgba(255,255,255,0.01); border-radius: 1.5rem; transition: 0.3s; margin-bottom: 1rem; }
+        .faq-item { border: 1px solid rgba(160, 140, 92, 0.1); background: rgba(255,255,255,0.02); backdrop-filter: blur(10px); border-radius: 1.5rem; transition: 0.3s; margin-bottom: 1.5rem; }
         .faq-item:hover { border-color: var(--gold); background: rgba(160, 140, 92, 0.05); }
 
         #modal-politica { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); align-items: center; justify-content: center; }
@@ -56,27 +81,23 @@
 </head>
 <body class="antialiased">
 
-    <header class="fixed w-full z-50 bg-[#050505]/80 backdrop-blur-md border-b border-white/5 px-6 py-4">
+    <header class="fixed w-full z-50 bg-[#050505]/60 backdrop-blur-xl border-b border-white/5 px-6 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="./logo.png" alt="" class="h-8 object-contain" onerror="this.style.display='none'">
+                <img src="./logo.png" alt="" class="h-10 object-contain" onerror="this.style.display='none'">
                 <span class="text-xl md:text-2xl font-bold tracking-widest gold-gradient-text uppercase italic">Wagner Alves</span>
             </div>
-            
             <nav class="hidden md:flex gap-10 text-[10px] font-black tracking-[0.2em] uppercase">
                 <a href="#inicio" class="hover:text-gold transition text-white">Início</a>
                 <a href="#depoimentos" class="hover:text-gold transition text-white">Feedbacks</a>
                 <a href="#sobre" class="hover:text-gold transition text-white">Consultor</a>
-                <a href="#contato" class="hover:text-gold transition text-white text-center">Localização</a>
+                <a href="#contato" class="hover:text-gold transition text-white">Localização</a>
             </nav>
-
-            <button onclick="toggleMenu()" class="md:hidden text-gold text-2xl focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button onclick="toggleMenu()" class="md:hidden text-gold text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
-    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 z-[60] p-12 flex flex-col gap-8 shadow-2xl bg-black/98 backdrop-blur-xl border-l border-zinc-800 transition-all duration-500 transform translate-x-full">
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 z-[60] p-12 flex flex-col gap-8 shadow-2xl bg-black/98 backdrop-blur-2xl border-l border-zinc-800 transition-all duration-500 transform translate-x-full">
         <button onclick="toggleMenu()" class="text-gold text-right text-3xl mb-4"><i class="fas fa-times"></i></button>
         <a href="#inicio" onclick="toggleMenu()" class="text-2xl font-bold uppercase gold-gradient-text italic text-center">Início</a>
         <a href="#depoimentos" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Feedbacks</a>
@@ -84,114 +105,85 @@
         <a href="#contato" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Localização</a>
     </div>
 
-    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 overflow-hidden text-center md:text-left">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center w-full relative z-10">
-            
+    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-navy/30 blur-[120px] rounded-full -z-10"></div>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center w-full relative z-10 text-center md:text-left">
             <div class="flex justify-center order-1 md:order-2" data-aos="zoom-in">
-                <img src="./foto-wagner.jpg" class="w-full max-w-[300px] md:max-w-md rounded-[3rem] border border-white/10 shadow-2xl mx-auto md:mx-0">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gold/20 blur-2xl"></div>
+                    <img src="./foto-wagner.jpg" class="relative w-full max-w-[320px] md:max-w-md rounded-[3rem] border border-white/10 shadow-2xl">
+                </div>
             </div>
-            
-            <div class="space-y-8 flex flex-col items-center md:items-start order-2 md:order-1" data-aos="fade-up">
-                <h1 class="text-5xl md:text-8xl leading-[1] font-medium text-white italic flex flex-col items-center md:items-start">Revele o que há de <span class="gold-gradient-text font-black">melhor em você.</span></h1>
-                <p class="text-zinc-400 text-lg md:text-2xl leading-relaxed max-w-md mx-auto md:mx-0 text-center md:text-left">Estrategista de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica de 24 anos para quem busca o topo. <span class="highlight-gold italic">Alinhando sua imagem ao seu sucesso.</span></p>
-                
+            <div class="space-y-8 flex flex-col items-center md:items-start order-2 md:order-1" data-aos="fade-right">
+                <h1 class="text-5xl md:text-8xl leading-[1] font-medium text-white italic">Revele o que há de <span class="gold-gradient-text font-black">melhor em você.</span></h1>
+                <p class="text-[#f1e4bc] text-lg md:text-2xl leading-relaxed max-w-md mx-auto md:mx-0 italic font-light">Estrategista de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica de 24 anos para quem busca o topo. <span class="highlight-gold underline decoration-gold/30">Alinhando sua imagem ao seu sucesso.</span></p>
                 <div class="flex flex-col items-center md:items-start gap-4 w-full">
-                    <a href="https://wa.me/5541999682982" class="btn-premium inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto text-center uppercase tracking-widest shadow-lg mx-auto md:mx-0">Agendar Consultoria</a>
+                    <a href="https://wa.me/5541999682982" class="btn-premium inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto text-center uppercase tracking-widest shadow-lg">Agendar Consultoria</a>
                     <p class="text-gold/60 text-[10px] uppercase tracking-[0.3em] font-bold text-center w-full md:text-left">Vagas limitadas para este mês</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-[#080808] border-y border-zinc-900">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div class="p-8 rounded-3xl border border-white/5 bg-zinc-950/50" data-aos="fade-up">
-                <i class="fas fa-dna text-gold text-4xl mb-4"></i>
-                <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-2 text-center">Análise Morfológica</h3>
-                <p class="text-zinc-500 text-xs uppercase text-center">Estudo técnico das proporções faciais</p>
-            </div>
-            <div class="p-8 rounded-3xl border border-white/5 bg-zinc-950/50" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-briefcase text-gold text-4xl mb-4"></i>
-                <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-2 text-center">Imagem de Poder</h3>
-                <p class="text-zinc-500 text-xs uppercase text-center">Seu visual alinhado ao seu sucesso</p>
-            </div>
-            <div class="p-8 rounded-3xl border border-white/5 bg-zinc-950/50" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-fingerprint text-gold text-4xl mb-4"></i>
-                <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-2 text-center">Identidade Única</h3>
-                <p class="text-zinc-500 text-xs uppercase text-center">Assinatura visual personalizada</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="py-8 bg-white/5 border-y border-white/5 marquee-container">
+    <div class="py-10 bg-white/[0.02] border-y border-white/5 marquee-container backdrop-blur-sm">
         <div class="logos-slide">
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ Atendimento Exclusivo</span>
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ 24 Anos de Expertise</span>
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ Visagismo Estratégico</span>
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ Referência em Curitiba</span>
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ Imagem de Autoridade</span>
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ Atendimento Exclusivo</span>
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ 24 Anos de Expertise</span>
-            <span class="mx-10 text-zinc-500 font-black uppercase tracking-[0.3em] text-xs md:text-lg italic">✦ Visagismo Estratégico</span>
+            <span class="mx-12 text-zinc-400 font-black uppercase tracking-[0.4em] text-xs md:text-lg italic opacity-50">✦ Atendimento Exclusivo</span>
+            <span class="mx-12 text-zinc-400 font-black uppercase tracking-[0.4em] text-xs md:text-lg italic opacity-50">✦ 24 Anos de Expertise</span>
+            <span class="mx-12 text-zinc-400 font-black uppercase tracking-[0.4em] text-xs md:text-lg italic opacity-50">✦ Visagismo Estratégico</span>
+            <span class="mx-12 text-zinc-400 font-black uppercase tracking-[0.4em] text-xs md:text-lg italic opacity-50">✦ Referência em Curitiba</span>
+            <span class="mx-12 text-zinc-400 font-black uppercase tracking-[0.4em] text-xs md:text-lg italic opacity-50">✦ Atendimento Exclusivo</span>
+            <span class="mx-12 text-zinc-400 font-black uppercase tracking-[0.4em] text-xs md:text-lg italic opacity-50">✦ 24 Anos de Expertise</span>
         </div>
     </div>
 
-    <section id="depoimentos" class="py-24 bg-[#080808]">
+    <section id="depoimentos" class="py-24 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 text-center mb-16" data-aos="fade-up">
-            <h2 class="text-6xl md:text-9xl gold-gradient-text font-black italic uppercase tracking-tighter text-center">Feedbacks</h2>
+            <h2 class="text-6xl md:text-9xl gold-gradient-text font-black italic uppercase tracking-tighter">Feedbacks</h2>
         </div>
         <div class="max-w-[1400px] mx-auto px-4" data-aos="zoom-in">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-1.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-2.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-3.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-4.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-5.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-1.png" playsinline><source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-2.png" playsinline><source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-3.png" playsinline><source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-4.png" playsinline><source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-5.png" playsinline><source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4"></video></div></div>
                 </div>
                 <div class="nav-container"><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div>
             </div>
         </div>
     </section>
 
-    <section id="sobre" class="py-24 bg-[#050505] flex items-center justify-center">
+    <section id="sobre" class="py-24 flex items-center justify-center relative">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-20 items-center w-full">
-            
-            <div class="flex justify-center relative w-full order-1 md:order-1" data-aos="fade-up">
-                <img src="./ia-metodo-wagner.png" class="rounded-[3rem] w-full max-w-[340px] md:max-w-full grayscale border border-white/5 shadow-2xl mx-auto">
-                <div class="absolute -bottom-5 right-4 md:-bottom-10 md:-right-10 bg-[#f1e4bc]/10 backdrop-blur-xl border border-[#f1e4bc]/40 px-6 py-3 rounded-2xl font-black text-[#f1e4bc] text-sm md:text-lg uppercase">24 Anos de História</div>
-            </div>
-            
-            <div data-aos="fade-up" class="space-y-8 text-center md:text-left order-2 md:order-2 flex flex-col items-center md:items-start">
-                <h2 class="text-5xl md:text-7xl lg:text-8xl text-white italic font-bold uppercase leading-tight text-center">Consultor</h2>
-                <div class="w-16 h-1 bg-gold mx-auto md:mx-0"></div>
-                
-                <div class="text-zinc-300 text-lg md:text-2xl leading-relaxed space-y-6 font-light italic text-justify md:text-left max-w-xl mx-auto md:mx-0 flex flex-col items-center md:items-start">
-                    <p class="border-l-4 border-gold pl-6 py-2 text-justify md:text-left">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
-                    <p class="not-italic text-center md:text-left">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança. Como o principal estrategista em <span class="highlight-gold uppercase italic">Visagismo Masculino</span> de Curitiba, seu método exclusivo une psicologia da imagem e precisão matemática para resultados inconfundíveis.</p>
+            <div class="flex justify-center relative w-full order-1" data-aos="fade-up">
+                <div class="relative">
+                    <img src="./ia-metodo-wagner.png" class="relative rounded-[3rem] w-full max-w-[340px] md:max-w-full grayscale hover:grayscale-0 transition duration-1000 border border-white/5 shadow-2xl mx-auto">
+                    <div class="absolute -bottom-5 right-4 md:-bottom-8 md:-right-8 bg-[#f1e4bc]/10 backdrop-blur-xl border border-[#f1e4bc]/40 px-6 py-3 rounded-2xl font-black text-[#f1e4bc] text-sm md:text-lg uppercase">24 Anos de História</div>
                 </div>
-                
+            </div>
+            <div data-aos="fade-up" class="space-y-8 text-center md:text-left order-2 flex flex-col items-center md:items-start">
+                <h2 class="text-6xl md:text-8xl text-white italic font-bold uppercase leading-tight">Consultor</h2>
+                <div class="w-16 h-1 bg-gold"></div>
+                <div class="text-zinc-300 text-lg md:text-2xl leading-relaxed space-y-6 font-light italic text-justify md:text-left max-w-xl">
+                    <p class="border-l-4 border-gold pl-6 py-2">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
+                    <p class="not-italic opacity-80 leading-relaxed">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança. Como o principal estrategista em <span class="highlight-gold uppercase italic">Visagismo Masculino</span> de Curitiba, seu método exclusivo une psicologia da imagem e precisão matemática facial.</p>
+                </div>
                 <div class="flex justify-center md:justify-start pt-4">
-                    <a href="https://wa.me/5541999682982" class="btn-premium px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest wa-pulse flex items-center gap-3">
-                        <i class="fab fa-whatsapp"></i> Iniciar transformação
-                    </a>
+                    <a href="https://wa.me/5541999682982" class="btn-premium px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest wa-pulse flex items-center gap-3"><i class="fab fa-whatsapp"></i> Iniciar transformação</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contato" class="py-24 bg-[#080808] border-y border-white/5 px-6">
+    <section id="contato" class="py-24 px-6 relative">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center text-center md:text-left">
             <div class="space-y-10 flex flex-col items-center md:items-start">
-                <h2 class="text-5xl md:text-6xl text-white italic font-bold uppercase text-center">Localização</h2>
-                <div class="space-y-6 text-zinc-400 flex flex-col items-center md:items-start">
-                    <div class="flex gap-4 items-center"><i class="fas fa-map-marker-alt text-gold text-2xl"></i><p class="text-xl">Rua Jacarezinho, 21 - Mercês</p></div>
-                    <div class="flex gap-4 items-center"><i class="fas fa-phone-alt text-gold text-2xl"></i><p class="text-xl font-bold">(41) 99968-2982</p></div>
-                    <div class="flex gap-4 items-center"><i class="fas fa-envelope text-gold text-2xl"></i><p class="text-lg italic">Wagnerbarbeiro15@gmail.com</p></div>
-                    <a href="https://www.instagram.com/owagneralvess" target="_blank" class="flex gap-4 items-center hover:text-white transition">
-                        <i class="fab fa-instagram text-gold text-2xl"></i>
-                        <p class="text-xl font-bold tracking-tight">@owagneralvess</p>
-                    </a>
+                <h2 class="text-5xl md:text-6xl text-white italic font-bold uppercase">Localização</h2>
+                <div class="space-y-6 text-zinc-400">
+                    <div class="flex gap-4 items-center justify-center md:justify-start"><i class="fas fa-map-marker-alt text-gold text-2xl"></i><p class="text-xl">Rua Jacarezinho, 21 - Mercês, Curitiba</p></div>
+                    <div class="flex gap-4 items-center justify-center md:justify-start"><i class="fas fa-phone-alt text-gold text-2xl"></i><p class="text-xl font-bold">(41) 99968-2982</p></div>
+                    <a href="https://www.instagram.com/owagneralves" target="_blank" class="flex gap-4 items-center justify-center md:justify-start hover:text-white transition"><i class="fab fa-instagram text-gold text-2xl"></i><p class="text-xl font-bold">@owagneralves</p></a>
                 </div>
             </div>
             <div class="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl h-[350px]">
@@ -200,62 +192,60 @@
         </div>
     </section>
 
-    <section id="duvidas" class="py-24 bg-[#050505]">
+    <section id="duvidas" class="py-24">
         <div class="max-w-4xl mx-auto px-6">
             <h2 class="text-5xl md:text-8xl text-white mb-16 italic text-center font-bold uppercase" data-aos="fade-up">FAQ</h2>
             <div class="grid gap-4">
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">O Visagismo é apenas para o corte?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Não. É um estudo completo da sua identidade. Alinhamos sua barba, cabelo e óculos para transmitir autoridade absoluta em qualquer ambiente.</div>
+                <details class="faq-item group p-8" data-aos="fade-up">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none w-full">O Visagismo é apenas para o corte?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">Não. É um estudo completo da sua identidade. Alinhamos sua barba, cabelo e óculos para transmitir autoridade absoluta em qualquer ambiente.</div>
                 </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">Quanto tempo dura a sessão?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Uma consultoria estratégica completa dura de 60 a 90 minutos de atenção técnica exclusiva e estratégica.</div>
+                <details class="faq-item group p-8" data-aos="fade-up">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none w-full">Quanto tempo dura a sessão?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">Uma consultoria estratégica completa dura de 60 a 90 minutos de atenção técnica exclusiva e estratégica.</div>
                 </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">O visagismo ajuda na escolha de óculos?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Sim. O formato da armação é crucial para equilibrar as linhas de força do seu rosto e reforçar o olhar de liderança.</div>
+                <details class="faq-item group p-8" data-aos="fade-up">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none w-full">O visagismo ajuda na escolha de óculos?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">Sim. O formato da armação é crucial para equilibrar as linhas de força do seu rosto e reforçar o olhar de liderança que sua posição exige.</div>
                 </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">Preciso fazer a consultoria toda vez?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Não. A consultoria profunda é feita uma vez. Os cortes seguintes são para manutenção da assinatura visual definida.</div>
+                <details class="faq-item group p-8" data-aos="fade-up">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none w-full">Preciso fazer a consultoria toda vez?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">Não. A consultoria profunda é feita uma vez para definir sua assinatura visual. Os cortes seguintes são para manutenção da estratégia traçada.</div>
                 </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">Qual a diferença entre barbeiro e visagista?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">O barbeiro executa o serviço. O visagista planeja estrategicamente seu visual para que ele trabalhe a seu favor nos seus negócios.</div>
+                <details class="faq-item group p-8" data-aos="fade-up">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none w-full">Qual a diferença entre barbeiro e visagista?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">O barbeiro executa o serviço. O visagista planeja estrategicamente seu visual para que ele trabalhe a seu favor nos negócios e vida pessoal.</div>
                 </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">Quais as formas de pagamento?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Aceitamos PIX, cartões de débito e crédito, com condições facilitadas para consultorias completas.</div>
+                <details class="faq-item group p-8" data-aos="fade-up">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none w-full">Quais as formas de pagamento?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">Aceitamos PIX, cartões de débito e crédito, com condições facilitadas para consultorias completas.</div>
                 </details>
             </div>
         </div>
     </section>
 
-    <footer class="py-20 border-t border-white/5 bg-[#050505] text-center px-6">
-        <p class="text-3xl font-black gold-gradient-text uppercase tracking-[0.4em] mb-10 italic">Wagner Alves</p>
-        <div class="flex flex-col items-center gap-6">
-            <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-[10px] font-black tracking-[0.3em] mb-10 underline decoration-zinc-800">Política de Privacidade</button>
-            <p class="text-zinc-800 text-[10px] uppercase tracking-widest font-bold italic">© 2026 - Estrategista de Imagem Masculina - Curitiba</p>
-        </div>
+    <footer class="py-20 border-t border-white/5 text-center px-6 relative">
+        <p class="text-3xl font-black gold-gradient-text uppercase tracking-[0.4em] mb-8 italic">Wagner Alves</p>
+        <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-[10px] font-black tracking-[0.3em] mb-6 block mx-auto underline decoration-zinc-800">Política de Privacidade</button>
+        <p class="text-zinc-800 text-[10px] uppercase tracking-widest font-bold italic">© 2026 - Estrategista de Imagem - Curitiba</p>
     </footer>
 
-    <div id="modal-politica" class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-6 backdrop-blur-sm" onclick="fecharPolitica()">
+    <div id="modal-politica" class="fixed inset-0 z-[100] hidden items-center justify-center p-6 backdrop-blur-sm" onclick="fecharPolitica()">
         <div class="max-w-xl bg-zinc-950 p-12 rounded-[3rem] border border-gold/20 text-center shadow-2xl" onclick="event.stopPropagation()">
-            <h2 class="text-4xl text-white font-black mb-8 italic uppercase tracking-tighter">Privacidade</h2>
-            <p class="text-zinc-400 text-lg leading-relaxed mb-10">Respeitamos a LGPD. Seus dados de contato são usados exclusivamente para agendamento.</p>
-            <button onclick="fecharPolitica()" class="text-gold font-black border border-gold px-12 py-4 rounded-2xl hover:bg-gold hover:text-black transition uppercase text-xs tracking-widest">Entendido</button>
+            <h2 class="text-3xl text-white font-black mb-6 italic uppercase">Privacidade</h2>
+            <p class="text-zinc-400 text-lg leading-relaxed mb-8">Respeitamos a LGPD. Seus dados de contato são usados exclusivamente para agendamento direto via WhatsApp.</p>
+            <button onclick="fecharPolitica()" class="text-gold font-black border border-gold px-10 py-3 rounded-2xl hover:bg-gold hover:text-black transition uppercase text-xs">Entendido</button>
         </div>
     </div>
 
     <a href="https://wa.me/5541999682982" class="fixed bottom-6 right-6 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50 wa-pulse">
-        <i class="fab fa-whatsapp text-3xl text-white"></i>
+        <i class="fab fa-whatsapp text-4xl text-white"></i>
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        AOS.init({ once: true, duration: 1000, disable: 'mobile' });
+        AOS.init({ once: true, duration: 1000 });
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 1.2, spaceBetween: 15, centeredSlides: true, loop: true,
             navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
