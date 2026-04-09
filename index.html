@@ -3,75 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultoria de Visagismo | Nome Profissional</title>
+    <title>Wagner Alves | Especialista em Visagismo Masculino e Consultoria de Imagem em Curitiba</title>
+    <meta name="description" content="Descubra o poder da sua imagem. Consultoria de Visagismo Masculino em Curitiba com Wagner Alves. Alinhe sua aparência à sua autoridade e propósito.">
+    <link rel="canonical" href="[COLOQUE_SEU_LINK_DO_GITHUB_PAGES_AQUI]">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        .gradient-gold {
-            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .bg-gold-gradient { background: linear-gradient(135deg, #a08c5c 0%, #dccfa1 50%, #a08c5c 100%); }
+        .text-gold { color: #dccfa1; }
+        .gold-border { border-color: #a08c5c; }
+        .btn-gold { background-color: #a08c5c; color: white; }
+        .btn-gold:hover { background-color: #dccfa1; color: black; }
     </style>
 </head>
-<body class="bg-zinc-900 text-white font-sans">
+<body class="bg-[#050505] text-zinc-100 antialiased">
 
-    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
-        <h1 class="text-2xl font-bold tracking-tighter">WAGNER<span class="text-amber-500 underline">ALVES</span></h1>
-        <div class="space-x-6 hidden md:block">
-            <a href="#home" class="hover:text-amber-500 transition">Início</a>
-            <a href="#servicos" class="hover:text-amber-500 transition">Serviços</a>
-            <a href="#sobre" class="hover:text-amber-500 transition">Sobre</a>
-            <a href="https://wa.me/5541999682982" class="bg-amber-600 px-5 py-2 rounded-full font-bold hover:bg-amber-500 transition">Agendar Consultoria</a>
-        </div>
-    </nav>
-
-    <section id="home" class="max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 space-y-6">
-            <h2 class="text-5xl md:text-7xl font-extrabold leading-tight">
-                Sua imagem fala <br> <span class="text-amber-500 italic">antes de você.</span>
-            </h2>
-            <p class="text-zinc-400 text-lg max-w-md">
-                Consultoria de visagismo personalizada para homens que buscam autoridade, confiança e harmonia facial.
-            </p>
-            <div class="flex space-x-4">
-                <a href="https://wa.me/SEUNUMERO" class="bg-white text-black px-8 py-4 rounded-lg font-bold hover:bg-zinc-200 transition">Quero transformar meu visual</a>
+    <header class="fixed w-full z-50 bg-[#050505]/80 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <span class="text-xl font-medium tracking-widest text-gold">WAGNER ALVES</span>
+            <div class="flex gap-3">
+                <a href="#metodo" class="text-zinc-400 hover:text-white transition hidden md:block mt-2">Método</a>
+                <a href="#beneficios" class="text-zinc-400 hover:text-white transition hidden md:block mt-2">Benefícios</a>
+                <a href="https://wa.me/5541999999999" target="_blank" class="btn-gold px-6 py-2 rounded-full font-semibold hover:scale-105 transition tracking-tight">AGENDAR JÁ</a>
             </div>
         </div>
-        <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
-            <div class="w-80 h-[450px] bg-zinc-800 rounded-2xl border-2 border-amber-500/30 flex items-center justify-center overflow-hidden">
-                <span class="text-zinc-500 italic">[Sua Foto de Visagista Aqui]</span>
+    </header>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center z-10 py-12">
+            <div class="space-y-10">
+                <h1 class="text-6xl md:text-8xl leading-tight font-medium">Sua imagem está<br><span class="text-gold italic font-bold">sabotando</span> sua autoridade?</h1>
+                <p class="text-zinc-400 text-2xl leading-relaxed max-w-2xl">Consultoria de Visagismo Masculino de Alto Padrão em Curitiba. Alinhamento de imagem para líderes, executivos e homens de sucesso.</p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="https://wa.me/5541999999999" target="_blank" class="bg-gold-gradient text-black text-center px-12 py-5 rounded-lg font-bold text-xl hover:scale-105 transition shadow-2xl">SIM, QUERO MINHA MELHOR VERSÃO</a>
+                </div>
+            </div>
+            <div class="relative">
+                <img src="foto-wagner.png" alt="Wagner Alves, Consultor de Visagismo Masculino em Curitiba" class="rounded-3xl shadow-2xl border-2 gold-border hover:border-gold transition duration-700">
+                <div class="absolute -bottom-8 -left-8 bg-black/80 backdrop-blur-lg border gold-border p-6 rounded-2xl hidden md:block shadow-lg">
+                    <p class="text-4xl font-bold text-gold">+3000</p>
+                    <p class="text-xs uppercase tracking-widest text-zinc-500">Horas de Estudo e Atendimento</p>
+                </div>
+            </div>
+        </div>
+        <div class="absolute w-96 h-96 rounded-full bg-gold/10 -top-20 -left-20 blur-3xl"></div>
+        <div class="absolute w-96 h-96 rounded-full bg-gold/5 bottom-0 right-0 blur-3xl"></div>
+    </section>
+
+    <section id="metodo" class="py-28 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative order-2 md:order-1">
+                <img src="ia-metodo-wagner.jpg" alt="Conceito de Visagismo Masculino e Estilo" class="rounded-3xl shadow-xl grayscale hover:grayscale-0 transition duration-1000">
+            </div>
+            <div class="space-y-10 order-1 md:order-2">
+                <h2 class="text-5xl">Mais que um corte de cabelo,<span class="text-gold italic">é seu posicionamento visual.</span></h2>
+                <p class="text-zinc-400 text-lg leading-relaxed">Não é sobre futilidade ou moda Passageira. Nosso método proprietário em Visagismo Masculino vai além. Nós analisamos a fundo as proporções áureas, temperamento, formato facial e objetivos de vida para criar uma identidade visual única e autêntica que comunica confiança e competência.</p>
             </div>
         </div>
     </section>
 
-    <section id="servicos" class="bg-zinc-800/50 py-20 px-6">
-        <div class="max-w-6xl mx-auto text-center mb-16">
-            <h3 class="text-3xl font-bold">Serviços Exclusivos</h3>
-            <div class="h-1 w-20 bg-amber-500 mx-auto mt-4"></div>
+    <section id="beneficios" class="py-28 px-6 bg-[#050505]">
+        <div class="max-w-7xl mx-auto text-center mb-20">
+            <h2 class="text-5xl">O Que Você Irá Conquistar?</h2>
+            <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
         </div>
-        
-        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-            <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-700 hover:border-amber-500 transition group">
-                <i class="fas fa-face-smile text-3xl text-amber-500 mb-4"></i>
-                <h4 class="text-xl font-bold mb-2">Análise Facial</h4>
-                <p class="text-zinc-400 text-sm">Estudo das proporções áureas e traços para definir o melhor corte de cabelo e barba.</p>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+            <div class="bg-[#0a0a0a] p-10 rounded-2xl border border-zinc-800 space-y-6 hover:border-gold transition">
+                <img src="antes-depois-ia-1.jpg" alt="Comparativo de Visagismo Antes e Depois" class="rounded-lg mb-4">
+                <h3 class="text-3xl font-medium">Autoridade Instantânea</h3>
+                <p class="text-zinc-400 text-sm">Cada traço facial e de estilo comunica algo. Nosso Visagismo garante que sua imagem passe uma mensagem clara de competência e liderança, eliminando ruídos e ambiguidades.</p>
             </div>
-
-            <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-700 hover:border-amber-500 transition group">
-                <i class="fas fa-user-tie text-3xl text-amber-500 mb-4"></i>
-                <h4 class="text-xl font-bold mb-2">Identidade Visual</h4>
-                <p class="text-zinc-400 text-sm">Alinhamento da sua imagem com seus objetivos profissionais e de vida.</p>
+            <div class="bg-[#0a0a0a] p-10 rounded-2xl border border-zinc-800 space-y-6 hover:border-gold transition">
+                <img src="antes-depois-ia-2.jpg" alt="Comparativo de Estilo Antes e Depois" class="rounded-lg mb-4">
+                <h3 class="text-3xl font-medium">Autenticidade e Confiança</h3>
+                <p class="text-zinc-400 text-sm">Elimine a "síndrome do impostor visual". Crie uma imagem alinhada com seu verdadeiro propósito e personalidade. Sinta-se confortável e confiante em qualquer ambiente.</p>
             </div>
-
-            <div class="bg-zinc-900 p-8 rounded-xl border border-zinc-700 hover:border-amber-500 transition group">
-                <i class="fas fa-camera text-3xl text-amber-500 mb-4"></i>
-                <h4 class="text-xl font-bold mb-2">Edição de Imagem</h4>
-                <p class="text-zinc-400 text-sm">Tratamento profissional de fotos para redes sociais e posicionamento digital.</p>
+            <div class="bg-[#0a0a0a] p-10 rounded-2xl border border-zinc-800 space-y-6 hover:border-gold transition">
+                <img src="antes-depois-ia-3.jpg" alt="Comparativo de Barba Antes e Depois" class="rounded-lg mb-4">
+                <h3 class="text-3xl font-medium">Harmonia e Praticidade</h3>
+                <p class="text-zinc-400 text-sm">Descubra as proporções exatas da sua barba e cabelo para uma aparência sempre impecável e alinhada. Ganhando tempo no seu dia a dia e se destacando na multidão.</p>
             </div>
         </div>
     </section>
 
-    <a href="https://wa.me/SEUNUMERO" class="fixed bottom-6 right-6 bg-green-600 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-500 transition z-50">
-        <i class="fab fa-whatsapp text-3xl"></i>
+    <footer class="py-16 border-t border-zinc-800 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto px-6 text-center text-zinc-600">
+            <p class="text-2xl font-bold tracking-widest text-gold mb-4">WAGNER ALVES</p>
+            <p class="text-xs uppercase tracking-widest">&copy; 2026 Wagner Alves - Especialista em Visagismo Masculino e Consultoria de Imagem.</p>
+        </div>
+    </footer-->
+
+    <a href="https://wa.me/5541999999999" target="_blank" class="fixed bottom-8 right-8 bg-[#25D366] w-20 h-20 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition z-50">
+        <i class="fab fa-whatsapp text-5xl text-white"></i>
     </a>
 
 </body>
