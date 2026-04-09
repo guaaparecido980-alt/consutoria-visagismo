@@ -7,7 +7,7 @@
     
     <link rel="icon" type="image/png" href="./favicon.png?v=2">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -28,11 +28,11 @@
             color: var(--gold-light); border: 1px solid var(--gold);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.4s;
         }
-        .btn-premium:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 40px rgba(160, 140, 92, 0.3); }
+        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(160, 140, 92, 0.3); }
 
         .marquee-container { display: flex; overflow: hidden; width: 100%; }
-        .logos-slide { display: flex; white-space: nowrap; animation: slide 30s infinite linear; }
-        @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .logos-slide { display: flex; white-space: nowrap; animation: 20s slide infinite linear; }
+        @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-100%); } }
         
         .swiper { width: 100%; padding-bottom: 60px !important; }
         .video-card { border-radius: 2.5rem; overflow: hidden; background: #000; border: 1px solid rgba(160, 140, 92, 0.1); }
@@ -88,8 +88,9 @@
             </div>
             
             <div class="space-y-8 flex flex-col items-center md:items-start order-2 md:order-1" data-aos="fade-up">
-                <h1 class="text-5xl md:text-8xl leading-[1] font-medium text-white italic flex flex-col items-center md:items-start">Revele o que há de <span class="gold-gradient-text font-black">melhor em você.</span></h1>
-                <p class="text-zinc-500 text-lg md:text-2xl leading-relaxed max-w-md mx-auto md:mx-0 text-center md:text-left">Estrategista de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica de 24 anos para quem busca o topo, <span class="text-white font-bold underline decoration-gold/50">alinhando sua imagem ao seu sucesso.</span></p>
+                <h1 class="text-5xl md:text-8xl leading-[1] font-medium text-white italic flex flex-col items-center md:items-start">revele o que há de <span class="gold-gradient-text font-black">melhor em você.</span></h1>
+                
+                <p class="text-[#f1e4bc] text-lg md:text-2xl leading-relaxed max-w-md mx-auto md:mx-0 text-center md:text-left italic font-light">Estrategista de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica de 24 anos para quem busca o topo. Alinhando sua imagem ao seu sucesso.</p>
                 
                 <div class="flex flex-col items-center md:items-start gap-4 w-full">
                     <a href="https://wa.me/5541999682982" class="btn-premium inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto text-center uppercase tracking-widest shadow-lg mx-auto md:mx-0">Agendar Consultoria</a>
@@ -121,11 +122,11 @@
         <div class="max-w-[1400px] mx-auto px-4" data-aos="zoom-in">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-1.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-2.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-3.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-4.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4"></video></div></div>
-                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-5.png" class="w-full aspect-[9/16] object-cover" playsinline><source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-1.png" playsinline><source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-2.png" playsinline><source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-3.png" playsinline><source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-4.png" playsinline><source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4"></video></div></div>
+                    <div class="swiper-slide"><div class="video-card"><video controls preload="none" poster="./capa-video-5.png" playsinline><source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4"></video></div></div>
                 </div>
                 <div class="nav-container"><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div>
             </div>
@@ -145,8 +146,8 @@
                 <div class="w-16 h-1 bg-gold mx-auto md:mx-0"></div>
                 
                 <div class="text-zinc-300 text-lg md:text-2xl leading-relaxed space-y-6 font-light italic text-justify md:text-left max-w-xl mx-auto md:mx-0 flex flex-col items-center md:items-start">
-                    <p class="border-l-4 border-gold pl-6 py-2 text-justify md:text-left">"No mercado de alto padrão, sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
-                    <p class="not-italic text-center md:text-left">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança. Como o principal estrategista em <span class="text-white font-bold uppercase">Visagismo Masculino</span> de Curitiba, seu método exclusivo une psicologia da imagem e precisão matemática facial para garantir resultados inconfundíveis.</p>
+                    <p class="border-l-4 border-gold pl-6 py-2 text-justify md:text-left">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
+                    <p class="not-italic text-center md:text-left leading-relaxed">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança. Como o principal estrategista em <span class="text-white font-bold uppercase">Visagismo Masculino</span> de Curitiba, seu método exclusivo une psicologia da imagem e precisão matemática facial para garantir resultados inconfundíveis.</p>
                 </div>
                 
                 <div class="flex justify-center md:justify-start pt-4">
@@ -163,7 +164,7 @@
             <div class="space-y-10 flex flex-col items-center md:items-start">
                 <h2 class="text-5xl md:text-6xl text-white italic font-bold uppercase text-center">Localização</h2>
                 <div class="space-y-6 text-zinc-400 flex flex-col items-center md:items-start">
-                    <div class="flex gap-4 items-center"><i class="fas fa-map-marker-alt text-gold text-2xl"></i><p class="text-xl">Rua Jacarezinho, 21 - Mercês</p></div>
+                    <div class="flex gap-4 items-center"><i class="fas fa-map-marker-alt text-gold text-2xl"></i><p class="text-xl">Rua Jacarezinho, 21 - Mercês, Curitiba</p></div>
                     <div class="flex gap-4 items-center"><i class="fas fa-phone-alt text-gold text-2xl"></i><p class="text-xl font-bold">(41) 99968-2982</p></div>
                     <div class="flex gap-4 items-center"><i class="fas fa-envelope text-gold text-2xl"></i><p class="text-lg italic underline decoration-gold/30">Wagnerbarbeiro15@gmail.com</p></div>
                 </div>
@@ -190,18 +191,6 @@
                     <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">O visagismo ajuda na escolha de óculos?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
                     <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Sim. O formato da armação é crucial para equilibrar as linhas de força do seu rosto e reforçar o olhar de liderança que sua posição exige.</div>
                 </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">Preciso fazer a consultoria toda vez?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Não. A consultoria profunda é feita uma vez para definir sua assinatura visual. Os cortes seguintes são para manutenção da estratégia traçada.</div>
-                </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">Qual a diferença entre barbeiro e visagista?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">O barbeiro executa o serviço. O visagista planeja estrategicamente seu visual para que ele trabalhe a seu favor nos seus negócios e vida pessoal.</div>
-                </details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]" data-aos="fade-up">
-                    <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase tracking-wider outline-none text-center md:text-left w-full">Quais as formas de pagamento?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
-                    <div class="pt-6 text-zinc-500 text-lg italic text-center md:text-left leading-relaxed">Aceitamos PIX, cartões de débito e crédito, com condições facilitadas para consultorias completas.</div>
-                </details>
             </div>
         </div>
     </section>
@@ -223,7 +212,7 @@
     </div>
 
     <a href="https://wa.me/5541999682982" class="fixed bottom-6 right-6 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50 wa-pulse">
-        <i class="fab fa-whatsapp text-4xl text-white"></i>
+        <i class="fab fa-whatsapp text-3xl text-white"></i>
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
