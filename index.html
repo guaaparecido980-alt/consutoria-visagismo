@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wagner Alves | Especialista em Visagismo Masculino em Curitiba</title>
+    <title>Wagner Alves | Especialista em Visagismo Masculino</title>
     
     <link rel="icon" type="image/png" href="./favicon.png?v=2">
     <link rel="shortcut icon" href="./favicon.png?v=2" type="image/x-icon">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -26,26 +26,25 @@
             display: inline-block;
         }
         
-        .border-gold { border-color: #a08c5c; }
         .bg-gold { background-color: #a08c5c; }
+        .border-gold { border-color: #a08c5c; }
         
-        /* UX Dinâmica: FAQ Hover */
-        .faq-item { border: 1px solid #27272a; transition: all 0.3s ease; }
-        .faq-item:hover { border-color: #dccfa1; background-color: #0f0f0f; transform: scale(1.01); }
+        /* FAQ Hover UX */
+        .faq-item { border: 1px solid #27272a; transition: all 0.3s ease; background-color: #0a0a0a; }
+        .faq-item:hover { border-color: #dccfa1; background-color: #111; transform: translateY(-3px); }
         .faq-item:hover summary { color: #dccfa1; }
 
-        /* Botão WhatsApp Pulsante */
+        /* WhatsApp Pulsante */
         .wa-pulse { animation: wa-beat 2s infinite; }
         @keyframes wa-beat {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* Modal Política */
         #modal-politica { display: none; position: fixed; inset: 0; z-index: 100; background-color: #050505; overflow-y: auto; }
         
-        /* Estilo dos Vídeos Grandes (aspect ratio vertical de Reels) */
+        /* Ajuste fino dos vídeos */
         .video-card video {
             width: 100%;
             height: auto;
@@ -57,8 +56,7 @@
         }
         .video-card:hover video {
             border-color: #dccfa1;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(160, 140, 92, 0.2);
+            box-shadow: 0 20px 40px rgba(160, 140, 92, 0.2);
         }
     </style>
 </head>
@@ -67,64 +65,44 @@
     <header class="fixed w-full z-50 bg-black/95 backdrop-blur-md border-b border-zinc-800">
         <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <span class="text-xl font-bold tracking-widest gold-gradient-text uppercase">Wagner Alves</span>
-            <nav class="flex gap-4 md:gap-8 text-[10px] md:text-sm font-medium tracking-widest tracking-tighter">
-                <a href="#inicio" class="hover:text-gold transition text-zinc-400">INÍCIO</a>
-                <a href="#depoimentos" class="hover:text-gold transition text-zinc-400">DEPOIMENTOS</a>
-                <a href="#sobre" class="hover:text-gold transition text-zinc-400 uppercase tracking-tighter">O Consultor</a>
-                <a href="#contato" class="hover:text-gold transition text-zinc-400">LOCALIZAÇÃO</a>
-                <a href="#duvidas" class="hover:text-gold transition text-zinc-400 uppercase tracking-tighter">FAQ</a>
+            <nav class="flex gap-4 md:gap-8 text-[10px] md:text-sm font-medium tracking-widest text-zinc-400">
+                <a href="#inicio" class="hover:text-gold transition uppercase">Início</a>
+                <a href="#depoimentos" class="hover:text-gold transition uppercase font-bold text-gold">Depoimentos</a>
+                <a href="#sobre" class="hover:text-gold transition uppercase tracking-tighter">O Consultor</a>
+                <a href="#contato" class="hover:text-gold transition uppercase">Localização</a>
+                <a href="#duvidas" class="hover:text-gold transition uppercase">Dúvidas</a>
             </nav>
         </div>
     </header>
 
-    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-32 pb-12">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-            <div class="space-y-10 text-center md:text-left" data-aos="fade-up" data-aos-duration="1000">
-                <h1 class="text-5xl md:text-8xl leading-tight font-medium text-white break-words">Sua imagem está<br><span class="gold-gradient-text italic font-bold">sabotando</span> sua autoridade?</h1>
-                <p class="text-zinc-400 text-2xl leading-relaxed">Consultoria de Visagismo Masculino de Alto Padrão em Curitiba. Alinhamento estratégico de imagem para homens de sucesso com expertise de 20 anos.</p>
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-32 pb-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-up" data-aos-duration="1000" class="text-center md:text-left">
+                <h1 class="text-5xl md:text-8xl leading-tight font-medium text-white mb-8 italic">Sua imagem está<br><span class="gold-gradient-text font-bold">sabotando</span> sua autoridade?</h1>
+                <p class="text-zinc-400 text-2xl mb-10 leading-relaxed">Consultoria de Visagismo Masculino de Alto Padrão em Curitiba. Alinhamento estratégico com expertise de <span class="text-white font-bold">20 anos</span>.</p>
                 <div class="pt-4">
                     <a href="https://wa.me/5541999682982" class="wa-pulse inline-block bg-white text-black px-12 py-5 rounded-lg font-black text-xl hover:bg-zinc-200 transition">QUERO MINHA MELHOR VERSÃO</a>
                 </div>
             </div>
-            <div class="relative flex justify-center" data-aos="zoom-in" data-aos-duration="1200">
+            <div class="flex justify-center" data-aos="zoom-in" data-aos-duration="1200">
                 <img src="./foto-wagner.jpg" alt="Wagner Alves" class="w-full max-w-md rounded-[2.5rem] border-2 border-[#a08c5c]/50 shadow-2xl">
             </div>
         </div>
     </section>
 
-    <section id="depoimentos" class="py-28 bg-[#0a0a0a] border-t border-zinc-900 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 text-center mb-24" data-aos="fade-up">
-            <h2 class="text-6xl md:text-8xl gold-gradient-text italic font-bold mb-6">A Elite já escolheu o sucesso</h2>
-            <div class="w-32 h-1 bg-gold mx-auto"></div>
-            <p class="text-zinc-500 text-2xl mt-10 max-w-3xl mx-auto">Ouça de homens comuns que transformaram suas carreiras e conquistaram respeito imediato através do Método Wagner Alves.</p>
+    <section id="depoimentos" class="py-28 bg-[#0a0a0a] border-y border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 text-center mb-24">
+            <h2 class="text-6xl md:text-8xl gold-gradient-text italic font-bold mb-6" data-aos="fade-up">A Elite já escolheu o sucesso</h2>
+            <div class="w-32 h-1 bg-gold mx-auto" data-aos="fade-up"></div>
+            <p class="text-zinc-500 text-2xl mt-10 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up">Assista aos depoimentos de homens que transformaram suas imagens e elevaram seu posicionamento profissional.</p>
         </div>
         
-        <div class="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 px-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="video-card">
-                <video controls preload="none" poster="./capa-video-1.jpg" playsinline>
-                    <source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="video-card">
-                <video controls preload="none" poster="./capa-video-2.jpg" playsinline>
-                    <source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="video-card">
-                <video controls preload="none" poster="./capa-video-3.jpg" playsinline>
-                    <source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="video-card">
-                <video controls preload="none" poster="./capa-video-4.jpg" playsinline>
-                    <source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="video-card">
-                <video controls preload="none" poster="./capa-video-5.jpg" playsinline>
-                    <source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4">
-                </video>
-            </div>
+        <div class="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 px-6" data-aos="fade-up">
+            <div class="video-card"><video controls preload="none" poster="./capa-video-1.png" playsinline><source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4"></video></div>
+            <div class="video-card"><video controls preload="none" poster="./capa-video-2.png" playsinline><source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4"></video></div>
+            <div class="video-card"><video controls preload="none" poster="./capa-video-3.png" playsinline><source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4"></video></div>
+            <div class="video-card"><video controls preload="none" poster="./capa-video-4.png" playsinline><source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4"></video></div>
+            <div class="video-card"><video controls preload="none" poster="./capa-video-5.png" playsinline><source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4"></video></div>
         </div>
     </section>
 
@@ -132,14 +110,14 @@
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="relative group" data-aos="fade-right">
                 <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 grayscale hover:grayscale-0 transition duration-1000 shadow-2xl">
-                <div class="absolute -bottom-4 -right-4 bg-gold px-6 py-2 rounded-lg font-bold text-black text-sm uppercase">Expertise de 20 Anos</div>
+                <div class="absolute -bottom-4 -right-4 bg-gold px-8 py-3 rounded-xl font-bold text-black text-sm uppercase shadow-2xl">Expertise de 20 Anos</div>
             </div>
             <div data-aos="fade-left" class="space-y-8">
-                <h2 class="text-6xl text-white italic font-medium leading-tight mb-6">O Consultor</h2>
+                <h2 class="text-6xl text-white italic font-medium leading-tight">O Consultor</h2>
                 <div class="w-24 h-1 bg-gold"></div>
                 <div class="space-y-6 text-zinc-300 text-xl leading-relaxed text-justify">
-                    <p>Com uma trajetória sólida de <span class="text-white font-bold text-2xl">20 anos</span>, Wagner Alves transcende a barbearia convencional. Sua expertise domina a complexa ciência do <span class="gold-gradient-text font-bold">Visagismo Masculino</span>.</p>
-                    <p>Cada análise técnica é um mergulho profundo nas proporções áureas, resultando em uma imagem que comunica <span class="text-white font-bold italic">autoridade imediata e sofisticação natural</span>.</p>
+                    <p>Com duas décadas de dedicação à estética masculina, Wagner Alves desenvolveu um método que une as <span class="text-white font-bold italic">proporções áureas</span> ao comportamento humano.</p>
+                    <p>O resultado é uma assinatura visual exclusiva, desenhada para homens que compreendem que sua imagem é sua ferramenta de poder mais valiosa.</p>
                 </div>
             </div>
         </div>
@@ -150,12 +128,12 @@
             <div class="space-y-12" data-aos="fade-right">
                 <h2 class="text-6xl text-white italic font-medium">Localização</h2>
                 <div class="space-y-10">
-                    <div class="flex gap-6 items-center"><i class="fas fa-map-marker-alt text-gold text-3xl w-10 text-center"></i> <p class="text-2xl text-white">Rua Jacarezinho, 21 - Mercês, Curitiba</p></div>
+                    <div class="flex gap-6 items-center"><i class="fas fa-map-marker-alt text-gold text-3xl w-10 text-center"></i> <p class="text-2xl text-white font-light">Rua Jacarezinho, 21 - Mercês, Curitiba</p></div>
                     <div class="flex gap-6 items-center font-bold"><i class="fas fa-phone-alt text-gold text-3xl w-10 text-center"></i> <p class="text-2xl text-white">(41) 99968-2982</p></div>
                 </div>
             </div>
-            <div class="w-full h-[400px] rounded-3xl overflow-hidden border-2 border-zinc-800 shadow-2xl" data-aos="zoom-in">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.5518063065673!2d-49.2908226!3d-25.4215286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce40919010967%3A0xc66519f18705a26b!2sR.%20Jacarezinho%2C%2021%20-%20Merc%C3%AAs%2C%20Curitiba%20-%20PR%2C%2080810-130!5e0!3m2!1spt-BR!2sbr!4v1712638000000!5m2!1spt-BR!2sbr0" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="w-full h-[450px] rounded-[2.5rem] overflow-hidden border-2 border-zinc-800 shadow-2xl" data-aos="zoom-in">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.225574457222!2d-49.29415662366367!3d-25.43072047756182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce3f898399e03%3A0xe54d68249051d95!2sR.%20Jacarezinho%2C%2021%20-%20Merc%C3%AAs%2C%20Curitiba%20-%20PR%2C%2080710-150!5e0!3m2!1spt-BR!2sbr!4v1712642500000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -164,63 +142,36 @@
         <div class="max-w-4xl mx-auto px-6">
             <h2 class="text-6xl text-white mb-20 italic text-center" data-aos="fade-up">Dúvidas Frequentes</h2>
             <div class="space-y-5">
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        O Visagismo é apenas para o corte de cabelo?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Não. O visagismo analisa o rosto como um todo, barba, sobrancelhas e até o estilo de óculos para criar um visual coerente com sua autoridade.</div>
+                <details class="faq-item group rounded-2xl" data-aos="fade-up">
+                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">O Visagismo é apenas para o corte?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="px-7 pb-7 text-zinc-400 text-lg leading-relaxed">Não. É uma análise completa da identidade. Definimos o melhor formato de barba, sobrancelhas e até óculos para alinhar sua imagem aos seus objetivos.</div>
                 </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        Quanto tempo dura uma sessão de consultoria?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Uma sessão de consultoria profunda e execução técnica leva em média 60 a 90 minutos de atenção exclusiva.</div>
+                <details class="faq-item group rounded-2xl" data-aos="fade-up">
+                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">Quanto tempo dura a sessão?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="px-7 pb-7 text-zinc-400 text-lg leading-relaxed">Uma consultoria estratégica completa dura de 60 a 90 minutos, garantindo atenção técnica exclusiva e um diagnóstico preciso.</div>
                 </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        Onde o Wagner atende em Curitiba?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">O atendimento é exclusivo e privado na Rua Jacarezinho, 21 - Mercês. Um ambiente focado em conforto e privacidade para o homem moderno.</div>
-                </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        Qual a diferença entre barbeiro comum e visagista?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">O barbeiro executa o que você pede. O visagista planeja estrategicamente sua imagem para que ela trabalhe a favor dos seus objetivos.</div>
-                </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        O visagismo ajuda na escolha de armações de óculos?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Com certeza. Definimos o formato e a cor da armação que equilibram suas feições faciais e reforçam sua autoridade.</div>
-                </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        Quais as formas de pagamento disponíveis?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Aceitamos PIX, cartões de débito e crédito. Os valores detalhados são informados via WhatsApp.</div>
+                <details class="faq-item group rounded-2xl" data-aos="fade-up">
+                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">Qual a diferença entre barbeiro e visagista?<span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span></summary>
+                    <div class="px-7 pb-7 text-zinc-400 text-lg leading-relaxed">O barbeiro executa o serviço. O visagista planeja estrategicamente seu visual para que ele comunique autoridade e confiança antes mesmo de você falar.</div>
                 </details>
             </div>
         </div>
     </section>
 
     <footer class="py-20 border-t border-zinc-900 bg-[#050505] text-center">
-        <p class="text-3xl font-bold gold-gradient-text uppercase tracking-widest mb-10">Wagner Alves</p>
-        <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-xs font-bold tracking-widest">Política de Privacidade</button>
-        <p class="text-zinc-800 text-[10px] mt-8 uppercase tracking-[0.2em]">© 2026 - O Novo Conceito em Visagismo Masculino</p>
+        <p class="text-3xl font-bold gold-gradient-text uppercase tracking-[0.4em] mb-10">Wagner Alves</p>
+        <div class="flex justify-center gap-10 text-zinc-600 text-[10px] mb-8 uppercase tracking-widest font-bold">
+            <button onclick="abrirPolitica()" class="hover:text-gold transition">Política de Privacidade</button>
+            <a href="https://wa.me/5541999682982" class="hover:text-gold transition">Suporte WhatsApp</a>
+        </div>
+        <p class="text-zinc-800 text-[10px] uppercase tracking-widest">© 2026 - O Novo Padrão em Imagem Masculina em Curitiba</p>
     </footer>
 
     <div id="modal-politica">
         <div class="max-w-3xl mx-auto px-6 py-20">
             <button onclick="fecharPolitica()" class="text-gold mb-10 text-xl font-bold hover:underline"><i class="fas fa-arrow-left"></i> VOLTAR PARA O SITE</button>
-            <h2 class="text-5xl text-white mb-6 font-bold italic">Política de Privacidade</h2>
-            <p class="text-zinc-400 text-xl leading-relaxed">Este site é operado por <strong>Wagner Alves</strong>. Coletamos seu contato via WhatsApp exclusivamente para fins de agendamento de consultoria. Respeitamos rigorosamente a LGPD: seus dados são confidenciais e nunca compartilhados.</p>
+            <h2 class="text-5xl text-white mb-6 italic">Política de Privacidade</h2>
+            <p class="text-zinc-400 text-xl leading-relaxed">Este site respeita sua privacidade. Dados coletados via WhatsApp são confidenciais e usados apenas para agendamento de consultoria. Cumprimos rigorosamente a LGPD.</p>
         </div>
     </div>
 
@@ -230,13 +181,7 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inicialização Blindada
-        AOS.init({
-            once: true, // A animação só acontece uma vez
-            duration: 800, // Duração de 0.8s
-            disable: 'mobile' // Desativa em celulares muito antigos para garantir performance
-        });
-
+        AOS.init({ once: true, duration: 800, disable: 'mobile' });
         function abrirPolitica() { document.getElementById('modal-politica').style.display = 'block'; document.body.style.overflow = 'hidden'; }
         function fecharPolitica() { document.getElementById('modal-politica').style.display = 'none'; document.body.style.overflow = 'auto'; }
     </script>
