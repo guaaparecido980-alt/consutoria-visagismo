@@ -21,33 +21,37 @@
             background-clip: text;
         }
         .btn-terno {
-            background-color: #1a233a; /* Azul do terno */
+            background-color: #1a233a; /* Azul Marinho do Terno */
             color: #dccfa1;
             border: 2px solid #a08c5c;
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
         }
         .btn-terno:hover {
             background-color: #dccfa1;
             color: #1a233a;
-            box-shadow: 0 0 25px rgba(160, 140, 92, 0.5);
-            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(160, 140, 92, 0.5);
+            transform: scale(1.03);
         }
         .faq-item { border: 1px solid #27272a; transition: all 0.3s ease; }
         .faq-item:hover { border-color: #dccfa1; background-color: #0f0f0f; }
         #modal-politica { display: none; position: fixed; inset: 0; z-index: 100; background-color: #050505; overflow-y: auto; }
+        .feature-card { background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%); border: 1px solid rgba(160, 140, 92, 0.2); }
     </style>
 </head>
 <body class="antialiased">
 
     <header class="fixed w-full z-50 bg-black/95 backdrop-blur-md border-b border-zinc-800">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <img src="./logo.png" alt="Wagner Alves" class="h-10 md:h-12 object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/000000/a08c5c?text=WAGNER+ALVES';">
-            <nav class="flex gap-4 md:gap-8 text-[10px] md:text-sm font-medium tracking-widest text-zinc-400">
-                <a href="#inicio" class="hover:text-gold transition uppercase font-bold text-white">Início</a>
-                <a href="#depoimentos" class="hover:text-gold transition uppercase font-bold text-white">Depoimentos</a>
-                <a href="#sobre" class="hover:text-gold transition uppercase font-bold text-white">O Consultor</a>
-                <a href="#contato" class="hover:text-gold transition uppercase font-bold text-white">Localização</a>
-                <a href="#duvidas" class="hover:text-gold transition uppercase font-bold text-white">FAQ</a>
+            <div class="flex items-center gap-3">
+                <img src="./logo.png" alt="" class="h-10 object-contain" onerror="this.style.display='none'">
+                <span class="text-xl font-bold tracking-widest gold-gradient-text uppercase">Wagner Alves</span>
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm font-medium tracking-widest text-zinc-400">
+                <a href="#inicio" class="hover:text-gold transition uppercase text-white font-bold">Início</a>
+                <a href="#depoimentos" class="hover:text-gold transition uppercase text-white font-bold">Depoimentos</a>
+                <a href="#sobre" class="hover:text-gold transition uppercase text-white font-bold">O Consultor</a>
+                <a href="#contato" class="hover:text-gold transition uppercase text-white font-bold">Localização</a>
+                <a href="#duvidas" class="hover:text-gold transition uppercase text-white font-bold">FAQ</a>
             </nav>
         </div>
     </header>
@@ -57,18 +61,35 @@
             <div class="space-y-10 text-center md:text-left" data-aos="fade-up">
                 <h1 class="text-6xl md:text-8xl leading-tight font-medium text-white italic">Sua imagem está<br><span class="gold-gradient-text font-bold">sabotando</span> sua autoridade?</h1>
                 <p class="text-zinc-400 text-2xl leading-relaxed">Mentor de Imagem Masculina de Alto Padrão em Curitiba. Expertise de <span class="text-white font-bold underline decoration-gold">20 anos</span>.</p>
-                <div class="pt-4 flex flex-col items-center md:items-start gap-4">
-                    <a href="https://wa.me/5541999682982" class="btn-terno inline-block px-12 py-5 rounded-lg font-black text-xl w-full md:w-auto text-center">QUERO MINHA MELHOR VERSÃO</a>
-                    <p class="text-zinc-600 text-xs uppercase tracking-widest">Agenda exclusiva com vagas limitadas para este mês.</p>
+                
+                <div class="pt-4 flex flex-col items-center md:items-start gap-6 w-full">
+                    <a href="https://wa.me/5541999682982" class="btn-terno inline-block px-12 py-5 rounded-lg font-black text-xl w-full md:w-auto text-center shadow-2xl">QUERO MINHA MELHOR VERSÃO</a>
+                    <p class="text-zinc-500 text-xs uppercase tracking-[0.2em] font-bold">Agenda exclusiva com vagas limitadas para este mês.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 pt-10">
+                    <div class="feature-card p-4 rounded-xl text-center">
+                        <i class="fas fa-microscope text-gold mb-2"></i>
+                        <p class="text-[10px] uppercase tracking-widest font-bold">Análise Científica</p>
+                    </div>
+                    <div class="feature-card p-4 rounded-xl text-center">
+                        <i class="fas fa-user-tie text-gold mb-2"></i>
+                        <p class="text-[10px] uppercase tracking-widest font-bold">Posicionamento Premium</p>
+                    </div>
+                    <div class="feature-card p-4 rounded-xl text-center hidden md:block border-gold">
+                        <i class="fas fa-award text-gold mb-2"></i>
+                        <p class="text-[10px] uppercase tracking-widest font-bold">Sigilo Absoluto</p>
+                    </div>
                 </div>
             </div>
+            
             <div class="flex justify-center" data-aos="zoom-in">
                 <img src="./foto-wagner.jpg" class="w-full max-w-md rounded-[2.5rem] border-2 border-[#a08c5c]/50 shadow-2xl">
             </div>
         </div>
     </section>
 
-    <section id="depoimentos" class="py-28 bg-[#0a0a0a] border-y border-zinc-900 overflow-hidden">
+    <section id="depoimentos" class="py-28 bg-[#0a0a0a] border-y border-zinc-900">
         <div class="max-w-7xl mx-auto px-6 text-center mb-24" data-aos="fade-up">
             <h2 class="text-6xl md:text-8xl gold-gradient-text italic font-bold mb-6">A Elite já escolheu o sucesso</h2>
             <div class="w-32 h-1 bg-gold mx-auto"></div>
@@ -85,34 +106,37 @@
     <section id="sobre" class="py-28 bg-[#050505]">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="relative group" data-aos="fade-right">
-                <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 grayscale shadow-2xl">
-                <div class="absolute -bottom-4 -right-4 bg-gold px-6 py-2 rounded-lg font-bold text-black text-sm uppercase">20 Anos de Experiência</div>
+                <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 grayscale hover:grayscale-0 transition duration-1000 shadow-2xl">
+                <div class="absolute -bottom-4 -right-4 bg-gold px-8 py-3 rounded-xl font-bold text-black text-sm uppercase shadow-2xl">Expertise de 20 Anos</div>
             </div>
             <div data-aos="fade-left" class="space-y-8">
-                <h2 class="text-6xl text-white italic font-medium leading-tight mb-6 uppercase">O Consultor</h2>
+                <h2 class="text-6xl text-white italic font-medium leading-tight mb-6">O Consultor</h2>
                 <div class="w-24 h-1 bg-gold"></div>
                 <p class="text-zinc-300 text-xl leading-relaxed text-justify italic">
-                    Com duas décadas de dedicação, Wagner Alves domina a ciência do Visagismo Masculino, criando assinaturas visuais exclusivas para homens que não aceitam o comum.
+                    "Meu objetivo não é mudar quem você é, mas garantir que o mundo enxergue o seu real valor através da sua imagem."
+                </p>
+                <p class="text-zinc-400 text-lg leading-relaxed text-justify">
+                    Com duas décadas de dedicação à estética masculina, Wagner Alves une as proporções áureas ao comportamento humano, criando assinaturas visuais exclusivas para homens que buscam o topo.
                 </p>
             </div>
         </div>
     </section>
 
     <section id="contato" class="py-28 bg-[#0a0a0a] border-y border-zinc-900">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center text-center md:text-left">
             <div class="space-y-12" data-aos="fade-right">
-                <h2 class="text-6xl text-white italic font-medium leading-tight">Localização</h2>
-                <div class="space-y-8">
-                    <div class="flex gap-6 items-center">
-                        <i class="fas fa-map-marker-alt text-gold text-3xl w-10 text-center"></i> 
+                <h2 class="text-6xl text-white italic font-medium">Localização</h2>
+                <div class="space-y-10">
+                    <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                        <i class="fas fa-map-marker-alt text-gold text-3xl"></i> 
                         <p class="text-2xl text-white">Rua Jacarezinho, 21 - Mercês, Curitiba</p>
                     </div>
-                    <div class="flex gap-6 items-center">
-                        <i class="fas fa-phone-alt text-gold text-3xl w-10 text-center"></i> 
-                        <p class="text-2xl text-white">(41) 99968-2982</p>
+                    <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                        <i class="fas fa-phone-alt text-gold text-3xl"></i> 
+                        <p class="text-2xl text-white font-bold">(41) 99968-2982</p>
                     </div>
-                    <div class="flex gap-6 items-center">
-                        <i class="fas fa-envelope text-gold text-3xl w-10 text-center"></i> 
+                    <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                        <i class="fas fa-envelope text-gold text-3xl"></i> 
                         <p class="text-xl text-zinc-400">Wagnerbarbeiro15@gmail.com</p>
                     </div>
                 </div>
@@ -128,25 +152,25 @@
             <h2 class="text-6xl text-white mb-20 italic text-center" data-aos="fade-up">Dúvidas Frequentes</h2>
             <div class="space-y-5">
                 <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
+                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium text-white outline-none">
                         O Visagismo é apenas para o corte?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
                     <div class="px-7 pb-7 text-zinc-400 text-lg">Não. O visagismo analisa o rosto, barba e sobrancelhas para criar um visual coerente com sua autoridade.</div>
                 </details>
                 <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
+                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium text-white outline-none">
+                        Quanto tempo dura a sessão?
+                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="px-7 pb-7 text-zinc-400 text-lg">Uma sessão de consultoria estratégica leva em média 60 a 90 minutos de atenção técnica exclusiva.</div>
+                </details>
+                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
+                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium text-white outline-none">
                         Qual a diferença entre barbeiro e visagista?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">O barbeiro executa. O visagista planeja estrategicamente sua imagem.</div>
-                </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        O visagismo ajuda na escolha de óculos?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Com certeza. O formato da armação é crucial para equilibrar as linhas do rosto e reforçar a liderança.</div>
+                    <div class="px-7 pb-7 text-zinc-400 text-lg">O barbeiro executa. O visagista planeja estrategicamente sua imagem para que ela trabalhe a seu favor.</div>
                 </details>
             </div>
         </div>
@@ -155,13 +179,13 @@
     <footer class="py-20 border-t border-zinc-900 bg-[#050505] text-center flex flex-col items-center">
         <p class="text-3xl font-bold gold-gradient-text uppercase tracking-[0.4em] mb-4">Wagner Alves</p>
         <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-xs font-bold tracking-widest mb-10">Política de Privacidade</button>
-        <p class="text-zinc-800 text-[10px] uppercase tracking-[0.2em]">© 2026 - Visagismo Masculino em Curitiba</p>
+        <p class="text-zinc-800 text-[10px] uppercase tracking-[0.2em]">© 2026 - O Novo Conceito em Visagismo Masculino</p>
     </footer>
 
     <div id="modal-politica">
         <div class="max-w-3xl mx-auto px-6 py-20 flex flex-col items-center text-center">
-            <button onclick="fecharPolitica()" class="text-gold mb-12 text-xl font-bold hover:underline"><i class="fas fa-arrow-left"></i> VOLTAR</button>
-            <h2 class="text-5xl text-white mb-10 font-bold italic uppercase">Política de Privacidade</h2>
+            <button onclick="fecharPolitica()" class="text-gold mb-10 text-xl font-bold hover:underline"><i class="fas fa-arrow-left"></i> VOLTAR PARA O SITE</button>
+            <h2 class="text-5xl text-white mb-6 italic">Política de Privacidade</h2>
             <p class="text-zinc-400 text-xl leading-relaxed">Respeitamos a LGPD: seus dados de contato são usados exclusivamente para agendamentos via WhatsApp.</p>
         </div>
     </div>
@@ -176,5 +200,6 @@
         function abrirPolitica() { document.getElementById('modal-politica').style.display = 'block'; document.body.style.overflow = 'hidden'; }
         function fecharPolitica() { document.getElementById('modal-politica').style.display = 'none'; document.body.style.overflow = 'auto'; }
     </script>
+
 </body>
 </html>
