@@ -6,8 +6,6 @@
     <title>Wagner Alves | Especialista em Visagismo Masculino</title>
     
     <link rel="icon" type="image/png" href="./favicon.png?v=2">
-    <link rel="shortcut icon" href="./favicon.png?v=2" type="image/x-icon">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -22,14 +20,23 @@
             background-clip: text;
         }
         .bg-gold { background-color: #a08c5c; }
-        .border-gold { border-color: #a08c5c; }
-        .btn-animate { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(160, 140, 92, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(160, 140, 92, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(160, 140, 92, 0); }
+        /* Efeito de Hover nas Perguntas */
+        .faq-item:hover {
+            border-color: #dccfa1;
+            background-color: #111;
+            transform: translateY(-2px);
         }
-        details summary::-webkit-details-marker { display: none; }
+        .faq-item:hover summary { color: #dccfa1; }
+        
+        /* Modal da Política */
+        #modal-politica {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background-color: #050505;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -51,9 +58,9 @@
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="space-y-10 text-center md:text-left">
                 <h1 class="text-5xl md:text-8xl leading-tight font-medium text-white break-words">Sua imagem está<br><span class="gold-gradient-text italic font-bold">sabotando</span> sua autoridade?</h1>
-                <p class="text-zinc-400 text-2xl leading-relaxed">A consultoria de visagismo que alinha sua aparência ao seu sucesso profissional. Atendimento exclusivo em Curitiba.</p>
+                <p class="text-zinc-400 text-2xl leading-relaxed">Consultoria de Visagismo de Alto Padrão em Curitiba.</p>
                 <div class="pt-4">
-                    <a href="https://wa.me/5541999682982" class="btn-animate inline-block bg-white text-black px-12 py-5 rounded-lg font-black text-xl hover:bg-zinc-200 transition">QUERO MINHA MELHOR VERSÃO</a>
+                    <a href="https://wa.me/5541999682982" class="inline-block bg-white text-black px-12 py-5 rounded-lg font-black text-xl hover:bg-zinc-200 transition">QUERO MINHA MELHOR VERSÃO</a>
                 </div>
             </div>
             <div class="relative flex justify-center">
@@ -62,24 +69,7 @@
         </div>
     </section>
 
-    <section id="sobre" class="py-28 bg-[#0a0a0a]">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-            <div class="order-2 md:order-1">
-                <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 shadow-2xl grayscale hover:grayscale-0 transition duration-700">
-            </div>
-            <div class="space-y-8 order-1 md:order-2">
-                <h2 class="text-5xl text-white italic">Sobre o Wagner</h2>
-                <div class="w-24 h-1 bg-gold"></div>
-                <div class="space-y-6 text-zinc-400 text-lg leading-relaxed">
-                    <p>Com mais de <span class="text-white font-bold">18 anos de trajetória</span> no universo da estética masculina, Wagner Alves consolidou-se como uma referência em Curitiba por unir a técnica clássica da barbearia à ciência avançada do Visagismo.</p>
-                    <p>Sua carreira é pautada por uma busca incansável por conhecimento, acumulando dezenas de certificações e cursos de especialização que o permitiram desenvolver um método único de análise facial. Para Wagner, cada cliente é um projeto de imagem exclusivo.</p>
-                    <p>Não se trata apenas de estética; trata-se de <span class="text-white font-bold">comunicação não-verbal</span>. Wagner utiliza seu domínio técnico para garantir que cada detalhe do seu rosto transmita a autoridade, confiança e harmonia que sua posição exige.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="transformacoes" class="py-28 bg-[#050505]">
+    <section id="transformacoes" class="py-28 bg-[#0a0a0a]">
         <div class="max-w-7xl mx-auto px-6 text-center mb-20">
             <h2 class="text-6xl text-white mb-6">A Transformação</h2>
             <div class="w-32 h-1 bg-gold mx-auto"></div>
@@ -100,26 +90,28 @@
         </div>
     </section>
 
+    <section id="sobre" class="py-28 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 shadow-2xl grayscale">
+            <div class="space-y-8">
+                <h2 class="text-5xl text-white italic">Sobre o Wagner</h2>
+                <div class="w-24 h-1 bg-gold"></div>
+                <p class="text-zinc-400 text-lg leading-relaxed text-justify">Com mais de 18 anos de profissão, Wagner Alves une técnica e visagismo para criar imagens de impacto. Sua trajetória é marcada por cursos de especialização e um olhar atento às proporções que comunicam autoridade.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="contato" class="py-28 bg-[#0a0a0a] border-t border-zinc-900">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
             <div class="space-y-12">
-                <h2 class="text-5xl text-white italic font-medium">Contato e Localização</h2>
+                <h2 class="text-5xl text-white italic">Contato e Localização</h2>
                 <div class="space-y-8 text-zinc-300">
-                    <div class="flex gap-4">
-                        <i class="fas fa-map-marker-alt text-gold text-2xl"></i>
-                        <p class="text-xl">Rua Jacarezinho, 21 - Mercês<br>Curitiba - PR</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <i class="fas fa-phone-alt text-gold text-2xl"></i>
-                        <p class="text-xl">(41) 99968-2982</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <i class="fas fa-envelope text-gold text-2xl"></i>
-                        <p class="text-xl">Wagnerbarbeiro15@gmail.com</p>
-                    </div>
+                    <div class="flex gap-4 items-center"><i class="fas fa-map-marker-alt text-gold text-2xl w-8"></i> <p class="text-xl">Rua Jacarezinho, 21 - Mercês</p></div>
+                    <div class="flex gap-4 items-center"><i class="fas fa-phone-alt text-gold text-2xl w-8"></i> <p class="text-xl">(41) 99968-2982</p></div>
+                    <div class="flex gap-4 items-center"><i class="fas fa-envelope text-gold text-2xl w-8"></i> <p class="text-xl text-sm md:text-xl">Wagnerbarbeiro15@gmail.com</p></div>
                 </div>
             </div>
-            <div class="w-full h-[400px] rounded-3xl overflow-hidden border-2 border-zinc-800 grayscale shadow-2xl">
+            <div class="w-full h-[350px] rounded-3xl overflow-hidden border-2 border-zinc-800 grayscale">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.5518063065673!2d-49.2908226!3d-25.4215286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce40919010967%3A0xc66519f18705a26b!2sR.%20Jacarezinho%2C%2021%20-%20Merc%C3%AAs%2C%20Curitiba%20-%20PR%2C%2080810-130!5e0!3m2!1spt-BR!2sbr!4v1712638000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
@@ -127,73 +119,88 @@
 
     <section id="duvidas" class="py-28 bg-[#050505]">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl text-white mb-4 italic">Dúvidas Frequentes</h2>
-                <p class="text-zinc-500">Se você ainda tem dúvidas, confira as respostas abaixo.</p>
-            </div>
+            <h2 class="text-5xl text-white mb-16 italic text-center">Dúvidas Frequentes</h2>
             
             <div class="space-y-4">
-                <details class="group bg-[#0a0a0a] rounded-2xl border border-zinc-800 open:border-gold transition-all duration-300">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-xl font-medium">
+                <details class="faq-item group bg-[#0a0a0a] rounded-2xl border border-zinc-800 transition-all duration-300">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-xl font-medium outline-none">
                         O Visagismo é apenas para o corte de cabelo?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
-                    <div class="px-6 pb-6 text-zinc-400 leading-relaxed">
-                        Não. O Visagismo é um estudo completo da sua imagem. Envolve o formato do rosto, temperamento, formato da barba, sobrancelhas e até o estilo de óculos e acessórios, tudo para criar um visual coerente com quem você é e com o que deseja transmitir.
-                    </div>
+                    <div class="px-6 pb-6 text-zinc-400">Embora o corte seja vital, o visagismo analisa todo o rosto, barba e sobrancelhas para um visual completo.</div>
                 </details>
 
-                <details class="group bg-[#0a0a0a] rounded-2xl border border-zinc-800 open:border-gold transition-all duration-300">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-xl font-medium">
+                <details class="faq-item group bg-[#0a0a0a] rounded-2xl border border-zinc-800 transition-all duration-300">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-xl font-medium outline-none">
                         Quanto tempo dura uma sessão de consultoria?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
-                    <div class="px-6 pb-6 text-zinc-400 leading-relaxed">
-                        Uma sessão completa de consultoria leva em média de 60 a 90 minutos. É um processo técnico e minucioso de medição facial e diagnóstico, seguido da execução do design personalizado.
-                    </div>
+                    <div class="px-6 pb-6 text-zinc-400">A sessão leva em média de 60 a 90 minutos para uma análise técnica profunda.</div>
                 </details>
 
-                <details class="group bg-[#0a0a0a] rounded-2xl border border-zinc-800 open:border-gold transition-all duration-300">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-xl font-medium">
-                        Preciso fazer a consultoria toda vez que for cortar?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-6 pb-6 text-zinc-400 leading-relaxed">
-                        Não. A consultoria profunda é feita uma vez para definirmos o seu mapa visual. Os atendimentos seguintes servem para manutenção da estratégia traçada, a menos que seus objetivos profissionais ou pessoais mudem.
-                    </div>
-                </details>
-
-                <details class="group bg-[#0a0a0a] rounded-2xl border border-zinc-800 open:border-gold transition-all duration-300">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-xl font-medium">
+                <details class="faq-item group bg-[#0a0a0a] rounded-2xl border border-zinc-800 transition-all duration-300">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none text-xl font-medium outline-none">
                         Quais os valores e formas de pagamento?
                         <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                     </summary>
-                    <div class="px-6 pb-6 text-zinc-400 leading-relaxed">
-                        Trabalhamos com pacotes exclusivos de consultoria. Os valores são informados via WhatsApp após uma breve triagem para entendermos sua necessidade. Aceitamos cartões de crédito, débito e PIX.
-                    </div>
+                    <div class="px-6 pb-6 text-zinc-400">Os valores variam conforme o pacote. Aceitamos PIX e cartões. Detalhes via WhatsApp.</div>
                 </details>
             </div>
         </div>
     </section>
 
     <footer class="py-20 border-t border-zinc-900 bg-[#050505] text-center">
-        <div class="max-w-7xl mx-auto px-6">
-            <p class="text-2xl font-bold gold-gradient-text uppercase tracking-widest mb-6">Wagner Alves</p>
-            <nav class="flex justify-center gap-8 text-zinc-600 text-xs mb-8 uppercase tracking-widest font-bold">
-                <a href="#inicio" class="hover:text-gold transition">Início</a>
-                <a href="#politica" class="hover:text-gold transition">Política de Privacidade</a>
-                <a href="#termos" class="hover:text-gold transition">Termos de Uso</a>
-            </nav>
-            <p id="politica" class="text-zinc-700 text-[10px] max-w-2xl mx-auto mb-4">
-                POLÍTICA DE PRIVACIDADE: Seus dados estão protegidos. Não compartilhamos informações com terceiros. O uso deste site implica na aceitação de nossos cookies para melhoria da experiência do usuário.
-            </p>
-            <p class="text-zinc-600 text-xs tracking-widest uppercase">&copy; 2026 - Especialista em Visagismo Masculino em Curitiba</p>
-        </div>
+        <p class="text-2xl font-bold gold-gradient-text uppercase tracking-widest mb-8">Wagner Alves</p>
+        <nav class="flex justify-center gap-8 text-zinc-600 text-xs mb-8 uppercase tracking-widest font-bold">
+            <button onclick="abrirPolitica()" class="hover:text-gold transition">Política de Privacidade</button>
+            <a href="https://wa.me/5541999682982" class="hover:text-gold transition">Suporte</a>
+        </nav>
+        <p class="text-zinc-600 text-[10px] uppercase">© 2026 - Especialista em Visagismo Masculino</p>
     </footer>
 
-    <a href="https://wa.me/5541999682982" class="fixed bottom-10 right-10 bg-[#25D366] w-20 h-20 rounded-full flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition">
-        <i class="fab fa-whatsapp text-5xl text-white"></i>
+    <div id="modal-politica">
+        <div class="max-w-3xl mx-auto px-6 py-20">
+            <button onclick="fecharPolitica()" class="flex items-center gap-2 text-gold mb-10 hover:underline">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <h2 class="text-4xl text-white mb-6">Política de Privacidade</h2>
+            <p class="text-zinc-500 mb-10 italic">Última atualização: abril de 2026</p>
+            
+            <div class="space-y-8 text-zinc-400 leading-relaxed text-justify">
+                <p>Este site é operado por <strong>Wagner Alves</strong>, visagista profissional com atuação em Curitiba - PR. Ao utilizar este site, você concorda com os termos desta política.</p>
+                
+                <div>
+                    <h4 class="text-white text-xl mb-2 italic">Dados Coletados</h4>
+                    <p>Coletamos dados fornecidos voluntariamente por meio de cliques no WhatsApp, como seu número de telefone e nome, para fins de agendamento de consultoria. Não coletamos dados automáticos além dos logs padrão de acesso.</p>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-xl mb-2 italic">Uso das Informações</h4>
+                    <p>Os dados são utilizados exclusivamente para responder solicitações de contato e comunicações relacionadas aos serviços de visagismo oferecidos. Não compartilhamos seus dados com terceiros para fins comerciais.</p>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-xl mb-2 italic">LGPD e Seus Direitos</h4>
+                    <p>Conforme a Lei Geral de Proteção de Dados, você tem direito a acessar, corrigir ou solicitar a exclusão dos seus dados a qualquer momento pelo WhatsApp: (41) 99968-2982.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/5541999682982" class="fixed bottom-10 right-10 bg-[#25D366] w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50 hover:scale-110 transition">
+        <i class="fab fa-whatsapp text-4xl text-white"></i>
     </a>
+
+    <script>
+        function abrirPolitica() {
+            document.getElementById('modal-politica').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Trava o scroll do site
+        }
+        function fecharPolitica() {
+            document.getElementById('modal-politica').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Destrava o scroll
+        }
+    </script>
 
 </body>
 </html>
