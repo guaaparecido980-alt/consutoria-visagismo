@@ -8,52 +8,51 @@
     <link rel="icon" type="image/png" href="./favicon.png?v=2">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f4f4f5; overflow-x: hidden; }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
         .gold-gradient-text {
             background: linear-gradient(135deg, #a08c5c 0%, #dccfa1 50%, #a08c5c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .bg-gold { background-color: #a08c5c; }
-        .faq-item:hover { border-color: #dccfa1; background-color: #111; }
-        
-        /* Estilização do Carrossel de Vídeos */
-        .swiper { width: 100%; padding-top: 50px; padding-bottom: 50px; }
-        .swiper-slide {
-            background-position: center;
-            background-size: cover;
-            width: 300px;
-            height: 533px; /* Proporção de Reels/TikTok */
-            filter: blur(1px) grayscale(0.5);
-            transition: 0.5s;
+
+        /* Estilo dos Cards de Vídeo */
+        .video-card {
+            position: relative;
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid #27272a;
+            border: 1px solid rgba(160, 140, 92, 0.2);
+            transition: all 0.4s ease;
+            background: #0a0a0a;
         }
-        .swiper-slide-active {
-            filter: blur(0px) grayscale(0);
-            transform: scale(1.1);
+        .video-card:hover {
             border-color: #dccfa1;
-            box-shadow: 0 0 30px rgba(160, 140, 92, 0.3);
-            z-index: 10;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(160, 140, 92, 0.2);
         }
-        video { width: 100%; height: 100%; object-fit: cover; }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 9/16; /* Proporção de Reels/Vertical */
+        }
         
-        #modal-politica { display: none; position: fixed; inset: 0; z-index: 100; background-color: #050505; overflow-y: auto; }
-        .btn-animate { animation: pulse 2s infinite; }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(160, 140, 92, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(160, 140, 92, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(160, 140, 92, 0); }
+        /* Botão WhatsApp Pulsante */
+        .wa-pulse { animation: wa-beat 2s infinite; }
+        @keyframes wa-beat {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
+
+        #modal-politica { display: none; position: fixed; inset: 0; z-index: 100; background-color: #050505; overflow-y: auto; }
     </style>
 </head>
 <body class="antialiased">
@@ -63,10 +62,9 @@
             <span class="text-xl font-bold tracking-widest gold-gradient-text uppercase">Wagner Alves</span>
             <nav class="flex gap-4 md:gap-8 text-[10px] md:text-sm font-medium tracking-widest text-zinc-400">
                 <a href="#inicio" class="hover:text-gold transition uppercase">Início</a>
-                <a href="#transformacoes" class="hover:text-gold transition uppercase">Depoimentos</a>
+                <a href="#depoimentos" class="hover:text-gold transition uppercase font-bold text-gold">Depoimentos</a>
                 <a href="#sobre" class="hover:text-gold transition uppercase">O Consultor</a>
-                <a href="#contato" class="hover:text-gold transition uppercase">Contato</a>
-                <a href="#duvidas" class="hover:text-gold transition uppercase">FAQ</a>
+                <a href="#contato" class="hover:text-gold transition uppercase">Localização</a>
             </nav>
         </div>
     </header>
@@ -75,8 +73,8 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-up" data-aos-duration="1000" class="text-center md:text-left">
                 <h1 class="text-5xl md:text-8xl leading-tight font-medium text-white mb-8">Sua imagem está<br><span class="gold-gradient-text italic font-bold">sabotando</span> sua autoridade?</h1>
-                <p class="text-zinc-400 text-2xl mb-10">Consultoria de Visagismo Masculino em Curitiba com expertise de <span class="text-white font-bold">20 anos</span>.</p>
-                <a href="https://wa.me/5541999682982" class="btn-animate inline-block bg-white text-black px-10 py-5 rounded-lg font-black text-xl hover:bg-zinc-200 transition">QUERO MINHA MELHOR VERSÃO</a>
+                <p class="text-zinc-400 text-2xl mb-10 leading-relaxed max-w-lg">Transforme sua presença com quem domina a arte do Visagismo Masculino há <span class="text-white font-bold underline decoration-gold">20 anos</span>.</p>
+                <a href="https://wa.me/5541999682982" class="inline-block bg-white text-black px-12 py-5 rounded-lg font-black text-xl hover:bg-zinc-200 transition shadow-2xl">QUERO MINHA MELHOR VERSÃO</a>
             </div>
             <div class="flex justify-center" data-aos="zoom-in">
                 <img src="./foto-wagner.jpg" class="w-full max-w-md rounded-[2.5rem] border-2 border-[#a08c5c]/50 shadow-2xl">
@@ -84,150 +82,118 @@
         </div>
     </section>
 
-    <section id="transformacoes" class="py-28 bg-[#0a0a0a] border-t border-zinc-900">
-        <div class="max-w-7xl mx-auto px-6 text-center mb-12" data-aos="fade-up">
-            <h2 class="text-6xl text-white italic font-medium mb-4">Casos de Sucesso</h2>
-            <p class="text-zinc-500 text-xl">Veja o impacto do Método Wagner Alves na vida de grandes profissionais.</p>
-            <div class="w-32 h-1 bg-gold mx-auto mt-6"></div>
+    <section id="depoimentos" class="py-32 bg-[#0a0a0a] border-y border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 text-center mb-20">
+            <h2 class="text-5xl md:text-7xl text-white italic leading-tight mb-8" data-aos="fade-up">
+                A Elite de Curitiba<br>
+                <span class="gold-gradient-text font-bold">já escolheu o sucesso</span>
+            </h2>
+            <p class="text-zinc-500 text-xl max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                Ouça de homens comuns que transformaram suas carreiras e conquistaram respeito imediato através do Método Wagner Alves. O próximo pode ser você.
+            </p>
+            <div class="w-32 h-1 bg-gold mx-auto mt-8"></div>
         </div>
 
-        <div class="swiper mySwiper" data-aos="zoom-in">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <video controls preload="none" poster="./foto-wagner.jpg">
-                        <source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="swiper-slide">
-                    <video controls preload="none">
-                        <source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="swiper-slide">
-                    <video controls preload="none">
-                        <source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="swiper-slide">
-                    <video controls preload="none">
-                        <source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="swiper-slide">
-                    <video controls preload="none">
-                        <source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4">
-                    </video>
-                </div>
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-6" data-aos="fade-up" data-aos-delay="400">
+            
+            <div class="video-card group">
+                <video controls preload="none" poster="./capa-video-1.jpg" playsinline>
+                    <source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4">
+                </video>
             </div>
-            <div class="swiper-button-next text-gold"></div>
-            <div class="swiper-button-prev text-gold"></div>
-            <div class="swiper-pagination"></div>
+
+            <div class="video-card group">
+                <video controls preload="none" poster="./capa-video-2.jpg" playsinline>
+                    <source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-card group">
+                <video controls preload="none" poster="./capa-video-3.jpg" playsinline>
+                    <source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-card group">
+                <video controls preload="none" poster="./capa-video-4.jpg" playsinline>
+                    <source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-card group">
+                <video controls preload="none" poster="./capa-video-5.jpg" playsinline>
+                    <source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4">
+                </video>
+            </div>
+
         </div>
     </section>
 
     <section id="sobre" class="py-28 bg-[#050505]">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="relative group" data-aos="fade-right">
-                <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 grayscale">
-                <div class="absolute -bottom-4 -right-4 bg-gold px-6 py-2 rounded-lg font-bold text-black text-sm uppercase">20 Anos de Experiência</div>
+                <img src="./ia-metodo-wagner.png" class="rounded-3xl border border-zinc-800 grayscale transition duration-700 hover:grayscale-0">
+                <div class="absolute -bottom-4 -right-4 bg-gold px-8 py-3 rounded-xl font-bold text-black text-sm uppercase shadow-2xl">
+                    Mentor de Imagem há 20 anos
+                </div>
             </div>
             <div data-aos="fade-left" class="space-y-8">
                 <h2 class="text-6xl text-white italic font-medium leading-tight">O Consultor</h2>
                 <div class="w-24 h-1 bg-gold"></div>
-                <div class="text-zinc-300 text-xl leading-relaxed text-justify space-y-4">
-                    <p>Com duas décadas de excelência, Wagner Alves transcende o conceito de barbearia para entregar uma mentoria de imagem estratégica.</p>
-                    <p>Dominando a ciência do <span class="gold-gradient-text font-bold">Visagismo Masculino</span>, ele cria assinaturas visuais que comunicam poder e autoridade imediata.</p>
-                </div>
+                <p class="text-zinc-300 text-xl leading-relaxed text-justify">
+                    Wagner Alves é o mentor por trás das imagens que transmitem poder em Curitiba. Com <span class="text-white font-bold">20 anos de excelência</span>, ele une as proporções áureas ao comportamento humano, criando uma <span class="gold-gradient-text font-bold italic">assinatura visual exclusiva</span> para homens de alto impacto.
+                </p>
             </div>
         </div>
     </section>
 
-    <section id="contato" class="py-28 bg-[#0a0a0a] border-y border-zinc-900">
+    <section id="contato" class="py-28 bg-[#0a0a0a] border-t border-zinc-900">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="space-y-12" data-aos="fade-right">
                 <h2 class="text-6xl text-white italic font-medium">Localização</h2>
                 <div class="space-y-8">
-                    <div class="flex gap-6 items-center"><i class="fas fa-map-marker-alt text-gold text-3xl w-10 text-center"></i> <p class="text-2xl text-white">Rua Jacarezinho, 21 - Mercês</p></div>
-                    <div class="flex gap-6 items-center"><i class="fas fa-phone-alt text-gold text-3xl w-10 text-center"></i> <p class="text-2xl text-white">(41) 99968-2982</p></div>
-                    <div class="flex gap-6 items-center"><i class="fas fa-envelope text-gold text-3xl w-10 text-center"></i> <p class="text-xl text-white">Wagnerbarbeiro15@gmail.com</p></div>
+                    <div class="flex gap-6 items-center">
+                        <i class="fas fa-map-marker-alt text-gold text-3xl w-10 text-center"></i> 
+                        <p class="text-2xl text-white">Rua Jacarezinho, 21 - Mercês, Curitiba</p>
+                    </div>
+                    <div class="flex gap-6 items-center font-bold">
+                        <i class="fas fa-phone-alt text-gold text-3xl w-10 text-center"></i> 
+                        <p class="text-2xl text-white">(41) 99968-2982</p>
+                    </div>
                 </div>
             </div>
-            <div class="w-full h-[400px] rounded-3xl overflow-hidden border-2 border-zinc-800 shadow-2xl" data-aos="zoom-in">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.2263309289297!2d-49.294154924610195!3d-25.43070447756187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce40f0656a59b%3A0xcf958742875f95cf!2sR.%20Jacarezinho%2C%2021%20-%20Merc%C3%AAs%2C%20Curitiba%20-%20PR%2C%2080710-150!5e0!3m2!1spt-BR!2sbr!4v1711678900000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="w-full h-[450px] rounded-[2.5rem] overflow-hidden border-2 border-zinc-800 shadow-2xl" data-aos="zoom-in">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.5518063065673!2d-49.2908226!3d-25.4215286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce40919010967%3A0xc66519f18705a26b!2sR.%20Jacarezinho%2C%2021%20-%20Merc%C3%AAs%2C%20Curitiba%20-%20PR%2C%2080810-130!5e0!3m2!1spt-BR!2sbr!4v1712638000000!5m2!1spt-BR!2sbr0" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
-    <section id="duvidas" class="py-28 bg-[#050505]">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-6xl text-white mb-20 italic text-center">Dúvidas Frequentes</h2>
-            <div class="space-y-5">
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        O Visagismo é apenas para o corte?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Não. O visagismo analisa o rosto, barba e sobrancelhas para criar um visual coerente com sua autoridade.</div>
-                </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        Quanto tempo dura a sessão?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Uma sessão estratégica leva em média 60 a 90 minutos de atenção técnica exclusiva.</div>
-                </details>
-                <details class="faq-item group bg-[#0a0a0a] rounded-2xl" data-aos="fade-up">
-                    <summary class="flex justify-between items-center p-7 cursor-pointer list-none text-xl font-medium outline-none text-white">
-                        Formas de pagamento?
-                        <span class="text-gold transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
-                    </summary>
-                    <div class="px-7 pb-7 text-zinc-400 text-lg">Aceitamos PIX, cartões de débito e crédito. Detalhes via WhatsApp.</div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-20 border-t border-zinc-900 bg-[#050505] text-center text-zinc-600">
-        <p class="text-2xl font-bold gold-gradient-text uppercase tracking-widest mb-6">Wagner Alves</p>
-        <button onclick="abrirPolitica()" class="hover:text-gold transition uppercase text-xs font-bold tracking-tighter">Política de Privacidade</button>
-        <p class="text-[10px] mt-6 uppercase tracking-widest">© 2026 - Visagismo Masculino Curitiba</p>
+    <footer class="py-20 border-t border-zinc-900 bg-[#050505] text-center">
+        <p class="text-3xl font-bold gold-gradient-text uppercase tracking-[0.4em] mb-10">Wagner Alves</p>
+        <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-xs font-bold tracking-widest">Política de Privacidade</button>
+        <p class="text-zinc-800 text-[10px] mt-8 uppercase tracking-[0.2em]">© 2026 - O Novo Conceito em Visagismo Masculino</p>
     </footer>
 
     <div id="modal-politica">
         <div class="max-w-3xl mx-auto px-6 py-20">
-            <button onclick="fecharPolitica()" class="text-gold mb-10 text-xl font-bold"><i class="fas fa-arrow-left"></i> VOLTAR</button>
-            <h2 class="text-5xl text-white mb-6 font-bold italic">Política de Privacidade</h2>
-            <p class="text-zinc-400 text-xl">Seus dados são confidenciais e usados apenas para agendamentos via WhatsApp. Respeitamos a LGPD.</p>
+            <button onclick="fecharPolitica()" class="text-gold mb-10 text-xl font-bold hover:underline">
+                <i class="fas fa-arrow-left"></i> VOLTAR PARA O SITE
+            </button>
+            <h2 class="text-5xl text-white mb-6 italic">Política de Privacidade</h2>
+            <p class="text-zinc-400 text-xl leading-relaxed">
+                Este site respeita sua privacidade. Os dados de contato via WhatsApp são usados exclusivamente para agendamentos. Cumprimos rigorosamente a LGPD.
+            </p>
         </div>
     </div>
 
-    <a href="https://wa.me/5541999682982" class="fixed bottom-10 right-10 bg-[#25D366] w-20 h-20 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition z-50">
+    <a href="https://wa.me/5541999682982" class="fixed bottom-10 right-10 bg-[#25D366] w-20 h-20 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition z-50 wa-pulse">
         <i class="fab fa-whatsapp text-5xl text-white"></i>
     </a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
     <script>
-        // Inicialização Animação
-        AOS.init({ once: true, duration: 800 });
-
-        // Inicialização Carrossel Luxo (Coverflow)
-        var swiper = new Swiper(".mySwiper", {
-            effect: "coverflow",
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            coverflowEffect: {
-                rotate: 15,
-                stretch: 0,
-                depth: 200,
-                modifier: 1,
-                slideShadows: true,
-            },
-            pagination: { el: ".swiper-pagination" },
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-        });
+        // Inicialização Garantida da Animação
+        AOS.init({ once: true, duration: 800, disable: 'mobile' });
 
         function abrirPolitica() { document.getElementById('modal-politica').style.display = 'block'; document.body.style.overflow = 'hidden'; }
         function fecharPolitica() { document.getElementById('modal-politica').style.display = 'none'; document.body.style.overflow = 'auto'; }
