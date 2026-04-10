@@ -210,35 +210,36 @@
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* ─── ANTES/DEPOIS ─── */
-        .before-after-wrap { position: relative; overflow: hidden; border-radius: 2rem; aspect-ratio: 3/4; background: #111; border: 1px solid rgba(160,140,92,0.2); }
-        .before-after-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-        .before-after-wrap .after-img { clip-path: inset(0 50% 0 0); transition: clip-path 0.05s; }
-        .ba-slider { position: absolute; inset: 0; opacity: 0; cursor: ew-resize !important; width: 100%; height: 100%; z-index: 10; }
-        .ba-handle {
-            position: absolute; top: 0; bottom: 0; width: 3px;
-            background: linear-gradient(to bottom, transparent, var(--gold-light), transparent);
-            left: 50%; transform: translateX(-50%);
-            pointer-events: none; z-index: 11;
-            transition: left 0.05s;
+        .ba-card {
+            position: relative; border-radius: 2rem; overflow: hidden;
+            border: 1px solid rgba(160,140,92,0.2);
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s;
+            background: #0a0a0a;
         }
-        .ba-handle::before, .ba-handle::after {
-            content: '';
-            position: absolute; left: 50%; transform: translateX(-50%);
-            width: 44px; height: 44px;
-            border: 2px solid var(--gold-light);
-            border-radius: 50%;
-            background: rgba(0,0,0,0.7);
+        .ba-card:hover { transform: translateY(-10px) scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(160,140,92,0.3); }
+        .ba-card img { width: 100%; display: block; }
+        .ba-card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, transparent 70%);
+            pointer-events: none; z-index: 1;
+        }
+        .ba-card-footer {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 1.5rem;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            z-index: 2;
+        }
+        .ba-pill {
+            padding: 5px 14px; border-radius: 999px;
+            font-size: 0.6rem; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase;
             backdrop-filter: blur(10px);
         }
-        .ba-handle::before { top: 50%; transform: translate(-50%, -50%); }
-        .ba-handle::after { top: 50%; transform: translate(-50%, -50%); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%23f1e4bc' viewBox='0 0 24 24'%3E%3Cpath d='M8 5l-7 7 7 7M16 5l7 7-7 7'/%3E%3C/svg%3E") center/20px no-repeat, rgba(0,0,0,0.7); }
-        .ba-label {
-            position: absolute; bottom: 1rem; z-index: 12;
-            padding: 4px 12px; border-radius: 999px;
-            font-size: 0.65rem; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase;
+        .ba-pill-antes { background: rgba(0,0,0,0.65); color: #aaa; border: 1px solid rgba(255,255,255,0.12); }
+        .ba-pill-depois { background: rgba(160,140,92,0.25); color: var(--gold-light); border: 1px solid rgba(160,140,92,0.5); }
+        .ba-shine {
+            position: absolute; inset: 0; pointer-events: none; z-index: 2;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
         }
-        .ba-label-antes { left: 1rem; background: rgba(0,0,0,0.7); color: #aaa; border: 1px solid rgba(255,255,255,0.1); }
-        .ba-label-depois { right: 1rem; background: rgba(160,140,92,0.2); color: var(--gold-light); border: 1px solid rgba(160,140,92,0.4); }
 
         /* ─── VÍDEOS ─── */
         .video-container { position: relative; width: 100%; aspect-ratio: 9/16; border-radius: 2.5rem; overflow: hidden; background: #000; border: 1px solid rgba(160,140,92,0.2); transition: transform 0.3s, box-shadow 0.3s; }
@@ -447,48 +448,41 @@
         <div class="max-w-7xl mx-auto text-center">
             <p class="text-[10px] font-black uppercase tracking-[0.35em] mb-4" style="color:var(--gold)" data-aos="fade-up">✦ Resultados reais ✦</p>
             <h2 class="text-4xl md:text-7xl gold-gradient-text font-black italic uppercase mb-4" data-aos="fade-up">Antes & Depois</h2>
-            <p class="text-zinc-500 italic text-sm mb-16 max-w-xl mx-auto" data-aos="fade-up">Arraste o controle para ver a transformação. Fotos reais de clientes com autorização de uso.</p>
+            <p class="text-zinc-500 italic text-sm mb-16 max-w-xl mx-auto" data-aos="fade-up">Resultados reais. Clientes reais. A diferença que o Visagismo Estratégico faz.</p>
 
-            <!-- GRID ANTES/DEPOIS — substitua os src pelas fotos reais -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-aos="fade-up">
+            <!-- GRID ANTES/DEPOIS — fotos reais de clientes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" data-aos="fade-up">
 
-                <!-- Card 1 -->
+                <!-- Card 1 — Cliente 1 -->
                 <div class="space-y-4">
-                    <div class="before-after-wrap">
-                        <img src="./antes-1.jpg" alt="Antes da consultoria" class="before-img" onerror="this.src='https://placehold.co/400x533/111/333?text=Foto+Antes+1'">
-                        <img src="./depois-1.jpg" alt="Depois da consultoria Wagner Alves" class="after-img" onerror="this.src='https://placehold.co/400x533/1a1a2e/a08c5c?text=Foto+Depois+1'">
-                        <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="updateBA(this)">
-                        <div class="ba-handle" style="left:50%"></div>
-                        <span class="ba-label ba-label-antes">Antes</span>
-                        <span class="ba-label ba-label-depois">Depois</span>
+                    <div class="ba-card">
+                        <div class="ba-shine"></div>
+                        <img src="./WhatsApp_Image_2026-04-07_at_22_56_05.jpeg"
+                             alt="Antes e depois do visagismo masculino — Autoridade e Liderança"
+                             loading="lazy">
+                        <div class="ba-card-overlay"></div>
+                        <div class="ba-card-footer">
+                            <span class="ba-pill ba-pill-antes">← Antes</span>
+                            <span class="ba-pill ba-pill-depois">Depois →</span>
+                        </div>
                     </div>
-                    <p class="text-zinc-500 text-xs italic">Cliente: Executivo — Setor Financeiro</p>
+                    <p class="text-zinc-500 text-xs italic text-center">"Expressão que transmite proximidade" → <span style="color:var(--gold-light)">"Postura que evoca seriedade e liderança"</span></p>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- Card 2 — Cliente 2 -->
                 <div class="space-y-4">
-                    <div class="before-after-wrap">
-                        <img src="./antes-2.jpg" alt="Antes da consultoria" class="before-img" onerror="this.src='https://placehold.co/400x533/111/333?text=Foto+Antes+2'">
-                        <img src="./depois-2.jpg" alt="Depois da consultoria Wagner Alves" class="after-img" onerror="this.src='https://placehold.co/400x533/1a1a2e/a08c5c?text=Foto+Depois+2'">
-                        <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="updateBA(this)">
-                        <div class="ba-handle" style="left:50%"></div>
-                        <span class="ba-label ba-label-antes">Antes</span>
-                        <span class="ba-label ba-label-depois">Depois</span>
+                    <div class="ba-card">
+                        <div class="ba-shine"></div>
+                        <img src="./WhatsApp_Image_2026-04-08_at_00_02_48.jpeg"
+                             alt="Antes e depois do visagismo masculino — Presença e Imagem Estratégica"
+                             loading="lazy">
+                        <div class="ba-card-overlay"></div>
+                        <div class="ba-card-footer">
+                            <span class="ba-pill ba-pill-antes">← Antes</span>
+                            <span class="ba-pill ba-pill-depois">Depois →</span>
+                        </div>
                     </div>
-                    <p class="text-zinc-500 text-xs italic">Cliente: Empresário — Tecnologia</p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="space-y-4">
-                    <div class="before-after-wrap">
-                        <img src="./antes-3.jpg" alt="Antes da consultoria" class="before-img" onerror="this.src='https://placehold.co/400x533/111/333?text=Foto+Antes+3'">
-                        <img src="./depois-3.jpg" alt="Depois da consultoria Wagner Alves" class="after-img" onerror="this.src='https://placehold.co/400x533/1a1a2e/a08c5c?text=Foto+Depois+3'">
-                        <input type="range" min="0" max="100" value="50" class="ba-slider" oninput="updateBA(this)">
-                        <div class="ba-handle" style="left:50%"></div>
-                        <span class="ba-label ba-label-antes">Antes</span>
-                        <span class="ba-label ba-label-depois">Depois</span>
-                    </div>
-                    <p class="text-zinc-500 text-xs italic">Cliente: Advogado — Direito Empresarial</p>
+                    <p class="text-zinc-500 text-xs italic text-center">"Aparência sem propósito" → <span style="color:var(--gold-light)">"Imagem estratégica e presença marcante"</span></p>
                 </div>
 
             </div>
@@ -804,16 +798,6 @@
             entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); } });
         }, { threshold: 0.5 });
         document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
-
-        // ─── ANTES/DEPOIS SLIDER ───
-        function updateBA(input) {
-            const wrap = input.closest('.before-after-wrap');
-            const afterImg = wrap.querySelector('.after-img');
-            const handle = wrap.querySelector('.ba-handle');
-            const pct = input.value;
-            afterImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
-            handle.style.left = pct + '%';
-        }
 
         // ─── VÍDEOS ───
         function toggleVideo(container) {
