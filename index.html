@@ -469,9 +469,95 @@
         .counter { display: inline-block; }
 
         img { max-width: 100%; height: auto; }
+        /* ─── LOADING SCREEN ─── */
+        #loader {
+            position: fixed; inset: 0; z-index: 99999;
+            background: #050505;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 2rem;
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), visibility 0.8s;
+        }
+        #loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        /* Linha superior e inferior — efeito cinemascope */
+        #loader::before, #loader::after {
+            content: '';
+            position: absolute; left: 0; right: 0; height: 80px;
+            background: #000;
+            transition: height 0.7s 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        #loader::before { top: 0; }
+        #loader::after { bottom: 0; }
+        #loader.hide::before, #loader.hide::after { height: 0; }
+
+        /* Texto letra por letra */
+        .loader-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: 0.25em;
+            color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Linha dourada que revela o texto */
+        .loader-name::after {
+            content: attr(data-text);
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            clip-path: inset(0 100% 0 0);
+            animation: textReveal 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+        }
+        @keyframes textReveal {
+            to { clip-path: inset(0 0% 0 0); }
+        }
+
+        /* Subtítulo */
+        .loader-sub {
+            font-size: 0.6rem;
+            font-weight: 900;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: rgba(160,140,92,0.5);
+            opacity: 0;
+            animation: fadeIn 0.8s ease 1.2s forwards;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        /* Barra de progresso dourada */
+        .loader-bar {
+            width: 120px; height: 1px;
+            background: rgba(160,140,92,0.15);
+            position: relative; overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 0.5s ease 0.8s forwards;
+        }
+        .loader-bar::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+            animation: barSweep 1s ease 0.8s forwards;
+        }
+        @keyframes barSweep {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+
+        /* Impede scroll durante loading */
+        body.loading { overflow: hidden; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased loading">
+
+    <!-- ══ LOADING SCREEN ══ -->
+    <div id="loader">
+        <div class="loader-name" data-text="Wagner Alves">Wagner Alves</div>
+        <div class="loader-bar"></div>
+        <p class="loader-sub">Estrategista de Imagem Masculina</p>
+    </div>
 
     <!-- CURSOR DOURADO -->
     <div id="cursor"></div>
@@ -983,6 +1069,17 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        // ─── LOADING SCREEN ───
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('hide');
+                document.body.classList.remove('loading');
+                // Remove do DOM após a animação
+                setTimeout(() => loader.remove(), 900);
+            }, 2000); // 2s — tempo suficiente para ver a animação
+        });
+
         // ─── AOS ───
         AOS.init({ once: true, duration: 1000, easing: 'ease-out-cubic' });
 
