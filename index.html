@@ -20,11 +20,14 @@
     <meta name="twitter:description" content="24 anos projetando autoridade e liderança. Agende sua consultoria exclusiva.">
     <meta name="twitter:image" content="./foto-wagner.jpg">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"LocalBusiness","name":"Wagner Alves – Estrategista de Imagem Masculina","description":"Visagismo masculino estratégico de alto padrão em Curitiba. 24 anos de experiência.","url":"https://wagneralves.com.br","telephone":"+5541999682982","email":"Wagnerbarbeiro15@gmail.com","image":"./foto-wagner.jpg","priceRange":"$$$$","address":{"@type":"PostalAddress","streetAddress":"Av. Cândido Hartmann, 1580","addressLocality":"Curitiba","addressRegion":"PR","addressCountry":"BR"},"geo":{"@type":"GeoCoordinates","latitude":-25.4256375,"longitude":-49.2993375},"openingHours":"Mo-Sa 09:00-19:00","sameAs":["https://www.instagram.com/owagneralvess"]}
+    {"@context":"https://schema.org","@type":"LocalBusiness","name":"Wagner Alves – Estrategista de Imagem Masculina","description":"Visagismo masculino estratégico de alto padrão em Curitiba. 24 anos de experiência.","url":"https://wagneralves.com.br","telephone":"+5541999682982","email":"Wagnerbarbeiro15@gmail.com","image":"./foto-wagner.jpg","priceRange":"$$$$","address":{"@type":"PostalAddress","streetAddress":"Av. Cândido Hartmann, 1580","addressLocality":"Curitiba","addressRegion":"PR","addressCountry":"BR"},"geo":{"@type":"GeoCoordinates","latitude":-25.4256375,"longitude":-49.2993375},"openingHours":"Mo-Sa 09:00-19:00","sameAs":["https://www.instagram.com/wagneralvess"]}
     </script>
 
     <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init','1456777349517939');fbq('track','PageView');
     function dispararPixelContato(){fbq('track','Contact');}
     </script>
@@ -38,1410 +41,242 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
     <style>
-        :root {
-            --gold: #a08c5c;
-            --gold-light: #f1e4bc;
-            --gold-dim: rgba(160,140,92,0.15);
-            --star: #FFD700;
-        }
-
-        /* ─── CURSOR DOURADO ─── */
+        :root { --gold: #a08c5c; --gold-light: #f1e4bc; --gold-dim: rgba(160,140,92,0.15); --star: #FFD700; }
         *, *::before, *::after { box-sizing: border-box; cursor: none !important; }
         #cursor { position: fixed; width: 12px; height: 12px; background: var(--gold-light); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: transform 0.1s, opacity 0.3s; mix-blend-mode: difference; }
         #cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(241,228,188,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: all 0.15s ease-out; }
         #cursor-ring.hovering { transform: translate(-50%,-50%) scale(1.8); border-color: var(--gold); background: rgba(160,140,92,0.08); }
         @media (hover: none) { #cursor, #cursor-ring { display: none; } *, *::before, *::after { cursor: auto !important; } }
-
-        /* ─── BASE ─── */
         html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #050505;
-            color: #f4f4f5;
-            overflow-x: hidden;
-            width: 100%;
-        }
-        body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.025; pointer-events: none; z-index: 9999;
-        }
-
-        /* ─── TIPOGRAFIA ─── */
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f4f4f5; overflow-x: hidden; width: 100%; }
+        body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://grainy-gradients.vercel.app/noise.svg'); opacity: 0.025; pointer-events: none; z-index: 9999; }
         h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
-        .gold-gradient-text {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; display: inline-block;
-        }
-
-        /* ─── HERO CINEMATIC ─── */
-        #inicio {
-            position: relative;
-            min-height: 100vh;
-            background: radial-gradient(ellipse at 60% 40%, rgba(26,35,58,0.5) 0%, transparent 60%),
-                        radial-gradient(ellipse at 10% 80%, rgba(160,140,92,0.07) 0%, transparent 50%);
-            overflow: hidden;
-        }
-        #inicio::after {
-            content: '';
-            position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
-            background: linear-gradient(to bottom, transparent, #050505);
-            pointer-events: none;
-        }
-
-        /* Linhas decorativas cinematográficas */
+        .gold-gradient-text { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+        #inicio { position: relative; min-height: 100vh; background: radial-gradient(ellipse at 60% 40%, rgba(26,35,58,0.5) 0%, transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(160,140,92,0.07) 0%, transparent 50%); overflow: hidden; }
+        #inicio::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to bottom, transparent, #050505); pointer-events: none; }
         .cinematic-lines { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-        .cinematic-lines::before {
-            content: '';
-            position: absolute; top: 0; left: 50%; width: 1px; height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(160,140,92,0.12), transparent);
-            animation: lineDown 3s ease-in-out infinite;
-        }
+        .cinematic-lines::before { content: ''; position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(160,140,92,0.12), transparent); animation: lineDown 3s ease-in-out infinite; }
         @keyframes lineDown { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-        /* Partículas flutuantes */
-        .particle {
-            position: absolute; width: 2px; height: 2px;
-            background: var(--gold-light); border-radius: 50%;
-            opacity: 0; animation: floatUp 8s infinite;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-20vh) translateX(30px); opacity: 0; }
-        }
-
-        /* ─── FOTO HERO ─── */
-        .hero-img-wrap {
-            position: relative;
-        }
-        .hero-img-wrap::before {
-            content: '';
-            position: absolute; inset: -2px;
-            background: linear-gradient(135deg, var(--gold), transparent 40%, transparent 60%, var(--gold));
-            border-radius: 3.2rem;
-            animation: borderPulse 4s ease-in-out infinite;
-            z-index: 0;
-        }
-        .hero-img-wrap::after {
-            content: '';
-            position: absolute; inset: -20px;
-            background: radial-gradient(circle, rgba(160,140,92,0.15) 0%, transparent 70%);
-            z-index: -1;
-            animation: glowPulse 3s ease-in-out infinite;
-        }
+        .particle { position: absolute; width: 2px; height: 2px; background: var(--gold-light); border-radius: 50%; opacity: 0; animation: floatUp 8s infinite; }
+        @keyframes floatUp { 0% { transform: translateY(100vh) translateX(0); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.3; } 100% { transform: translateY(-20vh) translateX(30px); opacity: 0; } }
+        .hero-img-wrap { position: relative; }
+        .hero-img-wrap::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--gold), transparent 40%, transparent 60%, var(--gold)); border-radius: 3.2rem; animation: borderPulse 4s ease-in-out infinite; z-index: 0; }
+        .hero-img-wrap::after { content: ''; position: absolute; inset: -20px; background: radial-gradient(circle, rgba(160,140,92,0.15) 0%, transparent 70%); z-index: -1; animation: glowPulse 3s ease-in-out infinite; }
         @keyframes borderPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
         @keyframes glowPulse { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.05); opacity: 1; } }
         .hero-img-wrap img { position: relative; z-index: 1; border-radius: 3rem; display: block; }
-
-        /* Selo flutuante na foto */
-        .hero-badge {
-            position: absolute; bottom: -16px; left: -16px; z-index: 10;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
-            border: 1px solid rgba(160,140,92,0.5);
-            border-radius: 1.2rem;
-            padding: 12px 20px;
-            backdrop-filter: blur(20px);
-            animation: badgeFloat 4s ease-in-out infinite;
-        }
-        @keyframes badgeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-
-        /* ─── ANIMAÇÃO TEXTO HERO ─── */
-        .hero-text-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        .hero-badge { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); z-index: 10; background: linear-gradient(135deg, #0a0a0a, #1a1a2e); border: 1px solid rgba(160,140,92,0.5); border-radius: 1.2rem; padding: 12px 20px; backdrop-filter: blur(20px); animation: badgeFloat 4s ease-in-out infinite; }
+        @keyframes badgeFloat { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -6px); } }
+        .hero-text-reveal { opacity: 0; transform: translateY(30px); animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
         .delay-5 { animation-delay: 1s; }
         @keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
-
-        /* ─── BOTÕES — cada um único ─── */
-
-        /* Remover estilo genérico antigo */
-        .wa-pulse { animation: pulse-gold 2s infinite; }
-        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(160,140,92,0.7); } 70% { box-shadow: 0 0 0 15px rgba(160,140,92,0); } 100% { box-shadow: 0 0 0 0 rgba(160,140,92,0); } }
-
-        /* ── BTN 1: Hero "Agendar Consultoria" — dourado sólido, cinematográfico ── */
-        .btn-hero {
-            display: inline-flex; align-items: center; gap: 12px;
-            background: linear-gradient(135deg, #a08c5c 0%, #f1e4bc 50%, #a08c5c 100%);
-            background-size: 200% auto;
-            color: #050505;
-            border: none;
-            padding: 1.2rem 2.5rem;
-            border-radius: 0.75rem;
-            font-weight: 900; font-size: 1.05rem;
-            text-transform: uppercase; letter-spacing: 0.15em;
-            text-decoration: none;
-            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
-            position: relative; overflow: hidden;
-            box-shadow: 0 8px 32px rgba(160,140,92,0.35);
-        }
-        .btn-hero:hover {
-            background-position: right center;
-            transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(160,140,92,0.5);
-            color: #050505;
-        }
-        .btn-hero::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-        .btn-hero:hover::after { transform: translateX(100%); }
-
-        /* ── BTN 2: "Verificar Disponibilidade" — contorno dourado, ghost elegante ── */
-        .btn-ghost-gold {
-            display: inline-flex; align-items: center; gap: 12px;
-            background: transparent;
-            color: var(--gold-light);
-            border: 1.5px solid var(--gold);
-            padding: 1rem 2rem;
-            border-radius: 2rem;
-            font-weight: 900; font-size: 0.9rem;
-            text-transform: uppercase; letter-spacing: 0.18em;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-            position: relative; overflow: hidden;
-        }
-        .btn-ghost-gold::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(160,140,92,0.12), rgba(160,140,92,0.05));
-            transform: scaleX(0); transform-origin: left;
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
-        }
+        .btn-hero { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #a08c5c 0%, #f1e4bc 50%, #a08c5c 100%); background-size: 200% auto; color: #050505; border: none; padding: 1.2rem 2.5rem; border-radius: 0.75rem; font-weight: 900; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.15em; transition: all 0.5s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(160,140,92,0.35); }
+        .btn-hero:hover { background-position: right center; transform: translateY(-4px); box-shadow: 0 20px 50px rgba(160,140,92,0.5); }
+        .btn-ghost-gold { display: inline-flex; align-items: center; gap: 12px; background: transparent; color: var(--gold-light); border: 1.5px solid var(--gold); padding: 1rem 2rem; border-radius: 2rem; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.18em; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
         .btn-ghost-gold:hover { border-color: var(--gold-light); color: white; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(160,140,92,0.2); }
-        .btn-ghost-gold:hover::before { transform: scaleX(1); }
-
-        /* ── BTN 3: "Quero minha transformação" — dark navy com brilho ── */
-        .btn-navy {
-            display: inline-flex; align-items: center; gap: 12px;
-            background: linear-gradient(135deg, #0d1b3e, #1a2a5e);
-            color: var(--gold-light);
-            border: 1px solid rgba(160,140,92,0.4);
-            padding: 1.1rem 2.2rem;
-            border-radius: 0.75rem;
-            font-weight: 900; font-size: 1rem;
-            text-transform: uppercase; letter-spacing: 0.15em;
-            text-decoration: none;
-            transition: all 0.4s;
-            position: relative; overflow: hidden;
-            box-shadow: 0 4px 20px rgba(13,27,62,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
-        }
-        .btn-navy::before {
-            content: '';
-            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at center, rgba(160,140,92,0.15) 0%, transparent 60%);
-            opacity: 0; transition: opacity 0.4s;
-        }
-        .btn-navy:hover { border-color: var(--gold-light); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(13,27,62,0.8), 0 0 0 1px rgba(160,140,92,0.3); }
-        .btn-navy:hover::before { opacity: 1; }
-
-        /* ── BTN 4: "Quero essa transformação" — ouro invertido com bordas arredondadas ── */
-        .btn-gold-outline-pill {
-            display: inline-flex; align-items: center; gap: 12px;
-            background: rgba(160,140,92,0.08);
-            color: var(--gold-light);
-            border: 1px solid rgba(160,140,92,0.5);
-            padding: 1.1rem 2.5rem;
-            border-radius: 999px;
-            font-weight: 900; font-size: 1rem;
-            text-transform: uppercase; letter-spacing: 0.18em;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-            backdrop-filter: blur(10px);
-            position: relative; overflow: hidden;
-        }
-        .btn-gold-outline-pill::after {
-            content: '';
-            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 0; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-            transition: width 0.4s;
-        }
-        .btn-gold-outline-pill:hover { background: rgba(160,140,92,0.18); border-color: var(--gold-light); color: white; transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 40px rgba(160,140,92,0.2); }
-        .btn-gold-outline-pill:hover::after { width: 80%; }
-
-        /* ── BTN 5: "Agendar Agora" — full width, dark glass ── */
-        .btn-glass-full {
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            width: 100%;
-            background: rgba(160,140,92,0.1);
-            color: var(--gold-light);
-            border: 1px solid rgba(160,140,92,0.35);
-            padding: 1.2rem 2rem;
-            border-radius: 1rem;
-            font-weight: 900; font-size: 1rem;
-            text-transform: uppercase; letter-spacing: 0.15em;
-            text-decoration: none;
-            transition: all 0.4s;
-            backdrop-filter: blur(20px);
-            position: relative; overflow: hidden;
-        }
-        .btn-glass-full::before {
-            content: '';
-            position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-            transition: width 0.4s;
-        }
-        .btn-glass-full:hover { background: rgba(160,140,92,0.18); border-color: var(--gold); color: white; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
-        .btn-glass-full:hover::before { width: 100%; opacity: 0.05; }
-
-        /* ── BTN antigo removido — mantido para não quebrar nada ── */
-        .btn-premium {
-            background: rgba(26,35,58,0.8); backdrop-filter: blur(10px);
-            color: var(--gold-light); border: 1px solid rgba(160,140,92,0.4);
-            transition: all 0.4s; text-decoration: none;
-        }
-        .btn-premium:hover { transform: translateY(-3px); border-color: var(--gold-light); }
-
-        /* ─── MARQUEE ─── */
+        .btn-navy { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #0d1b3e, #1a2a5e); color: var(--gold-light); border: 1px solid rgba(160,140,92,0.4); padding: 1.1rem 2.2rem; border-radius: 0.75rem; font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.15em; transition: all 0.4s; box-shadow: 0 4px 20px rgba(13,27,62,0.6); }
+        .btn-navy:hover { border-color: var(--gold-light); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(13,27,62,0.8); }
+        .btn-gold-outline-pill { display: inline-flex; align-items: center; gap: 12px; background: rgba(160,140,92,0.08); color: var(--gold-light); border: 1px solid rgba(160,140,92,0.5); padding: 1.1rem 2.5rem; border-radius: 999px; font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.18em; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); backdrop-filter: blur(10px); }
+        .btn-gold-outline-pill:hover { background: rgba(160,140,92,0.18); border-color: var(--gold-light); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(160,140,92,0.2); }
+        .btn-glass-full { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; background: rgba(160,140,92,0.1); color: var(--gold-light); border: 1px solid rgba(160,140,92,0.35); padding: 1.2rem 2rem; border-radius: 1rem; font-weight: 900; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.15em; transition: all 0.4s; backdrop-filter: blur(20px); }
+        .btn-glass-full:hover { background: rgba(160,140,92,0.18); border-color: var(--gold); transform: translateY(-2px); }
         .marquee-container { display: flex; overflow: hidden; width: 100%; padding: 2rem 0; border-y: 1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.3); }
         .logos-slide { display: flex; white-space: nowrap; animation: slide 40s infinite linear; }
         .logos-slide span { color: #ffffff !important; opacity: 0.7; font-weight: 900; text-transform: uppercase; letter-spacing: 0.35em; margin: 0 3rem; font-size: 0.7rem; }
         @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        /* ─── SEÇÃO NÚMEROS ─── */
         .stats-section { background: linear-gradient(135deg, rgba(160,140,92,0.05) 0%, rgba(0,0,0,0) 50%, rgba(160,140,92,0.03) 100%); border-top: 1px solid rgba(160,140,92,0.1); border-bottom: 1px solid rgba(160,140,92,0.1); }
         .stat-number { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; font-style: italic; line-height: 1; }
-        .stat-card { position: relative; overflow: hidden; }
-        .stat-card::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-
-        /* ─── CONTADOR DE VAGAS ─── */
-        .vagas-banner {
-            background: linear-gradient(135deg, rgba(160,140,92,0.08), rgba(26,35,58,0.5));
-            border: 1px solid rgba(160,140,92,0.25);
-            border-radius: 1rem;
-            padding: 0.75rem 1.5rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            backdrop-filter: blur(10px);
-        }
-        .vaga-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: blink 1.5s infinite; flex-shrink: 0; }
+        .stat-card { position: relative; }
+        .vagas-banner { background: linear-gradient(135deg, rgba(160,140,92,0.08), rgba(26,35,58,0.5)); border: 1px solid rgba(160,140,92,0.25); border-radius: 1rem; padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; gap: 0.75rem; backdrop-filter: blur(10px); }
+        .vaga-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: blink 1.5s infinite; }
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        /* ─── ANTES/DEPOIS REDESIGN FINAL ─── */
-        .ba-section-card {
-            position: relative;
-            border-radius: 2.5rem;
-            overflow: hidden;
-            border: 1px solid rgba(160,140,92,0.15);
-            background: linear-gradient(135deg, #0a0a14 0%, #0d1020 50%, #0a0a14 100%);
-            transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s, border-color 0.4s;
-            height: 520px; /* altura fixa igual nos dois cards */
-        }
-        .ba-section-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(160,140,92,0.35);
-            border-color: rgba(160,140,92,0.35);
-        }
-
-        /* Imagem preenche o card inteiro a partir de baixo das labels */
-        .ba-section-card img {
-            position: absolute;
-            top: 36px; /* abaixo das labels */
-            left: 0; right: 0; bottom: 0;
-            width: 100%;
-            height: calc(100% - 36px);
-            object-fit: contain; /* mantém rostos inteiros sem cortar */
-            object-position: center bottom;
-            display: block;
-            transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
-        }
-        .ba-section-card:hover img { transform: scale(1.02); }
-
-        /* Linha divisória dourada vertical entre antes e depois */
-        .ba-divider {
-            position: absolute;
-            top: 36px; bottom: 0;
-            left: 50%; transform: translateX(-50%);
-            width: 1px;
-            background: linear-gradient(to bottom, rgba(160,140,92,0.5), rgba(160,140,92,0.15) 60%, transparent);
-            z-index: 3;
-            pointer-events: none;
-        }
-        .ba-divider::before {
-            content: '✦';
-            position: absolute; top: 30%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--gold);
-            font-size: 0.7rem;
-            background: #0d1020;
-            padding: 5px 6px;
-            border-radius: 50%;
-            border: 1px solid rgba(160,140,92,0.3);
-            line-height: 1;
-        }
-
-        /* Labels ANTES / DEPOIS no topo */
-        .ba-labels {
-            position: absolute; top: 0; left: 0; right: 0;
-            display: flex; z-index: 4;
-            height: 36px;
-        }
-        .ba-label-antes, .ba-label-depois {
-            flex: 1; 
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.58rem; font-weight: 900;
-            letter-spacing: 0.3em; text-transform: uppercase;
-        }
-        .ba-label-antes {
-            color: rgba(180,180,180,0.65);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            background: rgba(0,0,0,0.3);
-        }
-        .ba-label-depois {
-            color: var(--gold);
-            border-bottom: 1px solid rgba(160,140,92,0.2);
-            background: rgba(160,140,92,0.05);
-        }
-
-        /* Glow sutil dourado */
-        .ba-section-card::before {
-            content: '';
-            position: absolute; bottom: 0; left: 0; right: 0; height: 30%;
-            background: linear-gradient(to top, rgba(160,140,92,0.04), transparent);
-            pointer-events: none; z-index: 1;
-        }
-
-        /* Shine */
-        .ba-shine {
-            position: absolute; inset: 0; pointer-events: none; z-index: 2;
-            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
-        }
-
-        /* ─── VÍDEOS ─── */
-        .video-container { position: relative; width: 100%; aspect-ratio: 9/16; border-radius: 2.5rem; overflow: hidden; background: #000; border: 1px solid rgba(160,140,92,0.2); transition: transform 0.3s, box-shadow 0.3s; }
-        .video-container:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .ba-section-card { position: relative; border-radius: 2.5rem; overflow: hidden; border: 1px solid rgba(160,140,92,0.15); background: linear-gradient(135deg, #0a0a14 0%, #0d1020 50%, #0a0a14 100%); transition: transform 0.6s, box-shadow 0.6s; height: 520px; }
+        .ba-section-card img { position: absolute; top: 36px; left: 0; right: 0; bottom: 0; width: 100%; height: calc(100% - 36px); object-fit: contain; object-position: center bottom; }
+        .ba-divider { position: absolute; top: 36px; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; background: linear-gradient(to bottom, rgba(160,140,92,0.5), rgba(160,140,92,0.15) 60%, transparent); z-index: 3; }
+        .ba-labels { position: absolute; top: 0; left: 0; right: 0; display: flex; z-index: 4; height: 36px; }
+        .ba-label-antes, .ba-label-depois { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 0.58rem; font-weight: 900; letter-spacing: 0.3em; text-transform: uppercase; }
+        .ba-label-antes { color: rgba(180,180,180,0.65); background: rgba(0,0,0,0.3); }
+        .ba-label-depois { color: var(--gold); background: rgba(160,140,92,0.05); }
+        .video-container { position: relative; width: 100%; aspect-ratio: 9/16; border-radius: 2.5rem; overflow: hidden; background: #000; border: 1px solid rgba(160,140,92,0.2); }
         .video-container video { width: 100%; height: 100%; object-fit: cover; }
-        .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); transition: 0.3s; z-index: 20; }
-        .play-overlay i { color: var(--gold-light); font-size: 4rem; opacity: 0.9; filter: drop-shadow(0 0 20px rgba(241,228,188,0.5)); transition: transform 0.3s; }
-        .play-overlay:hover i { transform: scale(1.15); }
-        .video-container.playing .play-overlay { opacity: 0; pointer-events: none; }
-
-        /* ─── SWIPER ─── */
+        .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); z-index: 20; }
         .swiper { width: 100%; padding-bottom: 60px !important; }
         .nav-container { display: flex; justify-content: center; gap: 30px; margin-top: -20px; z-index: 20; position: relative; }
-        .swiper-button-prev, .swiper-button-next { position: static !important; color: var(--gold) !important; background: rgba(160,140,92,0.05); width: 50px !important; height: 50px !important; border-radius: 50%; border: 1px solid var(--gold); transition: all 0.3s; }
-        .swiper-button-prev:hover, .swiper-button-next:hover { background: rgba(160,140,92,0.15); transform: scale(1.1); }
-
-        /* ─── DEPOIMENTOS ESCRITOS ─── */
-        .testimonial-card {
-            border-radius: 2rem; padding: 2.5rem;
-            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s;
-            position: relative; overflow: hidden;
-        }
-        .testimonial-card::before { content: '"'; position: absolute; top: -10px; right: 20px; font-family: 'Playfair Display', serif; font-size: 8rem; color: rgba(160,140,92,0.06); line-height: 1; pointer-events: none; }
-        .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
-
-        /* ─── FAQ ─── */
+        .swiper-button-prev, .swiper-button-next { position: static !important; color: var(--gold) !important; background: rgba(160,140,92,0.05); width: 50px !important; height: 50px !important; border-radius: 50%; border: 1px solid var(--gold); }
+        .testimonial-card { border-radius: 2rem; padding: 2.5rem; transition: transform 0.4s; position: relative; overflow: hidden; }
         .faq-item { border: 1px solid rgba(160,140,92,0.1); background: rgba(255,255,255,0.02); border-radius: 1.5rem; transition: all 0.4s; margin-bottom: 1rem; }
-        .faq-item:hover { transform: translateY(-3px); border-color: rgba(160,140,92,0.4); background: rgba(160,140,92,0.03); }
-        details[open].faq-item { border-color: rgba(160,140,92,0.4); background: rgba(160,140,92,0.04); }
-
-        /* ─── WHATSAPP FLUTUANTE ─── */
-        .whatsapp-fix { position: fixed; bottom: 24px; right: 24px; background: #25D366; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9998; animation: pulse-green 2s infinite; text-decoration: none; }
-        @keyframes pulse-green { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37,211,102,0.5); } 70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37,211,102,0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
-
-        /* ─── MODAL ─── */
+        .whatsapp-fix { position: fixed; bottom: 24px; right: 24px; background: #25D366; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9998; animation: pulse-green 2s infinite; }
         #modal-politica { display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { max-width: 600px; max-height: 80vh; overflow-y: auto; background: #0a0a0a; border: 1px solid var(--gold); border-radius: 2rem; padding: 30px; position: relative; }
-
-        /* ─── ÂNCORA DE VALOR ─── */
-        .valor-badge { background: linear-gradient(135deg, rgba(160,140,92,0.12), rgba(160,140,92,0.04)); border: 1px solid rgba(160,140,92,0.3); border-radius: 1rem; padding: 1rem 1.5rem; display: inline-flex; align-items: center; gap: 0.75rem; }
-
-        /* ─── BOTÃO SALVAR CONTATO ─── */
-        .btn-save-contact {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%;
-            background: transparent;
-            color: rgba(160,140,92,0.7);
-            border: 1px dashed rgba(160,140,92,0.3);
-            padding: 0.85rem 1.5rem;
-            border-radius: 1rem;
-            font-weight: 700; font-size: 0.8rem;
-            text-transform: uppercase; letter-spacing: 0.15em;
-            cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
-            position: relative; overflow: hidden;
-            font-family: 'Inter', sans-serif;
-        }
-        .btn-save-contact:hover {
-            background: rgba(160,140,92,0.07);
-            border-color: rgba(160,140,92,0.6);
-            border-style: solid;
-            color: var(--gold-light);
-            transform: translateY(-2px);
-        }
-        .btn-save-contact.saved {
-            border-style: solid;
-            border-color: rgba(34,197,94,0.5);
-            color: #22c55e;
-            background: rgba(34,197,94,0.05);
-        }
-
-        /* ─── MAPA ─── */
-        .map-wrap { border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(160,140,92,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-
-        /* ─── SCROLL INDICATOR ─── */
-        .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 5; animation: fadeInUp 1s 1.5s both; }
+        .modal-content { max-width: 600px; background: #0a0a0a; border: 1px solid var(--gold); border-radius: 2rem; padding: 30px; }
+        .btn-save-contact { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: transparent; color: rgba(160,140,92,0.7); border: 1px dashed rgba(160,140,92,0.3); padding: 0.85rem 1.5rem; border-radius: 1rem; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; cursor: pointer; transition: all 0.35s; }
+        .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 5; }
         .scroll-indicator span { width: 1px; height: 60px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollLine 2s ease-in-out infinite; }
         @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
-
-        /* ─── SECTION DIVIDERS ─── */
-        .section-divider { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 2rem; }
-
-        /* ─── PROCESSO STEPS ─── */
-        .step-line { position: absolute; top: 24px; left: calc(50% + 24px); right: calc(-50% + 24px); height: 1px; background: linear-gradient(90deg, rgba(160,140,92,0.4), rgba(160,140,92,0.1)); }
-
-        /* ─── ANIMAÇÃO CONTADORES ─── */
-        .counter { display: inline-block; }
-
-        img { max-width: 100%; height: auto; }
-
-        /* ══════════════════════════════════════════════
-           MOBILE — REVISÃO COMPLETA
-           Tudo calibrado para telas até 768px
-        ══════════════════════════════════════════════ */
-        @media (max-width: 767px) {
-
-            /* ── Barra de urgência mobile — já tem versão compacta no HTML ── */
-            #urgency-bar { padding: 0; }
-            header { top: 30px !important; }
-
-            /* ── Hero ── */
-            #inicio { padding-top: 120px; padding-bottom: 60px; }
-            #inicio .max-w-7xl { gap: 28px; }
-            .hero-badge {
-                left: 50% !important;
-                transform: translateX(-50%) !important;
-                bottom: -18px !important;
-                white-space: nowrap;
-                font-size: 0.7rem;
-                padding: 10px 16px;
-            }
-            h1.text-5xl { font-size: 2.6rem !important; line-height: 1.15; }
-            .valor-badge { width: 100%; justify-content: center; }
-            .btn-hero { width: 100%; justify-content: center; font-size: 0.9rem; padding: 1rem 1.5rem; letter-spacing: 0.1em; }
-
-            /* ── Marquee ── */
-            .logos-slide span { margin: 0 1.5rem; font-size: 0.6rem; }
-
-            /* ── Stats ── */
-            .stats-section .grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
-            .stat-card { padding: 1.5rem 1rem; }
-            .stat-number { font-size: 2.2rem; }
-
-            /* ── Antes & Depois ── */
-            .ba-section-card { height: 300px; border-radius: 1.5rem; }
-            .ba-labels { height: 30px; }
-            .ba-label-antes, .ba-label-depois { font-size: 0.5rem; letter-spacing: 0.2em; }
-            .ba-section-card img { top: 30px; height: calc(100% - 30px); }
-            .ba-divider { top: 30px; }
-
-            /* ── Vídeos depoimentos ── */
-            .video-container { border-radius: 1.5rem; }
-            .play-overlay i { font-size: 3rem; }
-
-            /* ── Depoimentos escritos ── */
-            .testimonial-card { padding: 1.5rem; border-radius: 1.5rem; }
-            .testimonial-card.md\:scale-105 { transform: none !important; }
-
-            /* ── Sobre / Vídeo consultor ── */
-            #sobre-video-wrap { border-radius: 1.5rem !important; }
-            #sobre .max-w-7xl { gap: 48px; }
-
-            /* ── Processo ── */
-            .processo-grid { gap: 2rem; }
-
-            /* ── Público-alvo ── */
-            .publico-card { padding: 2rem 1.5rem; border-radius: 1.5rem; }
-            .publico-card.md\:scale-105 { transform: none !important; }
-
-            /* ── Garantia ── */
-            .garantia-grid { grid-template-columns: 1fr !important; }
-
-            /* ── Contato ── */
-            #contato .grid { gap: 2rem; }
-            #contato h2 { font-size: 2.8rem !important; }
-            .map-wrap iframe { height: 220px !important; }
-
-            /* ── FAQ ── */
-            .faq-item summary { font-size: 0.85rem; }
-            #duvidas h2 { font-size: 2.5rem !important; }
-
-            /* ── Botões mobile — sempre largura total ── */
-            .btn-ghost-gold,
-            .btn-navy,
-            .btn-gold-outline-pill,
-            .btn-glass-full {
-                width: 100%;
-                justify-content: center;
-                font-size: 0.85rem;
-                letter-spacing: 0.1em;
-                padding: 1rem 1.2rem;
-            }
-
-            /* ── WhatsApp fixo — sobe acima do indicador de gestos iOS ── */
-            .whatsapp-fix { bottom: 28px; right: 16px; width: 56px; height: 56px; }
-
-            /* ── Exit popup ── */
-            #exit-popup > div {
-                padding: 2rem 1.5rem;
-                border-radius: 1.5rem;
-            }
-            #exit-popup h3 { font-size: 1.5rem !important; }
-
-            /* ── Loading screen ── */
-            .loader-name { font-size: 2.2rem; letter-spacing: 0.15em; }
-
-            /* ── Footer ── */
-            footer { padding: 3rem 1.5rem; }
-        }
-
-        /* Telas muito pequenas (iPhone SE, etc.) */
-        @media (max-width: 380px) {
-            h1.text-5xl { font-size: 2.1rem !important; }
-            .btn-hero { font-size: 0.8rem; }
-            .ba-section-card { height: 240px; }
-            #urgency-bar { display: none; } /* esconde em telas minúsculas */
-            header { top: 0 !important; }
-            #inicio { padding-top: 100px; }
-        }
-        /* ─── LOADING SCREEN ─── */
-        #loader {
-            position: fixed; inset: 0; z-index: 99999;
-            background: #050505;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 2rem;
-            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), visibility 0.8s;
-        }
-        #loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        /* Linha superior e inferior — efeito cinemascope */
-        #loader::before, #loader::after {
-            content: '';
-            position: absolute; left: 0; right: 0; height: 80px;
-            background: #000;
-            transition: height 0.7s 0.3s cubic-bezier(0.16,1,0.3,1);
-        }
-        #loader::before { top: 0; }
-        #loader::after { bottom: 0; }
-        #loader.hide::before, #loader.hide::after { height: 0; }
-
-        /* Texto letra por letra */
-        .loader-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
-            font-weight: 700;
-            font-style: italic;
-            letter-spacing: 0.25em;
-            color: transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        /* Linha dourada que revela o texto */
-        .loader-name::after {
-            content: attr(data-text);
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-            clip-path: inset(0 100% 0 0);
-            animation: textReveal 1.2s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
-        }
-        @keyframes textReveal {
-            to { clip-path: inset(0 0% 0 0); }
-        }
-
-        /* Subtítulo */
-        .loader-sub {
-            font-size: 0.6rem;
-            font-weight: 900;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            color: rgba(160,140,92,0.5);
-            opacity: 0;
-            animation: fadeIn 0.8s ease 1.2s forwards;
-        }
-        @keyframes fadeIn { to { opacity: 1; } }
-
-        /* Barra de progresso dourada */
-        .loader-bar {
-            width: 120px; height: 1px;
-            background: rgba(160,140,92,0.15);
-            position: relative; overflow: hidden;
-            opacity: 0;
-            animation: fadeIn 0.5s ease 0.8s forwards;
-        }
-        .loader-bar::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-            animation: barSweep 1s ease 0.8s forwards;
-        }
-        @keyframes barSweep {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(100%); }
-        }
-
-        /* Impede scroll durante loading */
+        #loader { position: fixed; inset: 0; z-index: 99999; background: #050505; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+        #loader.hide { opacity: 0; visibility: hidden; pointer-events: none; transition: 0.8s; }
+        .loader-name { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 700; font-style: italic; color: var(--gold-light); }
         body.loading { overflow: hidden; }
+
+        @media (max-width: 767px) {
+            #inicio { padding-top: 120px; }
+            h1.text-5xl { font-size: 2.6rem !important; }
+            .ba-section-card { height: 300px; }
+            .stats-section .grid { grid-template-columns: repeat(2, 1fr); }
+            .whatsapp-fix { bottom: 28px; right: 16px; width: 56px; height: 56px; }
+        }
     </style>
 </head>
 <body class="antialiased loading">
 
-    <!-- ══ LOADING SCREEN ══ -->
     <div id="loader">
-        <div class="loader-name" data-text="Wagner Alves">Wagner Alves</div>
-        <div class="loader-bar"></div>
-        <p class="loader-sub">Estrategista de Imagem Masculina</p>
+        <div class="loader-name">Wagner Alves</div>
+        <div class="w-24 h-px bg-gold/20 relative overflow-hidden"><div class="absolute inset-0 bg-gold-light animate-[barSweep_1s_infinite]"></div></div>
     </div>
 
-    <!-- CURSOR DOURADO -->
     <div id="cursor"></div>
     <div id="cursor-ring"></div>
 
-    <!-- PARTÍCULAS -->
-    <div class="cinematic-lines" aria-hidden="true">
-        <div class="particle" style="left:10%;animation-delay:0s;animation-duration:9s"></div>
-        <div class="particle" style="left:25%;animation-delay:2s;animation-duration:11s"></div>
-        <div class="particle" style="left:50%;animation-delay:4s;animation-duration:8s"></div>
-        <div class="particle" style="left:70%;animation-delay:1s;animation-duration:12s"></div>
-        <div class="particle" style="left:85%;animation-delay:3s;animation-duration:10s"></div>
-        <div class="particle" style="left:40%;animation-delay:5s;animation-duration:9s"></div>
-    </div>
+    <div class="cinematic-lines"><div class="particle" style="left:10%"></div><div class="particle" style="left:50%"></div></div>
 
-    <!-- ══ BARRA DE URGÊNCIA ══ -->
-    <div id="urgency-bar" style="background:linear-gradient(90deg,rgba(160,140,92,0.12),rgba(26,35,58,0.8),rgba(160,140,92,0.12));border-bottom:1px solid rgba(160,140,92,0.2);text-align:center;position:fixed;top:0;left:0;right:0;z-index:51;backdrop-filter:blur(10px);">
-
-        <!-- Versão DESKTOP: tudo em uma linha -->
-        <p class="hidden md:flex" style="font-size:0.65rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);align-items:center;justify-content:center;gap:10px;margin:0;padding:10px 16px;">
-            <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
-            <span>Wagner está aceitando agendamentos para Maio</span>
-            <span style="color:rgba(160,140,92,0.4)">·</span>
-            <span id="vagas-bar">2 vagas restantes</span>
-            <span style="color:rgba(160,140,92,0.4)">·</span>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" style="color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;">Garantir minha vaga →</a>
-        </p>
-
-        <!-- Versão MOBILE: compacta, 1 linha -->
-        <p class="flex md:hidden" style="font-size:0.58rem;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);align-items:center;justify-content:center;gap:6px;margin:0;padding:8px 12px;white-space:nowrap;overflow:hidden;">
-            <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
-            <span id="vagas-bar-mobile">2 vagas</span>
-            <span style="color:rgba(160,140,92,0.4)">·</span>
-            <span>Maio</span>
-            <span style="color:rgba(160,140,92,0.4)">·</span>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" style="color:var(--gold-light);text-decoration:underline;text-underline-offset:2px;">Garantir vaga →</a>
+    <div id="urgency-bar" class="fixed top-0 w-full z-[51] backdrop-blur-md border-b border-gold/20 py-2 text-center bg-black/40">
+        <p class="text-[10px] uppercase font-black tracking-widest text-gold-light flex items-center justify-center gap-2">
+            <span class="vaga-dot"></span> Wagner aceitando agendamentos para Maio · <span id="vagas-bar">2 vagas</span>
         </p>
     </div>
 
-    <!-- HEADER -->
     <header class="fixed w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5 px-6 py-4" style="top:37px">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <img src="./logo.png" alt="Logo Wagner Alves" class="h-12 w-auto object-contain" loading="lazy" onerror="this.style.display='none'">
+                <img src="./logo.png" class="h-12" onerror="this.style.display='none'">
                 <span class="text-xl md:text-2xl font-bold tracking-widest gold-gradient-text uppercase italic serif">Wagner Alves</span>
             </div>
             <nav class="hidden md:flex gap-10 text-[10px] font-black tracking-[0.2em] uppercase text-white/70">
-                <a href="#inicio" class="hover:text-white transition-colors duration-300">Início</a>
-                <a href="#resultados" class="hover:text-white transition-colors duration-300">Resultados</a>
-                <a href="#depoimentos" class="hover:text-white transition-colors duration-300">Depoimentos</a>
-                <a href="#sobre" class="hover:text-white transition-colors duration-300">Consultor</a>
-                <a href="#contato" class="hover:text-white transition-colors duration-300">Localização</a>
+                <a href="#inicio">Início</a><a href="#resultados">Resultados</a><a href="#depoimentos">Depoimentos</a><a href="#sobre">Consultor</a><a href="#contato">Localização</a>
             </nav>
-            <button onclick="toggleMenu()" aria-label="Abrir menu" class="md:hidden text-gold text-2xl focus:outline-none">
-                <i class="fas fa-bars" style="color:var(--gold)"></i>
-            </button>
+            <button onclick="toggleMenu()" class="md:hidden text-gold text-2xl"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
-    <!-- MENU MOBILE -->
     <div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 z-[60] p-12 flex flex-col gap-8 shadow-2xl bg-black/98 backdrop-blur-2xl border-l border-zinc-800 transition-all duration-500 transform translate-x-full text-center">
-        <button onclick="toggleMenu()" aria-label="Fechar menu" class="text-right text-3xl mb-4" style="color:var(--gold)"><i class="fas fa-times"></i></button>
-        <a href="#inicio" onclick="toggleMenu()" class="text-2xl font-bold uppercase gold-gradient-text italic">Início</a>
+        <button onclick="toggleMenu()" class="text-right text-gold text-3xl mb-4"><i class="fas fa-times"></i></button>
+        <a href="#inicio" onclick="toggleMenu()" class="text-2xl font-bold gold-gradient-text italic">Início</a>
         <a href="#resultados" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Resultados</a>
         <a href="#depoimentos" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Depoimentos</a>
         <a href="#sobre" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Consultor</a>
         <a href="#contato" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Localização</a>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- HERO                                       -->
-    <!-- ══════════════════════════════════════════ -->
-    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-36 pb-24 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
-
-            <!-- FOTO -->
-            <div class="flex justify-center items-center order-1 md:order-2 hero-text-reveal delay-1 w-full">
-                <div class="hero-img-wrap mx-auto relative" style="width:min(280px, 80vw)">
-                    <img src="./foto-wagner.jpg" alt="Wagner Alves – Visagista Masculino de Alto Padrão em Curitiba" width="400" height="500" loading="eager" style="width:100%;border-radius:2.5rem;">
-                    <div class="hero-badge">
-                        <div class="vaga-dot"></div>
-                        <div>
-                            <p class="text-[10px] font-black uppercase tracking-widest" style="color:var(--gold-light)">Disponível este mês</p>
-                            <p id="vagas-texto" class="text-xs font-bold text-white">Carregando vagas...</p>
-                        </div>
-                    </div>
+    <section id="inicio">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center px-6 min-h-screen">
+            <div class="flex justify-center order-1 md:order-2 hero-text-reveal delay-1">
+                <div class="hero-img-wrap w-full max-w-[300px]">
+                    <img src="./foto-wagner.jpg" class="w-full">
+                    <div class="hero-badge"><div class="vaga-dot"></div><p id="vagas-texto" class="text-white text-xs font-bold uppercase">2 vagas restantes</p></div>
                 </div>
             </div>
-
-            <!-- TEXTO -->
-            <div class="space-y-7 order-2 md:order-1 text-center md:text-left">
-                <p class="hero-text-reveal delay-1 text-[10px] font-black uppercase tracking-[0.35em]" style="color:var(--gold)">✦ Estrategista de Imagem Masculina ✦</p>
-
-                <h1 class="hero-text-reveal delay-2 text-5xl md:text-7xl font-medium text-white italic leading-tight">
-                    O Visagista dos<br><span class="gold-gradient-text font-black">Executivos<br>de Curitiba.</span>
-                </h1>
-
-                <p class="hero-text-reveal delay-3 text-white/80 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 italic font-light">
-                    24 anos projetando autoridade, liderança e confiança.<br>
-                    <span class="font-semibold text-white/95">Sua imagem fala antes de você —</span> eu garanto que ela diga exatamente o que você precisa.
-                </p>
-
-                <div class="hero-text-reveal delay-4">
-                    <div class="valor-badge inline-flex">
-                        <i class="fas fa-gem" style="color:var(--gold); font-size:1.1rem"></i>
-                        <div class="text-left">
-                            <p class="text-[10px] font-black uppercase tracking-widest" style="color:var(--gold-light)">Consultoria Exclusiva</p>
-                            <p class="text-zinc-400 text-xs italic">120 a 150 min de imersão total · Investimento sob consulta</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-text-reveal delay-5 flex flex-col items-center md:items-start gap-3">
-                    <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="btn-hero wa-pulse">
-                        <i class="fab fa-whatsapp text-xl"></i> Agendar Consultoria
-                    </a>
-                    <p class="text-[10px] uppercase tracking-[0.25em] font-bold" style="color:rgba(160,140,92,0.6)">Atendimento pessoal e exclusivo · Sem fila de espera</p>
-                </div>
+            <div class="space-y-8 order-2 md:order-1 text-center md:text-left">
+                <p class="hero-text-reveal delay-1 text-gold text-[10px] font-black uppercase tracking-[0.35em]">✦ Estrategista de Imagem ✦</p>
+                <h1 class="hero-text-reveal delay-2 text-5xl md:text-7xl font-medium text-white italic">O Visagista dos <span class="gold-gradient-text font-black">Executivos.</span></h1>
+                <p class="hero-text-reveal delay-3 text-white/80 text-lg md:text-xl italic font-light">Sua imagem fala antes de você — eu garanto que ela diga o que você precisa.</p>
+                <div class="hero-text-reveal delay-5"><a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="btn-hero"><i class="fab fa-whatsapp"></i> Agendar Consultoria</a></div>
             </div>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div class="scroll-indicator hidden md:flex" aria-hidden="true">
-            <p class="text-[9px] uppercase tracking-[0.3em] font-bold" style="color:rgba(160,140,92,0.5)">scroll</p>
-            <span></span>
         </div>
     </section>
 
-    <!-- MARQUEE -->
-    <div class="marquee-container" aria-hidden="true">
-        <div class="logos-slide">
-            <span>✦ Atendimento Exclusivo</span><span>✦ 24 Anos de Expertise</span><span>✦ Visagismo Estratégico</span><span>✦ Referência em Curitiba</span><span>✦ Líderes & Empresários</span><span>✦ Barbearia Clube</span><span>✦ 120 a 150 min de Imersão</span>
-            <span>✦ Atendimento Exclusivo</span><span>✦ 24 Anos de Expertise</span><span>✦ Visagismo Estratégico</span><span>✦ Referência em Curitiba</span><span>✦ Líderes & Empresários</span><span>✦ Barbearia Clube</span><span>✦ 120 a 150 min de Imersão</span>
-        </div>
-    </div>
+    <div class="marquee-container"><div class="logos-slide"><span>✦ Atendimento Exclusivo</span><span>✦ 24 Anos de Expertise</span><span>✦ Visagismo Estratégico</span><span>✦ Referência em Curitiba</span></div></div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- NÚMEROS / PROVA SOCIAL                     -->
-    <!-- ══════════════════════════════════════════ -->
     <section class="stats-section py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-0 md:gap-8 text-center">
-                <div class="stat-card py-8 px-4" data-aos="fade-up">
-                    <p class="stat-number gold-gradient-text" data-target="24">0</p>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mt-3">Anos de expertise</p>
-                </div>
-                <div class="stat-card py-8 px-4" data-aos="fade-up" data-aos-delay="100">
-                    <p class="stat-number gold-gradient-text" data-target="500" data-suffix="+">0</p>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mt-3">Transformações realizadas</p>
-                </div>
-                <div class="stat-card py-8 px-4" data-aos="fade-up" data-aos-delay="200">
-                    <p class="stat-number gold-gradient-text" data-target="98" data-suffix="%">0</p>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mt-3">Clientes que indicam</p>
-                </div>
-                <div class="stat-card py-8 px-4" data-aos="fade-up" data-aos-delay="300">
-                    <p class="stat-number gold-gradient-text" data-target="150" data-suffix="min">0</p>
-                    <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mt-3">De imersão total</p>
-                </div>
-            </div>
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 text-center">
+            <div class="stat-card" data-aos="fade-up"><p class="stat-number gold-gradient-text" data-target="24">0</p><p class="text-[10px] font-black uppercase text-zinc-500">Anos de expertise</p></div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100"><p class="stat-number gold-gradient-text" data-target="500" data-suffix="+">0</p><p class="text-[10px] font-black uppercase text-zinc-500">Transformações</p></div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200"><p class="stat-number gold-gradient-text" data-target="98" data-suffix="%">0</p><p class="text-[10px] font-black uppercase text-zinc-500">Aprovação</p></div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300"><p class="stat-number gold-gradient-text" data-target="150" data-suffix="min">0</p><p class="text-[10px] font-black uppercase text-zinc-500">Imersão Total</p></div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- ANTES & DEPOIS                             -->
-    <!-- ══════════════════════════════════════════ -->
-    <section id="resultados" class="py-24 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto text-center">
-            <p class="text-[10px] font-black uppercase tracking-[0.35em] mb-4" style="color:var(--gold)" data-aos="fade-up">✦ Resultados reais ✦</p>
-            <h2 class="text-4xl md:text-7xl gold-gradient-text font-black italic uppercase mb-4" data-aos="fade-up">Antes & Depois</h2>
-            <p class="text-zinc-500 italic text-sm mb-16 max-w-xl mx-auto" data-aos="fade-up">Resultados reais. Clientes reais. A diferença que o Visagismo Estratégico faz.</p>
-
-            <!-- GRID ANTES/DEPOIS — fotos reais de clientes -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" data-aos="fade-up">
-
-                <!-- Card 1 -->
-                <div class="space-y-3">
-                    <div class="ba-section-card">
-                        <div class="ba-shine"></div>
-                        <!-- Labels topo -->
-                        <div class="ba-labels">
-                            <span class="ba-label-antes">Antes</span>
-                            <span class="ba-label-depois">Depois</span>
-                        </div>
-                        <!-- Divisória dourada vertical -->
-                        <div class="ba-divider"></div>
-                        <!-- Imagem PNG com fundo transparente -->
-                        <img src="./1.png"
-                             alt="Antes e depois do visagismo — autoridade e liderança"
-                             loading="lazy">
-                    </div>
-                    <p class="text-zinc-600 text-[10px] uppercase tracking-widest font-bold text-center italic">✦ Transformação real · Cliente executivo</p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="space-y-3">
-                    <div class="ba-section-card">
-                        <div class="ba-shine"></div>
-                        <div class="ba-labels">
-                            <span class="ba-label-antes">Antes</span>
-                            <span class="ba-label-depois">Depois</span>
-                        </div>
-                        <div class="ba-divider"></div>
-                        <img src="./2.png"
-                             alt="Antes e depois do visagismo — presença e imagem estratégica"
-                             loading="lazy">
-                    </div>
-                    <p class="text-zinc-600 text-[10px] uppercase tracking-widest font-bold text-center italic">✦ Transformação real · Alta performance</p>
-                </div>
-
-            </div>
-
-            <div class="mt-12" data-aos="fade-up">
-                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20quero%20minha%20transformação!" onclick="dispararPixelContato()" class="btn-navy">
-                    <i class="fab fa-whatsapp text-xl"></i> Quero minha transformação
-                </a>
-            </div>
+    <section id="resultados" class="py-24 px-6 border-t border-white/5 text-center">
+        <h2 class="text-4xl md:text-7xl gold-gradient-text font-black italic uppercase mb-16" data-aos="fade-up">Antes & Depois</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="ba-section-card" data-aos="fade-up"><div class="ba-labels"><span class="ba-label-antes">Antes</span><span class="ba-label-depois">Depois</span></div><div class="ba-divider"></div><img src="./1.png"></div>
+            <div class="ba-section-card" data-aos="fade-up" data-aos-delay="100"><div class="ba-labels"><span class="ba-label-antes">Antes</span><span class="ba-label-depois">Depois</span></div><div class="ba-divider"></div><img src="./2.png"></div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- DEPOIMENTOS EM VÍDEO                       -->
-    <!-- ══════════════════════════════════════════ -->
-    <section id="depoimentos" class="py-16 relative overflow-hidden text-center border-t border-white/5">
-        <p class="text-[10px] font-black uppercase tracking-[0.35em] mb-4" style="color:var(--gold)" data-aos="fade-up">✦ O que dizem os clientes ✦</p>
-        <h2 class="text-4xl md:text-8xl gold-gradient-text font-black italic uppercase mb-4" data-aos="fade-up">Depoimentos</h2>
-        <p class="text-zinc-500 italic text-sm mb-12 max-w-xl mx-auto" data-aos="fade-up">Toque para assistir. Histórias reais de transformação.</p>
-        <div class="max-w-[1400px] mx-auto px-4" data-aos="zoom-in">
+    <section id="depoimentos" class="py-16 text-center border-t border-white/5">
+        <h2 class="text-4xl md:text-8xl gold-gradient-text font-black italic uppercase mb-12">Depoimentos</h2>
+        <div class="max-w-[1400px] mx-auto px-4">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video preload="none" poster="./capa-video-1.png" loop playsinline><source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
-                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video preload="none" poster="./capa-video-2.png" loop playsinline><source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
-                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video preload="none" poster="./capa-video-3.png" loop playsinline><source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
-                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video preload="none" poster="./capa-video-4.png" loop playsinline><source src="./snapinsta.com.br-69d741e4dd53f.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
-                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video preload="none" poster="./capa-video-5.png" loop playsinline><source src="./snapinsta.com.br-69d741ad68a2d.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
+                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video poster="./capa-video-1.png" loop playsinline><source src="./snapinsta.com.br-69d7427266c3f.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
+                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video poster="./capa-video-2.png" loop playsinline><source src="./snapinsta.com.br-69d7424a3df7c.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
+                    <div class="swiper-slide"><div class="video-container" onclick="toggleVideo(this)"><video poster="./capa-video-3.png" loop playsinline><source src="./snapinsta.com.br-69d742223183d.mp4" type="video/mp4"></video><div class="play-overlay"><i class="fas fa-play"></i></div></div></div>
                 </div>
                 <div class="nav-container"><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div>
             </div>
         </div>
     </section>
 
-    <!-- DEPOIMENTOS ESCRITOS -->
-    <section class="py-12 bg-white/[0.01] px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="testimonial-card border border-white/5 bg-black/40 backdrop-blur-xl" data-aos="fade-up">
-                    <div class="flex mb-5" style="color:var(--star)" aria-label="5 estrelas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-zinc-300 italic mb-8 leading-relaxed text-lg">"O Wagner é um profissional diferenciado. O visagismo mudou totalmente minha percepção de autoridade no trabalho."</p>
-                    <div class="flex items-center gap-4">
-                        <img src="https://i.pravatar.cc/100?img=11" width="48" height="48" loading="lazy" alt="Rodrigo A." class="w-12 h-12 rounded-full border" style="border-color:rgba(160,140,92,0.3)">
-                        <div><span class="text-white font-bold text-sm block italic">Rodrigo A.</span><span class="text-xs font-bold" style="color:rgba(160,140,92,0.6)">Empresário</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card border md:scale-105" style="border-color:rgba(160,140,92,0.25);background:rgba(160,140,92,0.03)" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex mb-5" style="color:var(--star)" aria-label="5 estrelas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-zinc-100 italic mb-8 leading-relaxed font-medium text-lg">"Melhor visagista de Curitiba sem dúvidas. Minha imagem hoje condiz exatamente com o sucesso que busco."</p>
-                    <div class="flex items-center gap-4">
-                        <img src="https://i.pravatar.cc/100?img=12" width="56" height="56" loading="lazy" alt="Gustavo A." class="w-14 h-14 rounded-full border-2" style="border-color:rgba(160,140,92,0.5)">
-                        <div><span class="text-white font-black block italic text-sm">Gustavo A.</span><span class="text-xs font-bold" style="color:var(--gold)">Liderança Executiva</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card border border-white/5 bg-black/40 backdrop-blur-xl" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex mb-5" style="color:var(--star)" aria-label="5 estrelas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-zinc-300 italic mb-8 leading-relaxed text-lg">"Sempre tive dúvida sobre o melhor corte. A consultoria técnica tirou todas as dúvidas. Sensacional!"</p>
-                    <div class="flex items-center gap-4">
-                        <img src="https://i.pravatar.cc/100?img=13" width="48" height="48" loading="lazy" alt="Maurício P." class="w-12 h-12 rounded-full border" style="border-color:rgba(160,140,92,0.3)">
-                        <div><span class="text-white font-bold text-sm block italic">Maurício P.</span><span class="text-xs font-bold" style="color:rgba(160,140,92,0.6)">Advogado</span></div>
-                    </div>
-                </div>
+    <section id="sobre" class="py-24 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="relative" data-aos="fade-right"><img src="./ia-metodo-wagner.png" class="rounded-[3rem] border border-white/5 shadow-2xl"></div>
+            <div class="space-y-6 text-center md:text-left" data-aos="fade-left">
+                <h2 class="text-6xl gold-gradient-text font-bold uppercase italic">Consultor</h2>
+                <p class="text-zinc-300 text-lg italic leading-relaxed">"Revele o que há de melhor em você. Minha missão é alinhar sua imagem ao seu sucesso através do Visagismo Estratégico."</p>
+                <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="btn-ghost-gold"><i class="fab fa-whatsapp"></i> Verificar Disponibilidade</a>
             </div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- SOBRE / CONSULTOR                          -->
-    <!-- ══════════════════════════════════════════ -->
-    <section id="sobre" class="py-24 flex items-center justify-center relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center w-full">
-
-            <!-- VÍDEO DO WAGNER -->
-            <div class="flex justify-center relative w-full order-1" data-aos="fade-right">
-                <div class="relative w-full max-w-[300px] md:max-w-[360px]">
-                    <!-- Glow dourado atrás -->
-                    <div class="absolute -inset-3 rounded-[3rem] blur-2xl" style="background:rgba(160,140,92,0.12)"></div>
-
-                    <!-- Container do vídeo -->
-                    <div id="sobre-video-wrap" class="relative rounded-[2.5rem] overflow-hidden border shadow-2xl" style="border-color:rgba(160,140,92,0.2);aspect-ratio:9/16;background:#050505;cursor:pointer;" onclick="toggleSobreVideo()">
-                        <video id="sobre-video" src="./video-wagner.mp4" poster="./video-wagner-poster.jpg" preload="none" playsinline loop
-                            class="w-full h-full object-cover"></video>
-
-                        <!-- Overlay de play -->
-                        <div id="sobre-play-overlay" class="absolute inset-0 flex flex-col items-center justify-center gap-4" style="background:rgba(0,0,0,0.35);transition:opacity 0.4s;">
-                            <div class="w-20 h-20 rounded-full border-2 flex items-center justify-center" style="border-color:var(--gold-light);background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);">
-                                <i class="fas fa-play text-2xl ml-1" style="color:var(--gold-light)"></i>
-                            </div>
-                            <p class="text-[10px] font-black uppercase tracking-[0.3em]" style="color:rgba(241,228,188,0.7)">Assistir apresentação</p>
-                        </div>
-                    </div>
-
-                    <!-- Badge flutuante -->
-                    <div class="absolute -bottom-5 -right-4 md:-right-8 backdrop-blur-xl border px-5 py-3 rounded-2xl font-black text-sm uppercase whitespace-nowrap" style="background:rgba(241,228,188,0.08);border-color:rgba(241,228,188,0.4);color:var(--gold-light)">24 Anos de História</div>
+    <section id="contato" class="py-24 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h2 class="text-5xl md:text-7xl italic font-bold gold-gradient-text uppercase">Localização</h2>
+                <div class="space-y-4 text-zinc-400">
+                    <div class="flex gap-4"><i class="fas fa-map-marker-alt text-gold text-2xl"></i><p class="text-xl">Barbearia Clube — Av. Cândido Hartmann, 1580</p></div>
+                    <div class="flex gap-4"><i class="fas fa-phone-alt text-gold text-2xl"></i><p class="text-xl font-bold">(41) 99968-2982</p></div>
+                    <a href="https://www.instagram.com/wagneralvess" target="_blank" class="flex gap-4 hover:text-white transition"><i class="fab fa-instagram text-gold text-2xl"></i><p class="text-xl font-bold">@wagneralvess</p></a>
                 </div>
             </div>
-
-            <div data-aos="fade-left" class="flex flex-col items-center md:items-start order-2 space-y-6 text-center md:text-left">
-                <h2 class="text-6xl md:text-8xl text-white italic font-bold uppercase leading-tight">Consultor</h2>
-                <div class="w-16 h-1" style="background:var(--gold)"></div>
-                <div class="text-zinc-300 text-lg md:text-xl leading-relaxed italic max-w-xl mx-auto md:mx-0">
-                    <p class="border-l-4 pl-6 py-2 mb-6" style="border-color:var(--gold)">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
-                    <p class="not-italic opacity-80 leading-relaxed">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança através do <span class="gold-gradient-text font-bold uppercase italic">Visagismo Masculino</span> estratégico. Cada sessão de <strong class="text-white">120 a 150 minutos</strong> é uma análise profunda das suas linhas faciais, temperamento e objetivos profissionais.</p>
-                </div>
-                <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="btn-ghost-gold">
-                    <i class="fab fa-whatsapp"></i> Verificar Disponibilidade
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════ -->
-    <!-- PROCESSO — 3 PASSOS                        -->
-    <!-- ══════════════════════════════════════════ -->
-    <section class="py-16 border-y border-white/5" style="background:rgba(255,255,255,0.01)">
-        <div class="max-w-7xl mx-auto px-6">
-            <p class="text-center text-[10px] font-black uppercase tracking-[0.35em] mb-12" style="color:var(--gold)" data-aos="fade-up">✦ Como funciona ✦</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center relative">
-                <div class="space-y-4 relative" data-aos="fade-up">
-                    <div class="w-14 h-14 rounded-full border flex items-center justify-center mx-auto text-xl font-black italic serif" style="border-color:rgba(160,140,92,0.4);color:var(--gold);background:rgba(160,140,92,0.05)">01</div>
-                    <h4 class="text-white font-bold uppercase tracking-widest text-sm">Reserva</h4>
-                    <p class="text-zinc-500 text-sm italic leading-relaxed">Entre em contato pelo WhatsApp e escolha o melhor horário.</p>
-                </div>
-                <div class="space-y-4 relative" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 rounded-full border flex items-center justify-center mx-auto text-xl font-black italic serif" style="border-color:rgba(160,140,92,0.4);color:var(--gold);background:rgba(160,140,92,0.05)">02</div>
-                    <h4 class="text-white font-bold uppercase tracking-widest text-sm">Imersão Estratégica</h4>
-                    <p class="text-zinc-500 text-sm italic leading-relaxed">120 a 150 min de análise técnica profunda: face, temperamento e objetivos.</p>
-                </div>
-                <div class="space-y-4 relative" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 rounded-full border flex items-center justify-center mx-auto text-xl font-black italic serif" style="border-color:var(--gold);color:var(--gold);background:rgba(160,140,92,0.1)">03</div>
-                    <h4 class="text-white font-bold uppercase tracking-widest text-sm">Autoridade</h4>
-                    <p class="text-zinc-500 text-sm italic leading-relaxed">Sua imagem projeta poder e confiança antes mesmo de falar.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PÚBLICO-ALVO -->
-    <section class="py-20 relative text-center px-6">
-        <div class="max-w-7xl mx-auto">
-            <p class="text-[10px] font-black uppercase tracking-[0.35em] mb-4" style="color:var(--gold)" data-aos="fade-up">✦ Para quem é ✦</p>
-            <h2 class="text-4xl md:text-6xl text-white italic font-medium uppercase mb-16" data-aos="fade-up">Para quem busca<br><span class="gold-gradient-text font-black">o próximo nível.</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] transition-all duration-500 hover:border-gold hover:-translate-y-2 hover:shadow-2xl" data-aos="fade-up" style="--gold:var(--gold)">
-                    <i class="fas fa-briefcase text-2xl mb-6" style="color:rgba(160,140,92,0.5)"></i>
-                    <h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Líderes</h5>
-                    <p class="text-zinc-500 text-sm italic">Imagem que precede sua fala e projeta autoridade natural.</p>
-                </div>
-                <div class="p-10 rounded-[2rem] border md:scale-105 shadow-2xl" style="border-color:rgba(160,140,92,0.25);background:rgba(160,140,92,0.03)" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-crown text-2xl mb-6" style="color:var(--gold)"></i>
-                    <h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Empresários</h5>
-                    <p class="text-zinc-500 text-sm italic font-bold">Presença física e digital que fecha negócios.</p>
-                </div>
-                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] transition-all duration-500 hover:border-gold hover:-translate-y-2 hover:shadow-2xl" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-gem text-2xl mb-6" style="color:rgba(160,140,92,0.5)"></i>
-                    <h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Alta Performance</h5>
-                    <p class="text-zinc-500 text-sm italic">Precisão estratégica para quem não aceita o mediano.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════ -->
-    <!-- CONTATO / LOCALIZAÇÃO                      -->
-    <!-- ══════════════════════════════════════════ -->
-    <section id="contato" class="py-24 px-6 relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-            <div class="space-y-8 flex flex-col items-center md:items-start text-center md:text-left">
-                <p class="text-[10px] font-black uppercase tracking-[0.35em]" style="color:var(--gold)" data-aos="fade-up">✦ Onde nos encontrar ✦</p>
-                <h2 class="text-5xl md:text-7xl italic font-bold uppercase gold-gradient-text" data-aos="fade-up">Localização</h2>
-                <div class="space-y-5 text-zinc-400 w-full" data-aos="fade-up">
-                    <div class="flex gap-4 items-center justify-center md:justify-start">
-                        <i class="fas fa-map-marker-alt text-2xl w-8 flex-shrink-0" style="color:var(--gold)"></i>
-                        <p class="text-lg">Barbearia Clube — Av. Cândido Hartmann, 1580 — Curitiba</p>
-                    </div>
-                    <div class="flex gap-4 items-center justify-center md:justify-start">
-                        <i class="fas fa-phone-alt text-2xl w-8 flex-shrink-0" style="color:var(--gold)"></i>
-                        <a href="tel:+5541999682982" class="text-xl font-bold hover:text-white transition-colors">(41) 99968-2982</a>
-                    </div>
-                    <div class="flex gap-4 items-center justify-center md:justify-start">
-                        <i class="fas fa-envelope text-2xl w-8 flex-shrink-0" style="color:var(--gold)"></i>
-                        <a href="mailto:Wagnerbarbeiro15@gmail.com" class="text-xl italic hover:text-white transition-colors">Wagnerbarbeiro15@gmail.com</a>
-                    </div>
-                    <a href="https://www.instagram.com/owagneralvess" target="_blank" rel="noopener noreferrer" class="flex gap-4 items-center justify-center md:justify-start hover:text-white transition-colors group">
-                        <i class="fab fa-instagram text-2xl w-8 flex-shrink-0 group-hover:scale-110 transition-transform" style="color:var(--gold)"></i>
-                        <p class="text-xl font-bold">@owagneralvess</p>
-                    </a>
-                </div>
-
-                <!-- Mapa -->
-                <div class="map-wrap w-full" style="height:280px;" data-aos="fade-up">
-                    <iframe
-                        title="Localização Barbearia Clube – Wagner Alves, Curitiba"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d-49.2993375!3d-25.4256375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce3e413aa0447%3A0x1567913d87428796!2sBarbearia+Clube!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
-                        width="100%" height="280"
-                        style="border:0;filter:invert(90%) hue-rotate(180deg) brightness(0.85) contrast(1.1);"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-
-            <div class="p-10 rounded-[2.5rem] bg-gradient-to-br from-zinc-900 to-black border shadow-2xl relative overflow-hidden group" style="border-color:rgba(160,140,92,0.2)" data-aos="fade-left">
-                <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-110 transition duration-700"><i class="fas fa-award" style="font-size:8rem;color:var(--gold)"></i></div>
+            <div class="p-10 rounded-[2.5rem] bg-gradient-to-br from-zinc-900 to-black border border-gold/20 shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:scale-110 transition duration-700"><i class="fas fa-award text-8xl text-gold"></i></div>
                 <h3 class="text-2xl font-bold text-white mb-2 uppercase italic">Experiência de Elite</h3>
-                <div class="w-10 h-px mb-6" style="background:var(--gold)"></div>
-                <p class="text-zinc-400 leading-relaxed italic mb-8">Atendimento exclusivo na Barbearia Clube. Estacionamento gratuito, ambiente climatizado e bar café VIP para o seu total conforto durante os <strong class="text-white">120 a 150 minutos</strong> de imersão.</p>
-                <div class="flex flex-wrap gap-3 mb-10">
-                    <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic" style="background:rgba(160,140,92,0.1);border:1px solid rgba(160,140,92,0.3);color:var(--gold)">✦ Estacionamento Gratuito</span>
-                    <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic" style="background:rgba(160,140,92,0.1);border:1px solid rgba(160,140,92,0.3);color:var(--gold)">✦ Bar Café VIP</span>
-                    <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic" style="background:rgba(160,140,92,0.1);border:1px solid rgba(160,140,92,0.3);color:var(--gold)">✦ Ambiente Climatizado</span>
-                    <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic" style="background:rgba(160,140,92,0.1);border:1px solid rgba(160,140,92,0.3);color:var(--gold)">✦ Atendimento Exclusivo</span>
+                <p class="text-zinc-400 italic mb-8">Atendimento exclusivo na prestigiada Barbearia Clube Mercês. Estacionamento VIP e ambiente climatizado.</p>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic bg-gold/10 border border-gold/30 text-gold">✦ Bar Café VIP</span>
+                    <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic bg-gold/10 border border-gold/30 text-gold">✦ Estacionamento Gratuito</span>
                 </div>
-                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="btn-glass-full">
-                    <i class="fab fa-whatsapp text-xl"></i> Agendar Agora
-                </a>
-
-                <!-- SALVAR CONTATO -->
-                <button onclick="salvarContato()" class="btn-save-contact w-full mt-3">
-                    <i class="fas fa-address-card text-base"></i>
-                    <span>Salvar Contato no Celular</span>
-                    <i class="fas fa-download text-xs opacity-60"></i>
-                </button>
+                <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="btn-glass-full"><i class="fab fa-whatsapp"></i> Agendar Agora</a>
             </div>
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- GARANTIA / COMPROMISSO                     -->
-    <!-- ══════════════════════════════════════════ -->
-    <section class="py-24 px-6 border-t border-white/5" style="background:radial-gradient(ellipse at center,rgba(160,140,92,0.06) 0%,transparent 70%)">
-        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full border-2 mb-8" style="border-color:rgba(160,140,92,0.4);background:rgba(160,140,92,0.05)">
-                <i class="fas fa-shield-alt text-3xl" style="color:var(--gold)"></i>
-            </div>
-            <p class="text-[10px] font-black uppercase tracking-[0.35em] mb-4" style="color:var(--gold)">✦ Meu compromisso com você ✦</p>
-            <h2 class="text-4xl md:text-6xl text-white italic font-bold mb-8 leading-tight serif">
-                "Se você sair igual entrou,<br><span class="gold-gradient-text">eu não fiz meu trabalho."</span>
-            </h2>
-            <p class="text-zinc-400 text-lg italic leading-relaxed max-w-2xl mx-auto mb-10">
-                Cada consultoria é uma imersão de <strong class="text-white">120 a 150 minutos</strong> com atenção técnica total. Analiso suas linhas faciais, temperamento, estilo de vida e objetivos profissionais. O resultado não é só um corte — é uma <strong class="text-white">identidade visual estratégica</strong> construída para você.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 garantia-grid">
-                <div class="p-6 rounded-2xl border text-left" style="border-color:rgba(160,140,92,0.15);background:rgba(160,140,92,0.03)">
-                    <i class="fas fa-user-check mb-4 text-xl" style="color:var(--gold)"></i>
-                    <h5 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Atendimento 100% Pessoal</h5>
-                    <p class="text-zinc-500 text-xs italic leading-relaxed">Somente Wagner Alves. Sem assistentes. Sem delegação. Sua transformação nas mãos de quem tem 24 anos de expertise.</p>
-                </div>
-                <div class="p-6 rounded-2xl border text-left" style="border-color:rgba(160,140,92,0.15);background:rgba(160,140,92,0.03)">
-                    <i class="fas fa-brain mb-4 text-xl" style="color:var(--gold)"></i>
-                    <h5 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Análise Estratégica Profunda</h5>
-                    <p class="text-zinc-500 text-xs italic leading-relaxed">Não existe fórmula genérica. Cada consultoria é única, calibrada para seus objetivos profissionais e sua identidade.</p>
-                </div>
-                <div class="p-6 rounded-2xl border text-left" style="border-color:rgba(160,140,92,0.15);background:rgba(160,140,92,0.03)">
-                    <i class="fas fa-chart-line mb-4 text-xl" style="color:var(--gold)"></i>
-                    <h5 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Resultado Visível e Duradouro</h5>
-                    <p class="text-zinc-500 text-xs italic leading-relaxed">Você sai com uma imagem que projeta autoridade, confiança e liderança — e sabe exatamente como manter.</p>
-                </div>
-            </div>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20quero%20agendar%20minha%20consultoria" onclick="dispararPixelContato()" class="btn-gold-outline-pill">
-                <i class="fab fa-whatsapp text-xl"></i> Quero essa transformação
-            </a>
-        </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════ -->
-    <!-- FAQ                                        -->
-    <!-- ══════════════════════════════════════════ -->
-    <section id="duvidas" class="py-24 border-t border-white/5 text-center px-6" style="background:#050505">
-        <p class="text-[10px] font-black uppercase tracking-[0.35em] mb-4" style="color:var(--gold)" data-aos="fade-up">✦ Tire suas dúvidas ✦</p>
-        <h2 class="text-5xl md:text-8xl italic font-bold uppercase gold-gradient-text mb-16" data-aos="fade-up">Dúvidas Comuns</h2>
-        <div class="max-w-4xl mx-auto text-left space-y-4">
-            <details class="faq-item group p-8" data-aos="fade-up">
-                <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">O que diferencia o Visagismo de um corte comum?<span class="group-open:rotate-180 transition" style="color:var(--gold)"><i class="fas fa-chevron-down"></i></span></summary>
-                <div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Diferente de uma barbearia comum, o Visagismo Estratégico analisa suas linhas faciais, temperamento e objetivos profissionais para transmitir autoridade e confiança personalizada.</div>
-            </details>
-            <details class="faq-item group p-8" data-aos="fade-up">
-                <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Quanto tempo dura a consultoria?<span class="group-open:rotate-180 transition" style="color:var(--gold)"><i class="fas fa-chevron-down"></i></span></summary>
-                <div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">A consultoria completa de alto padrão dura de <strong class="text-white">120 a 150 minutos</strong> de imersão total — análise técnica profunda, visagismo estratégico e execução com perfeição.</div>
-            </details>
-            <details class="faq-item group p-8" data-aos="fade-up">
-                <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Eu uso óculos. O Visagismo ajuda?<span class="group-open:rotate-180 transition" style="color:var(--gold)"><i class="fas fa-chevron-down"></i></span></summary>
-                <div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Sim. Os óculos impactam muito sua comunicação visual. Orientamos sobre o formato ideal para reforçar sua imagem de liderança e autoridade.</div>
-            </details>
-            <details class="faq-item group p-8" data-aos="fade-up">
-                <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Wagner Alves atende pessoalmente?<span class="group-open:rotate-180 transition" style="color:var(--gold)"><i class="fas fa-chevron-down"></i></span></summary>
-                <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">Sim. Cada consultoria é realizada pessoalmente pelo Wagner Alves, aplicando 24 anos de experiência técnica em cada atendimento. Sem assistentes, sem terceiros.</div>
-            </details>
-            <details class="faq-item group p-8" data-aos="fade-up">
-                <summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Quais são as formas de pagamento?<span class="group-open:rotate-180 transition" style="color:var(--gold)"><i class="fas fa-chevron-down"></i></span></summary>
-                <div class="pt-6 text-zinc-400 text-lg italic leading-relaxed">Aceitamos PIX, cartões de débito e crédito (com parcelamento disponível).</div>
-            </details>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="py-20 border-t border-white/5 text-center px-6">
-        <p class="text-3xl font-black gold-gradient-text uppercase tracking-[0.4em] mb-4 italic serif">Wagner Alves</p>
-        <p class="text-zinc-600 text-xs italic mb-8">Estrategista de Imagem Masculina · Curitiba · Barbearia Clube</p>
-        <div class="flex justify-center gap-6 mb-8">
-            <a href="https://www.instagram.com/owagneralvess" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full border flex items-center justify-center transition hover:-translate-y-1" style="border-color:rgba(160,140,92,0.3);color:var(--gold)"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="w-10 h-10 rounded-full border flex items-center justify-center transition hover:-translate-y-1" style="border-color:rgba(160,140,92,0.3);color:var(--gold)"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <button onclick="abrirPolitica()" class="transition uppercase text-[10px] font-black underline block mx-auto mb-4" style="color:rgba(100,100,100,0.7)">Política de Privacidade</button>
-        <p class="text-[10px] uppercase tracking-widest font-bold italic" style="color:#1a1a1a">© 2026 — Todos os direitos reservados</p>
+    <footer class="py-20 border-t border-white/5 text-center">
+        <p class="text-3xl font-black gold-gradient-text uppercase italic serif mb-4">Wagner Alves</p>
+        <button onclick="abrirPolitica()" class="text-zinc-600 uppercase text-[10px] font-black underline">Política de Privacidade</button>
+        <p class="text-zinc-800 text-[10px] italic mt-4">© 2026 — Curitiba/PR</p>
     </footer>
 
-    <!-- MODAL POLÍTICA -->
-    <div id="modal-politica" onclick="fecharPolitica()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h2 class="text-3xl font-black mb-8 italic uppercase text-center" style="color:var(--gold)">Política de Privacidade</h2>
-            <div class="space-y-6 text-zinc-400 text-sm leading-relaxed text-justify">
-                <p><strong class="text-white">1. Coleta de Informações:</strong> Coletamos dados básicos de contato fornecidos por você via WhatsApp para agendamentos.</p>
-                <p><strong class="text-white">2. Uso dos Dados:</strong> Suas informações são utilizadas exclusivamente para agendamento de consultorias e comunicações diretas.</p>
-                <p><strong class="text-white">3. Cookies e Rastreamento:</strong> Este site utiliza o Facebook Pixel para medir eficácia das comunicações. Nenhum dado é vendido a terceiros.</p>
-            </div>
-            <button onclick="fecharPolitica()" class="mt-8 w-full text-white font-black py-4 rounded-xl transition uppercase text-xs text-center block" style="background:var(--gold)">Entendido e Fechar</button>
-        </div>
-    </div>
+    <div id="modal-politica" onclick="fecharPolitica()"><div class="modal-content" onclick="event.stopPropagation()"><h2 class="text-2xl text-gold font-bold mb-4 uppercase italic">Privacidade</h2><p class="text-zinc-400 text-sm italic">Seus dados são usados exclusivamente para agendamento de consultorias via WhatsApp.</p><button onclick="fecharPolitica()" class="mt-8 w-full bg-gold text-white font-black py-4 rounded-xl uppercase text-xs">Fechar</button></div></div>
 
-    <!-- WHATSAPP FIXO -->
-    <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="whatsapp-fix" aria-label="Falar com Wagner Alves no WhatsApp">
-        <i class="fab fa-whatsapp text-3xl text-white"></i>
-    </a>
-
-    <!-- ══ EXIT INTENT POPUP ══ -->
-    <div id="exit-popup" style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:20px;">
-        <div style="max-width:520px;width:100%;background:linear-gradient(135deg,#0a0a0a,#0f1420);border:1px solid rgba(160,140,92,0.35);border-radius:2.5rem;padding:3rem;position:relative;text-align:center;">
-            <button onclick="fecharExitPopup()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(160,140,92,0.5);font-size:1.5rem;line-height:1;">✕</button>
-            <div style="width:64px;height:64px;border-radius:50%;border:1px solid rgba(160,140,92,0.4);background:rgba(160,140,92,0.07);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
-                <i class="fas fa-calendar-check" style="color:var(--gold);font-size:1.6rem"></i>
-            </div>
-            <p style="font-size:0.65rem;font-weight:900;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Antes de sair</p>
-            <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);color:white;font-style:italic;font-weight:700;line-height:1.2;margin-bottom:1rem;">Sua vaga ainda<br>está disponível.</h3>
-            <p style="color:#a1a1aa;font-style:italic;line-height:1.7;margin-bottom:2rem;font-size:0.95rem;">Apenas <strong style="color:white" id="vagas-popup">2 vagas</strong> restantes para este mês. Uma consultoria de 120 a 150 min pode mudar a forma como o mundo enxerga você.</p>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20vi%20que%20ainda%20tem%20vaga%20e%20gostaria%20de%20agendar" onclick="dispararPixelContato();fecharExitPopup();" style="display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#a08c5c,#f1e4bc,#a08c5c);background-size:200% auto;color:#050505;border:none;border-radius:1rem;padding:1.1rem 2rem;font-weight:900;font-size:1rem;text-transform:uppercase;letter-spacing:0.15em;text-decoration:none;transition:all 0.4s;margin-bottom:1rem;box-shadow:0 8px 30px rgba(160,140,92,0.4);" onmouseover="this.style.backgroundPosition='right center';this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 40px rgba(160,140,92,0.55)'" onmouseout="this.style.backgroundPosition='left center';this.style.transform='none';this.style.boxShadow='0 8px 30px rgba(160,140,92,0.4)'"  >
-                <i class="fab fa-whatsapp" style="font-size:1.3rem"></i> Garantir minha vaga agora
-            </a>
-            <button onclick="fecharExitPopup()" style="background:none;border:none;color:#52525b;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;text-decoration:underline;text-underline-offset:3px;">Não, vou continuar sem transformar minha imagem</button>
-        </div>
-    </div>
+    <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="whatsapp-fix"><i class="fab fa-whatsapp text-3xl text-white"></i></a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // ─── SALVAR CONTATO (vCard) ───
-        function salvarContato() {
-            const btn = document.querySelector('.btn-save-contact');
-
-            const vcard = [
-                'BEGIN:VCARD',
-                'VERSION:3.0',
-                'FN:Wagner Alves',
-                'N:Alves;Wagner;;;',
-                'ORG:Wagner Alves – Estrategista de Imagem Masculina',
-                'TITLE:Visagista Masculino de Alto Padrão',
-                'TEL;TYPE=CELL,PREF:+5541999682982',
-                'EMAIL:Wagnerbarbeiro15@gmail.com',
-                'URL:https://wagneralves.com.br',
-                'ADR;TYPE=WORK:;;Av. Cândido Hartmann\\, 1580;Curitiba;PR;;Brasil',
-                'NOTE:Barbearia Clube – Visagismo Estratégico Masculino – Curitiba/PR',
-                'X-SOCIALPROFILE;type=instagram:https://instagram.com/owagneralvess',
-                'END:VCARD'
-            ].join('\r\n');
-
-            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Wagner-Alves-Visagista.vcf';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-
-            // Feedback visual
-            btn.classList.add('saved');
-            btn.innerHTML = '<i class="fas fa-check text-base"></i><span>Contato Salvo!</span>';
-            setTimeout(() => {
-                btn.classList.remove('saved');
-                btn.innerHTML = '<i class="fas fa-address-card text-base"></i><span>Salvar Contato no Celular</span><i class="fas fa-download text-xs opacity-60"></i>';
-            }, 3000);
-        }
-
-        // ─── LOADING SCREEN ───
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.classList.add('hide');
-                document.body.classList.remove('loading');
-                // Remove do DOM após a animação
-                setTimeout(() => loader.remove(), 900);
-            }, 2000); // 2s — tempo suficiente para ver a animação
-        });
-
-        // ─── AOS ───
-        AOS.init({ once: true, duration: 1000, easing: 'ease-out-cubic' });
-
-        // ─── SWIPER ───
-        new Swiper(".mySwiper", {
-            slidesPerView: 1.2, spaceBetween: 20, loop: true, centeredSlides: true,
-            touchMoveStopPropagation: true, speed: 800,
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-            breakpoints: {
-                768: { slidesPerView: 3, spaceBetween: 30, centeredSlides: false },
-                1024: { slidesPerView: 5, spaceBetween: 30, centeredSlides: false }
-            }
-        });
-
-        // ─── CURSOR DOURADO ───
-        const cursor = document.getElementById('cursor');
-        const ring = document.getElementById('cursor-ring');
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-        function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
-        animateRing();
-        document.querySelectorAll('a, button, [onclick], input[type=range]').forEach(el => {
-            el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
-            el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
-        });
-
-        // ─── VAGAS (consistente entre barra, hero e popup) ───
-        function calcularVagas() {
-            const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 3));
-            return (seed % 3) + 1;
-        }
-        const vagas = calcularVagas();
-        const sufixo = vagas === 1 ? ' vaga restante este mês' : ' vagas restantes este mês';
-        const el = document.getElementById('vagas-texto');
-        const elBar = document.getElementById('vagas-bar');
-        const elBarMobile = document.getElementById('vagas-bar-mobile');
-        const elPopup = document.getElementById('vagas-popup');
-        if (el) el.textContent = vagas + sufixo;
-        if (elBar) elBar.textContent = vagas + (vagas === 1 ? ' vaga restante' : ' vagas restantes');
-        if (elBarMobile) elBarMobile.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
-        if (elPopup) elPopup.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
-
-        // ─── CONTADORES ANIMADOS ───
-        function animateCounter(el) {
-            const target = parseInt(el.getAttribute('data-target'));
-            const suffix = el.getAttribute('data-suffix') || '';
-            const duration = 2000;
-            const start = performance.now();
-            function update(now) {
-                const elapsed = now - start;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                el.textContent = Math.floor(eased * target) + suffix;
-                if (progress < 1) requestAnimationFrame(update);
-            }
-            requestAnimationFrame(update);
-        }
-        const counterObs = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); } });
-        }, { threshold: 0.5 });
-        document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
-
-        // ─── EXIT INTENT ───
-        let exitShown = false;
-
-        // Desktop: só dispara se o mouse sair pela parte de cima após 8s na página
-        let pageTime = 0;
-        const pageTimer = setInterval(() => { pageTime++; }, 1000);
-
-        document.addEventListener('mouseleave', e => {
-            if (e.clientY <= 5 && !exitShown && pageTime >= 8) {
-                exitShown = true;
-                clearInterval(pageTimer);
-                const popup = document.getElementById('exit-popup');
-                popup.style.display = 'flex';
-                setTimeout(() => { popup.style.opacity = '1'; }, 10);
-            }
-        });
-
-        // Mobile: mostra após 90s de inatividade
-        let mobileTimer;
-        function resetMobileTimer() {
-            clearTimeout(mobileTimer);
-            mobileTimer = setTimeout(() => {
-                if (!exitShown) {
-                    exitShown = true;
-                    document.getElementById('exit-popup').style.display = 'flex';
-                }
-            }, 90000);
-        }
-        ['touchstart','scroll'].forEach(e => document.addEventListener(e, resetMobileTimer, { passive: true }));
-        resetMobileTimer();
-
-        function fecharExitPopup() {
-            const popup = document.getElementById('exit-popup');
-            popup.style.opacity = '0';
-            setTimeout(() => popup.style.display = 'none', 300);
-        }
-        document.getElementById('exit-popup').addEventListener('click', function(e) {
-            if (e.target === this) fecharExitPopup();
-        });
-
-        // ─── VÍDEO CONSULTOR ───
-        function toggleSobreVideo() {
-            const video = document.getElementById('sobre-video');
-            const overlay = document.getElementById('sobre-play-overlay');
-            if (video.paused) {
-                video.play();
-                overlay.style.opacity = '0';
-                overlay.style.pointerEvents = 'none';
-            } else {
-                video.pause();
-                overlay.style.opacity = '1';
-                overlay.style.pointerEvents = 'auto';
-            }
-        }
-
-        // ─── VÍDEOS depoimentos ───
-        function toggleVideo(container) {
-            document.querySelectorAll('.video-container').forEach(c => {
-                if (c !== container) { c.querySelector('video').pause(); c.classList.remove('playing'); }
-            });
-            const video = container.querySelector('video');
-            if (video.paused) { video.play(); container.classList.add('playing'); }
-            else { video.pause(); container.classList.remove('playing'); }
-        }
-
-        // ─── MENU MOBILE ───
+        AOS.init({ once: true, duration: 1000 });
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loader').classList.add('hide'); document.body.classList.remove('loading'); }, 2000); });
+        new Swiper(".mySwiper", { slidesPerView: 1.2, spaceBetween: 20, loop: true, centeredSlides: true, navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }, breakpoints: { 768: { slidesPerView: 3 }, 1024: { slidesPerView: 5 } } });
+        const cursor = document.getElementById('cursor'); const ring = document.getElementById('cursor-ring');
+        document.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; });
+        function toggleVideo(container) { const video = container.querySelector('video'); if (video.paused) { video.play(); container.classList.add('playing'); } else { video.pause(); container.classList.remove('playing'); } }
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('translate-x-full'); }
-
-        // ─── MODAL POLÍTICA ───
         function abrirPolitica() { document.getElementById('modal-politica').style.display = 'flex'; }
         function fecharPolitica() { document.getElementById('modal-politica').style.display = 'none'; }
+        document.querySelectorAll('[data-target]').forEach(el => { const target = +el.getAttribute('data-target'); const count = () => { const now = +el.innerText.replace(/\D/g,''); const inc = target / 100; if(now < target) { el.innerText = Math.ceil(now + inc) + (el.getAttribute('data-suffix') || ''); setTimeout(count, 20); } }; count(); });
     </script>
 </body>
 </html>
