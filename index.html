@@ -162,26 +162,148 @@
         .delay-5 { animation-delay: 1s; }
         @keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* ─── BOTÕES ─── */
+        /* ─── BOTÕES — cada um único ─── */
+
+        /* Remover estilo genérico antigo */
         .wa-pulse { animation: pulse-gold 2s infinite; }
         @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(160,140,92,0.7); } 70% { box-shadow: 0 0 0 15px rgba(160,140,92,0); } 100% { box-shadow: 0 0 0 0 rgba(160,140,92,0); } }
 
-        .btn-premium {
-            background: rgba(26,35,58,0.8);
-            backdrop-filter: blur(10px);
+        /* ── BTN 1: Hero "Agendar Consultoria" — dourado sólido, cinematográfico ── */
+        .btn-hero {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: linear-gradient(135deg, #a08c5c 0%, #f1e4bc 50%, #a08c5c 100%);
+            background-size: 200% auto;
+            color: #050505;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 0.75rem;
+            font-weight: 900; font-size: 1.05rem;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+            position: relative; overflow: hidden;
+            box-shadow: 0 8px 32px rgba(160,140,92,0.35);
+        }
+        .btn-hero:hover {
+            background-position: right center;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(160,140,92,0.5);
+            color: #050505;
+        }
+        .btn-hero::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        .btn-hero:hover::after { transform: translateX(100%); }
+
+        /* ── BTN 2: "Verificar Disponibilidade" — contorno dourado, ghost elegante ── */
+        .btn-ghost-gold {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: transparent;
             color: var(--gold-light);
-            border: 1px solid rgba(160,140,92,0.4);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1.5px solid var(--gold);
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            font-weight: 900; font-size: 0.9rem;
+            text-transform: uppercase; letter-spacing: 0.18em;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
             position: relative; overflow: hidden;
         }
-        .btn-premium::before {
+        .btn-ghost-gold::before {
             content: '';
-            position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(241,228,188,0.08), transparent);
-            transition: left 0.6s;
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(160,140,92,0.12), rgba(160,140,92,0.05));
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .btn-premium:hover { transform: translateY(-3px); border-color: var(--gold-light); box-shadow: 0 20px 40px rgba(160,140,92,0.2); }
-        .btn-premium:hover::before { left: 100%; }
+        .btn-ghost-gold:hover { border-color: var(--gold-light); color: white; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(160,140,92,0.2); }
+        .btn-ghost-gold:hover::before { transform: scaleX(1); }
+
+        /* ── BTN 3: "Quero minha transformação" — dark navy com brilho ── */
+        .btn-navy {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: linear-gradient(135deg, #0d1b3e, #1a2a5e);
+            color: var(--gold-light);
+            border: 1px solid rgba(160,140,92,0.4);
+            padding: 1.1rem 2.2rem;
+            border-radius: 0.75rem;
+            font-weight: 900; font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.4s;
+            position: relative; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(13,27,62,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        .btn-navy::before {
+            content: '';
+            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at center, rgba(160,140,92,0.15) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .btn-navy:hover { border-color: var(--gold-light); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(13,27,62,0.8), 0 0 0 1px rgba(160,140,92,0.3); }
+        .btn-navy:hover::before { opacity: 1; }
+
+        /* ── BTN 4: "Quero essa transformação" — ouro invertido com bordas arredondadas ── */
+        .btn-gold-outline-pill {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: rgba(160,140,92,0.08);
+            color: var(--gold-light);
+            border: 1px solid rgba(160,140,92,0.5);
+            padding: 1.1rem 2.5rem;
+            border-radius: 999px;
+            font-weight: 900; font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 0.18em;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            backdrop-filter: blur(10px);
+            position: relative; overflow: hidden;
+        }
+        .btn-gold-outline-pill::after {
+            content: '';
+            position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+            transition: width 0.4s;
+        }
+        .btn-gold-outline-pill:hover { background: rgba(160,140,92,0.18); border-color: var(--gold-light); color: white; transform: translateY(-3px) scale(1.02); box-shadow: 0 16px 40px rgba(160,140,92,0.2); }
+        .btn-gold-outline-pill:hover::after { width: 80%; }
+
+        /* ── BTN 5: "Agendar Agora" — full width, dark glass ── */
+        .btn-glass-full {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            width: 100%;
+            background: rgba(160,140,92,0.1);
+            color: var(--gold-light);
+            border: 1px solid rgba(160,140,92,0.35);
+            padding: 1.2rem 2rem;
+            border-radius: 1rem;
+            font-weight: 900; font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            text-decoration: none;
+            transition: all 0.4s;
+            backdrop-filter: blur(20px);
+            position: relative; overflow: hidden;
+        }
+        .btn-glass-full::before {
+            content: '';
+            position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            transition: width 0.4s;
+        }
+        .btn-glass-full:hover { background: rgba(160,140,92,0.18); border-color: var(--gold); color: white; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+        .btn-glass-full:hover::before { width: 100%; opacity: 0.05; }
+
+        /* ── BTN antigo removido — mantido para não quebrar nada ── */
+        .btn-premium {
+            background: rgba(26,35,58,0.8); backdrop-filter: blur(10px);
+            color: var(--gold-light); border: 1px solid rgba(160,140,92,0.4);
+            transition: all 0.4s; text-decoration: none;
+        }
+        .btn-premium:hover { transform: translateY(-3px); border-color: var(--gold-light); }
 
         /* ─── MARQUEE ─── */
         .marquee-container { display: flex; overflow: hidden; width: 100%; padding: 2rem 0; border-y: 1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.3); }
@@ -404,7 +526,7 @@
                 </div>
 
                 <div class="hero-text-reveal delay-5 flex flex-col items-center md:items-start gap-3">
-                    <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="btn-premium wa-pulse inline-flex items-center gap-3 px-10 py-5 rounded-xl font-black text-lg uppercase tracking-widest shadow-lg">
+                    <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="btn-hero wa-pulse">
                         <i class="fab fa-whatsapp text-xl"></i> Agendar Consultoria
                     </a>
                     <p class="text-[10px] uppercase tracking-[0.25em] font-bold" style="color:rgba(160,140,92,0.6)">Atendimento pessoal e exclusivo · Sem fila de espera</p>
@@ -500,7 +622,7 @@
             </div>
 
             <div class="mt-12" data-aos="fade-up">
-                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20quero%20minha%20transformação!" onclick="dispararPixelContato()" class="btn-premium wa-pulse inline-flex items-center gap-3 px-10 py-5 rounded-xl font-black text-base uppercase tracking-widest">
+                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20quero%20minha%20transformação!" onclick="dispararPixelContato()" class="btn-navy">
                     <i class="fab fa-whatsapp text-xl"></i> Quero minha transformação
                 </a>
             </div>
@@ -578,7 +700,7 @@
                     <p class="border-l-4 pl-6 py-2 mb-6" style="border-color:var(--gold)">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
                     <p class="not-italic opacity-80 leading-relaxed">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança através do <span class="gold-gradient-text font-bold uppercase italic">Visagismo Masculino</span> estratégico. Cada sessão de <strong class="text-white">120 a 150 minutos</strong> é uma análise profunda das suas linhas faciais, temperamento e objetivos profissionais.</p>
                 </div>
-                <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="btn-premium wa-pulse px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest flex items-center gap-3">
+                <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="btn-ghost-gold">
                     <i class="fab fa-whatsapp"></i> Verificar Disponibilidade
                 </a>
             </div>
@@ -686,7 +808,7 @@
                     <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic" style="background:rgba(160,140,92,0.1);border:1px solid rgba(160,140,92,0.3);color:var(--gold)">✦ Ambiente Climatizado</span>
                     <span class="px-4 py-2 rounded-full text-[10px] font-bold uppercase italic" style="background:rgba(160,140,92,0.1);border:1px solid rgba(160,140,92,0.3);color:var(--gold)">✦ Atendimento Exclusivo</span>
                 </div>
-                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="btn-premium wa-pulse w-full text-center px-8 py-5 rounded-2xl font-black text-base uppercase tracking-widest flex items-center justify-center gap-3">
+                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="btn-glass-full">
                     <i class="fab fa-whatsapp text-xl"></i> Agendar Agora
                 </a>
             </div>
@@ -725,7 +847,7 @@
                     <p class="text-zinc-500 text-xs italic leading-relaxed">Você sai com uma imagem que projeta autoridade, confiança e liderança — e sabe exatamente como manter.</p>
                 </div>
             </div>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20quero%20agendar%20minha%20consultoria" onclick="dispararPixelContato()" class="btn-premium wa-pulse inline-flex items-center gap-3 px-10 py-5 rounded-xl font-black text-lg uppercase tracking-widest">
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20quero%20agendar%20minha%20consultoria" onclick="dispararPixelContato()" class="btn-gold-outline-pill">
                 <i class="fab fa-whatsapp text-xl"></i> Quero essa transformação
             </a>
         </div>
@@ -801,7 +923,7 @@
             <p style="font-size:0.65rem;font-weight:900;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Antes de sair</p>
             <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);color:white;font-style:italic;font-weight:700;line-height:1.2;margin-bottom:1rem;">Sua vaga ainda<br>está disponível.</h3>
             <p style="color:#a1a1aa;font-style:italic;line-height:1.7;margin-bottom:2rem;font-size:0.95rem;">Apenas <strong style="color:white" id="vagas-popup">2 vagas</strong> restantes para este mês. Uma consultoria de 120 a 150 min pode mudar a forma como o mundo enxerga você.</p>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20vi%20que%20ainda%20tem%20vaga%20e%20gostaria%20de%20agendar" onclick="dispararPixelContato();fecharExitPopup();" style="display:flex;align-items:center;justify-content:center;gap:12px;background:rgba(26,35,58,0.9);color:var(--gold-light);border:1px solid rgba(160,140,92,0.5);border-radius:1rem;padding:1.1rem 2rem;font-weight:900;font-size:1rem;text-transform:uppercase;letter-spacing:0.15em;text-decoration:none;transition:all 0.3s;margin-bottom:1rem;" onmouseover="this.style.borderColor='var(--gold-light)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(160,140,92,0.5)';this.style.transform='none'">
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20vi%20que%20ainda%20tem%20vaga%20e%20gostaria%20de%20agendar" onclick="dispararPixelContato();fecharExitPopup();" style="display:flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#a08c5c,#f1e4bc,#a08c5c);background-size:200% auto;color:#050505;border:none;border-radius:1rem;padding:1.1rem 2rem;font-weight:900;font-size:1rem;text-transform:uppercase;letter-spacing:0.15em;text-decoration:none;transition:all 0.4s;margin-bottom:1rem;box-shadow:0 8px 30px rgba(160,140,92,0.4);" onmouseover="this.style.backgroundPosition='right center';this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 40px rgba(160,140,92,0.55)'" onmouseout="this.style.backgroundPosition='left center';this.style.transform='none';this.style.boxShadow='0 8px 30px rgba(160,140,92,0.4)'"  >
                 <i class="fab fa-whatsapp" style="font-size:1.3rem"></i> Garantir minha vaga agora
             </a>
             <button onclick="fecharExitPopup()" style="background:none;border:none;color:#52525b;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;text-decoration:underline;text-underline-offset:3px;">Não, vou continuar sem transformar minha imagem</button>
