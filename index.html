@@ -331,36 +331,83 @@
         .vaga-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: blink 1.5s infinite; flex-shrink: 0; }
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* ─── ANTES/DEPOIS ─── */
-        .ba-card {
-            position: relative; border-radius: 2rem; overflow: hidden;
-            border: 1px solid rgba(160,140,92,0.2);
-            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s;
-            background: #0a0a0a;
+        /* ─── ANTES/DEPOIS REDESIGN FINAL ─── */
+        .ba-section-card {
+            position: relative;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(160,140,92,0.15);
+            background: linear-gradient(135deg, #0a0a14 0%, #0d1020 50%, #0a0a14 100%);
+            transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s, border-color 0.4s;
         }
-        .ba-card:hover { transform: translateY(-10px) scale(1.01); box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(160,140,92,0.3); }
-        .ba-card img { width: 100%; display: block; }
-        .ba-card-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, transparent 70%);
+        .ba-section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(160,140,92,0.35);
+            border-color: rgba(160,140,92,0.35);
+        }
+
+        /* Linha divisória dourada vertical entre antes e depois */
+        .ba-divider {
+            position: absolute;
+            top: 10%; bottom: 10%;
+            left: 50%; transform: translateX(-50%);
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(160,140,92,0.6), transparent);
+            z-index: 3;
+        }
+        .ba-divider::before {
+            content: '✦';
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gold);
+            font-size: 0.8rem;
+            background: #0d1020;
+            padding: 6px;
+            border-radius: 50%;
+            border: 1px solid rgba(160,140,92,0.3);
+        }
+
+        /* Labels ANTES / DEPOIS no topo */
+        .ba-labels {
+            position: absolute; top: 0; left: 0; right: 0;
+            display: flex; z-index: 4;
+        }
+        .ba-label-antes, .ba-label-depois {
+            flex: 1; padding: 12px 0;
+            text-align: center;
+            font-size: 0.6rem; font-weight: 900;
+            letter-spacing: 0.3em; text-transform: uppercase;
+        }
+        .ba-label-antes {
+            color: rgba(180,180,180,0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .ba-label-depois {
+            color: var(--gold);
+            border-bottom: 1px solid rgba(160,140,92,0.2);
+        }
+
+        /* Imagem PNG flutuando no fundo escuro */
+        .ba-section-card img {
+            width: 100%;
+            display: block;
+            padding: 2.5rem 1rem 1rem;
+            transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+        }
+        .ba-section-card:hover img { transform: scale(1.02); }
+
+        /* Glow sutil dourado no card */
+        .ba-section-card::before {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+            background: linear-gradient(to top, rgba(160,140,92,0.04), transparent);
             pointer-events: none; z-index: 1;
         }
-        .ba-card-footer {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            padding: 1.5rem;
-            display: flex; justify-content: space-between; align-items: flex-end;
-            z-index: 2;
-        }
-        .ba-pill {
-            padding: 5px 14px; border-radius: 999px;
-            font-size: 0.6rem; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase;
-            backdrop-filter: blur(10px);
-        }
-        .ba-pill-antes { background: rgba(0,0,0,0.65); color: #aaa; border: 1px solid rgba(255,255,255,0.12); }
-        .ba-pill-depois { background: rgba(160,140,92,0.25); color: var(--gold-light); border: 1px solid rgba(160,140,92,0.5); }
+
+        /* Shine */
         .ba-shine {
             position: absolute; inset: 0; pointer-events: none; z-index: 2;
-            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%);
         }
 
         /* ─── VÍDEOS ─── */
@@ -587,36 +634,39 @@
             <!-- GRID ANTES/DEPOIS — fotos reais de clientes -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" data-aos="fade-up">
 
-                <!-- Card 1 — Cliente 1 -->
-                <div class="space-y-4">
-                    <div class="ba-card">
+                <!-- Card 1 -->
+                <div class="space-y-3">
+                    <div class="ba-section-card">
                         <div class="ba-shine"></div>
-                        <img src="./WhatsApp_Image_2026-04-07_at_22_56_05.png"
-                             alt="Antes e depois do visagismo masculino — Autoridade e Liderança"
-                             loading="lazy">
-                        <div class="ba-card-overlay"></div>
-                        <div class="ba-card-footer">
-                            <span class="ba-pill ba-pill-antes">← Antes</span>
-                            <span class="ba-pill ba-pill-depois">Depois →</span>
+                        <!-- Labels topo -->
+                        <div class="ba-labels">
+                            <span class="ba-label-antes">Antes</span>
+                            <span class="ba-label-depois">Depois</span>
                         </div>
+                        <!-- Divisória dourada vertical -->
+                        <div class="ba-divider"></div>
+                        <!-- Imagem PNG com fundo transparente -->
+                        <img src="./1.png"
+                             alt="Antes e depois do visagismo — autoridade e liderança"
+                             loading="lazy">
                     </div>
-                    <p class="text-zinc-500 text-xs italic text-center">"Expressão que transmite proximidade" → <span style="color:var(--gold-light)">"Postura que evoca seriedade e liderança"</span></p>
+                    <p class="text-zinc-600 text-[10px] uppercase tracking-widest font-bold text-center italic">✦ Transformação real · Cliente executivo</p>
                 </div>
 
-                <!-- Card 2 — Cliente 2 -->
-                <div class="space-y-4">
-                    <div class="ba-card">
+                <!-- Card 2 -->
+                <div class="space-y-3">
+                    <div class="ba-section-card">
                         <div class="ba-shine"></div>
-                        <img src="./WhatsApp_Image_2026-04-08_at_00_02_48.png"
-                             alt="Antes e depois do visagismo masculino — Presença e Imagem Estratégica"
-                             loading="lazy">
-                        <div class="ba-card-overlay"></div>
-                        <div class="ba-card-footer">
-                            <span class="ba-pill ba-pill-antes">← Antes</span>
-                            <span class="ba-pill ba-pill-depois">Depois →</span>
+                        <div class="ba-labels">
+                            <span class="ba-label-antes">Antes</span>
+                            <span class="ba-label-depois">Depois</span>
                         </div>
+                        <div class="ba-divider"></div>
+                        <img src="./2.png"
+                             alt="Antes e depois do visagismo — presença e imagem estratégica"
+                             loading="lazy">
                     </div>
-                    <p class="text-zinc-500 text-xs italic text-center">"Aparência sem propósito" → <span style="color:var(--gold-light)">"Imagem estratégica e presença marcante"</span></p>
+                    <p class="text-zinc-600 text-[10px] uppercase tracking-widest font-bold text-center italic">✦ Transformação real · Alta performance</p>
                 </div>
 
             </div>
