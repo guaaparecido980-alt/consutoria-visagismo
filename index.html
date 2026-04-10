@@ -13,7 +13,6 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1456777349517939'); fbq('track', 'PageView');
 
-    // Função para rastrear o clique no WhatsApp como Conversão de Contato
     function dispararPixelContato() {
         fbq('track', 'Contact');
         console.log('Evento de Contato enviado ao Facebook');
@@ -82,10 +81,10 @@
 
     <div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 z-[60] p-12 flex flex-col gap-8 shadow-2xl bg-black/98 backdrop-blur-2xl border-l border-zinc-800 transition-all duration-500 transform translate-x-full text-center">
         <button onclick="toggleMenu()" class="text-gold text-right text-3xl mb-4"><i class="fas fa-times"></i></button>
-        <a href="#inicio" onclick="toggleMenu()" class="text-2xl font-bold uppercase gold-gradient-text italic">Início</a>
-        <a href="#depoimentos" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Depoimentos</a>
-        <a href="#sobre" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Consultor</a>
-        <a href="#contato" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Localização</a>
+        <a href="#inicio" onclick="toggleMenu()" class="text-2xl font-bold uppercase gold-gradient-text italic text-center">Início</a>
+        <a href="#depoimentos" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Depoimentos</a>
+        <a href="#sobre" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Consultor</a>
+        <a href="#contato" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Localização</a>
     </div>
 
     <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 text-center md:text-left">
@@ -102,7 +101,7 @@
                     Estrategista de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica de 24 anos para quem busca o topo. <span class="gold-gradient-text font-bold">Alinhando sua imagem ao seu sucesso.</span>
                 </p>
                 <div class="flex flex-col items-center md:items-start gap-4">
-                    <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20imagem." onclick="dispararPixelContato()" class="btn-premium wa-pulse inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto uppercase tracking-widest shadow-lg mx-auto md:mx-0">Agendar Consultoria</a>
+                    <a href="https://wa.me/5541999682982?text=Olá%20Wagner" onclick="dispararPixelContato()" class="btn-premium wa-pulse inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto uppercase tracking-widest shadow-lg mx-auto md:mx-0">Agendar Consultoria</a>
                     <p class="text-gold/60 text-[10px] uppercase tracking-[0.3em] font-bold text-center">Últimas 3 vagas disponíveis para este mês</p>
                 </div>
             </div>
@@ -164,14 +163,14 @@
                     <p class="border-l-4 border-gold pl-6 py-2 mb-6">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
                     <p class="not-italic opacity-80 leading-relaxed">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança através do <span class="gold-gradient-text font-bold uppercase italic text-center md:text-left">Visagismo Masculino</span> estratégico.</p>
                 </div>
-                <a href="https://wa.me/5541999682982?text=Olá%20Wagner" onclick="dispararPixelContato()" class="btn-premium wa-pulse px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest flex items-center gap-3"><i class="fab fa-whatsapp"></i> Verificar Disponibilidade</a>
+                <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="btn-premium wa-pulse px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest flex items-center gap-3"><i class="fab fa-whatsapp"></i> Verificar Disponibilidade</a>
             </div>
         </div>
     </section>
 
     <section class="py-16 bg-white/[0.02] border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div class="space-y-3" data-aos="fade-up"><span class="text-gold font-black text-5xl opacity-50">01</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Reserva</h4><p class="text-zinc-500 text-xs italic">Agendamento via WhatsApp direto.</p></div>
+            <div class="space-y-3" data-aos="fade-up"><span class="text-gold font-black text-5xl opacity-50">01</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Reserva</h4><p class="text-zinc-500 text-xs italic">WhatsApp direto.</p></div>
             <div class="space-y-3" data-aos="fade-up" data-aos-delay="100"><span class="text-gold font-black text-5xl opacity-50">02</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Estratégia</h4><p class="text-zinc-500 text-xs italic">Análise técnica facial profunda.</p></div>
             <div class="space-y-3" data-aos="fade-up" data-aos-delay="200"><span class="text-gold font-black text-5xl opacity-50">03</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Sucesso</h4><p class="text-zinc-500 text-xs italic">Sua imagem projetando autoridade.</p></div>
         </div>
@@ -202,7 +201,7 @@
             <div class="p-8 rounded-[2.5rem] bg-gradient-to-br from-zinc-900 to-black border border-gold/20 shadow-2xl relative overflow-hidden group">
                 <div class="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition duration-500"><i class="fas fa-award text-8xl text-gold"></i></div>
                 <h3 class="text-2xl font-bold text-white mb-4 uppercase italic">Experiência de Elite</h3>
-                <p class="text-zinc-400 leading-relaxed italic mb-6">Atendimento exclusivo na Barbearia Clube Mercês. Um ambiente discreto e sofisticado para quem valoriza imagem e tempo.</p>
+                <p class="text-zinc-400 leading-relaxed italic mb-6">Atendimento exclusivo na prestigiada Barbearia Clube Mercês. Um ambiente discreto e sofisticado para o homem que valoriza sua imagem.</p>
                 <div class="flex flex-wrap gap-3">
                     <span class="px-4 py-2 rounded-full bg-gold/10 border border-gold/30 text-gold text-[10px] font-bold uppercase italic">Estacionamento Gratuito</span>
                     <span class="px-4 py-2 rounded-full bg-gold/10 border border-gold/30 text-gold text-[10px] font-bold uppercase italic">Bar Café VIP</span>
@@ -212,21 +211,14 @@
         </div>
     </section>
 
-    <section class="py-24 bg-gradient-to-b from-transparent to-zinc-950/80 border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6 text-center" data-aos="zoom-in">
-            <h2 class="text-4xl md:text-6xl text-white font-bold uppercase italic mb-10 text-center w-full">Sua imagem é seu<br><span class="gold-gradient-text font-black text-center">maior ativo.</span></h2>
-            <p class="text-zinc-400 text-lg md:text-2xl mb-12 italic font-light text-center leading-relaxed">Não deixe seu posicionamento ao acaso. Comunique o sucesso que você já alcançou.</p>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner" onclick="dispararPixelContato()" class="btn-premium wa-pulse px-12 py-6 rounded-2xl font-black text-xl uppercase tracking-widest inline-flex items-center gap-4 mx-auto"><i class="fab fa-whatsapp text-3xl"></i> Reservar Diagnóstico de Imagem</a>
-            <p class="mt-8 text-gold/60 text-[11px] uppercase tracking-[0.4em] font-black text-center w-full">Últimas 3 vagas disponíveis para este mês</p>
-        </div>
-    </section>
-
     <section id="duvidas" class="py-24 bg-[#050505] border-t border-white/5 text-center px-6">
-        <h2 class="text-5xl md:text-8xl italic text-center font-bold uppercase inline-block text-center gold-gradient-text mb-16" data-aos="fade-up">Dúvidas Comuns</h2>
-        <div class="max-w-4xl mx-auto text-left">
+        <h2 class="text-5xl md:text-8xl italic text-center font-bold uppercase inline-block gold-gradient-text mb-16" data-aos="fade-up">Dúvidas Comuns</h2>
+        <div class="max-w-4xl mx-auto text-left space-y-4">
             <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">O que diferencia o Visagismo de um corte comum?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Diferente de uma barbearia comum, o Visagismo Estratégico analisa suas linhas faciais, temperamento e objetivos profissionais para transmitir autoridade e confiança personalizada.</div></details>
             <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Quanto tempo dura a sessão?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Uma consultoria completa de alto padrão dura de 60 a 90 minutos de atenção técnica exclusiva e estratégica.</div></details>
-            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Wagner Alves atende pessoalmente?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Sim. O atendimento é exclusivo e realizado pessoalmente por Wagner Alves, aplicando seus 24 anos de experiência técnica.</div></details>
+            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Eu uso óculos. O Visagismo ajuda?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Sim. Os óculos impactam muito sua comunicação visual. Orientamos sobre o formato ideal para reforçar sua imagem de liderança.</div></details>
+            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Wagner Alves atende pessoalmente?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Sim. O atendimento é exclusivo e realizado pessoalmente por Wagner Alves, com 24 anos de experiência técnica.</div></details>
+            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Quais são as formas de pagamento disponíveis?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Aceitamos PIX, cartões de débito e crédito (com parcelamento disponível).</div></details>
         </div>
     </section>
 
@@ -240,8 +232,9 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <h2 class="text-3xl text-gold font-black mb-8 italic uppercase text-center">Política de Privacidade</h2>
             <div class="space-y-6 text-zinc-400 text-sm leading-relaxed text-justify">
-                <p><strong>1. Coleta de Informações:</strong> Coletamos dados básicos de contato fornecidos por você via WhatsApp para agendamentos e comunicações diretas.</p>
-                <p><strong>2. Uso dos Dados:</strong> Suas informações são utilizadas exclusivamente para o agendamento de consultorias.</p>
+                <p><strong>1. Coleta de Informações:</strong> Coletamos dados básicos de contato fornecidos por você via WhatsApp e cookies para melhorar sua experiência.</p>
+                <p><strong>2. Uso dos Dados:</strong> Suas informações são utilizadas exclusivamente para o agendamento de consultorias e comunicações diretas.</p>
+                <p><strong>3. Seus Direitos (LGPD):</strong> Você tem o direito de solicitar a exclusão de seus dados a qualquer momento via WhatsApp.</p>
             </div>
             <button onclick="fecharPolitica()" class="mt-8 w-full bg-gold text-white font-black py-4 rounded-xl hover:bg-gold-light transition uppercase text-xs text-center block">Entendido e Fechar</button>
         </div>
