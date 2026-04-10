@@ -53,8 +53,9 @@
         .swiper-button-prev, .swiper-button-next { position: static !important; color: var(--gold) !important; background: rgba(160, 140, 92, 0.05); width: 50px !important; height: 50px !important; border-radius: 50%; border: 1px solid var(--gold); }
         
         .faq-item { border: 1px solid rgba(160, 140, 92, 0.1); background: rgba(255,255,255,0.02); border-radius: 1.5rem; transition: all 0.4s; margin-bottom: 1rem; }
+        .faq-item:hover { border-color: var(--gold); background: rgba(160, 140, 92, 0.05); }
+
         .whatsapp-fix { position: fixed; bottom: 24px; right: 24px; background: #25D366; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 999; animation: pulse-green 2s infinite; }
-        @keyframes pulse-green { 0% { transform: scale(0.95); } 70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { transform: scale(0.95); } }
         
         #modal-politica { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); align-items: center; justify-content: center; padding: 20px; }
         .modal-content { max-width: 600px; max-height: 80vh; overflow-y: auto; background: #0a0a0a; border: 1px solid var(--gold); border-radius: 2rem; padding: 30px; position: relative; }
@@ -107,6 +108,8 @@
         </div>
     </section>
 
+    <div class="marquee-container"><div class="logos-slide"><span>✦ Atendimento Exclusivo</span><span>✦ 24 Anos de Expertise</span><span>✦ Visagismo Estratégico</span><span>✦ Referência em Curitiba</span><span>✦ Atendimento Exclusivo</span></div></div>
+
     <section id="depoimentos" class="py-16 relative overflow-hidden text-center border-t border-white/5">
         <h2 class="text-4xl md:text-9xl gold-gradient-text font-black italic uppercase mb-12" data-aos="fade-up">Depoimentos</h2>
         <div class="max-w-[1400px] mx-auto px-4" data-aos="zoom-in">
@@ -143,6 +146,49 @@
         </div>
     </section>
 
+    <section class="py-16 bg-white/[0.02] border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div class="space-y-3" data-aos="fade-up">
+                <span class="text-gold font-black text-5xl opacity-50">01</span>
+                <h4 class="text-white font-bold uppercase tracking-widest text-sm">Reserva</h4>
+                <p class="text-zinc-500 text-xs italic">Agendamento via WhatsApp direto com o especialista.</p>
+            </div>
+            <div class="space-y-3" data-aos="fade-up" data-aos-delay="100">
+                <span class="text-gold font-black text-5xl opacity-50">02</span>
+                <h4 class="text-white font-bold uppercase tracking-widest text-sm">Estratégia</h4>
+                <p class="text-zinc-500 text-xs italic">Análise técnica das linhas faciais e objetivos de imagem.</p>
+            </div>
+            <div class="space-y-3" data-aos="fade-up" data-aos-delay="200">
+                <span class="text-gold font-black text-5xl opacity-50">03</span>
+                <h4 class="text-white font-bold uppercase tracking-widest text-sm">Execução</h4>
+                <p class="text-zinc-500 text-xs italic">A transformação física que projeta sua nova autoridade.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl text-center text-white italic font-medium uppercase mb-16">Especialista em<br><span class="gold-gradient-text font-black">Posicionamento de Elite.</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-gold/30 transition text-center">
+                    <i class="fas fa-briefcase text-gold/50 text-2xl mb-6"></i>
+                    <h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Líderes & Executivos</h5>
+                    <p class="text-zinc-500 text-sm italic">Imagem que transmite segurança e poder de decisão.</p>
+                </div>
+                <div class="p-10 rounded-[2rem] border border-gold/20 bg-gold/[0.02] md:scale-105 shadow-2xl text-center">
+                    <i class="fas fa-crown text-gold text-2xl mb-6"></i>
+                    <h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Empresários</h5>
+                    <p class="text-zinc-500 text-sm italic font-bold">Destaque sua marca pessoal no mercado competitivo.</p>
+                </div>
+                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-gold/30 transition text-center">
+                    <i class="fas fa-gem text-gold/50 text-2xl mb-6"></i>
+                    <h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Alta Performance</h5>
+                    <p class="text-zinc-500 text-sm italic">Para quem não aceita nada menos que a perfeição técnica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contato" class="py-24 px-6 relative border-t border-white/5 text-center md:text-left">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8 flex flex-col items-center md:items-start text-center md:text-left">
@@ -151,31 +197,49 @@
                     <div class="flex gap-4 items-center justify-center md:justify-start w-full md:w-auto"><i class="fas fa-map-marker-alt text-gold text-2xl"></i><p class="text-xl">Barbearia Clube - Av. Cândido Hartmann, 1580 - Curitiba</p></div>
                     <div class="flex gap-4 items-center justify-center md:justify-start w-full md:w-auto"><i class="fas fa-phone-alt text-gold text-2xl"></i><p class="text-xl font-bold">(41) 99968-2982</p></div>
                     <div class="flex gap-4 items-center justify-center md:justify-start w-full md:w-auto"><i class="fas fa-envelope text-gold text-2xl"></i><p class="text-xl italic">Wagnerbarbeiro15@gmail.com</p></div>
-                    <a href="https://www.instagram.com/wagneralvess" target="_blank" class="flex gap-4 items-center justify-center md:justify-start hover:text-white transition group"><i class="fab fa-instagram text-gold text-2xl group-hover:scale-110 transition"></i><p class="text-xl font-bold">@wagneralvess</p></a>
                 </div>
             </div>
             <div class="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl h-[350px]">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.220560117075!2d-49.29959632369687!3d-25.43088193301072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce38ab9e40447%3A0x1567913d87428796!2sBarbearia%20Clube%20Champagnat!5e0!3m2!1spt-BR!2sbr!4v1711200000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.204555813735!2d-49.30391492370603!3d-25.43142077755866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce38a4401e6e9%3A0xc068868840a976a1!2sAv.%20C%C3%A2ndido%20Hartmann%2C%201580%20-%20Bigorrilho%2C%20Curitiba%20-%20PR%2C%2080710-570!5e0!3m2!1spt-BR!2sbr!4v1711311000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-4xl md:text-6xl gold-gradient-text font-black italic uppercase mb-12 text-center">Dúvidas Comuns</h2>
+            <div class="space-y-4">
+                <details class="faq-item group p-6">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-lg font-bold text-white uppercase outline-none">O que é Visagismo Estratégico? <span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary>
+                    <p class="mt-4 text-zinc-400 italic">É a técnica de adequar sua imagem (cabelo, barba, acessórios) aos seus objetivos de vida e carreira, analisando o formato do rosto e temperamento.</p>
+                </details>
+                <details class="faq-item group p-6">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-lg font-bold text-white uppercase outline-none">Qual o tempo de duração da consultoria? <span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary>
+                    <p class="mt-4 text-zinc-400 italic">Uma sessão completa de diagnóstico e execução leva em média de 60 a 90 minutos de atenção técnica exclusiva.</p>
+                </details>
+                <details class="faq-item group p-6">
+                    <summary class="flex justify-between items-center cursor-pointer list-none text-lg font-bold text-white uppercase outline-none">Wagner atende pessoalmente? <span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary>
+                    <p class="mt-4 text-zinc-400 italic">Sim. Todo o atendimento estratégico e execução técnica é realizado pessoalmente por Wagner Alves.</p>
+                </details>
             </div>
         </div>
     </section>
 
     <footer class="py-20 border-t border-white/5 text-center px-6">
         <p class="text-3xl font-black gold-gradient-text uppercase tracking-[0.4em] mb-10 italic">Wagner Alves</p>
-        <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-[10px] font-black tracking-[0.3em] mb-6 block mx-auto underline text-center">Política de Privacidade</button>
-        <p class="text-zinc-800 text-[10px] uppercase tracking-widest font-bold italic text-center">© 2026 - Estrategista de Imagem Masculina - Curitiba</p>
+        <button onclick="abrirPolitica()" class="text-zinc-600 hover:text-gold transition uppercase text-[10px] font-black tracking-[0.3em] mb-6 block mx-auto underline">Política de Privacidade</button>
+        <p class="text-zinc-800 text-[10px] uppercase tracking-widest font-bold italic">© 2026 - Estrategista de Imagem Masculina - Curitiba</p>
     </footer>
 
     <div id="modal-politica" onclick="fecharPolitica()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <h2 class="text-3xl text-gold font-black mb-8 italic uppercase text-center">Política de Privacidade</h2>
+            <h2 class="text-3xl text-gold font-black mb-8 italic uppercase text-center">Privacidade</h2>
             <div class="space-y-6 text-zinc-400 text-sm leading-relaxed text-justify">
-                <p><strong>1. Coleta de Informações:</strong> Coletamos dados básicos de contato fornecidos por você via WhatsApp e dados de navegação por meio de cookies e do Meta Pixel para melhorar sua experiência.</p>
-                <p><strong>2. Uso dos Dados:</strong> Suas informações são utilizadas exclusivamente para o agendamento de consultorias e comunicações diretas.</p>
-                <p><strong>3. Seus Direitos (LGPD):</strong> Você tem o direito de solicitar a exclusão de seus dados a qualquer momento via WhatsApp.</p>
-                <p>Ao navegar neste site, você concorda com estes termos.</p>
+                <p><strong>1. Coleta:</strong> Dados fornecidos via WhatsApp e cookies para melhorar a experiência.</p>
+                <p><strong>2. Uso:</strong> Exclusivamente para agendamento e comunicações diretas.</p>
+                <p>Ao navegar, você concorda com estes termos.</p>
             </div>
-            <button onclick="fecharPolitica()" class="mt-8 w-full bg-gold text-white font-black py-4 rounded-xl hover:bg-gold-light transition uppercase text-xs">Entendido e Fechar</button>
+            <button onclick="fecharPolitica()" class="mt-8 w-full bg-gold text-white font-black py-4 rounded-xl hover:bg-gold-light transition uppercase">Entendido e Fechar</button>
         </div>
     </div>
 
@@ -186,9 +250,9 @@
     <script>
         AOS.init({ once: true, duration: 1000 });
         var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1.2, spaceBetween: 20, loop: true, centeredSlides: true, slideToClickedSlide: false, touchMoveStopPropagation: true, speed: 800,
+            slidesPerView: 1.2, spaceBetween: 20, loop: true, centeredSlides: true,
             navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-            breakpoints: { 768: { slidesPerView: 3, spaceBetween: 30, centeredSlides: false }, 1024: { slidesPerView: 5, spaceBetween: 30, centeredSlides: false } }
+            breakpoints: { 768: { slidesPerView: 3, spaceBetween: 30 }, 1024: { slidesPerView: 5, spaceBetween: 30 } }
         });
         function toggleVideo(container) {
             const video = container.querySelector('video');
