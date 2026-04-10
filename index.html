@@ -480,6 +480,119 @@
         .counter { display: inline-block; }
 
         img { max-width: 100%; height: auto; }
+
+        /* ══════════════════════════════════════════════
+           MOBILE — REVISÃO COMPLETA
+           Tudo calibrado para telas até 768px
+        ══════════════════════════════════════════════ */
+        @media (max-width: 767px) {
+
+            /* ── Barra de urgência ── */
+            #urgency-bar p {
+                font-size: 0.55rem;
+                gap: 6px;
+                flex-direction: column;
+                line-height: 1.6;
+            }
+            #urgency-bar { padding: 8px 12px; }
+
+            /* ── Header ── */
+            header { top: 52px !important; padding: 12px 16px; }
+
+            /* ── Hero ── */
+            #inicio { padding-top: 140px; padding-bottom: 60px; }
+            #inicio .max-w-7xl { gap: 32px; }
+            .hero-img-wrap img { max-width: 260px; border-radius: 2rem; }
+            .hero-img-wrap::before { border-radius: 2.2rem; }
+            .hero-badge { left: 50%; transform: translateX(-50%); bottom: -18px; white-space: nowrap; font-size: 0.7rem; padding: 10px 16px; }
+            h1.text-5xl { font-size: 2.6rem !important; line-height: 1.15; }
+            .valor-badge { width: 100%; justify-content: center; }
+            .btn-hero { width: 100%; justify-content: center; font-size: 0.9rem; padding: 1rem 1.5rem; letter-spacing: 0.1em; }
+
+            /* ── Marquee ── */
+            .logos-slide span { margin: 0 1.5rem; font-size: 0.6rem; }
+
+            /* ── Stats ── */
+            .stats-section .grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+            .stat-card { padding: 1.5rem 1rem; }
+            .stat-number { font-size: 2.2rem; }
+
+            /* ── Antes & Depois ── */
+            .ba-section-card { height: 300px; border-radius: 1.5rem; }
+            .ba-labels { height: 30px; }
+            .ba-label-antes, .ba-label-depois { font-size: 0.5rem; letter-spacing: 0.2em; }
+            .ba-section-card img { top: 30px; height: calc(100% - 30px); }
+            .ba-divider { top: 30px; }
+
+            /* ── Vídeos depoimentos ── */
+            .video-container { border-radius: 1.5rem; }
+            .play-overlay i { font-size: 3rem; }
+
+            /* ── Depoimentos escritos ── */
+            .testimonial-card { padding: 1.5rem; border-radius: 1.5rem; }
+            .testimonial-card.md\:scale-105 { transform: none !important; }
+
+            /* ── Sobre / Vídeo consultor ── */
+            #sobre-video-wrap { border-radius: 1.5rem !important; }
+            #sobre .max-w-7xl { gap: 48px; }
+
+            /* ── Processo ── */
+            .processo-grid { gap: 2rem; }
+
+            /* ── Público-alvo ── */
+            .publico-card { padding: 2rem 1.5rem; border-radius: 1.5rem; }
+            .publico-card.md\:scale-105 { transform: none !important; }
+
+            /* ── Garantia ── */
+            .garantia-grid { grid-template-columns: 1fr !important; }
+
+            /* ── Contato ── */
+            #contato .grid { gap: 2rem; }
+            #contato h2 { font-size: 2.8rem !important; }
+            .map-wrap iframe { height: 220px !important; }
+
+            /* ── FAQ ── */
+            .faq-item summary { font-size: 0.85rem; }
+            #duvidas h2 { font-size: 2.5rem !important; }
+
+            /* ── Botões mobile — sempre largura total ── */
+            .btn-ghost-gold,
+            .btn-navy,
+            .btn-gold-outline-pill,
+            .btn-glass-full {
+                width: 100%;
+                justify-content: center;
+                font-size: 0.85rem;
+                letter-spacing: 0.1em;
+                padding: 1rem 1.2rem;
+            }
+
+            /* ── WhatsApp fixo — sobe acima do indicador de gestos iOS ── */
+            .whatsapp-fix { bottom: 28px; right: 16px; width: 56px; height: 56px; }
+
+            /* ── Exit popup ── */
+            #exit-popup > div {
+                padding: 2rem 1.5rem;
+                border-radius: 1.5rem;
+            }
+            #exit-popup h3 { font-size: 1.5rem !important; }
+
+            /* ── Loading screen ── */
+            .loader-name { font-size: 2.2rem; letter-spacing: 0.15em; }
+
+            /* ── Footer ── */
+            footer { padding: 3rem 1.5rem; }
+        }
+
+        /* Telas muito pequenas (iPhone SE, etc.) */
+        @media (max-width: 380px) {
+            h1.text-5xl { font-size: 2.1rem !important; }
+            .btn-hero { font-size: 0.8rem; }
+            .ba-section-card { height: 240px; }
+            #urgency-bar { display: none; } /* esconde em telas minúsculas */
+            header { top: 0 !important; }
+            #inicio { padding-top: 100px; }
+        }
         /* ─── LOADING SCREEN ─── */
         #loader {
             position: fixed; inset: 0; z-index: 99999;
@@ -586,10 +699,10 @@
 
     <!-- ══ BARRA DE URGÊNCIA ══ -->
     <div id="urgency-bar" style="background:linear-gradient(90deg,rgba(160,140,92,0.12),rgba(26,35,58,0.8),rgba(160,140,92,0.12));border-bottom:1px solid rgba(160,140,92,0.2);padding:10px 16px;text-align:center;position:fixed;top:0;left:0;right:0;z-index:51;backdrop-filter:blur(10px);">
-        <p style="font-size:0.65rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+        <p style="font-size:0.65rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0;">
             <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
-            Wagner está aceitando agendamentos para Maio
-            <span style="color:rgba(160,140,92,0.5)">·</span>
+            <span>Wagner está aceitando agendamentos para Maio</span>
+            <span style="color:rgba(160,140,92,0.5)" class="hidden sm:inline">·</span>
             <span id="vagas-bar">2 vagas restantes</span>
             <span style="color:rgba(160,140,92,0.5)">·</span>
             <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" style="color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;">Garantir minha vaga →</a>
@@ -698,7 +811,7 @@
     <!-- ══════════════════════════════════════════ -->
     <section class="stats-section py-20 px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-0 md:gap-8 text-center">
                 <div class="stat-card py-8 px-4" data-aos="fade-up">
                     <p class="stat-number gold-gradient-text" data-target="24">0</p>
                     <p class="text-[10px] font-black uppercase tracking-widest text-zinc-500 mt-3">Anos de expertise</p>
@@ -997,7 +1110,7 @@
             <p class="text-zinc-400 text-lg italic leading-relaxed max-w-2xl mx-auto mb-10">
                 Cada consultoria é uma imersão de <strong class="text-white">120 a 150 minutos</strong> com atenção técnica total. Analiso suas linhas faciais, temperamento, estilo de vida e objetivos profissionais. O resultado não é só um corte — é uma <strong class="text-white">identidade visual estratégica</strong> construída para você.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 garantia-grid">
                 <div class="p-6 rounded-2xl border text-left" style="border-color:rgba(160,140,92,0.15);background:rgba(160,140,92,0.03)">
                     <i class="fas fa-user-check mb-4 text-xl" style="color:var(--gold)"></i>
                     <h5 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Atendimento 100% Pessoal</h5>
