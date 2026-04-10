@@ -13,7 +13,7 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1456777349517939'); fbq('track', 'PageView');
 
-    // Função para disparar o evento de conversão no clique
+    // Função Master para Conversão de Contato
     function dispararPixel() {
         fbq('track', 'Contact');
         console.log('Facebook Pixel: Evento Contact disparado!');
@@ -82,10 +82,10 @@
 
     <div id="mobile-menu" class="fixed inset-y-0 right-0 w-80 z-[60] p-12 flex flex-col gap-8 shadow-2xl bg-black/98 backdrop-blur-2xl border-l border-zinc-800 transition-all duration-500 transform translate-x-full text-center">
         <button onclick="toggleMenu()" class="text-gold text-right text-3xl mb-4"><i class="fas fa-times"></i></button>
-        <a href="#inicio" onclick="toggleMenu()" class="text-2xl font-bold uppercase gold-gradient-text italic">Início</a>
-        <a href="#depoimentos" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Depoimentos</a>
-        <a href="#sobre" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Consultor</a>
-        <a href="#contato" onclick="toggleMenu()" class="text-2xl font-bold text-white italic">Localização</a>
+        <a href="#inicio" onclick="toggleMenu()" class="text-2xl font-bold uppercase gold-gradient-text italic text-center">Início</a>
+        <a href="#depoimentos" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Depoimentos</a>
+        <a href="#sobre" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Consultor</a>
+        <a href="#contato" onclick="toggleMenu()" class="text-2xl font-bold text-white italic text-center">Localização</a>
     </div>
 
     <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-6 text-center md:text-left">
@@ -129,21 +129,21 @@
 
     <section class="py-12 bg-white/[0.02]">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
                 <div class="p-8 rounded-[2rem] border border-white/5 bg-black/40 backdrop-blur-xl" data-aos="fade-up">
                     <div class="flex mb-4" style="color:#FFD700"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-zinc-300 italic mb-8 leading-relaxed">"O Wagner é um profissional diferenciado. O visagismo mudou totalmente minha percepção de autoridade no trabalho."</p>
-                    <div class="flex items-center gap-4"><img src="https://i.pravatar.cc/100?img=11" class="w-12 h-12 rounded-full border border-gold/30"><div><span class="text-white font-bold text-sm block italic">Rodrigo A.</span><span class="text-zinc-500 text-[10px] font-bold">Empresário</span></div></div>
+                    <div class="flex items-center gap-4"><img src="https://i.pravatar.cc/100?img=11" class="w-12 h-12 rounded-full border border-gold/30"><div><span class="text-white font-bold text-sm block italic">Rodrigo A.</span><span class="text-zinc-500 text-[10px] font-bold uppercase">Empresário</span></div></div>
                 </div>
                 <div class="p-8 rounded-[2rem] border border-gold/20 bg-gold/[0.03] backdrop-blur-xl md:scale-105" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex mb-4" style="color:#FFD700"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-zinc-100 italic mb-8 leading-relaxed font-medium">"Melhor visagista de Curitiba sem dúvidas. Minha imagem hoje condiz exatamente com o sucesso que busco."</p>
-                    <div class="flex items-center gap-4"><img src="https://i.pravatar.cc/100?img=12" class="w-14 h-14 rounded-full border-2 border-gold/50"><div><span class="text-white font-black text-sm block italic">Gustavo A.</span><span class="text-gold text-[10px] font-bold">Liderança Executiva</span></div></div>
+                    <div class="flex items-center gap-4"><img src="https://i.pravatar.cc/100?img=12" class="w-14 h-14 rounded-full border-2 border-gold/50"><div><span class="text-white font-black block italic text-sm">Gustavo A.</span><span class="text-gold text-[10px] font-bold uppercase">Liderança Executiva</span></div></div>
                 </div>
                 <div class="p-8 rounded-[2rem] border border-white/5 bg-black/40 backdrop-blur-xl" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex mb-4" style="color:#FFD700"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-zinc-300 italic mb-8 leading-relaxed">"Sempre tive dúvida sobre o melhor corte. A consultoria técnica tirou todas as dúvidas. Sensacional!"</p>
-                    <div class="flex items-center gap-4"><img src="https://i.pravatar.cc/100?img=13" class="w-12 h-12 rounded-full border border-gold/30"><div><span class="text-white font-bold text-sm block italic">Maurício P.</span><span class="text-zinc-500 text-[10px] font-bold">Advogado</span></div></div>
+                    <div class="flex items-center gap-4"><img src="https://i.pravatar.cc/100?img=13" class="w-12 h-12 rounded-full border border-gold/30"><div><span class="text-white font-bold block italic text-sm">Maurício P.</span><span class="text-zinc-500 text-[10px] font-bold uppercase">Advogado</span></div></div>
                 </div>
             </div>
         </div>
@@ -162,18 +162,18 @@
                 <div class="w-16 h-1 bg-gold"></div>
                 <div class="text-zinc-300 text-lg md:text-2xl leading-relaxed italic text-left md:text-justify max-w-xl mx-auto md:mx-0">
                     <p class="border-l-4 border-gold pl-6 py-2 mb-6">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
-                    <p class="not-italic opacity-80 leading-relaxed">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança através do <span class="gold-gradient-text font-bold uppercase italic text-center md:text-left">Visagismo Masculino</span> estratégico.</p>
+                    <p class="not-italic opacity-80 leading-relaxed">Há mais de duas décadas, Wagner Alves projeta autoridade através do <span class="gold-gradient-text font-bold uppercase italic text-center md:text-left">Visagismo Masculino</span> estratégico.</p>
                 </div>
-                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20verificar%20sua%20disponibilidade." onclick="dispararPixel()" class="btn-premium wa-pulse px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest flex items-center gap-3"><i class="fab fa-whatsapp"></i> Verificar Disponibilidade</a>
+                <a href="https://wa.me/5541999682982?text=Olá%20Wagner" onclick="dispararPixel()" class="btn-premium wa-pulse px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest flex items-center gap-3"><i class="fab fa-whatsapp"></i> Verificar Disponibilidade</a>
             </div>
         </div>
     </section>
 
     <section class="py-16 bg-white/[0.02] border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div class="space-y-3" data-aos="fade-up"><span class="text-gold font-black text-5xl opacity-50">01</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Reserva</h4><p class="text-zinc-500 text-xs italic">Agendamento via WhatsApp direto.</p></div>
-            <div class="space-y-3" data-aos="fade-up" data-aos-delay="100"><span class="text-gold font-black text-5xl opacity-50">02</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Estratégia</h4><p class="text-zinc-500 text-xs italic">Análise técnica facial profunda.</p></div>
-            <div class="space-y-3" data-aos="fade-up" data-aos-delay="200"><span class="text-gold font-black text-5xl opacity-50">03</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Sucesso</h4><p class="text-zinc-500 text-xs italic">Sua imagem projetando autoridade.</p></div>
+            <div class="space-y-3" data-aos="fade-up"><span class="text-gold font-black text-5xl opacity-50">01</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Reserva</h4><p class="text-zinc-500 text-xs italic">WhatsApp direto.</p></div>
+            <div class="space-y-3" data-aos="fade-up" data-aos-delay="100"><span class="text-gold font-black text-5xl opacity-50">02</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Estratégia</h4><p class="text-zinc-500 text-xs italic">Análise técnica.</p></div>
+            <div class="space-y-3" data-aos="fade-up" data-aos-delay="200"><span class="text-gold font-black text-5xl opacity-50">03</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Sucesso</h4><p class="text-zinc-500 text-xs italic">Autoridade absoluta.</p></div>
         </div>
     </section>
 
@@ -181,9 +181,9 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl md:text-6xl text-white italic font-medium uppercase mb-16">Para quem busca<br><span class="gold-gradient-text font-black">o próximo nível.</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-gold/30 transition"><i class="fas fa-briefcase text-gold/50 text-2xl mb-6"></i><h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Líderes</h5><p class="text-zinc-500 text-sm italic">Imagem que precede sua fala.</p></div>
-                <div class="p-10 rounded-[2rem] border border-gold/20 bg-gold/[0.02] md:scale-105 shadow-2xl"><i class="fas fa-crown text-gold text-2xl mb-6"></i><h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Empresários</h5><p class="text-zinc-500 text-sm italic font-bold">Presença Física e Digital.</p></div>
-                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-gold/30 transition"><i class="fas fa-gem text-gold/50 text-2xl mb-6"></i><h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Alta Performance</h5><p class="text-zinc-500 text-sm italic">Precisão Estratégica.</p></div>
+                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-gold/30 transition text-center"><i class="fas fa-briefcase text-gold/50 text-2xl mb-6"></i><h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Líderes</h5><p class="text-zinc-500 text-sm italic">Imagem que precede sua fala.</p></div>
+                <div class="p-10 rounded-[2rem] border border-gold/20 bg-gold/[0.02] md:scale-105 shadow-2xl text-center"><i class="fas fa-crown text-gold text-2xl mb-6"></i><h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4">Empresários</h5><p class="text-zinc-500 text-sm italic font-bold">Presença Física e Digital.</p></div>
+                <div class="p-10 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:border-gold/30 transition text-center"><i class="fas fa-gem text-gold/50 text-2xl mb-6"></i><h5 class="text-white font-bold uppercase tracking-widest text-sm mb-4 text-center">Alta Performance</h5><p class="text-zinc-500 text-sm italic">Precisão Técnica.</p></div>
             </div>
         </div>
     </section>
@@ -192,7 +192,7 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8 flex flex-col items-center md:items-start text-center md:text-left">
                 <h2 class="text-5xl md:text-7xl italic font-bold uppercase gold-gradient-text">Localização</h2>
-                <div class="space-y-6 text-zinc-400 w-full text-center md:text-left">
+                <div class="space-y-6 text-zinc-400 w-full">
                     <div class="flex gap-4 items-center justify-center md:justify-start w-full md:w-auto"><i class="fas fa-map-marker-alt text-gold text-2xl"></i><p class="text-xl">Barbearia Clube - Av. Cândido Hartmann, 1580 - Curitiba</p></div>
                     <div class="flex gap-4 items-center justify-center md:justify-start w-full md:w-auto"><i class="fas fa-phone-alt text-gold text-2xl"></i><p class="text-xl font-bold">(41) 99968-2982</p></div>
                     <div class="flex gap-4 items-center justify-center md:justify-start w-full md:w-auto"><i class="fas fa-envelope text-gold text-2xl"></i><p class="text-xl italic">Wagnerbarbeiro15@gmail.com</p></div>
@@ -200,7 +200,7 @@
                 </div>
             </div>
             <div class="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl h-[350px]">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.2255755106263!2d-49.284852!3d-25.430752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI1JzUwLjciUyA0OcKwMTcnMDUuNSJX!5e0!3m2!1spt-BR!2sbr!4v16500000000009" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/search/?api=1&query=Rua+Jacarezinho,+21+-+Mercês,+Curitiba+-+PR4" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -209,7 +209,7 @@
         <div class="max-w-4xl mx-auto px-6 text-center" data-aos="zoom-in">
             <h2 class="text-4xl md:text-6xl text-white font-bold uppercase italic mb-10 text-center w-full">Sua imagem é seu<br><span class="gold-gradient-text font-black text-center">maior ativo.</span></h2>
             <p class="text-zinc-400 text-lg md:text-2xl mb-12 italic font-light text-center leading-relaxed">Não deixe seu posicionamento ao acaso. Comunique o sucesso que você já alcançou.</p>
-            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20reservar%20meu%20diagnóstico%20de%20imagem." onclick="dispararPixel()" class="btn-premium wa-pulse px-12 py-6 rounded-2xl font-black text-xl uppercase tracking-widest inline-flex items-center gap-4 mx-auto"><i class="fab fa-whatsapp text-3xl"></i> Reservar Diagnóstico de Imagem</a>
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner" onclick="dispararPixel()" class="btn-premium wa-pulse px-12 py-6 rounded-2xl font-black text-xl uppercase tracking-widest inline-flex items-center gap-4 mx-auto"><i class="fab fa-whatsapp text-3xl"></i> Reservar Diagnóstico de Imagem</a>
             <p class="mt-8 text-gold/60 text-[11px] uppercase tracking-[0.4em] font-black text-center w-full">Últimas 3 vagas disponíveis para este mês</p>
         </div>
     </section>
@@ -217,9 +217,12 @@
     <section id="duvidas" class="py-24 bg-[#050505] border-t border-white/5 text-center px-6">
         <h2 class="text-5xl md:text-8xl italic text-center font-bold uppercase inline-block text-center gold-gradient-text mb-16" data-aos="fade-up">Dúvidas Comuns</h2>
         <div class="max-w-4xl mx-auto text-left">
-            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">O que diferencia o Visagismo de um corte comum?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Diferente de uma barbearia comum, o Visagismo Estratégico analisa suas linhas faciais, temperamento e objetivos profissionais para transmitir autoridade e confiança personalizada.</div></details>
+            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">O que diferencia o Visagismo de um corte comum?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">O Visagismo Estratégico analisa suas linhas faciais, temperamento e objetivos profissionais para transmitir autoridade e confiança de forma personalizada.</div></details>
             <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Quanto tempo dura a sessão?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Uma consultoria completa de alto padrão dura de 60 a 90 minutos de atenção técnica exclusiva e estratégica.</div></details>
+            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Eu uso óculos. O Visagismo também me ajuda com isso?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Com certeza. Analisamos se a sua armação atual reforça ou enfraquece sua imagem de liderança.</div></details>
+            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Preciso fazer essa consultoria toda vez?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Não. Uma vez estabelecida sua assinatura estratégica, as manutenções servem para manter o padrão de excelência.</div></details>
             <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Wagner Alves atende pessoalmente?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Sim. O atendimento é exclusivo e realizado pessoalmente por Wagner Alves, com 24 anos de expertise técnica.</div></details>
+            <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-left">Quais são as formas de pagamento disponíveis?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Aceitamos PIX, cartões de débito e crédito (com parcelamento disponível).</div></details>
         </div>
     </section>
 
@@ -231,10 +234,10 @@
 
     <div id="modal-politica" onclick="fecharPolitica()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <h2 class="text-3xl text-gold font-black mb-8 italic uppercase text-center">Privacidade</h2>
+            <h2 class="text-3xl text-gold font-black mb-8 italic uppercase text-center">Política de Privacidade</h2>
             <div class="space-y-6 text-zinc-400 text-sm leading-relaxed text-justify">
-                <p><strong>1. Coleta:</strong> Dados básicos fornecidos via WhatsApp e cookies para melhorar a experiência.</p>
-                <p><strong>2. Uso:</strong> Exclusivamente para agendamento e comunicações diretas.</p>
+                <p><strong>1. Coleta de Informações:</strong> Coletamos dados básicos de contato fornecidos por você via WhatsApp e dados de navegação por meio de cookies e do Meta Pixel para melhorar sua experiência.</p>
+                <p><strong>2. Uso dos Dados:</strong> Suas informações são utilizadas exclusivamente para o agendamento de consultorias e comunicações diretas.</p>
                 <p><strong>3. Seus Direitos (LGPD):</strong> Você tem o direito de solicitar a exclusão de seus dados a qualquer momento via WhatsApp.</p>
             </div>
             <button onclick="fecharPolitica()" class="mt-8 w-full bg-gold text-white font-black py-4 rounded-xl hover:bg-gold-light transition uppercase text-xs text-center block">Entendido e Fechar</button>
