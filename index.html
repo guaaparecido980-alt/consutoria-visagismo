@@ -338,9 +338,9 @@
             border-radius: 2.5rem;
             overflow: hidden;
             border: 1px solid rgba(160,140,92,0.15);
-            background: linear-gradient(135deg, #0a0a14 0%, #0d1020 50%, #0a0a14 100%);
+            background: #0d1020;
             transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s, border-color 0.4s;
-            height: 520px; /* altura fixa igual nos dois cards */
+            height: 520px;
         }
         .ba-section-card:hover {
             transform: translateY(-8px);
@@ -348,19 +348,18 @@
             border-color: rgba(160,140,92,0.35);
         }
 
-        /* Imagem preenche o card inteiro a partir de baixo das labels */
+        /* Imagem preenche o card 100% — cover garante sem espaço vazio */
         .ba-section-card img {
             position: absolute;
-            top: 36px; /* abaixo das labels */
-            left: 0; right: 0; bottom: 0;
+            top: 36px; left: 0; right: 0; bottom: 0;
             width: 100%;
             height: calc(100% - 36px);
-            object-fit: contain; /* mantém rostos inteiros sem cortar */
-            object-position: center bottom;
+            object-fit: cover;
+            object-position: center top; /* mostra os rostos, não os pescoços */
             display: block;
             transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
         }
-        .ba-section-card:hover img { transform: scale(1.02); }
+        .ba-section-card:hover img { transform: scale(1.03); }
 
         /* Linha divisória dourada vertical entre antes e depois */
         .ba-divider {
@@ -547,7 +546,7 @@
             .stat-number { font-size: 2.2rem; }
 
             /* ── Antes & Depois ── */
-            .ba-section-card { height: 300px; border-radius: 1.5rem; }
+            .ba-section-card { height: 360px; border-radius: 1.5rem; }
             .ba-labels { height: 30px; }
             .ba-label-antes, .ba-label-depois { font-size: 0.5rem; letter-spacing: 0.2em; }
             .ba-section-card img { top: 30px; height: calc(100% - 30px); }
