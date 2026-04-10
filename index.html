@@ -461,6 +461,36 @@
         /* ─── ÂNCORA DE VALOR ─── */
         .valor-badge { background: linear-gradient(135deg, rgba(160,140,92,0.12), rgba(160,140,92,0.04)); border: 1px solid rgba(160,140,92,0.3); border-radius: 1rem; padding: 1rem 1.5rem; display: inline-flex; align-items: center; gap: 0.75rem; }
 
+        /* ─── BOTÃO SALVAR CONTATO ─── */
+        .btn-save-contact {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%;
+            background: transparent;
+            color: rgba(160,140,92,0.7);
+            border: 1px dashed rgba(160,140,92,0.3);
+            padding: 0.85rem 1.5rem;
+            border-radius: 1rem;
+            font-weight: 700; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+            position: relative; overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-save-contact:hover {
+            background: rgba(160,140,92,0.07);
+            border-color: rgba(160,140,92,0.6);
+            border-style: solid;
+            color: var(--gold-light);
+            transform: translateY(-2px);
+        }
+        .btn-save-contact.saved {
+            border-style: solid;
+            border-color: rgba(34,197,94,0.5);
+            color: #22c55e;
+            background: rgba(34,197,94,0.05);
+        }
+
         /* ─── MAPA ─── */
         .map-wrap { border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(160,140,92,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
@@ -487,24 +517,21 @@
         ══════════════════════════════════════════════ */
         @media (max-width: 767px) {
 
-            /* ── Barra de urgência ── */
-            #urgency-bar p {
-                font-size: 0.55rem;
-                gap: 6px;
-                flex-direction: column;
-                line-height: 1.6;
-            }
-            #urgency-bar { padding: 8px 12px; }
-
-            /* ── Header ── */
-            header { top: 52px !important; padding: 12px 16px; }
+            /* ── Barra de urgência mobile — já tem versão compacta no HTML ── */
+            #urgency-bar { padding: 0; }
+            header { top: 30px !important; }
 
             /* ── Hero ── */
-            #inicio { padding-top: 140px; padding-bottom: 60px; }
-            #inicio .max-w-7xl { gap: 32px; }
-            .hero-img-wrap img { max-width: 260px; border-radius: 2rem; }
-            .hero-img-wrap::before { border-radius: 2.2rem; }
-            .hero-badge { left: 50%; transform: translateX(-50%); bottom: -18px; white-space: nowrap; font-size: 0.7rem; padding: 10px 16px; }
+            #inicio { padding-top: 120px; padding-bottom: 60px; }
+            #inicio .max-w-7xl { gap: 28px; }
+            .hero-badge {
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                bottom: -18px !important;
+                white-space: nowrap;
+                font-size: 0.7rem;
+                padding: 10px 16px;
+            }
             h1.text-5xl { font-size: 2.6rem !important; line-height: 1.15; }
             .valor-badge { width: 100%; justify-content: center; }
             .btn-hero { width: 100%; justify-content: center; font-size: 0.9rem; padding: 1rem 1.5rem; letter-spacing: 0.1em; }
@@ -698,14 +725,26 @@
     </div>
 
     <!-- ══ BARRA DE URGÊNCIA ══ -->
-    <div id="urgency-bar" style="background:linear-gradient(90deg,rgba(160,140,92,0.12),rgba(26,35,58,0.8),rgba(160,140,92,0.12));border-bottom:1px solid rgba(160,140,92,0.2);padding:10px 16px;text-align:center;position:fixed;top:0;left:0;right:0;z-index:51;backdrop-filter:blur(10px);">
-        <p style="font-size:0.65rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:0;">
+    <div id="urgency-bar" style="background:linear-gradient(90deg,rgba(160,140,92,0.12),rgba(26,35,58,0.8),rgba(160,140,92,0.12));border-bottom:1px solid rgba(160,140,92,0.2);text-align:center;position:fixed;top:0;left:0;right:0;z-index:51;backdrop-filter:blur(10px);">
+
+        <!-- Versão DESKTOP: tudo em uma linha -->
+        <p class="hidden md:flex" style="font-size:0.65rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);align-items:center;justify-content:center;gap:10px;margin:0;padding:10px 16px;">
             <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
             <span>Wagner está aceitando agendamentos para Maio</span>
-            <span style="color:rgba(160,140,92,0.5)" class="hidden sm:inline">·</span>
+            <span style="color:rgba(160,140,92,0.4)">·</span>
             <span id="vagas-bar">2 vagas restantes</span>
-            <span style="color:rgba(160,140,92,0.5)">·</span>
+            <span style="color:rgba(160,140,92,0.4)">·</span>
             <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" style="color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;">Garantir minha vaga →</a>
+        </p>
+
+        <!-- Versão MOBILE: compacta, 1 linha -->
+        <p class="flex md:hidden" style="font-size:0.58rem;font-weight:900;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light);align-items:center;justify-content:center;gap:6px;margin:0;padding:8px 12px;white-space:nowrap;overflow:hidden;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
+            <span id="vagas-bar-mobile">2 vagas</span>
+            <span style="color:rgba(160,140,92,0.4)">·</span>
+            <span>Maio</span>
+            <span style="color:rgba(160,140,92,0.4)">·</span>
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" style="color:var(--gold-light);text-decoration:underline;text-underline-offset:2px;">Garantir vaga →</a>
         </p>
     </div>
 
@@ -746,9 +785,9 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
 
             <!-- FOTO -->
-            <div class="flex justify-center order-1 md:order-2 hero-text-reveal delay-1">
-                <div class="hero-img-wrap w-full max-w-[320px] md:max-w-md relative">
-                    <img src="./foto-wagner.jpg" alt="Wagner Alves – Visagista Masculino de Alto Padrão em Curitiba" width="400" height="500" loading="eager">
+            <div class="flex justify-center items-center order-1 md:order-2 hero-text-reveal delay-1 w-full">
+                <div class="hero-img-wrap mx-auto relative" style="width:min(280px, 80vw)">
+                    <img src="./foto-wagner.jpg" alt="Wagner Alves – Visagista Masculino de Alto Padrão em Curitiba" width="400" height="500" loading="eager" style="width:100%;border-radius:2.5rem;">
                     <div class="hero-badge">
                         <div class="vaga-dot"></div>
                         <div>
@@ -1091,6 +1130,13 @@
                 <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" class="btn-glass-full">
                     <i class="fab fa-whatsapp text-xl"></i> Agendar Agora
                 </a>
+
+                <!-- SALVAR CONTATO -->
+                <button onclick="salvarContato()" class="btn-save-contact w-full mt-3">
+                    <i class="fas fa-address-card text-base"></i>
+                    <span>Salvar Contato no Celular</span>
+                    <i class="fas fa-download text-xs opacity-60"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -1213,6 +1259,45 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        // ─── SALVAR CONTATO (vCard) ───
+        function salvarContato() {
+            const btn = document.querySelector('.btn-save-contact');
+
+            const vcard = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'FN:Wagner Alves',
+                'N:Alves;Wagner;;;',
+                'ORG:Wagner Alves – Estrategista de Imagem Masculina',
+                'TITLE:Visagista Masculino de Alto Padrão',
+                'TEL;TYPE=CELL,PREF:+5541999682982',
+                'EMAIL:Wagnerbarbeiro15@gmail.com',
+                'URL:https://wagneralves.com.br',
+                'ADR;TYPE=WORK:;;Av. Cândido Hartmann\\, 1580;Curitiba;PR;;Brasil',
+                'NOTE:Barbearia Clube – Visagismo Estratégico Masculino – Curitiba/PR',
+                'X-SOCIALPROFILE;type=instagram:https://instagram.com/wagneralvess',
+                'END:VCARD'
+            ].join('\r\n');
+
+            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Wagner-Alves-Visagista.vcf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Feedback visual
+            btn.classList.add('saved');
+            btn.innerHTML = '<i class="fas fa-check text-base"></i><span>Contato Salvo!</span>';
+            setTimeout(() => {
+                btn.classList.remove('saved');
+                btn.innerHTML = '<i class="fas fa-address-card text-base"></i><span>Salvar Contato no Celular</span><i class="fas fa-download text-xs opacity-60"></i>';
+            }, 3000);
+        }
+
         // ─── LOADING SCREEN ───
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -1259,9 +1344,11 @@
         const sufixo = vagas === 1 ? ' vaga restante este mês' : ' vagas restantes este mês';
         const el = document.getElementById('vagas-texto');
         const elBar = document.getElementById('vagas-bar');
+        const elBarMobile = document.getElementById('vagas-bar-mobile');
         const elPopup = document.getElementById('vagas-popup');
         if (el) el.textContent = vagas + sufixo;
         if (elBar) elBar.textContent = vagas + (vagas === 1 ? ' vaga restante' : ' vagas restantes');
+        if (elBarMobile) elBarMobile.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
         if (elPopup) elPopup.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
 
         // ─── CONTADORES ANIMADOS ───
