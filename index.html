@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wagner Alves | Consultor de Imagem Masculina de Alto Padrão</title>
+    <title>Wagner Alves | Estrategista de Imagem Masculina em Curitiba</title>
     
     <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -37,7 +37,7 @@
         .btn-premium { background: rgba(26, 35, 58, 0.8); backdrop-filter: blur(10px); color: var(--gold-light); border: 1px solid rgba(160, 140, 92, 0.4); transition: 0.4s; }
         .btn-premium:hover { transform: translateY(-3px); border-color: var(--gold-light); }
         
-        .marquee-container { display: flex; overflow: hidden; width: 100%; padding: 2.5rem 0; border-y: 1px solid rgba(255,255,255,0.1); background: transparent; }
+        .marquee-container { display: flex; overflow: hidden; width: 100%; padding: 2.5rem 0; border-y: 1px solid rgba(255,255,255,0.1); }
         .logos-slide { display: flex; white-space: nowrap; animation: slide 40s infinite linear; }
         .logos-slide span { color: #ffffff !important; opacity: 0.8; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3em; margin: 0 3rem; }
         @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -52,7 +52,21 @@
         .nav-container { display: flex; justify-content: center; gap: 30px; margin-top: -20px; z-index: 20; position: relative; }
         .swiper-button-prev, .swiper-button-next { position: static !important; color: var(--gold) !important; background: rgba(160, 140, 92, 0.05); width: 50px !important; height: 50px !important; border-radius: 50%; border: 1px solid var(--gold); }
         
-        .faq-item { border: 1px solid rgba(160, 140, 92, 0.1); background: rgba(255,255,255,0.02); border-radius: 1.5rem; transition: 0.3s; margin-bottom: 1rem; }
+        /* FAQ Interativo Professional */
+        .faq-item { 
+            border: 1px solid rgba(160, 140, 92, 0.1); 
+            background: rgba(255,255,255,0.02); 
+            border-radius: 1.5rem; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            margin-bottom: 1rem; 
+        }
+        .faq-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            background: rgba(160, 140, 92, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
         .whatsapp-fix { position: fixed; bottom: 24px; right: 24px; background: #25D366; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 999; animation: pulse-green 2s infinite; }
         @keyframes pulse-green { 0% { transform: scale(0.95); } 70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { transform: scale(0.95); } }
         #modal-politica { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); align-items: center; justify-content: center; }
@@ -64,7 +78,7 @@
     <header class="fixed w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5 px-6 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="./logo.png" alt="" class="h-10" onerror="this.style.display='none'">
+                <img src="./logo.png" alt="Wagner Alves Logo" class="h-10" onerror="this.style.display='none'">
                 <span class="text-xl md:text-2xl font-bold tracking-widest gold-gradient-text uppercase italic">Wagner Alves</span>
             </div>
             <nav class="hidden md:flex gap-10 text-[10px] font-black tracking-[0.2em] uppercase text-white/80">
@@ -90,7 +104,7 @@
             <div class="flex justify-center order-1 md:order-2" data-aos="zoom-in">
                 <div class="relative group">
                     <div class="absolute -inset-1 bg-gold/20 blur-2xl"></div>
-                    <img src="./foto-wagner.jpg" class="relative w-full max-w-[320px] md:max-w-md rounded-[3rem] border border-white/10 shadow-2xl">
+                    <img src="./foto-wagner.jpg" alt="Wagner Alves - Estrategista de Imagem" class="relative w-full max-w-[320px] md:max-w-md rounded-[3rem] border border-white/10 shadow-2xl">
                 </div>
             </div>
             <div class="space-y-8 order-2 md:order-1" data-aos="fade-right">
@@ -99,8 +113,8 @@
                     Estrategista de Imagem Masculina de Alto Padrão em Curitiba. Expertise técnica de 24 anos para quem busca o topo. <span class="gold-gradient-text font-bold">Alinhando sua imagem ao seu sucesso.</span>
                 </p>
                 <div class="flex flex-col items-center md:items-start gap-4">
-                    <a href="https://wa.me/5541999682982" onclick="fbq('track', 'Contact');" class="btn-premium wa-pulse inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto uppercase tracking-widest shadow-lg mx-auto md:mx-0">Agendar Consultoria</a>
-                    <p class="text-gold/60 text-[10px] uppercase tracking-[0.3em] font-bold">Vagas limitadas para este mês</p>
+                    <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20imagem." onclick="fbq('track', 'Contact');" class="btn-premium wa-pulse inline-block px-10 py-5 rounded-xl font-black text-lg w-full md:w-auto uppercase tracking-widest shadow-lg mx-auto md:mx-0">Agendar Consultoria</a>
+                    <p class="text-gold/60 text-[10px] uppercase tracking-[0.3em] font-bold">Últimas 3 vagas disponíveis para este mês</p>
                 </div>
             </div>
         </div>
@@ -168,7 +182,7 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center w-full">
             <div class="flex justify-center relative w-full order-1" data-aos="fade-up">
                 <div class="relative flex justify-center w-full">
-                    <img src="./ia-metodo-wagner.png" class="relative rounded-[3rem] w-full max-w-[340px] md:max-w-full border border-white/5 shadow-2xl">
+                    <img src="./ia-metodo-wagner.png" alt="Wagner Alves Consultor" class="relative rounded-[3rem] w-full max-w-[340px] md:max-w-full border border-white/5 shadow-2xl">
                     <div class="absolute -bottom-5 right-1/2 translate-x-1/2 md:translate-x-0 md:bottom-[-20px] md:right-[-30px] bg-[#f1e4bc]/10 backdrop-blur-xl border border-[#f1e4bc]/40 px-6 py-3 rounded-2xl font-black text-[#f1e4bc] text-sm md:text-lg uppercase whitespace-nowrap">24 Anos de História</div>
                 </div>
             </div>
@@ -179,7 +193,7 @@
                     <p class="border-l-4 border-gold pl-6 py-2 mb-6">"Sua imagem fala antes de você. Garanto que ela diga exatamente o que você deseja conquistar."</p>
                     <p class="not-italic opacity-80 leading-relaxed text-center md:text-left">Há mais de duas décadas, Wagner Alves projeta autoridade e liderança através do <span class="gold-gradient-text font-bold uppercase italic">Visagismo Masculino</span> estratégico.</p>
                 </div>
-                <a href="https://wa.me/5541999682982" onclick="fbq('track', 'Contact');" class="btn-premium wa-pulse px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest flex items-center gap-3"><i class="fab fa-whatsapp"></i> Verificar Disponibilidade</a>
+                <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20verificar%20sua%20disponibilidade%20para%20uma%20consultoria." onclick="fbq('track', 'Contact');" class="btn-premium wa-pulse px-8 py-4 rounded-2xl font-black text-base uppercase tracking-widest flex items-center gap-3"><i class="fab fa-whatsapp"></i> Verificar Disponibilidade</a>
             </div>
         </div>
     </section>
@@ -187,7 +201,7 @@
     <section class="py-16 bg-white/[0.02] border-y border-white/5 text-center">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div class="space-y-3" data-aos="fade-up"><span class="text-gold font-black text-5xl opacity-50">01</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Reserva</h4><p class="text-zinc-500 text-xs italic">WhatsApp Direto.</p></div>
-            <div class="space-y-3" data-aos="fade-up" data-aos-delay="100"><span class="text-gold font-black text-5xl opacity-50">02</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Estratégia</h4><p class="text-zinc-500 text-xs italic">Análise Facial.</p></div>
+            <div class="space-y-3" data-aos="fade-up" data-aos-delay="100"><span class="text-gold font-black text-5xl opacity-50">02</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Estratégia</h4><p class="text-zinc-500 text-xs italic">Análise Facial Técnica.</p></div>
             <div class="space-y-3" data-aos="fade-up" data-aos-delay="200"><span class="text-gold font-black text-5xl opacity-50">03</span><h4 class="text-white font-bold uppercase tracking-widest text-sm">Sucesso</h4><p class="text-zinc-500 text-xs italic">Sua Imagem de Elite.</p></div>
         </div>
     </section>
@@ -214,8 +228,8 @@
                     <a href="https://www.instagram.com/wagneralvess" target="_blank" class="flex gap-4 items-center justify-center md:justify-start hover:text-white transition group"><i class="fab fa-instagram text-gold text-2xl group-hover:scale-110 transition"></i><p class="text-xl font-bold">@wagneralvess</p></a>
                 </div>
             </div>
-            <div class="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl h-[450px]">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.225574577457!2d-49.29959642461042!3d-25.43054597755866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce3e413aa0447%3A0x1567919d87428796!2sBarbearia%20Clube%20Champagnat!5e0!3m2!1spt-BR!2sbr!4v1711411545677!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl h-[350px]">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.2255755106263!2d-49.284852!3d-25.430752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI1JzUwLjciUyA0OcKwMTcnMDUuNSJX!5e0!3m2!1spt-BR!2sbr!4v16500000000004" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
@@ -224,23 +238,23 @@
         <div class="max-w-4xl mx-auto px-6 text-center" data-aos="zoom-in">
             <h2 class="text-4xl md:text-6xl text-white font-bold uppercase italic mb-10 text-center w-full">Sua imagem é seu<br><span class="gold-gradient-text font-black text-center">maior ativo.</span></h2>
             <p class="text-zinc-400 text-lg md:text-2xl mb-12 italic font-light text-center leading-relaxed">Não deixe seu posicionamento ao acaso. Comunique o sucesso que você já alcançou.</p>
-            <a href="https://wa.me/5541999682982" onclick="fbq('track', 'Contact');" class="btn-premium wa-pulse px-12 py-6 rounded-2xl font-black text-xl uppercase tracking-widest inline-flex items-center gap-4 mx-auto">
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20reservar%20meu%20diagnóstico%20de%20imagem." onclick="fbq('track', 'Contact');" class="btn-premium wa-pulse px-12 py-6 rounded-2xl font-black text-xl uppercase tracking-widest inline-flex items-center gap-4 mx-auto">
                 <i class="fab fa-whatsapp text-3xl"></i> Reservar Diagnóstico de Imagem
             </a>
-            <p class="mt-8 text-gold/60 text-[11px] uppercase tracking-[0.4em] font-black text-center w-full">Últimas 3 vagas para este mês em Curitiba</p>
+            <p class="mt-8 text-gold/60 text-[11px] uppercase tracking-[0.4em] font-black text-center w-full">Últimas 3 vagas disponíveis para este mês</p>
         </div>
     </section>
 
     <section id="duvidas" class="py-24 bg-[#050505] border-t border-white/5">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-5xl md:text-8xl text-white mb-16 italic text-center font-bold uppercase inline-block text-center" data-aos="fade-up">Dúvidas Comuns</h2>
+            <h2 class="text-5xl md:text-8xl italic text-center font-bold uppercase inline-block text-center gold-gradient-text mb-16" data-aos="fade-up">Dúvidas Comuns</h2>
             <div class="grid gap-4 text-left">
-                <details class="faq-item group p-8 bg-[#0a0a0a]"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none">O que diferencia o Visagismo de um corte comum?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">O Visagismo Estratégico analisa suas linhas faciais, temperamento e objetivos profissionais. O objetivo é transmitir autoridade de forma personalizada.</div></details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Quanto tempo dura a sessão?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Uma consultoria completa de alto padrão dura de 60 a 90 minutos de atenção técnica exclusiva.</div></details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Eu uso óculos. O Visagismo também me ajuda com isso?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Com certeza. Analisamos se a sua armação atual reforça ou enfraquece sua imagem de liderança.</div></details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Preciso fazer essa consultoria toda vez?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Não. Uma vez estabelecida sua assinatura estratégica, as manutenções servem para manter o padrão de excelência.</div></details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Wagner Alves atende pessoalmente?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Sim. O atendimento é exclusivo e realizado pessoalmente por Wagner Alves, com 24 anos de expertise técnica.</div></details>
-                <details class="faq-item group p-8 bg-[#0a0a0a]"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Quais são as formas de pagamento?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Aceitamos PIX, cartões de débito e crédito (com parcelamento disponível).</div></details>
+                <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none">O que diferencia o Visagismo de um corte comum?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">O Visagismo Estratégico analisa suas linhas faciais, temperamento e objetivos profissionais. O objetivo é transmitir autoridade de forma personalizada.</div></details>
+                <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Quanto tempo dura a sessão?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Uma consultoria completa de alto padrão dura de 60 a 90 minutos de atenção técnica exclusiva.</div></details>
+                <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Eu uso óculos. O Visagismo também me ajuda com isso?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-justify leading-relaxed">Com certeza. Analisamos se a sua armação atual reforça ou enfraquece sua imagem de liderança.</div></details>
+                <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Preciso fazer essa consultoria toda vez?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Não. Uma vez estabelecida sua assinatura estratégica, as manutenções servem para manter o padrão de excelência.</div></details>
+                <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Wagner Alves atende pessoalmente?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Sim. O atendimento é exclusivo e realizado pessoalmente por Wagner Alves, com 24 anos de expertise técnica.</div></details>
+                <details class="faq-item group p-8"><summary class="flex justify-between items-center cursor-pointer list-none text-xl font-bold text-white uppercase outline-none text-justify">Quais são as formas de pagamento disponíveis?<span class="text-gold group-open:rotate-180 transition"><i class="fas fa-chevron-down"></i></span></summary><div class="pt-6 text-zinc-400 text-lg italic text-center md:text-left leading-relaxed">Aceitamos PIX, cartões de débito e crédito (com parcelamento disponível).</div></details>
             </div>
         </div>
     </section>
@@ -254,12 +268,12 @@
     <div id="modal-politica" class="fixed inset-0 z-[100] hidden items-center justify-center p-6 backdrop-blur-sm" onclick="fecharPolitica()">
         <div class="max-w-xl bg-zinc-950 p-12 rounded-[3rem] border border-gold/20 text-center shadow-2xl" onclick="event.stopPropagation()">
             <h2 class="text-3xl text-white font-black mb-6 italic uppercase text-center">Privacidade</h2>
-            <p class="text-zinc-400 text-lg leading-relaxed mb-8">Respeitamos a LGPD. Seus dados de contato são confidenciais.</p>
+            <p class="text-zinc-400 text-lg leading-relaxed mb-8 text-center">Respeitamos a LGPD. Seus dados de contato são confidenciais.</p>
             <button onclick="fecharPolitica()" class="text-gold font-black border border-gold px-10 py-3 rounded-2xl hover:bg-gold hover:text-black transition uppercase text-xs text-center mx-auto block">Entendido</button>
         </div>
     </div>
 
-    <a href="https://wa.me/5541999682982" onclick="fbq('track', 'Contact');" class="whatsapp-fix"><i class="fab fa-whatsapp text-3xl text-white"></i></a>
+    <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20imagem." onclick="fbq('track', 'Contact');" class="whatsapp-fix"><i class="fab fa-whatsapp text-3xl text-white"></i></a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
