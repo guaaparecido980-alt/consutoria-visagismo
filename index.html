@@ -318,8 +318,20 @@
         <div class="particle" style="left:40%;animation-delay:5s;animation-duration:9s"></div>
     </div>
 
+    <!-- ══ BARRA DE URGÊNCIA ══ -->
+    <div id="urgency-bar" style="background:linear-gradient(90deg,rgba(160,140,92,0.12),rgba(26,35,58,0.8),rgba(160,140,92,0.12));border-bottom:1px solid rgba(160,140,92,0.2);padding:10px 16px;text-align:center;position:fixed;top:0;left:0;right:0;z-index:51;backdrop-filter:blur(10px);">
+        <p style="font-size:0.65rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+            <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
+            Wagner está aceitando agendamentos para Maio
+            <span style="color:rgba(160,140,92,0.5)">·</span>
+            <span id="vagas-bar">2 vagas restantes</span>
+            <span style="color:rgba(160,140,92,0.5)">·</span>
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" style="color:var(--gold-light);text-decoration:underline;text-underline-offset:3px;">Garantir minha vaga →</a>
+        </p>
+    </div>
+
     <!-- HEADER -->
-    <header class="fixed w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5 px-6 py-4">
+    <header class="fixed w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5 px-6 py-4" style="top:37px">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <img src="./logo.png" alt="Logo Wagner Alves" class="h-12 w-auto object-contain" loading="lazy" onerror="this.style.display='none'">
@@ -351,7 +363,7 @@
     <!-- ══════════════════════════════════════════ -->
     <!-- HERO                                       -->
     <!-- ══════════════════════════════════════════ -->
-    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-24 px-6">
+    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-36 pb-24 px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center w-full">
 
             <!-- FOTO -->
@@ -457,7 +469,7 @@
                 <div class="space-y-4">
                     <div class="ba-card">
                         <div class="ba-shine"></div>
-                        <img src="./WhatsApp_Image_2026-04-07_at_22_56_05.jpeg"
+                        <img src="./WhatsApp_Image_2026-04-07_at_22_56_05.png"
                              alt="Antes e depois do visagismo masculino — Autoridade e Liderança"
                              loading="lazy">
                         <div class="ba-card-overlay"></div>
@@ -473,7 +485,7 @@
                 <div class="space-y-4">
                     <div class="ba-card">
                         <div class="ba-shine"></div>
-                        <img src="./WhatsApp_Image_2026-04-08_at_00_02_48.jpeg"
+                        <img src="./WhatsApp_Image_2026-04-08_at_00_02_48.png"
                              alt="Antes e depois do visagismo masculino — Presença e Imagem Estratégica"
                              loading="lazy">
                         <div class="ba-card-overlay"></div>
@@ -682,6 +694,44 @@
     </section>
 
     <!-- ══════════════════════════════════════════ -->
+    <!-- GARANTIA / COMPROMISSO                     -->
+    <!-- ══════════════════════════════════════════ -->
+    <section class="py-24 px-6 border-t border-white/5" style="background:radial-gradient(ellipse at center,rgba(160,140,92,0.06) 0%,transparent 70%)">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full border-2 mb-8" style="border-color:rgba(160,140,92,0.4);background:rgba(160,140,92,0.05)">
+                <i class="fas fa-shield-alt text-3xl" style="color:var(--gold)"></i>
+            </div>
+            <p class="text-[10px] font-black uppercase tracking-[0.35em] mb-4" style="color:var(--gold)">✦ Meu compromisso com você ✦</p>
+            <h2 class="text-4xl md:text-6xl text-white italic font-bold mb-8 leading-tight serif">
+                "Se você sair igual entrou,<br><span class="gold-gradient-text">eu não fiz meu trabalho."</span>
+            </h2>
+            <p class="text-zinc-400 text-lg italic leading-relaxed max-w-2xl mx-auto mb-10">
+                Cada consultoria é uma imersão de <strong class="text-white">120 a 150 minutos</strong> com atenção técnica total. Analiso suas linhas faciais, temperamento, estilo de vida e objetivos profissionais. O resultado não é só um corte — é uma <strong class="text-white">identidade visual estratégica</strong> construída para você.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="p-6 rounded-2xl border text-left" style="border-color:rgba(160,140,92,0.15);background:rgba(160,140,92,0.03)">
+                    <i class="fas fa-user-check mb-4 text-xl" style="color:var(--gold)"></i>
+                    <h5 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Atendimento 100% Pessoal</h5>
+                    <p class="text-zinc-500 text-xs italic leading-relaxed">Somente Wagner Alves. Sem assistentes. Sem delegação. Sua transformação nas mãos de quem tem 24 anos de expertise.</p>
+                </div>
+                <div class="p-6 rounded-2xl border text-left" style="border-color:rgba(160,140,92,0.15);background:rgba(160,140,92,0.03)">
+                    <i class="fas fa-brain mb-4 text-xl" style="color:var(--gold)"></i>
+                    <h5 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Análise Estratégica Profunda</h5>
+                    <p class="text-zinc-500 text-xs italic leading-relaxed">Não existe fórmula genérica. Cada consultoria é única, calibrada para seus objetivos profissionais e sua identidade.</p>
+                </div>
+                <div class="p-6 rounded-2xl border text-left" style="border-color:rgba(160,140,92,0.15);background:rgba(160,140,92,0.03)">
+                    <i class="fas fa-chart-line mb-4 text-xl" style="color:var(--gold)"></i>
+                    <h5 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Resultado Visível e Duradouro</h5>
+                    <p class="text-zinc-500 text-xs italic leading-relaxed">Você sai com uma imagem que projeta autoridade, confiança e liderança — e sabe exatamente como manter.</p>
+                </div>
+            </div>
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20quero%20agendar%20minha%20consultoria" onclick="dispararPixelContato()" class="btn-premium wa-pulse inline-flex items-center gap-3 px-10 py-5 rounded-xl font-black text-lg uppercase tracking-widest">
+                <i class="fab fa-whatsapp text-xl"></i> Quero essa transformação
+            </a>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════ -->
     <!-- FAQ                                        -->
     <!-- ══════════════════════════════════════════ -->
     <section id="duvidas" class="py-24 border-t border-white/5 text-center px-6" style="background:#050505">
@@ -741,6 +791,23 @@
         <i class="fab fa-whatsapp text-3xl text-white"></i>
     </a>
 
+    <!-- ══ EXIT INTENT POPUP ══ -->
+    <div id="exit-popup" style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,0.92);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:20px;">
+        <div style="max-width:520px;width:100%;background:linear-gradient(135deg,#0a0a0a,#0f1420);border:1px solid rgba(160,140,92,0.35);border-radius:2.5rem;padding:3rem;position:relative;text-align:center;">
+            <button onclick="fecharExitPopup()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:rgba(160,140,92,0.5);font-size:1.5rem;line-height:1;">✕</button>
+            <div style="width:64px;height:64px;border-radius:50%;border:1px solid rgba(160,140,92,0.4);background:rgba(160,140,92,0.07);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+                <i class="fas fa-calendar-check" style="color:var(--gold);font-size:1.6rem"></i>
+            </div>
+            <p style="font-size:0.65rem;font-weight:900;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Antes de sair</p>
+            <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);color:white;font-style:italic;font-weight:700;line-height:1.2;margin-bottom:1rem;">Sua vaga ainda<br>está disponível.</h3>
+            <p style="color:#a1a1aa;font-style:italic;line-height:1.7;margin-bottom:2rem;font-size:0.95rem;">Apenas <strong style="color:white" id="vagas-popup">2 vagas</strong> restantes para este mês. Uma consultoria de 120 a 150 min pode mudar a forma como o mundo enxerga você.</p>
+            <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20vi%20que%20ainda%20tem%20vaga%20e%20gostaria%20de%20agendar" onclick="dispararPixelContato();fecharExitPopup();" style="display:flex;align-items:center;justify-content:center;gap:12px;background:rgba(26,35,58,0.9);color:var(--gold-light);border:1px solid rgba(160,140,92,0.5);border-radius:1rem;padding:1.1rem 2rem;font-weight:900;font-size:1rem;text-transform:uppercase;letter-spacing:0.15em;text-decoration:none;transition:all 0.3s;margin-bottom:1rem;" onmouseover="this.style.borderColor='var(--gold-light)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(160,140,92,0.5)';this.style.transform='none'">
+                <i class="fab fa-whatsapp" style="font-size:1.3rem"></i> Garantir minha vaga agora
+            </a>
+            <button onclick="fecharExitPopup()" style="background:none;border:none;color:#52525b;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;text-decoration:underline;text-underline-offset:3px;">Não, vou continuar sem transformar minha imagem</button>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
@@ -770,14 +837,19 @@
             el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
         });
 
-        // ─── CONTADOR DE VAGAS ───
+        // ─── VAGAS (consistente entre barra, hero e popup) ───
         function calcularVagas() {
             const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 3));
-            const vagas = (seed % 3) + 1;
-            const txt = document.getElementById('vagas-texto');
-            if (txt) txt.textContent = vagas + (vagas === 1 ? ' vaga restante este mês' : ' vagas restantes este mês');
+            return (seed % 3) + 1;
         }
-        calcularVagas();
+        const vagas = calcularVagas();
+        const sufixo = vagas === 1 ? ' vaga restante este mês' : ' vagas restantes este mês';
+        const el = document.getElementById('vagas-texto');
+        const elBar = document.getElementById('vagas-bar');
+        const elPopup = document.getElementById('vagas-popup');
+        if (el) el.textContent = vagas + sufixo;
+        if (elBar) elBar.textContent = vagas + (vagas === 1 ? ' vaga restante' : ' vagas restantes');
+        if (elPopup) elPopup.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
 
         // ─── CONTADORES ANIMADOS ───
         function animateCounter(el) {
@@ -799,6 +871,36 @@
         }, { threshold: 0.5 });
         document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
 
+        // ─── EXIT INTENT ───
+        let exitShown = false;
+        document.addEventListener('mouseleave', e => {
+            if (e.clientY <= 5 && !exitShown) {
+                exitShown = true;
+                const popup = document.getElementById('exit-popup');
+                popup.style.display = 'flex';
+                setTimeout(() => { popup.style.opacity = '1'; }, 10);
+            }
+        });
+        // Mobile: show after 40s of inactivity
+        let mobileTimer;
+        function resetMobileTimer() {
+            clearTimeout(mobileTimer);
+            mobileTimer = setTimeout(() => {
+                if (!exitShown) { exitShown = true; document.getElementById('exit-popup').style.display = 'flex'; }
+            }, 40000);
+        }
+        ['touchstart','scroll'].forEach(e => document.addEventListener(e, resetMobileTimer, { passive: true }));
+        resetMobileTimer();
+
+        function fecharExitPopup() {
+            const popup = document.getElementById('exit-popup');
+            popup.style.opacity = '0';
+            setTimeout(() => popup.style.display = 'none', 300);
+        }
+        document.getElementById('exit-popup').addEventListener('click', function(e) {
+            if (e.target === this) fecharExitPopup();
+        });
+
         // ─── VÍDEOS ───
         function toggleVideo(container) {
             document.querySelectorAll('.video-container').forEach(c => {
@@ -812,7 +914,7 @@
         // ─── MENU MOBILE ───
         function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('translate-x-full'); }
 
-        // ─── MODAL ───
+        // ─── MODAL POLÍTICA ───
         function abrirPolitica() { document.getElementById('modal-politica').style.display = 'flex'; }
         function fecharPolitica() { document.getElementById('modal-politica').style.display = 'none'; }
     </script>
