@@ -61,8 +61,15 @@
             max-width: 100%;
             position: relative;
         }
-        /* Garante que nenhum elemento filho vaze — exceto swiper */
-        *:not(.swiper):not(.swiper-wrapper):not(.swiper-slide) { box-sizing: border-box; }
+        /* Garante box-sizing mas NÃO limita ícones/pseudo-elementos */
+        *:not(i):not(.fa):not([class*="fa-"]):not(.swiper):not(.swiper-wrapper):not(.swiper-slide) {
+            box-sizing: border-box;
+        }
+        /* Ícones Font Awesome nunca recebem max-width */
+        i, [class*="fa-"], [class*="fas "], [class*="fab "] {
+            max-width: none !important;
+            display: inline !important;
+        }
 
         /* ─── CURSOR DOURADO ─── */
         *, *::before, *::after { box-sizing: border-box; cursor: none !important; }
@@ -618,13 +625,14 @@
 
             /* ── Overflow global — nunca vaza para fora ── */
             html, body { overflow-x: hidden !important; max-width: 100vw !important; }
-            * { max-width: 100%; box-sizing: border-box; }
+            *:not(i):not([class*="fa-"]) { max-width: 100%; box-sizing: border-box; }
+            i, [class*="fa-"] { max-width: none !important; display: inline !important; }
             /* Não aplica clip no swiper — ele precisa de overflow visível */
             section, header, footer { overflow-x: hidden; }
             .cinematic-lines, .hero-img-wrap::after, .hero-img-wrap::before { overflow: hidden; }
             /* Swiper precisa de overflow visível para funcionar */
-            .swiper, .swiper-wrapper, .swiper-slide, .video-container { overflow: visible !important; max-width: none !important; }
-            .swiper { overflow: hidden !important; } /* só o container externo esconde */
+            .swiper-wrapper, .swiper-slide { overflow: visible !important; max-width: none !important; }
+            .swiper { overflow: hidden !important; }
 
             /* ── Hero ── */
             #inicio { padding-top: 110px !important; padding-bottom: 60px; padding-left: 16px !important; padding-right: 16px !important; }
@@ -1084,7 +1092,37 @@
                     <div class="flex mb-5" style="color:var(--star)" aria-label="5 estrelas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-zinc-300 italic mb-8 leading-relaxed text-lg">"O Wagner é um profissional diferenciado. O visagismo mudou totalmente minha percepção de autoridade no trabalho."</p>
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center font-black text-lg serif italic flex-shrink-0" style="background:linear-gradient(135deg,rgba(160,140,92,0.2),rgba(160,140,92,0.05));border:1.5px solid rgba(160,140,92,0.4);color:var(--gold-light)">R</div>
+                        <div class="w-12 h-12 rounded-full flex-shrink-0 overflow-hidden" style="border:1.5px solid rgba(160,140,92,0.4)">
+                            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+                                <rect width="48" height="48" fill="#0d1020"/>
+                                <!-- Body/suit -->
+                                <rect x="10" y="34" width="28" height="14" rx="4" fill="#1a2a4e"/>
+                                <rect x="20" y="32" width="8" height="6" fill="#1a2a4e"/>
+                                <!-- Shirt/tie -->
+                                <polygon points="24,32 21,38 24,36 27,38" fill="#a08c5c"/>
+                                <!-- Neck -->
+                                <rect x="20" y="28" width="8" height="6" rx="2" fill="#c4956a"/>
+                                <!-- Head -->
+                                <ellipse cx="24" cy="22" rx="10" ry="11" fill="#c4956a"/>
+                                <!-- Hair -->
+                                <ellipse cx="24" cy="13" rx="10" ry="5" fill="#2d1f0e"/>
+                                <rect x="14" y="13" width="20" height="6" fill="#2d1f0e"/>
+                                <!-- Eyes -->
+                                <ellipse cx="20" cy="22" rx="1.5" ry="1.5" fill="#1a0a00"/>
+                                <ellipse cx="28" cy="22" rx="1.5" ry="1.5" fill="#1a0a00"/>
+                                <!-- Eyebrows -->
+                                <path d="M17.5 19.5 Q20 18.5 22.5 19.5" stroke="#2d1f0e" stroke-width="1.2" fill="none"/>
+                                <path d="M25.5 19.5 Q28 18.5 30.5 19.5" stroke="#2d1f0e" stroke-width="1.2" fill="none"/>
+                                <!-- Nose -->
+                                <path d="M23 24 Q24 26 25 24" stroke="#a07050" stroke-width="0.8" fill="none"/>
+                                <!-- Mouth - subtle smile -->
+                                <path d="M21 28 Q24 30 27 28" stroke="#8a5040" stroke-width="1" fill="none"/>
+                                <!-- Beard subtle -->
+                                <path d="M15 26 Q14 30 17 33 Q20 35 24 35 Q28 35 31 33 Q34 30 33 26" fill="#2d1f0e" opacity="0.3"/>
+                                <!-- Gold ring accent -->
+                                <circle cx="24" cy="24" r="23" fill="none" stroke="#a08c5c" stroke-width="0.5" opacity="0.5"/>
+                            </svg>
+                        </div>
                         <div><span class="text-white font-bold text-sm block italic">Rodrigo A.</span><span class="text-xs font-bold" style="color:rgba(160,140,92,0.6)">Empresário</span></div>
                     </div>
                 </div>
@@ -1092,7 +1130,41 @@
                     <div class="flex mb-5" style="color:var(--star)" aria-label="5 estrelas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-zinc-100 italic mb-8 leading-relaxed font-medium text-lg">"Melhor visagista de Curitiba sem dúvidas. Minha imagem hoje condiz exatamente com o sucesso que busco."</p>
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full flex items-center justify-center font-black text-xl serif italic flex-shrink-0" style="background:linear-gradient(135deg,rgba(160,140,92,0.25),rgba(160,140,92,0.08));border:2px solid rgba(160,140,92,0.6);color:var(--gold-light)">G</div>
+                        <div class="w-14 h-14 rounded-full flex-shrink-0 overflow-hidden" style="border:2px solid rgba(160,140,92,0.6)">
+                            <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" width="56" height="56">
+                                <rect width="56" height="56" fill="#0a0a14"/>
+                                <!-- Body/dark suit -->
+                                <rect x="10" y="40" width="36" height="16" rx="4" fill="#0d1b3e"/>
+                                <rect x="22" y="37" width="12" height="8" fill="#0d1b3e"/>
+                                <!-- White shirt -->
+                                <rect x="24" y="37" width="8" height="8" fill="#e8dcc8"/>
+                                <!-- Gold tie -->
+                                <polygon points="28,37 25.5,44 28,42 30.5,44" fill="#a08c5c"/>
+                                <!-- Neck -->
+                                <rect x="23" y="32" width="10" height="7" rx="2" fill="#b87d5a"/>
+                                <!-- Head - lighter skin -->
+                                <ellipse cx="28" cy="25" rx="12" ry="13" fill="#b87d5a"/>
+                                <!-- Hair - dark short -->
+                                <ellipse cx="28" cy="14" rx="12" ry="5" fill="#1a1008"/>
+                                <rect x="16" y="14" width="24" height="8" fill="#1a1008"/>
+                                <rect x="16" y="18" width="3" height="8" rx="2" fill="#1a1008"/>
+                                <rect x="37" y="18" width="3" height="8" rx="2" fill="#1a1008"/>
+                                <!-- Eyes -->
+                                <ellipse cx="23" cy="25" rx="1.8" ry="1.8" fill="#0a0500"/>
+                                <ellipse cx="33" cy="25" rx="1.8" ry="1.8" fill="#0a0500"/>
+                                <!-- Eyebrows strong -->
+                                <path d="M20 21.5 Q23 20 26 21.5" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+                                <path d="M30 21.5 Q33 20 36 21.5" stroke="#1a1008" stroke-width="1.5" fill="none"/>
+                                <!-- Nose -->
+                                <path d="M27 27 Q28 30 29 27" stroke="#9a6040" stroke-width="0.8" fill="none"/>
+                                <!-- Confident smile -->
+                                <path d="M23 32 Q28 35 33 32" stroke="#7a4030" stroke-width="1.2" fill="none"/>
+                                <!-- Short beard -->
+                                <path d="M17 28 Q16 33 19 37 Q23 40 28 40 Q33 40 37 37 Q40 33 39 28" fill="#1a1008" opacity="0.35"/>
+                                <!-- Gold accent ring -->
+                                <circle cx="28" cy="28" r="27" fill="none" stroke="#a08c5c" stroke-width="0.8" opacity="0.6"/>
+                            </svg>
+                        </div>
                         <div><span class="text-white font-black block italic text-sm">Gustavo A.</span><span class="text-xs font-bold" style="color:var(--gold)">Liderança Executiva</span></div>
                     </div>
                 </div>
@@ -1100,7 +1172,43 @@
                     <div class="flex mb-5" style="color:var(--star)" aria-label="5 estrelas"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="text-zinc-300 italic mb-8 leading-relaxed text-lg">"Sempre tive dúvida sobre o melhor corte. A consultoria técnica tirou todas as dúvidas. Sensacional!"</p>
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center font-black text-lg serif italic flex-shrink-0" style="background:linear-gradient(135deg,rgba(160,140,92,0.2),rgba(160,140,92,0.05));border:1.5px solid rgba(160,140,92,0.4);color:var(--gold-light)">M</div>
+                        <div class="w-12 h-12 rounded-full flex-shrink-0 overflow-hidden" style="border:1.5px solid rgba(160,140,92,0.4)">
+                            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+                                <rect width="48" height="48" fill="#0d1020"/>
+                                <!-- Dark suit body -->
+                                <rect x="10" y="35" width="28" height="13" rx="3" fill="#111827"/>
+                                <rect x="20" y="33" width="8" height="6" fill="#111827"/>
+                                <!-- White shirt collar -->
+                                <polygon points="24,33 21,37 24,35.5 27,37" fill="#e8dcc8"/>
+                                <rect x="22" y="33" width="4" height="5" fill="#e8dcc8"/>
+                                <!-- Gold tie -->
+                                <polygon points="24,33 26,38 24,36.5 22,38" fill="#a08c5c"/>
+                                <!-- Neck -->
+                                <rect x="21" y="28" width="6" height="6" rx="2" fill="#d4956a"/>
+                                <!-- Head - light skin -->
+                                <ellipse cx="24" cy="22" rx="9" ry="10" fill="#d4956a"/>
+                                <!-- Hair - styled back, distinguished -->
+                                <ellipse cx="24" cy="13" rx="9" ry="4" fill="#3d2b1a"/>
+                                <rect x="15" y="13" width="18" height="6" fill="#3d2b1a"/>
+                                <!-- Grey temples - distinguished look -->
+                                <rect x="15" y="16" width="3" height="6" rx="1" fill="#888"/>
+                                <rect x="30" y="16" width="3" height="6" rx="1" fill="#888"/>
+                                <!-- Eyes - confident -->
+                                <ellipse cx="20.5" cy="22" rx="1.4" ry="1.4" fill="#1a0800"/>
+                                <ellipse cx="27.5" cy="22" rx="1.4" ry="1.4" fill="#1a0800"/>
+                                <!-- Eyebrows - strong -->
+                                <path d="M18 19.5 Q20.5 18.5 23 19.5" stroke="#3d2b1a" stroke-width="1.3" fill="none"/>
+                                <path d="M25 19.5 Q27.5 18.5 30 19.5" stroke="#3d2b1a" stroke-width="1.3" fill="none"/>
+                                <!-- Nose -->
+                                <path d="M23 24 Q24 26 25 24" stroke="#b07050" stroke-width="0.8" fill="none"/>
+                                <!-- Confident smile -->
+                                <path d="M21.5 28 Q24 30 26.5 28" stroke="#8a5040" stroke-width="1" fill="none"/>
+                                <!-- Clean shaven / light beard -->
+                                <path d="M15.5 24 Q15 28 17.5 31 Q20.5 33 24 33 Q27.5 33 30.5 31 Q33 28 32.5 24" fill="#3d2b1a" opacity="0.2"/>
+                                <!-- Gold ring accent -->
+                                <circle cx="24" cy="24" r="23" fill="none" stroke="#a08c5c" stroke-width="0.5" opacity="0.5"/>
+                            </svg>
+                        </div>
                         <div><span class="text-white font-bold text-sm block italic">Maurício P.</span><span class="text-xs font-bold" style="color:rgba(160,140,92,0.6)">Advogado</span></div>
                     </div>
                 </div>
@@ -1122,7 +1230,7 @@
 
                     <!-- Container do vídeo -->
                     <div id="sobre-video-wrap" class="relative rounded-[2.5rem] overflow-hidden border shadow-2xl" style="border-color:rgba(160,140,92,0.2);aspect-ratio:9/16;background:#050505;cursor:pointer;" onclick="toggleSobreVideo()">
-                        <video id="sobre-video" src="./video-wagner.mp4" poster="./video-wagner-poster.jpg" preload="none" playsinline loop
+                        <video id="sobre-video" src="./video-wagner.mp4" poster="./video-wagner-poste.PNG" preload="none" playsinline loop
                             class="w-full h-full object-cover"></video>
 
                         <!-- Overlay de play -->
