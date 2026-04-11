@@ -230,29 +230,44 @@
         .btn-ghost-gold:hover { border-color: var(--gold-light); color: white; transform: translateY(-3px); box-shadow: 0 12px 30px rgba(160,140,92,0.2); }
         .btn-ghost-gold:hover::before { transform: scaleX(1); }
 
-        /* ── BTN 3: "Quero minha transformação" — dark navy com brilho ── */
+        /* ── BTN 3: "Quero minha transformação" — dourado pulsante ── */
         .btn-navy {
             display: inline-flex; align-items: center; gap: 12px;
-            background: linear-gradient(135deg, #0d1b3e, #1a2a5e);
-            color: var(--gold-light);
-            border: 1px solid rgba(160,140,92,0.4);
+            background: linear-gradient(135deg, #a08c5c 0%, #f1e4bc 50%, #a08c5c 100%);
+            background-size: 200% auto;
+            color: #050505;
+            border: none;
             padding: 1.1rem 2.2rem;
             border-radius: 0.75rem;
             font-weight: 900; font-size: 1rem;
             text-transform: uppercase; letter-spacing: 0.15em;
             text-decoration: none;
-            transition: all 0.4s;
             position: relative; overflow: hidden;
-            box-shadow: 0 4px 20px rgba(13,27,62,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            animation: btnGoldPulse 2.5s ease-in-out infinite;
+            box-shadow: 0 8px 32px rgba(160,140,92,0.4);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .btn-navy::before {
+        @keyframes btnGoldPulse {
+            0%, 100% { box-shadow: 0 8px 32px rgba(160,140,92,0.4), 0 0 0 0 rgba(160,140,92,0.5); }
+            50% { box-shadow: 0 8px 40px rgba(160,140,92,0.6), 0 0 0 12px rgba(160,140,92,0); }
+        }
+        .btn-navy::after {
             content: '';
-            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at center, rgba(160,140,92,0.15) 0%, transparent 60%);
-            opacity: 0; transition: opacity 0.4s;
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+            transform: translateX(-100%);
+            animation: btnShine 2.5s ease-in-out infinite;
         }
-        .btn-navy:hover { border-color: var(--gold-light); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(13,27,62,0.8), 0 0 0 1px rgba(160,140,92,0.3); }
-        .btn-navy:hover::before { opacity: 1; }
+        @keyframes btnShine {
+            0%, 40% { transform: translateX(-100%); }
+            60%, 100% { transform: translateX(100%); }
+        }
+        .btn-navy:hover {
+            background-position: right center;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(160,140,92,0.55);
+            color: #050505;
+        }
 
         /* ── BTN 4: "Quero essa transformação" — ouro invertido com bordas arredondadas ── */
         .btn-gold-outline-pill {
