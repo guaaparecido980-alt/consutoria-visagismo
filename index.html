@@ -777,8 +777,8 @@
             to { transform: translateX(100%); }
         }
 
-        /* Impede scroll durante loading */
-        body.loading { overflow: hidden; }
+        /* Impede scroll durante loading — apenas bloqueia interação, não scroll */
+        body.loading { pointer-events: none; }
     </style>
 </head>
 <body class="antialiased loading">
@@ -1442,15 +1442,17 @@
         }
 
         // ─── LOADING SCREEN ───
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.classList.add('hide');
-                document.body.classList.remove('loading');
-                // Remove do DOM após a animação
-                setTimeout(() => loader.remove(), 900);
-            }, 2000); // 2s — tempo suficiente para ver a animação
-        });
+        // Garante que o loader some mesmo se window.load não disparar
+        function esconderLoader() {
+            const loader = document.getElementById('loader');
+            if (!loader) return;
+            loader.classList.add('hide');
+            document.body.classList.remove('loading');
+            setTimeout(() => { if (loader.parentNode) loader.remove(); }, 900);
+        }
+        // Tenta via window.load, mas garante via timeout máximo de 3s
+        window.addEventListener('load', () => setTimeout(esconderLoader, 2000));
+        setTimeout(esconderLoader, 3500); // fallback garantido
 
         // ─── AOS ───
         AOS.init({ once: true, duration: 1000, easing: 'ease-out-cubic' });
