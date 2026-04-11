@@ -1294,19 +1294,71 @@
             <a href="https://wa.me/5541999682982" onclick="dispararPixelContato()" class="w-10 h-10 rounded-full border flex items-center justify-center transition hover:-translate-y-1" style="border-color:rgba(160,140,92,0.3);color:var(--gold)"><i class="fab fa-whatsapp"></i></a>
         </div>
         <button onclick="abrirPolitica()" class="transition uppercase text-[10px] font-black underline block mx-auto mb-4" style="color:rgba(100,100,100,0.7)">Política de Privacidade</button>
-        <p class="text-[10px] uppercase tracking-widest font-bold italic" style="color:#1a1a1a">© 2026 — Todos os direitos reservados</p>
+        <div class="flex justify-center gap-4 mb-4 flex-wrap">
+            <button onclick="abrirTermos()" class="transition uppercase text-[10px] font-black underline" style="color:rgba(100,100,100,0.5)">Termos de Uso</button>
+            <span style="color:rgba(100,100,100,0.3)">·</span>
+            <button onclick="abrirCookies()" class="transition uppercase text-[10px] font-black underline" style="color:rgba(100,100,100,0.5)">Política de Cookies</button>
+        </div>
+        <p class="text-[10px] uppercase tracking-widest font-bold italic" style="color:#1a1a1a">© 2026 — Todos os direitos reservados — Wagner Alves Visagismo</p>
     </footer>
 
-    <!-- MODAL POLÍTICA -->
-    <div id="modal-politica" onclick="fecharPolitica()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h2 class="text-3xl font-black mb-8 italic uppercase text-center" style="color:var(--gold)">Política de Privacidade</h2>
-            <div class="space-y-6 text-zinc-400 text-sm leading-relaxed text-justify">
-                <p><strong class="text-white">1. Coleta de Informações:</strong> Coletamos dados básicos de contato fornecidos por você via WhatsApp para agendamentos.</p>
-                <p><strong class="text-white">2. Uso dos Dados:</strong> Suas informações são utilizadas exclusivamente para agendamento de consultorias e comunicações diretas.</p>
-                <p><strong class="text-white">3. Cookies e Rastreamento:</strong> Este site utiliza o Facebook Pixel para medir eficácia das comunicações. Nenhum dado é vendido a terceiros.</p>
+    <!-- ══ MODAL: POLÍTICA DE PRIVACIDADE ══ -->
+    <div id="modal-politica" onclick="fecharPolitica()" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.95);backdrop-filter:blur(15px);align-items:center;justify-content:center;padding:20px;">
+        <div class="modal-content" onclick="event.stopPropagation()" style="position:relative;">
+            <button onclick="fecharPolitica()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(160,140,92,0.5);font-size:1.3rem;cursor:pointer;">✕</button>
+            <h2 class="text-2xl font-black mb-2 italic uppercase text-center" style="color:var(--gold)">Política de Privacidade</h2>
+            <p class="text-center text-zinc-600 text-[10px] uppercase tracking-widest mb-6">Última atualização: Abril de 2026</p>
+            <div class="space-y-5 text-zinc-400 text-sm leading-relaxed text-justify">
+                <p><strong class="text-white">1. Responsável pelos Dados</strong><br>Wagner Alves — Estrategista de Imagem Masculina, com sede em Curitiba/PR, Av. Cândido Hartmann, 1580. Contato: Wagnerbarbeiro15@gmail.com | (41) 99968-2982.</p>
+                <p><strong class="text-white">2. Dados Coletados</strong><br>Coletamos apenas os dados que você fornece voluntariamente ao entrar em contato via WhatsApp, como nome e número de telefone. Não coletamos dados sensíveis como CPF, endereço residencial ou dados bancários.</p>
+                <p><strong class="text-white">3. Finalidade do Tratamento</strong><br>Seus dados são utilizados exclusivamente para: (a) agendamento de consultorias; (b) envio de confirmações e lembretes de atendimento; (c) comunicações relacionadas aos nossos serviços. Não utilizamos seus dados para fins comerciais de terceiros.</p>
+                <p><strong class="text-white">4. Cookies e Rastreamento</strong><br>Este site utiliza o Facebook Pixel (Meta) para mensurar a eficácia de comunicações e anúncios. O Pixel pode coletar informações sobre sua navegação de forma anonimizada. Nenhum dado pessoal identificável é compartilhado com anunciantes.</p>
+                <p><strong class="text-white">5. Google</strong><br>Utilizamos ferramentas do Google (Analytics e Search Console) para acompanhar o desempenho do site. Os dados coletados são estatísticos e anonimizados, sem identificação pessoal.</p>
+                <p><strong class="text-white">6. Compartilhamento de Dados</strong><br>Não vendemos, alugamos ou compartilhamos seus dados pessoais com terceiros, exceto quando exigido por lei ou ordem judicial.</p>
+                <p><strong class="text-white">7. Armazenamento e Segurança</strong><br>Seus dados são armazenados de forma segura pelo tempo necessário para a prestação do serviço, sendo excluídos após o encerramento do relacionamento comercial, salvo obrigação legal.</p>
+                <p><strong class="text-white">8. Seus Direitos — LGPD (Lei nº 13.709/2018)</strong><br>Você tem direito a: confirmar a existência de tratamento; acessar seus dados; corrigir dados incorretos; solicitar exclusão; revogar consentimento a qualquer momento. Exerça seus direitos pelo e-mail Wagnerbarbeiro15@gmail.com.</p>
+                <p><strong class="text-white">9. Alterações</strong><br>Esta política pode ser atualizada periodicamente. Alterações significativas serão comunicadas via WhatsApp ou e-mail.</p>
             </div>
             <button onclick="fecharPolitica()" class="mt-8 w-full text-white font-black py-4 rounded-xl transition uppercase text-xs text-center block" style="background:var(--gold)">Entendido e Fechar</button>
+        </div>
+    </div>
+
+    <!-- ══ MODAL: TERMOS DE USO ══ -->
+    <div id="modal-termos" onclick="fecharTermos()" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.95);backdrop-filter:blur(15px);align-items:center;justify-content:center;padding:20px;">
+        <div class="modal-content" onclick="event.stopPropagation()" style="position:relative;">
+            <button onclick="fecharTermos()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(160,140,92,0.5);font-size:1.3rem;cursor:pointer;">✕</button>
+            <h2 class="text-2xl font-black mb-2 italic uppercase text-center" style="color:var(--gold)">Termos de Uso</h2>
+            <p class="text-center text-zinc-600 text-[10px] uppercase tracking-widest mb-6">Última atualização: Abril de 2026</p>
+            <div class="space-y-5 text-zinc-400 text-sm leading-relaxed text-justify">
+                <p><strong class="text-white">1. Aceitação dos Termos</strong><br>Ao acessar e utilizar este site, você concorda com os presentes Termos de Uso. Caso não concorde, pedimos que não utilize nossos serviços digitais.</p>
+                <p><strong class="text-white">2. Serviços Oferecidos</strong><br>Wagner Alves oferece consultoria de visagismo masculino estratégico com atendimento presencial exclusivo na Barbearia Clube, Curitiba/PR. As informações neste site são de caráter informativo e não constituem contrato até confirmação formal via WhatsApp.</p>
+                <p><strong class="text-white">3. Agendamentos</strong><br>Os agendamentos são realizados exclusivamente via WhatsApp. A confirmação ocorre somente após contato direto com Wagner Alves, sujeita à disponibilidade de agenda. O número de vagas mensais é limitado.</p>
+                <p><strong class="text-white">4. Cancelamentos e Reagendamentos</strong><br>Cancelamentos devem ser comunicados com no mínimo 24 horas de antecedência. O não comparecimento sem aviso prévio poderá implicar na perda da vaga e eventual cobrança de taxa de ausência.</p>
+                <p><strong class="text-white">5. Propriedade Intelectual</strong><br>Todo o conteúdo deste site — textos, imagens, vídeos, design e marca — é de propriedade exclusiva de Wagner Alves. É proibida a reprodução, cópia ou distribuição sem autorização expressa por escrito.</p>
+                <p><strong class="text-white">6. Limitação de Responsabilidade</strong><br>Os resultados do visagismo variam de acordo com as características individuais de cada cliente. Wagner Alves compromete-se com a excelência técnica e dedicação total em cada atendimento.</p>
+                <p><strong class="text-white">7. Foro</strong><br>Estes termos são regidos pelas leis brasileiras. Eventuais disputas serão dirimidas no Foro da Comarca de Curitiba/PR.</p>
+            </div>
+            <button onclick="fecharTermos()" class="mt-8 w-full text-white font-black py-4 rounded-xl transition uppercase text-xs text-center block" style="background:var(--gold)">Entendido e Fechar</button>
+        </div>
+    </div>
+
+    <!-- ══ MODAL: COOKIES ══ -->
+    <div id="modal-cookies" onclick="fecharCookies()" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.95);backdrop-filter:blur(15px);align-items:center;justify-content:center;padding:20px;">
+        <div class="modal-content" onclick="event.stopPropagation()" style="position:relative;">
+            <button onclick="fecharCookies()" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:rgba(160,140,92,0.5);font-size:1.3rem;cursor:pointer;">✕</button>
+            <h2 class="text-2xl font-black mb-2 italic uppercase text-center" style="color:var(--gold)">Política de Cookies</h2>
+            <p class="text-center text-zinc-600 text-[10px] uppercase tracking-widest mb-6">Última atualização: Abril de 2026</p>
+            <div class="space-y-5 text-zinc-400 text-sm leading-relaxed text-justify">
+                <p><strong class="text-white">O que são Cookies?</strong><br>Cookies são pequenos arquivos de texto armazenados no seu dispositivo ao visitar um site. Eles ajudam a melhorar a experiência de navegação e mensurar o desempenho do site.</p>
+                <p><strong class="text-white">Cookies que utilizamos</strong><br>
+                    <strong class="text-zinc-300">· Essenciais:</strong> Necessários para o funcionamento básico do site. Não podem ser desativados.<br><br>
+                    <strong class="text-zinc-300">· Facebook Pixel (Meta):</strong> Utilizado para mensurar a eficácia de anúncios e comunicações. Coleta dados de navegação de forma anonimizada. Saiba mais em: facebook.com/privacy.<br><br>
+                    <strong class="text-zinc-300">· Google Analytics:</strong> Utilizado para análise estatística de acessos. Todos os dados são anonimizados. Saiba mais em: policies.google.com.
+                </p>
+                <p><strong class="text-white">Como gerenciar Cookies</strong><br>Você pode controlar e/ou excluir cookies nas configurações do seu navegador. A desativação pode afetar algumas funcionalidades do site.</p>
+                <p><strong class="text-white">Retenção</strong><br>Cookies de análise são retidos por até 26 meses. Cookies essenciais são excluídos ao encerrar a sessão.</p>
+            </div>
+            <button onclick="fecharCookies()" class="mt-8 w-full text-white font-black py-4 rounded-xl transition uppercase text-xs text-center block" style="background:var(--gold)">Entendido e Fechar</button>
         </div>
     </div>
 
@@ -1518,6 +1570,10 @@
         // ─── MODAL POLÍTICA ───
         function abrirPolitica() { document.getElementById('modal-politica').style.display = 'flex'; }
         function fecharPolitica() { document.getElementById('modal-politica').style.display = 'none'; }
+        function abrirTermos() { document.getElementById('modal-termos').style.display = 'flex'; }
+        function fecharTermos() { document.getElementById('modal-termos').style.display = 'none'; }
+        function abrirCookies() { document.getElementById('modal-cookies').style.display = 'flex'; }
+        function fecharCookies() { document.getElementById('modal-cookies').style.display = 'none'; }
     </script>
 </body>
 </html>
