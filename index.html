@@ -61,8 +61,8 @@
             max-width: 100%;
             position: relative;
         }
-        /* Garante que nenhum elemento filho vaze */
-        * { box-sizing: border-box; }
+        /* Garante que nenhum elemento filho vaze — exceto swiper */
+        *:not(.swiper):not(.swiper-wrapper):not(.swiper-slide) { box-sizing: border-box; }
 
         /* ─── CURSOR DOURADO ─── */
         *, *::before, *::after { box-sizing: border-box; cursor: none !important; }
@@ -618,9 +618,13 @@
 
             /* ── Overflow global — nunca vaza para fora ── */
             html, body { overflow-x: hidden !important; max-width: 100vw !important; }
-            * { max-width: 100%; }
-            section, header, footer, div { overflow-x: clip; }
+            * { max-width: 100%; box-sizing: border-box; }
+            /* Não aplica clip no swiper — ele precisa de overflow visível */
+            section, header, footer { overflow-x: hidden; }
             .cinematic-lines, .hero-img-wrap::after, .hero-img-wrap::before { overflow: hidden; }
+            /* Swiper precisa de overflow visível para funcionar */
+            .swiper, .swiper-wrapper, .swiper-slide, .video-container { overflow: visible !important; max-width: none !important; }
+            .swiper { overflow: hidden !important; } /* só o container externo esconde */
 
             /* ── Hero ── */
             #inicio { padding-top: 110px !important; padding-bottom: 60px; padding-left: 16px !important; padding-right: 16px !important; }
