@@ -1536,7 +1536,7 @@
             return (seed % 3) + 1;
         }
         const vagas = calcularVagas();
-        const sufixo = vagas === 1 ? ' vaga restante este mês' : ' vagas restantes este mês';
+        const sufixo = vagas === 4 ? ' vaga restante este mês' : ' vagas restantes este mês';
         const el = document.getElementById('vagas-texto');
         const elBar = document.getElementById('vagas-bar');
         const elBarMobile = document.getElementById('vagas-bar-mobile');
