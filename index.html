@@ -1542,7 +1542,7 @@
         const elBarMobile = document.getElementById('vagas-bar-mobile');
         const elPopup = document.getElementById('vagas-popup');
         if (el) el.textContent = vagas + sufixo;
-        if (elBar) elBar.textContent = vagas + (vagas === 1 ? ' vaga restante' : ' vagas restantes');
+        if (elBar) elBar.textContent = vagas + (vagas === 4 ? ' vaga restante' : ' vagas restantes');
         if (elBarMobile) elBarMobile.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
         if (elPopup) elPopup.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
 
