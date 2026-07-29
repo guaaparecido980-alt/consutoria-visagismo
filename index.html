@@ -1505,7 +1505,18 @@
         setTimeout(esconderLoader, 1500);
 
         // ─── AOS ───
-        AOS.init({ once: true, duration: 1000, easing: 'ease-out-cubic' });
+        // Se a biblioteca AOS não carregar (CDN instável, bloqueador de anúncios, conexão
+        // ruim), elementos com data-aos (inclui as fotos de Antes & Depois) ficariam
+        // invisíveis para sempre, pois começam com opacity:0 até a AOS revelá-los.
+        // Este fallback garante que fiquem visíveis mesmo se a animação falhar.
+        try {
+            AOS.init({ once: true, duration: 1000, easing: 'ease-out-cubic' });
+        } catch (e) {
+            document.querySelectorAll('[data-aos]').forEach(function (el) {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+        }
 
         // ─── SWIPER ───
         new Swiper(".mySwiper", {
