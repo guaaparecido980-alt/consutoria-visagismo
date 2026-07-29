@@ -587,6 +587,7 @@
         <a class="btn btn-secundario" id="link-whatsapp" href="#" target="_blank" rel="noopener">Abrir WhatsApp para enviar o PDF</a>
         <a class="btn btn-secundario" id="link-email" href="#">Abrir e-mail para enviar o PDF</a>
         <button type="button" class="btn btn-secundario" id="btn-imprimir-novamente">Abrir novamente a janela de impressão</button>
+        <button type="button" class="btn-voltar" id="btn-reiniciar" style="width:100%;">Preencher novamente do zero</button>
       </div>
     </div>
   </div>
@@ -860,6 +861,17 @@ document.getElementById('btn-gerar-pdf').addEventListener('click', gerarPdf);
 document.getElementById('btn-imprimir-novamente').addEventListener('click', () => {
   montarResumo();
   window.print();
+});
+
+document.getElementById('btn-reiniciar').addEventListener('click', () => {
+  form.reset();
+  document.querySelectorAll('.campo.erro, .consentimento.erro').forEach(el => el.classList.remove('erro'));
+  document.querySelectorAll('textarea').forEach(el => { el.style.height = ''; });
+  try{ localStorage.removeItem(CHAVE_RASCUNHO); }catch(e){}
+  document.title = 'Formulário de Pré-Entrevista — Visagismo | Wagner Alves';
+  document.querySelector('main > form').style.display = '';
+  posEnvio.style.display = 'none';
+  irParaEtapa(0);
 });
 
 atualizarStepper();
