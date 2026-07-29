@@ -178,22 +178,25 @@
   .campo input[type="number"],
   .campo textarea{
     width:100%;
-    background: var(--preto);
+    background: rgba(0,0,0,0.22);
     border: 1px solid var(--grafite-borda);
-    border-radius: 7px;
+    border-radius: 8px;
     color: var(--bege);
-    padding: 13px 15px;
+    padding: 12px 14px;
     font-family: 'Inter', sans-serif;
     font-size: 14.5px;
+    line-height: 1.55;
     resize: none;
     overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
     transition: border-color .2s, box-shadow .2s;
   }
-  .campo textarea{ min-height: 70px; }
+  .campo textarea{ min-height: 46px; }
   .campo input:focus, .campo textarea:focus{
     outline: none; border-color: var(--dourado);
-    box-shadow: 0 0 0 3px var(--sombra-ouro);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.25), 0 0 0 3px var(--sombra-ouro);
   }
+  .campo input::placeholder, .campo textarea::placeholder{ color: var(--texto-fraco); opacity: 0.7; }
   .campo.erro input, .campo.erro textarea{ border-color: var(--erro); }
   .campo .aviso-erro{
     display:none; color: var(--erro); font-size:12px; margin-top:6px;
@@ -398,17 +401,17 @@
 
         <div class="campo">
           <label for="p1">1. Qual foi a principal razão que fez você procurar uma consultoria de visagismo neste momento da sua vida?</label>
-          <textarea id="p1" name="p1" required></textarea>
+          <textarea id="p1" name="p1" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p2">2. Existe alguma situação específica, pessoal ou profissional, que fez você sentir necessidade de mudar sua imagem?</label>
-          <textarea id="p2" name="p2" required></textarea>
+          <textarea id="p2" name="p2" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p3">3. Alguma pessoa já comentou algo sobre sua aparência que marcou você positiva ou negativamente?</label>
-          <textarea id="p3" name="p3" required></textarea>
+          <textarea id="p3" name="p3" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
 
@@ -438,12 +441,12 @@
         </div>
         <div class="campo">
           <label for="p5">5. Você já pensou em fazer uma mudança radical no cabelo, barba ou estilo? Qual?</label>
-          <textarea id="p5" name="p5" required></textarea>
+          <textarea id="p5" name="p5" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p6">6. Já se arrependeu de algum corte, barba ou procedimento visual? O que aconteceu?</label>
-          <textarea id="p6" name="p6" required></textarea>
+          <textarea id="p6" name="p6" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
 
@@ -462,17 +465,17 @@
 
         <div class="campo">
           <label for="p7">7. Onde você trabalha atualmente e como deseja ser percebido no seu ambiente profissional?</label>
-          <textarea id="p7" name="p7" required></textarea>
+          <textarea id="p7" name="p7" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p8">8. Quais são seus maiores objetivos de vida hoje? Qual posição, cargo ou estilo de vida você deseja alcançar no futuro?</label>
-          <textarea id="p8" name="p8" required></textarea>
+          <textarea id="p8" name="p8" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p9">9. Como você imagina sua aparência no auge do seu sucesso? Descreva roupas, cabelo, barba, postura e energia que gostaria de transmitir.</label>
-          <textarea id="p9" name="p9" required></textarea>
+          <textarea id="p9" name="p9" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
 
@@ -491,17 +494,17 @@
 
         <div class="campo">
           <label for="p10">10. Existe alguma característica do seu rosto, cabelo ou barba que incomoda você? Já recebeu apelidos, julgamentos ou interpretações erradas sobre sua aparência?</label>
-          <textarea id="p10" name="p10" required></textarea>
+          <textarea id="p10" name="p10" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p11">11. Como é sua rotina semanal? Cite trabalho, lazer, esportes, eventos sociais, igreja, viagens e todos os ambientes que você frequenta.</label>
-          <textarea id="p11" name="p11" required></textarea>
+          <textarea id="p11" name="p11" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p12">12. O que você deseja transmitir através da sua imagem hoje?</label>
-          <textarea id="p12" name="p12" required></textarea>
+          <textarea id="p12" name="p12" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
 
@@ -520,22 +523,22 @@
 
         <div class="campo">
           <label for="p13">13. Quais pessoas inspiram você visualmente? (artistas, empresários, atletas, líderes, personagens etc.)</label>
-          <textarea id="p13" name="p13" required></textarea>
+          <textarea id="p13" name="p13" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p14">14. Você acredita que sua imagem atual representa quem você realmente é? Explique.</label>
-          <textarea id="p14" name="p14" required></textarea>
+          <textarea id="p14" name="p14" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p15">15. Se sua imagem pudesse abrir portas para você, quais portas gostaria que ela abrisse?</label>
-          <textarea id="p15" name="p15" required></textarea>
+          <textarea id="p15" name="p15" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
         <div class="campo">
           <label for="p16">16. O que seria um resultado perfeito para você após essa consultoria de visagismo?</label>
-          <textarea id="p16" name="p16" required></textarea>
+          <textarea id="p16" name="p16" required placeholder="Escreva sua resposta aqui..."></textarea>
           <div class="aviso-erro">Conte um pouco sobre isso.</div>
         </div>
 
@@ -628,7 +631,15 @@ function irParaEtapa(indice){
   // Recalcula a altura das textareas desta etapa: se valores foram restaurados
   // de um rascunho enquanto a etapa estava oculta, a altura ficaria travada em 0.
   steps[indice].querySelectorAll('textarea').forEach(ajustarAltura);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Não pula pro topo absoluto da página (isso obrigaria o cliente a rolar de
+  // novo pelo cabeçalho toda vez). Só reposiciona o mínimo necessário pra deixar
+  // o topo da etapa logo abaixo da barra fixa de progresso.
+  const alturaCabecalho = document.getElementById('wizard-shell').offsetHeight;
+  const topoAlvo = steps[indice].getBoundingClientRect().top + window.scrollY - alturaCabecalho - 16;
+  if(Math.abs(window.scrollY - topoAlvo) > 4){
+    window.scrollTo({ top: Math.max(topoAlvo, 0), behavior: 'smooth' });
+  }
 }
 
 function validarEtapa(indice){
