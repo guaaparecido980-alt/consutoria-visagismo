@@ -952,10 +952,12 @@ function todasEtapasValidas(){
   return true;
 }
 
-/* Acima desse tamanho, o link do WhatsApp (wa.me?text=...) corre risco real de
-   cortar o texto silenciosamente em alguns celulares/navegadores — por segurança,
-   preferimos cair para o fluxo de PDF em vez de arriscar perder resposta do cliente. */
-const LIMITE_MENSAGEM_DIRETA = 3000;
+/* O limite real de risco é no tamanho da URL final (https://wa.me/...?text=TEXTO-CODIFICADO),
+   não no texto puro digitado pelo cliente — acentos do português (ção, ã, é...) inflam o
+   texto em ~1.5x quando viram %XX na URL. 2083 caracteres é o teto historicamente citado
+   como seguro em qualquer navegador/SO/proxy (herança do Internet Explorer, mas ainda usado
+   como referência universal). Damos uma margem generosa abaixo disso. */
+const LIMITE_URL_WHATSAPP = 1900;
 
 function montarTextoPlano(){
   const nome = document.getElementById('nome').value.trim();
@@ -980,11 +982,15 @@ function montarTextoPlano(){
   texto += 'Nível de interesse: ' + (nivelEl ? nivelEl.value : '—') + '\n';
   texto += 'Prazo desejado: ' + (prazoEl ? prazoEl.value : '—') + '\n\n';
 
-  perguntas.forEach(p => {
+  // Rótulo curto (P1, P2...) em vez da pergunta inteira: o Wagner já conhece as
+  // próprias perguntas, e a pergunta completa por extenso (16x) sozinha já ocuparia
+  // mais espaço que o limite seguro da URL do WhatsApp. A pergunta completa continua
+  // no PDF, que não tem essa restrição.
+  perguntas.forEach((p, i) => {
     let resposta;
     if(p.id === 'area'){ resposta = areasTexto; }
     else{ resposta = document.getElementById(p.id).value.trim() || '—'; }
-    texto += p.label + '\nR: ' + resposta + '\n\n';
+    texto += 'P' + (i + 1) + ': ' + resposta + '\n\n';
   });
 
   return texto.trim();
@@ -1007,15 +1013,16 @@ function enviarPorWhatsapp(){
   }
 
   const texto = montarTextoPlano();
+  const textoCodificado = encodeURIComponent(texto);
 
-  if(texto.length > LIMITE_MENSAGEM_DIRETA){
+  if(textoCodificado.length > LIMITE_URL_WHATSAPP){
     gerarPdf(true);
     return;
   }
 
   try{ localStorage.removeItem(CHAVE_RASCUNHO); }catch(e){}
 
-  const url = 'https://wa.me/' + CONFIG.whatsappNumero + '?text=' + encodeURIComponent(texto);
+  const url = 'https://wa.me/' + CONFIG.whatsappNumero + '?text=' + textoCodificado;
   document.getElementById('link-whatsapp-direto').href = url;
   window.open(url, '_blank');
 
