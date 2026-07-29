@@ -204,6 +204,7 @@
   }
   .campo.erro .aviso-erro{ display:block; }
   .consentimento.erro{ border-color: var(--erro); }
+  .campo.erro .chip{ border-color: var(--erro); }
 
   /* chips (pergunta 4) */
   .chips{ display:flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
@@ -309,6 +310,15 @@
       border: 1px solid #ddd; border-radius: 5px; padding: 10px 14px; margin-bottom: 18px; font-size: 11.5px;
     }
     #resumo-impressao .dados-pessoais strong{ color:#000; }
+    #resumo-impressao .perfil-lead{
+      display:grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
+      background: rgba(160,140,92,0.08); border: 1.5px solid #a08c5c; border-radius: 6px;
+      padding: 11px 14px; margin-bottom: 18px; font-size: 12.5px; color:#000; font-weight:600;
+    }
+    #resumo-impressao .rotulo-perfil{
+      display:block; font-size: 9px; letter-spacing:1px; text-transform:uppercase;
+      color:#7d6a45; font-weight:700; margin-bottom: 2px;
+    }
     /* Coluna única de propósito: layout em 2 colunas (column-count) tem bug conhecido
        no Chrome ao gerar PDF — respostas longas podem ser cortadas em vez de fluir pra
        próxima página. Coluna única nunca corta texto, só usa mais página se precisar. */
@@ -346,7 +356,7 @@
 
 <div id="wizard-shell">
   <div class="stepper-info">
-    <span id="step-label">Etapa 1 de 8</span>
+    <span id="step-label">Etapa 1 de 9</span>
     <span id="step-titulo-atual">Bem-vindo</span>
   </div>
   <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
@@ -568,8 +578,41 @@
       </div>
     </section>
 
-    <!-- ETAPA 7 — CONSENTIMENTO E ENVIO -->
-    <section class="step" data-step="7" data-titulo="Finalizar">
+    <!-- ETAPA 7 — NÍVEL DE INTERESSE -->
+    <section class="step" data-step="7" data-titulo="Nível de interesse">
+      <div class="step-card">
+        <h2>Só mais duas perguntas</h2>
+        <p class="subtitulo">Isso ajuda a priorizar seu atendimento corretamente.</p>
+
+        <div class="campo">
+          <label>17. Qual dessas frases descreve melhor você agora?</label>
+          <div class="chips" role="radiogroup" aria-label="Nível de interesse">
+            <label class="chip"><input type="radio" name="nivel_interesse" value="Já decidi investir na minha imagem e quero agendar minha consultoria" required><span>Já decidi investir na minha imagem e quero agendar</span></label>
+            <label class="chip"><input type="radio" name="nivel_interesse" value="Tenho interesse real, mas quero entender melhor antes de decidir"><span>Tenho interesse real, mas quero entender melhor antes</span></label>
+            <label class="chip"><input type="radio" name="nivel_interesse" value="Estou apenas pesquisando por curiosidade"><span>Estou apenas pesquisando por curiosidade</span></label>
+          </div>
+          <div class="aviso-erro">Escolha uma opção.</div>
+        </div>
+
+        <div class="campo">
+          <label>18. Quando você gostaria de começar sua consultoria?</label>
+          <div class="chips" role="radiogroup" aria-label="Prazo desejado">
+            <label class="chip"><input type="radio" name="prazo_desejado" value="O quanto antes" required><span>O quanto antes</span></label>
+            <label class="chip"><input type="radio" name="prazo_desejado" value="Nos próximos 30 dias"><span>Nos próximos 30 dias</span></label>
+            <label class="chip"><input type="radio" name="prazo_desejado" value="Ainda não tenho prazo definido"><span>Ainda não tenho prazo definido</span></label>
+          </div>
+          <div class="aviso-erro">Escolha uma opção.</div>
+        </div>
+
+        <div class="nav-etapa">
+          <button type="button" class="btn-voltar" data-back>Voltar</button>
+          <button type="button" class="btn" data-next>Próximo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ETAPA 8 — CONSENTIMENTO E ENVIO -->
+    <section class="step" data-step="8" data-titulo="Finalizar">
       <div class="step-card">
         <h2>Quase lá</h2>
         <p class="subtitulo">Confirme abaixo e gere seu PDF de respostas.</p>
@@ -670,7 +713,14 @@ function validarEtapa(indice){
 
   campos.forEach(campo => {
     const wrapper = campo.closest('.campo, .consentimento');
-    const ok = campo.type === 'checkbox' ? campo.checked : campo.value.trim() !== '';
+    let ok;
+    if(campo.type === 'radio'){
+      ok = etapa.querySelector('input[name="' + campo.name + '"]:checked') !== null;
+    } else if(campo.type === 'checkbox'){
+      ok = campo.checked;
+    } else {
+      ok = campo.value.trim() !== '';
+    }
     if(wrapper){ wrapper.classList.toggle('erro', !ok); }
     if(!ok){
       valido = false;
@@ -718,6 +768,10 @@ form.addEventListener('change', e => {
     const wrapper = e.target.closest('.consentimento');
     if(wrapper && e.target.checked) wrapper.classList.remove('erro');
   }
+  if(e.target.type === 'radio' && e.target.checked){
+    const wrapper = e.target.closest('.campo');
+    if(wrapper) wrapper.classList.remove('erro');
+  }
 });
 
 const perguntas = [
@@ -751,6 +805,10 @@ function coletarDados(){
   });
   dados.area = Array.from(document.querySelectorAll('input[name="area"]:checked')).map(el => el.value);
   dados.consentimento = document.getElementById('consentimento').checked;
+  const nivelEl = document.querySelector('input[name="nivel_interesse"]:checked');
+  const prazoEl = document.querySelector('input[name="prazo_desejado"]:checked');
+  dados.nivel_interesse = nivelEl ? nivelEl.value : '';
+  dados.prazo_desejado = prazoEl ? prazoEl.value : '';
   return dados;
 }
 
@@ -766,7 +824,7 @@ form.addEventListener('change', salvarRascunho);
 
 function restaurarDados(dados){
   Object.keys(dados).forEach(chave => {
-    if(chave === 'area' || chave === 'consentimento') return;
+    if(chave === 'area' || chave === 'consentimento' || chave === 'nivel_interesse' || chave === 'prazo_desejado') return;
     const el = document.getElementById(chave);
     if(el){ el.value = dados[chave]; ajustarAltura(el); }
   });
@@ -776,6 +834,16 @@ function restaurarDados(dados){
     });
   }
   if(dados.consentimento){ document.getElementById('consentimento').checked = true; }
+  if(dados.nivel_interesse){
+    document.querySelectorAll('input[name="nivel_interesse"]').forEach(r => {
+      r.checked = (r.value === dados.nivel_interesse);
+    });
+  }
+  if(dados.prazo_desejado){
+    document.querySelectorAll('input[name="prazo_desejado"]').forEach(r => {
+      r.checked = (r.value === dados.prazo_desejado);
+    });
+  }
 }
 
 (function verificarRascunho(){
@@ -809,6 +877,11 @@ function montarResumo(){
 
   const dataHoje = new Date().toLocaleDateString('pt-BR');
 
+  const nivelInteresseEl = document.querySelector('input[name="nivel_interesse"]:checked');
+  const prazoDesejadoEl = document.querySelector('input[name="prazo_desejado"]:checked');
+  const nivelInteresse = nivelInteresseEl ? nivelInteresseEl.value : '—';
+  const prazoDesejado = prazoDesejadoEl ? prazoDesejadoEl.value : '—';
+
   let html = '';
   html += '<div class="cabecalho-doc">';
   html += '<div><div class="marca-doc">Wagner Alves · Visagismo Estratégico</div><h1>Formulário de Pré-Entrevista</h1></div>';
@@ -819,6 +892,11 @@ function montarResumo(){
   html += '<div><strong>Idade:</strong> ' + escapeHtml(idade) + '</div>';
   html += '<div><strong>Profissão:</strong> ' + escapeHtml(profissao) + '</div>';
   html += '<div><strong>Instagram:</strong> ' + (instagram ? escapeHtml(instagram) : '—') + '</div>';
+  html += '</div>';
+
+  html += '<div class="perfil-lead">';
+  html += '<div><span class="rotulo-perfil">Nível de interesse</span>' + escapeHtml(nivelInteresse) + '</div>';
+  html += '<div><span class="rotulo-perfil">Prazo desejado</span>' + escapeHtml(prazoDesejado) + '</div>';
   html += '</div>';
 
   perguntas.forEach(p => {
@@ -862,7 +940,11 @@ function gerarPdf(){
   try{ localStorage.removeItem(CHAVE_RASCUNHO); }catch(e){}
 
   const nome = document.getElementById('nome').value.trim();
-  const mensagem = 'Olá Wagner! Segue em anexo o meu formulário de pré-entrevista de visagismo (' + (nome || 'PDF') + ').';
+  const nivelEl = document.querySelector('input[name="nivel_interesse"]:checked');
+  const prazoEl = document.querySelector('input[name="prazo_desejado"]:checked');
+  const linhaPerfil = (nivelEl ? '\n• Nível de interesse: ' + nivelEl.value : '') +
+                      (prazoEl ? '\n• Prazo desejado: ' + prazoEl.value : '');
+  const mensagem = 'Olá Wagner! Segue em anexo o meu formulário de pré-entrevista de visagismo (' + (nome || 'PDF') + ').' + linhaPerfil;
 
   document.getElementById('link-whatsapp').href =
     'https://wa.me/' + CONFIG.whatsappNumero + '?text=' + encodeURIComponent(mensagem);
