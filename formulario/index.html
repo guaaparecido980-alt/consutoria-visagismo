@@ -255,6 +255,14 @@
     color: var(--dourado-claro);
   }
 
+  .link-discreto{
+    display:block; width:100%; text-align:center; margin-top:14px;
+    background:none; border:none; color: var(--texto-fraco);
+    font-family:'Inter'; font-size:12.5px; text-decoration:underline;
+    cursor:pointer; padding:6px;
+  }
+  .link-discreto:hover{ color: var(--dourado-claro); }
+
   /* ---------- Pós-envio ---------- */
   .pos-envio{
     display:none;
@@ -615,7 +623,7 @@
     <section class="step" data-step="8" data-titulo="Finalizar">
       <div class="step-card">
         <h2>Quase lá</h2>
-        <p class="subtitulo">Confirme abaixo e gere seu PDF de respostas.</p>
+        <p class="subtitulo">Confirme abaixo e envie suas respostas para o Wagner.</p>
 
         <div class="consentimento">
           <input type="checkbox" id="consentimento" name="consentimento" required>
@@ -623,13 +631,14 @@
         </div>
 
         <div id="mensagem-validacao" style="display:none; color:var(--erro); background:rgba(193,123,111,0.1); border:1px solid rgba(193,123,111,0.4); padding:12px 16px; border-radius:8px; font-size:14px; margin-bottom:20px;">
-          Por favor, preencha todos os campos obrigatórios antes de gerar o PDF.
+          Por favor, preencha todos os campos obrigatórios antes de enviar.
         </div>
 
         <div class="nav-etapa">
           <button type="button" class="btn-voltar" data-back>Voltar</button>
-          <button type="button" id="btn-gerar-pdf" class="btn">Gerar meu PDF de respostas</button>
+          <button type="button" id="btn-enviar-whatsapp" class="btn">Enviar minhas respostas pelo WhatsApp</button>
         </div>
+        <button type="button" id="btn-preferir-pdf" class="link-discreto">Prefiro gerar um PDF e enviar por e-mail</button>
       </div>
     </section>
 
@@ -640,16 +649,33 @@
       <div class="selo-ok">
         <svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="#1a1608" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
-      <h2>PDF pronto para salvar</h2>
-      <p>A janela de impressão do seu navegador foi aberta. Escolha <strong>"Salvar como PDF"</strong>
-      (ou "Microsoft Print to PDF") para baixar o arquivo. Depois, envie o PDF salvo para o Wagner
-      por um dos canais abaixo.</p>
-      <div class="acoes">
-        <a class="btn btn-secundario" id="link-whatsapp" href="#" target="_blank" rel="noopener">Abrir WhatsApp para enviar o PDF</a>
-        <a class="btn btn-secundario" id="link-email" href="#">Abrir e-mail para enviar o PDF</a>
-        <button type="button" class="btn btn-secundario" id="btn-imprimir-novamente">Abrir novamente a janela de impressão</button>
-        <button type="button" class="btn-voltar" id="btn-reiniciar" style="width:100%;">Preencher novamente do zero</button>
+
+      <div id="pos-envio-whatsapp">
+        <h2>Prontinho!</h2>
+        <p>O WhatsApp deve abrir com sua mensagem já pronta, com todas as suas respostas.
+        É só conferir e apertar em <strong>enviar</strong>.</p>
+        <div class="acoes">
+          <a class="btn" id="link-whatsapp-direto" href="#" target="_blank" rel="noopener">Abrir WhatsApp novamente</a>
+          <button type="button" class="btn-voltar" id="btn-preferir-pdf-2" style="width:100%;">Prefiro gerar um PDF em vez disso</button>
+        </div>
       </div>
+
+      <div id="pos-envio-pdf" style="display:none;">
+        <div id="aviso-fallback-pdf" style="display:none; background:rgba(193,123,111,0.1); border:1px solid rgba(193,123,111,0.4); color:var(--erro); padding:12px 16px; border-radius:8px; font-size:13.5px; margin-bottom:18px; text-align:left;">
+          Suas respostas ficaram longas demais para enviar direto pelo WhatsApp com segurança (o link poderia cortar parte do texto). Por isso, geramos um PDF — assim nada se perde.
+        </div>
+        <h2>PDF pronto para salvar</h2>
+        <p>A janela de impressão do seu navegador foi aberta. Escolha <strong>"Salvar como PDF"</strong>
+        (ou "Microsoft Print to PDF") para baixar o arquivo. Depois, envie o PDF salvo para o Wagner
+        por um dos canais abaixo.</p>
+        <div class="acoes">
+          <a class="btn btn-secundario" id="link-whatsapp" href="#" target="_blank" rel="noopener">Abrir WhatsApp para enviar o PDF</a>
+          <a class="btn btn-secundario" id="link-email" href="#">Abrir e-mail para enviar o PDF</a>
+          <button type="button" class="btn btn-secundario" id="btn-imprimir-novamente">Abrir novamente a janela de impressão</button>
+        </div>
+      </div>
+
+      <button type="button" class="btn-voltar" id="btn-reiniciar" style="width:100%; margin-top:14px;">Preencher novamente do zero</button>
     </div>
   </div>
 </main>
@@ -926,7 +952,77 @@ function todasEtapasValidas(){
   return true;
 }
 
-function gerarPdf(){
+/* Acima desse tamanho, o link do WhatsApp (wa.me?text=...) corre risco real de
+   cortar o texto silenciosamente em alguns celulares/navegadores — por segurança,
+   preferimos cair para o fluxo de PDF em vez de arriscar perder resposta do cliente. */
+const LIMITE_MENSAGEM_DIRETA = 3000;
+
+function montarTextoPlano(){
+  const nome = document.getElementById('nome').value.trim();
+  const idade = document.getElementById('idade').value.trim();
+  const profissao = document.getElementById('profissao').value.trim();
+  const instagram = document.getElementById('instagram').value.trim();
+
+  const areasMarcadas = Array.from(document.querySelectorAll('input[name="area"]:checked')).map(el => el.value);
+  const areaOutros = document.getElementById('area_outros').value.trim();
+  if(areaOutros){ areasMarcadas.push(areaOutros); }
+  const areasTexto = areasMarcadas.length ? areasMarcadas.join(', ') : '—';
+
+  const nivelEl = document.querySelector('input[name="nivel_interesse"]:checked');
+  const prazoEl = document.querySelector('input[name="prazo_desejado"]:checked');
+
+  let texto = 'FORMULÁRIO DE PRÉ-ENTREVISTA — VISAGISMO\n';
+  texto += 'Wagner Alves · Visagismo Estratégico\n\n';
+  texto += 'Nome: ' + nome + '\n';
+  texto += 'Idade: ' + idade + '\n';
+  texto += 'Profissão: ' + profissao + '\n';
+  texto += 'Instagram: ' + (instagram || '—') + '\n\n';
+  texto += 'Nível de interesse: ' + (nivelEl ? nivelEl.value : '—') + '\n';
+  texto += 'Prazo desejado: ' + (prazoEl ? prazoEl.value : '—') + '\n\n';
+
+  perguntas.forEach(p => {
+    let resposta;
+    if(p.id === 'area'){ resposta = areasTexto; }
+    else{ resposta = document.getElementById(p.id).value.trim() || '—'; }
+    texto += p.label + '\nR: ' + resposta + '\n\n';
+  });
+
+  return texto.trim();
+}
+
+function mostrarPosEnvio(modo){
+  document.querySelector('main > form').style.display = 'none';
+  document.getElementById('pos-envio-whatsapp').style.display = (modo === 'whatsapp') ? 'block' : 'none';
+  document.getElementById('pos-envio-pdf').style.display = (modo === 'pdf') ? 'block' : 'none';
+  posEnvio.style.display = 'block';
+  posEnvio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function enviarPorWhatsapp(){
+  mensagemValidacao.style.display = 'none';
+
+  if(!validarEtapa(indiceAtual) || !todasEtapasValidas()){
+    mensagemValidacao.style.display = 'block';
+    return;
+  }
+
+  const texto = montarTextoPlano();
+
+  if(texto.length > LIMITE_MENSAGEM_DIRETA){
+    gerarPdf(true);
+    return;
+  }
+
+  try{ localStorage.removeItem(CHAVE_RASCUNHO); }catch(e){}
+
+  const url = 'https://wa.me/' + CONFIG.whatsappNumero + '?text=' + encodeURIComponent(texto);
+  document.getElementById('link-whatsapp-direto').href = url;
+  window.open(url, '_blank');
+
+  mostrarPosEnvio('whatsapp');
+}
+
+function gerarPdf(viaFallback){
   mensagemValidacao.style.display = 'none';
 
   if(!validarEtapa(indiceAtual) || !todasEtapasValidas()){
@@ -954,12 +1050,14 @@ function gerarPdf(){
     '?subject=' + encodeURIComponent('Formulário de Pré-Entrevista - Visagismo - ' + (nome || '')) +
     '&body=' + encodeURIComponent(mensagem + '\n\n(Não esqueça de anexar o PDF salvo antes de enviar.)');
 
-  document.querySelector('main > form').style.display = 'none';
-  posEnvio.style.display = 'block';
-  posEnvio.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('aviso-fallback-pdf').style.display = viaFallback ? 'block' : 'none';
+
+  mostrarPosEnvio('pdf');
 }
 
-document.getElementById('btn-gerar-pdf').addEventListener('click', gerarPdf);
+document.getElementById('btn-enviar-whatsapp').addEventListener('click', enviarPorWhatsapp);
+document.getElementById('btn-preferir-pdf').addEventListener('click', () => gerarPdf(false));
+document.getElementById('btn-preferir-pdf-2').addEventListener('click', () => gerarPdf(false));
 document.getElementById('btn-imprimir-novamente').addEventListener('click', () => {
   montarResumo();
   window.print();
