@@ -840,7 +840,7 @@
         <!-- Versão DESKTOP: tudo em uma linha -->
         <p class="hidden md:flex" style="font-size:0.65rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);align-items:center;justify-content:center;gap:10px;margin:0;padding:10px 16px;">
             <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
-            <span>Wagner está aceitando agendamentos para julho</span>
+            <span>Wagner está aceitando agendamentos para <span id="mes-agendamento-desktop">julho</span></span>
             <span style="color:rgba(160,140,92,0.4)">·</span>
             <span id="vagas-bar">2 vagas restantes</span>
             <span style="color:rgba(160,140,92,0.4)">·</span>
@@ -852,7 +852,7 @@
             <span style="width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 1.5s infinite;flex-shrink:0"></span>
             <span id="vagas-bar-mobile">2 vagas</span>
             <span style="color:rgba(160,140,92,0.4)">·</span>
-            <span>Julho</span>
+            <span id="mes-agendamento-mobile">Julho</span>
             <span style="color:rgba(160,140,92,0.4)">·</span>
             <a href="https://wa.me/5541999682982?text=Olá%20Wagner,%20gostaria%20de%20agendar%20uma%20consultoria" onclick="dispararPixelContato()" style="color:var(--gold-light);text-decoration:underline;text-underline-offset:2px;">Garantir vaga →</a>
         </p>
@@ -1556,6 +1556,16 @@
         if (elBar) elBar.textContent = vagas + (vagas === 4 ? ' vaga restante' : ' vagas restantes');
         if (elBarMobile) elBarMobile.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
         if (elPopup) elPopup.textContent = vagas + (vagas === 1 ? ' vaga' : ' vagas');
+
+        // ─── MÊS ATUAL (barra de urgência) ───
+        // Antes ficava escrito na mão em dois lugares (desktop/mobile) e ficava
+        // fácil os dois saírem dessincronizados. Agora os dois puxam do mesmo cálculo.
+        const mesesPtBr = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+        const nomeMesAtual = mesesPtBr[new Date().getMonth()];
+        const elMesDesktop = document.getElementById('mes-agendamento-desktop');
+        const elMesMobile = document.getElementById('mes-agendamento-mobile');
+        if (elMesDesktop) elMesDesktop.textContent = nomeMesAtual;
+        if (elMesMobile) elMesMobile.textContent = nomeMesAtual.charAt(0).toUpperCase() + nomeMesAtual.slice(1);
 
         // ─── CONTADORES ANIMADOS ───
         function animateCounter(el) {
