@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teste de Perfil Comportamental em Arquétipos | Wagner Alves</title>
+<meta name="description" content="Descubra qual perfil comportamental — Rei, Guerreiro, Mago ou Amante — mais se aproxima da sua maneira de pensar, decidir e se relacionar. Teste de autoconhecimento em 30 perguntas, com resultado personalizado.">
+<link rel="canonical" href="https://owagneralvessvisagista.com/teste-de-perfil-comportamental-em-arquetipos/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Wagner Alves">
+<meta name="theme-color" content="#0a0a0a">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Wagner Alves — Visagismo Estratégico">
+<meta property="og:title" content="Teste de Perfil Comportamental em Arquétipos | Wagner Alves">
+<meta property="og:description" content="Rei, Guerreiro, Mago ou Amante? Descubra em 30 perguntas qual perfil comportamental mais se aproxima do seu jeito de decidir, trabalhar e se relacionar.">
+<meta property="og:url" content="https://owagneralvessvisagista.com/teste-de-perfil-comportamental-em-arquetipos/">
+<meta property="og:image" content="https://owagneralvessvisagista.com/logo.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Teste de Perfil Comportamental em Arquétipos | Wagner Alves">
+<meta name="twitter:description" content="Rei, Guerreiro, Mago ou Amante? Descubra qual perfil comportamental mais se aproxima do seu jeito de decidir e se relacionar.">
+<meta name="twitter:image" content="https://owagneralvessvisagista.com/logo.png">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Teste de Perfil Comportamental em Arquétipos",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "pt-BR",
+  "url": "https://owagneralvessvisagista.com/teste-de-perfil-comportamental-em-arquetipos/",
+  "description": "Teste de autoconhecimento com 30 perguntas que identifica qual dos quatro perfis comportamentais — Rei, Guerreiro, Mago ou Amante — mais se aproxima do modo de agir de cada pessoa.",
+  "author": { "@type": "Person", "name": "Wagner Alves" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }
+}
+</script>
+</head>
+<body>
+
+<!-- ====================================================== BARRA DE PROGRESSO -->
+<div class="barra-topo" id="barra-topo" style="display:none">
+  <div class="container">
+    <div class="info">
+      <span id="contador">Pergunta 1 de 30</span>
+      <span class="categoria" id="categoria"></span>
+    </div>
+    <div class="trilho"><div class="preenche" id="preenche"></div></div>
+  </div>
+</div>
+
+<!-- ================================================================ LANDING -->
+<section class="tela ativa" data-tela="landing">
+  <div class="container">
+    <header class="hero">
+      <div class="constelacao" id="constelacao" aria-hidden="true"></div>
+      <div class="olho">Wagner Alves · Visagismo Estratégico</div>
+      <h1>Descubra o que realmente guia suas decisões.</h1>
+      <p class="sub">Responda algumas perguntas e descubra qual perfil comportamental mais se aproxima da sua maneira de pensar, agir e se relacionar.</p>
+
+      <button class="btn" id="btn-comecar">Descobrir meu perfil</button>
+
+      <div class="selos">
+        <span class="selo">3 a 5 minutos</span>
+        <span class="selo"><span id="total-perguntas">30</span> perguntas</span>
+        <span class="selo">Resultado personalizado</span>
+        <span class="selo">Quatro dimensões</span>
+      </div>
+
+      <!-- Retomar rascunho -->
+      <div class="painel" id="caixa-retomar" style="display:none; margin-top:34px; text-align:left">
+        <h3 style="font-family:'Inter',sans-serif; font-size:12px; letter-spacing:2.4px; text-transform:uppercase; color:var(--dourado-claro)">Teste em andamento</h3>
+        <p class="texto-suave" id="texto-retomar" style="font-size:14.5px"></p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <button class="btn" id="btn-retomar" style="flex:1">Continuar de onde parei</button>
+          <button class="btn-texto" id="btn-descartar">Começar do zero</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="divisor"><span class="linha"></span><span class="diamante"></span><span class="linha"></span></div>
+
+    <section class="secao">
+      <h2>Como funciona</h2>
+      <p class="texto-suave">Nada de questionário genérico. Cada pergunta descreve uma situação real e pede apenas que você escolha o que mais se parece com o seu jeito — não existe resposta certa.</p>
+
+      <div class="passos">
+        <div class="passo">
+          <span class="num">1</span>
+          <div><h3>Responda às perguntas</h3><p>Trinta situações do dia a dia, com quatro caminhos possíveis em cada uma.</p></div>
+        </div>
+        <div class="passo">
+          <span class="num">2</span>
+          <div><h3>O sistema analisa suas respostas</h3><p>Cada escolha alimenta quatro dimensões comportamentais diferentes.</p></div>
+        </div>
+        <div class="passo">
+          <span class="num">3</span>
+          <div><h3>Descubra seu perfil predominante</h3><p>Você recebe o mapa completo das quatro dimensões, não apenas um rótulo.</p></div>
+        </div>
+        <div class="passo">
+          <span class="num">4</span>
+          <div><h3>Veja seus pontos fortes e de desenvolvimento</h3><p>Como você decide, lidera, se relaciona e reage sob pressão — com sugestões práticas.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao">
+      <h2>As quatro dimensões</h2>
+      <p class="texto-suave">Todo mundo tem um pouco das quatro. O que muda é a proporção — e é justamente ela que define o seu jeito de funcionar.</p>
+      <div class="grade-perfis" id="grade-perfis"></div>
+
+      <p class="aviso-etico">
+        Este teste é uma ferramenta de autoconhecimento e não substitui avaliação psicológica ou profissional.
+        O resultado indica tendências comportamentais que aparecem nas suas respostas — não é um diagnóstico
+        e não define quem você é.
+      </p>
+
+      <div style="text-align:center; margin-top:36px">
+        <button class="btn" id="btn-comecar-2">Começar o teste</button>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- =================================================================== TESTE -->
+<section class="tela" data-tela="teste">
+  <div class="container">
+    <div class="area-pergunta">
+      <h2 class="pergunta-texto" id="pergunta-texto"></h2>
+      <div class="opcoes" id="opcoes" role="radiogroup" tabindex="-1" aria-label="Alternativas"></div>
+
+      <div class="alerta" id="alerta-pergunta">Escolha uma alternativa para continuar.</div>
+
+      <div class="navegacao">
+        <button class="btn-texto" id="btn-voltar">← Voltar</button>
+        <button class="btn" id="btn-continuar">Continuar</button>
+      </div>
+
+      <p class="texto-fraco" style="text-align:center; margin-top:24px">
+        Não existe resposta certa. Escolha o que mais se parece com você hoje.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== ANALISANDO -->
+<section class="tela" data-tela="analisando">
+  <div class="container">
+    <div class="analisando">
+      <div class="orbita" aria-hidden="true"><span></span><span></span><span></span></div>
+      <h2>Analisando suas respostas</h2>
+      <p class="etapa" id="etapa-analise" aria-live="polite">Organizando suas respostas...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== LEAD -->
+<section class="tela" data-tela="lead">
+  <div class="container">
+    <div style="text-align:center; padding:56px 0 30px">
+      <div class="olho">Análise concluída</div>
+      <h1 style="font-size:clamp(26px,5vw,40px)">Seu resultado está pronto.</h1>
+      <p class="texto-suave" style="max-width:480px; margin:0 auto">
+        Informe seu nome e e-mail para liberar sua análise completa.
+      </p>
+    </div>
+
+    <form class="painel" id="form-lead" novalidate>
+      <div class="campo">
+        <label for="lead-nome">Seu nome</label>
+        <input type="text" id="lead-nome" name="nome" autocomplete="name" required aria-describedby="erro-nome">
+        <span class="msg-erro" id="erro-nome">Informe seu nome.</span>
+      </div>
+
+      <div class="campo">
+        <label for="lead-email">Seu melhor e-mail</label>
+        <input type="email" id="lead-email" name="email" autocomplete="email" inputmode="email" required aria-describedby="erro-email">
+        <span class="msg-erro" id="erro-email">Informe um e-mail válido.</span>
+      </div>
+
+      <label class="consentimento" for="lead-consent">
+        <input type="checkbox" id="lead-consent" name="consentimento">
+        <span>Concordo em receber meu resultado e comunicações relacionadas ao teste, conforme a
+          <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+      </label>
+
+      <button type="submit" class="btn" id="btn-liberar" style="width:100%">Liberar minha análise</button>
+
+      <p class="texto-fraco" style="text-align:center; margin:18px 0 0">
+        Seus dados não são vendidos nem compartilhados. Você pode pedir a exclusão a qualquer momento.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- =============================================================== RESULTADO -->
+<section class="tela" data-tela="resultado">
+  <div class="container container-largo">
+
+    <div class="coroa-resultado">
+      <div class="emblema-grande" id="emblema-resultado" aria-hidden="true"></div>
+      <div class="rotulo" id="saudacao">Seu perfil predominante é</div>
+      <div class="nome-perfil" id="nome-perfil"></div>
+      <div class="combinacao-tag" id="combinacao-tag"></div>
+      <p class="texto-suave" id="descricao-curta" style="max-width:560px; margin:22px auto 0"></p>
+    </div>
+
+    <div class="painel" id="aviso-compartilhado" style="display:none; margin-top:30px; text-align:center">
+      <p style="margin:0 0 16px" class="texto-suave">Você está vendo o resultado de outra pessoa. Quer descobrir o seu?</p>
+      <button class="btn" id="btn-refazer-topo" onclick="document.getElementById('btn-refazer').click()">Fazer o meu teste</button>
+    </div>
+
+    <div class="divisor"><span class="linha"></span><span class="diamante"></span><span class="linha"></span></div>
+
+    <!-- Mapa -->
+    <section>
+      <h2 style="text-align:center">Seu mapa comportamental</h2>
+      <p class="texto-suave" style="text-align:center; max-width:520px; margin:0 auto">
+        Todas as quatro dimensões aparecem em você. O que define seu jeito é a proporção entre elas.
+      </p>
+      <div class="radar-wrap" id="radar"></div>
+      <div class="grafico" id="grafico-barras"></div>
+    </section>
+
+    <!-- Combinação -->
+    <div class="bloco" id="bloco-combinacao" style="margin-top:30px">
+      <h3 id="combinacao-titulo"></h3>
+      <p class="texto-suave" id="combinacao-texto"></p>
+    </div>
+
+    <!-- Descrição longa -->
+    <div class="bloco">
+      <h3>Seu retrato</h3>
+      <p class="texto-suave" id="descricao-longa"></p>
+    </div>
+
+    <div class="divisor"><span class="linha"></span><span class="diamante"></span><span class="linha"></span></div>
+
+    <h2 style="text-align:center">Como você funciona</h2>
+    <div id="funcionamento" style="margin-top:22px"></div>
+
+    <div class="divisor"><span class="linha"></span><span class="diamante"></span><span class="linha"></span></div>
+
+    <h2 style="text-align:center">Seus pontos fortes</h2>
+    <div class="bloco" id="pontos-fortes" style="margin-top:22px"></div>
+
+    <h2 style="text-align:center; margin-top:44px">Pontos de atenção</h2>
+    <p class="texto-suave" style="text-align:center; max-width:520px; margin:0 auto 22px">
+      Não são defeitos. São o outro lado das suas próprias forças — o que costuma aparecer quando elas agem sem freio.
+    </p>
+    <div class="bloco" id="pontos-atencao"></div>
+
+    <h2 style="text-align:center; margin-top:44px">Seu próximo passo</h2>
+    <div class="bloco" id="desenvolvimento" style="margin-top:22px"></div>
+
+    <!-- Ações -->
+    <div class="acoes-resultado">
+      <button class="btn btn-vazado" id="btn-relatorio">Ver meu relatório completo</button>
+      <button class="btn btn-vazado" id="btn-compartilhar">Compartilhar meu resultado</button>
+      <button class="btn btn-vazado" id="btn-copiar">Copiar link</button>
+    </div>
+
+    <!-- CTA comercial -->
+    <div class="cta-final">
+      <div class="olho">Próximo passo</div>
+      <h2>Quer entender como usar seu perfil a seu favor?</h2>
+      <p>
+        Seu comportamento e sua imagem falam a mesma língua. Na consultoria de visagismo estratégico,
+        traduzimos o seu perfil em presença — no corte, na barba, no estilo e na forma como as pessoas
+        percebem você antes mesmo de você falar.
+      </p>
+      <a class="btn" id="link-whatsapp-lead" href="https://wa.me/5541999682982" target="_blank" rel="noopener">Quero conhecer mais</a>
+    </div>
+
+    <div style="text-align:center; margin:26px 0 10px">
+      <button class="btn-texto" id="btn-refazer">Refazer o teste</button>
+    </div>
+
+    <p class="aviso-etico" style="text-align:left">
+      Este teste é uma ferramenta de autoconhecimento e não substitui avaliação psicológica ou profissional.
+      O resultado indica tendências comportamentais identificadas nas suas respostas de hoje — elas podem
+      mudar com o tempo e com o contexto.
+      <br><br>
+      Versão do teste: <span id="versao-teste">1.0</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================= RODAPÉ -->
+<footer class="rodape">
+  <div class="container">
+    <div class="marca-rodape">Wagner Alves</div>
+    <div class="texto-fraco" style="margin-bottom:14px">Visagismo Estratégico · Curitiba</div>
+    <div>
+      <a href="sobre.html">Sobre o método</a>
+      <a href="privacidade.html">Privacidade</a>
+      <a href="termos.html">Termos de uso</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/content.js"></script>
+<script src="assets/engine.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
