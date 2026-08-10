@@ -800,23 +800,28 @@ form.addEventListener('change', e => {
   }
 });
 
+/* `label` = pergunta por extenso, usada no PDF (que não tem restrição de tamanho).
+   `curta` = mesma pergunta condensada, usada na mensagem do WhatsApp: preserva o
+   contexto de cada resposta sem estourar o tamanho da URL do wa.me. As 16 perguntas
+   por extenso custariam sozinhas ~2.400 caracteres codificados, antes de qualquer
+   resposta — por isso a versão curta. */
 const perguntas = [
-  { id: 'p1', label: '1. Qual foi a principal razão que fez você procurar uma consultoria de visagismo neste momento da sua vida?' },
-  { id: 'p2', label: '2. Existe alguma situação específica, pessoal ou profissional, que fez você sentir necessidade de mudar sua imagem?' },
-  { id: 'p3', label: '3. Alguma pessoa já comentou algo sobre sua aparência que marcou você positiva ou negativamente?' },
-  { id: 'area', label: '4. Qual área da sua vida você deseja fortalecer através da sua imagem?' },
-  { id: 'p5', label: '5. Você já pensou em fazer uma mudança radical no cabelo, barba ou estilo? Qual?' },
-  { id: 'p6', label: '6. Já se arrependeu de algum corte, barba ou procedimento visual? O que aconteceu?' },
-  { id: 'p7', label: '7. Onde você trabalha atualmente e como deseja ser percebido no seu ambiente profissional?' },
-  { id: 'p8', label: '8. Quais são seus maiores objetivos de vida hoje? Qual posição, cargo ou estilo de vida você deseja alcançar no futuro?' },
-  { id: 'p9', label: '9. Como você imagina sua aparência no auge do seu sucesso? Descreva roupas, cabelo, barba, postura e energia que gostaria de transmitir.' },
-  { id: 'p10', label: '10. Existe alguma característica do seu rosto, cabelo ou barba que incomoda você? Já recebeu apelidos, julgamentos ou interpretações erradas sobre sua aparência?' },
-  { id: 'p11', label: '11. Como é sua rotina semanal? Cite trabalho, lazer, esportes, eventos sociais, igreja, viagens e todos os ambientes que você frequenta.' },
-  { id: 'p12', label: '12. O que você deseja transmitir através da sua imagem hoje?' },
-  { id: 'p13', label: '13. Quais pessoas inspiram você visualmente? (artistas, empresários, atletas, líderes, personagens etc.)' },
-  { id: 'p14', label: '14. Você acredita que sua imagem atual representa quem você realmente é? Explique.' },
-  { id: 'p15', label: '15. Se sua imagem pudesse abrir portas para você, quais portas gostaria que ela abrisse?' },
-  { id: 'p16', label: '16. O que seria um resultado perfeito para você após essa consultoria de visagismo?' }
+  { id: 'p1', curta: 'Razão de buscar visagismo agora', label: '1. Qual foi a principal razão que fez você procurar uma consultoria de visagismo neste momento da sua vida?' },
+  { id: 'p2', curta: 'Situação que gerou a necessidade de mudar', label: '2. Existe alguma situação específica, pessoal ou profissional, que fez você sentir necessidade de mudar sua imagem?' },
+  { id: 'p3', curta: 'Comentário sobre a aparência que marcou', label: '3. Alguma pessoa já comentou algo sobre sua aparência que marcou você positiva ou negativamente?' },
+  { id: 'area', curta: 'Áreas da vida a fortalecer', label: '4. Qual área da sua vida você deseja fortalecer através da sua imagem?' },
+  { id: 'p5', curta: 'Mudança radical que já pensou', label: '5. Você já pensou em fazer uma mudança radical no cabelo, barba ou estilo? Qual?' },
+  { id: 'p6', curta: 'Arrependimento com corte/barba/procedimento', label: '6. Já se arrependeu de algum corte, barba ou procedimento visual? O que aconteceu?' },
+  { id: 'p7', curta: 'Trabalho e como quer ser percebido', label: '7. Onde você trabalha atualmente e como deseja ser percebido no seu ambiente profissional?' },
+  { id: 'p8', curta: 'Objetivos de vida e onde quer chegar', label: '8. Quais são seus maiores objetivos de vida hoje? Qual posição, cargo ou estilo de vida você deseja alcançar no futuro?' },
+  { id: 'p9', curta: 'Aparência no auge do sucesso', label: '9. Como você imagina sua aparência no auge do seu sucesso? Descreva roupas, cabelo, barba, postura e energia que gostaria de transmitir.' },
+  { id: 'p10', curta: 'O que incomoda no rosto/cabelo/barba', label: '10. Existe alguma característica do seu rosto, cabelo ou barba que incomoda você? Já recebeu apelidos, julgamentos ou interpretações erradas sobre sua aparência?' },
+  { id: 'p11', curta: 'Rotina semanal e ambientes que frequenta', label: '11. Como é sua rotina semanal? Cite trabalho, lazer, esportes, eventos sociais, igreja, viagens e todos os ambientes que você frequenta.' },
+  { id: 'p12', curta: 'O que quer transmitir hoje', label: '12. O que você deseja transmitir através da sua imagem hoje?' },
+  { id: 'p13', curta: 'Referências visuais que inspiram', label: '13. Quais pessoas inspiram você visualmente? (artistas, empresários, atletas, líderes, personagens etc.)' },
+  { id: 'p14', curta: 'A imagem atual representa quem é', label: '14. Você acredita que sua imagem atual representa quem você realmente é? Explique.' },
+  { id: 'p15', curta: 'Portas que a imagem deve abrir', label: '15. Se sua imagem pudesse abrir portas para você, quais portas gostaria que ela abrisse?' },
+  { id: 'p16', curta: 'Resultado perfeito após a consultoria', label: '16. O que seria um resultado perfeito para você após essa consultoria de visagismo?' }
 ];
 
 function escapeHtml(str){
@@ -954,10 +959,15 @@ function todasEtapasValidas(){
 
 /* O limite real de risco é no tamanho da URL final (https://wa.me/...?text=TEXTO-CODIFICADO),
    não no texto puro digitado pelo cliente — acentos do português (ção, ã, é...) inflam o
-   texto em ~1.5x quando viram %XX na URL. 2083 caracteres é o teto historicamente citado
-   como seguro em qualquer navegador/SO/proxy (herança do Internet Explorer, mas ainda usado
-   como referência universal). Damos uma margem generosa abaixo disso. */
-const LIMITE_URL_WHATSAPP = 1900;
+   texto em ~1.5x quando viram %XX na URL.
+
+   O WhatsApp não publica limite para o parâmetro ?text (a mensagem em si aceita 65.536
+   caracteres). O teto de 2083 usado antes aqui é herança do Internet Explorer e não se
+   aplica a navegador de celular moderno — mas a URL ainda passa por servidor e por intent
+   do Android, então mantemos um teto conservador com folga larga. Se estourar, o formulário
+   cai sozinho no PDF (que leva as perguntas por extenso), então errar para cima degrada a
+   experiência em vez de perder resposta. */
+const LIMITE_URL_WHATSAPP = 4000;
 
 function montarTextoPlano(){
   const nome = document.getElementById('nome').value.trim();
@@ -973,7 +983,9 @@ function montarTextoPlano(){
   const nivelEl = document.querySelector('input[name="nivel_interesse"]:checked');
   const prazoEl = document.querySelector('input[name="prazo_desejado"]:checked');
 
-  let texto = 'FORMULÁRIO DE PRÉ-ENTREVISTA — VISAGISMO\n';
+  // Os asteriscos viram negrito no WhatsApp: separam visualmente a pergunta da
+  // resposta na conversa, sem custar quase nada no tamanho da URL.
+  let texto = '*FORMULÁRIO DE PRÉ-ENTREVISTA — VISAGISMO*\n';
   texto += 'Wagner Alves · Visagismo Estratégico\n\n';
   texto += 'Nome: ' + nome + '\n';
   texto += 'Idade: ' + idade + '\n';
@@ -982,15 +994,11 @@ function montarTextoPlano(){
   texto += 'Nível de interesse: ' + (nivelEl ? nivelEl.value : '—') + '\n';
   texto += 'Prazo desejado: ' + (prazoEl ? prazoEl.value : '—') + '\n\n';
 
-  // Rótulo curto (P1, P2...) em vez da pergunta inteira: o Wagner já conhece as
-  // próprias perguntas, e a pergunta completa por extenso (16x) sozinha já ocuparia
-  // mais espaço que o limite seguro da URL do WhatsApp. A pergunta completa continua
-  // no PDF, que não tem essa restrição.
   perguntas.forEach((p, i) => {
     let resposta;
     if(p.id === 'area'){ resposta = areasTexto; }
     else{ resposta = document.getElementById(p.id).value.trim() || '—'; }
-    texto += 'P' + (i + 1) + ': ' + resposta + '\n\n';
+    texto += '*' + (i + 1) + '. ' + p.curta + '*\n' + resposta + '\n\n';
   });
 
   return texto.trim();
