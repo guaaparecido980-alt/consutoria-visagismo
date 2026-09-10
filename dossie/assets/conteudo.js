@@ -309,7 +309,7 @@
       slug: 'oval',
       nome: 'Rosto Oval',
       poligono: null,
-      elipse: { cx: 100, cy: 116, rx: 54, ry: 96 },
+      elipse: { cx: 100, cy: 128, rx: 74, ry: 108 },
       descricao:
         'Considerado o formato de referência do visagismo: comprimento cerca de uma vez e meia a largura, ' +
         'testa levemente mais larga que o queixo e transições curvas, sem ângulos marcados.',
@@ -327,7 +327,7 @@
       slug: 'redondo',
       nome: 'Rosto Redondo',
       poligono: null,
-      elipse: { cx: 100, cy: 116, rx: 62, ry: 76 },
+      elipse: { cx: 100, cy: 130, rx: 81, ry: 88 },
       descricao:
         'Largura e comprimento próximos, maçãs do rosto como ponto mais largo, mandíbula pouco angulada e ' +
         'contornos predominantemente curvos.',
@@ -345,7 +345,7 @@
     {
       slug: 'quadrado',
       nome: 'Rosto Quadrado',
-      poligono: '46,30 154,30 152,206 48,206',
+      poligono: '28,36 172,36 169,224 31,224',
       descricao:
         'Testa larga, mandíbula marcada e de mesma largura da testa, com ângulos bem definidos nos quatro ' +
         'cantos. Comprimento e largura próximos.',
@@ -362,7 +362,7 @@
     {
       slug: 'retangular',
       nome: 'Rosto Retangular (Oblongo)',
-      poligono: '52,22 148,22 146,214 54,214',
+      poligono: '38,26 162,26 160,232 40,232',
       descricao:
         'Mesma angulação do rosto quadrado, porém nitidamente mais comprido que largo. Testa alta e ' +
         'mandíbula reta.',
@@ -378,7 +378,7 @@
     {
       slug: 'triangular',
       nome: 'Rosto Triangular (Base Larga)',
-      poligono: '70,26 130,26 158,208 42,208',
+      poligono: '60,34 140,34 180,224 20,224',
       descricao:
         'Testa estreita e mandíbula larga, com a maior largura na base do rosto. A linha do contorno abre ' +
         'de cima para baixo.',
@@ -394,7 +394,7 @@
     {
       slug: 'triangular-invertido',
       nome: 'Rosto Triangular Invertido',
-      poligono: '42,30 158,30 100,212',
+      poligono: '22,40 178,40 100,234',
       descricao:
         'Testa larga, maçãs do rosto pronunciadas e queixo estreito e afinado. A linha do contorno fecha ' +
         'de cima para baixo.',
@@ -411,7 +411,7 @@
     {
       slug: 'losango',
       nome: 'Rosto Losango (Diamante)',
-      poligono: '100,22 160,112 100,214 40,112',
+      poligono: '100,22 182,128 100,236 18,128',
       descricao:
         'Testa e queixo estreitos com maçãs do rosto largas e altas — o ponto mais largo fica no meio do ' +
         'rosto, criando os dois ângulos que dão nome ao formato.',
@@ -427,7 +427,7 @@
     {
       slug: 'hexagonal-base-reta',
       nome: 'Rosto Hexagonal de Base Reta',
-      poligono: '74,24 126,24 160,102 132,204 68,204 40,102',
+      poligono: '64,28 136,28 182,118 144,224 56,224 18,118',
       descricao:
         'Característico por possuir o osso zigomático — também conhecido como maçã do rosto — mais ' +
         'pronunciado da face. Não possui o ângulo de mandíbula muito marcado, porém o mento (queixo) ' +
@@ -448,7 +448,7 @@
     {
       slug: 'trapezoidal',
       nome: 'Rosto Trapezoidal',
-      poligono: '62,26 138,26 158,200 42,200',
+      poligono: '52,34 148,34 180,218 20,218',
       descricao:
         'Testa de largura média e mandíbula larga e reta, com laterais que abrem em linha contínua da testa ' +
         'até a base. Contorno inferior horizontal e marcado.',
@@ -464,7 +464,7 @@
     {
       slug: 'pentagonal',
       nome: 'Rosto Pentagonal',
-      poligono: '100,20 158,78 138,206 62,206 42,78',
+      poligono: '100,20 180,92 152,226 48,226 20,92',
       descricao:
         'Testa que afina em direção ao topo formando um ângulo superior, maçãs largas e mandíbula reta com ' +
         'queixo de base marcada.',

@@ -379,9 +379,11 @@
     $$('#secoes .secao').forEach(function (s) {
       s.setAttribute('data-ativa', String(s.getAttribute('data-secao') === id));
     });
-    var pagina = { cliente: 1, perfil: 3, rosto: 5, cabelo: 6, medidas: 7,
-                   proposta: 8, fotos: 9, manutencao: 12 }[id];
-    if (pagina) irParaPagina(pagina);
+    /* Antes daqui, trocar de etapa arrastava a prévia (e no celular a página
+       inteira) até a página correspondente. Quem clica numa etapa quer EDITAR,
+       não navegar no documento — a tela saía de baixo do dedo antes de dar
+       tempo de mexer em nada. A navegação do dossiê agora é só pelas setas. */
+    $('#secoes').scrollTop = 0;
   }
 
   /* --- seções --------------------------------------------------------- */
@@ -825,12 +827,18 @@
 
   function atualizarPreview() {
     var palco = $('#palco');
+    /* Remontar o dossiê zera a rolagem do palco. Sem guardar e devolver a
+       posição, a prévia pulava para a primeira página a cada tecla digitada. */
+    var posicao = palco.scrollTop;
+
     var paginas = S.montar(ficha);
     palco.innerHTML = paginas.map(function (html) {
       return '<div class="moldura__caixa"><div class="moldura">' + html + '</div></div>';
     }).join('');
     palco.dataset.escalado = '';   /* conteúdo novo: força remedir */
     ajustarEscala();
+    palco.scrollTop = posicao;
+
     $('#conta-paginas').textContent = paginas.length + ' páginas';
     marcarPagina();
   }
@@ -870,11 +878,16 @@
     }
   }
 
+  /* Rola apenas o palco da prévia, nunca a página inteira: `scrollIntoView`
+     arrastava o documento junto e, no celular, jogava o formulário para fora
+     da tela. */
   function irParaPagina(n) {
     paginaAtual = Math.max(1, Math.min(13, n));
-    var caixas = $$('#palco .moldura__caixa');
-    var alvo = caixas[paginaAtual - 1];
-    if (alvo) alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var palco = $('#palco');
+    var alvo = $$('#palco .moldura__caixa')[paginaAtual - 1];
+    if (alvo) {
+      palco.scrollTo({ top: alvo.offsetTop - palco.offsetTop, behavior: 'smooth' });
+    }
     marcarPagina();
   }
 
