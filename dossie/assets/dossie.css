@@ -249,11 +249,13 @@
    03 · ANÁLISE FACIAL
 =========================================================================== */
 .rosto__nome { font-family: var(--serif); font-style: italic; font-size: 60px; line-height: 1.1; color: var(--tinta); margin: -18px 0 36px; }
-.rosto__dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; height: 600px; margin-bottom: 44px; }
-.rosto__diagrama { background: var(--papel-2); padding: 18px; display: flex; align-items: center; justify-content: center; }
-.rosto__diagrama svg { width: 100%; height: 100%; }
-.rosto__dupla .foto { height: 600px; }
-.pg--rosto .bloco { margin-top: calc(30px * var(--k)); }
+/* modelo 3D + linhas: a imagem e o SVG ocupam a mesma caixa, na mesma
+   proporção (1000 x 896), então cada linha cai no ponto medido */
+.rosto3d { position: relative; width: 100%; height: 806px; background: #1e1b16; overflow: hidden; }
+.rosto3d__img, .rosto3d__linhas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+.rosto__legenda { margin: 16px 0 34px; font-size: 21px; letter-spacing: .08em; color: var(--texto-3); }
+.pg--rosto .bloco, .pg--rosto2 .bloco { margin-top: calc(34px * var(--k)); }
+.pg--rosto2 .foto--faixa { height: 640px; }
 
 /* ===========================================================================
    04 · ESTRUTURA DO FIO

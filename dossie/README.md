@@ -44,7 +44,7 @@ atendimento. Nada vai para servidor nenhum.
 |---|---|
 | **Cliente** | Nome, profissão e data — vão para a capa |
 | **Perfil** | Rei, Guerreiro, Mago ou Amante |
-| **Rosto** | Formato entre 10 opções — o desenho do rosto muda junto |
+| **Rosto** | Formato entre os 7 modelos 3D: oval, redondo, quadrado, retangular, triangular, diamante e coração |
 | **Cabelo** | Tipo 1A a 4C, densidade e couro cabeludo |
 | **Medidas** | Topo, frente, laterais, nuca, barba, direção do fio e desenho da barba |
 | **Proposta** | Texto técnico do atendimento (vem pré-escrito pelo perfil) |
@@ -58,7 +58,7 @@ atendimento. Nada vai para servidor nenhum.
 - **Em pé, no formato da tela do celular** (9:16). Cada página ocupa a tela
   inteira e o texto é lido sem zoom. O formato deitado de apresentação deixava
   a letra minúscula no telefone.
-- **15 páginas**: capa, sumário, perfil, direção de imagem (2), análise facial,
+- **16 páginas**: capa, sumário, perfil, direção de imagem (2), análise facial (2),
   estrutura do fio, projeto técnico (2), proposta, referências, antes e depois
   (2), manutenção e contracapa.
 - **Fotos recortadas, não esticadas.** Cada foto é recortada no tamanho exato do
@@ -69,6 +69,14 @@ atendimento. Nada vai para servidor nenhum.
 - Tamanho típico: 3 a 5 MB — passa pelo WhatsApp sem problema.
 
 ---
+
+## A análise facial em 3D
+
+A página do formato do rosto mostra o **modelo 3D** daquele formato, renderizado
+no Blender, com as linhas por cima: o traçado geométrico em dourado e as
+larguras de testa, maçãs e mandíbula, mais o comprimento. As linhas não são
+desenhadas no olho — saem de medidas tiradas da própria malha 3D. Para refazer
+depois de mexer nos modelos: `automacao/rostos-3d/gerar.ps1` (ver o LEIA-ME de lá).
 
 ## Os desenhos técnicos
 
@@ -136,6 +144,7 @@ dossie/
     ├── app.js              ficha, prévia e geração do PDF
     ├── dossie.css          estilo do documento entregue ao cliente
     ├── app.css             estilo da ferramenta que o Wagner opera
+    ├── rostos/             os 7 rostos 3D e as medidas das linhas
     ├── wagner-capa.jpg     retrato da capa
     └── wagner-final.jpg    retrato da contracapa
 ```

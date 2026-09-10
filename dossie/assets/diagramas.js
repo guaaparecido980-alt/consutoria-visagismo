@@ -153,17 +153,15 @@
      jw  meia-largura na mandíbula chw meia-largura da base do queixo
      rTesta / rMaca / rMand / rQueixo — suavidade de cada marco
   =========================================================================== */
+  /* Os sete formatos dos modelos 3D (visagismo_todas_juntas.blend). */
   var FORMAS = {
-    'oval':                 { H: 306, sw: 104, fw: 95,  cw: 99,  jw: 79,  chw: 22, rTesta: 1,   rMaca: 1,    rMand: 1,    rQueixo: 1 },
-    'redondo':              { H: 284, sw: 110, fw: 101, cw: 111, jw: 99,  chw: 34, rTesta: 1,   rMaca: 1,    rMand: 1,    rQueixo: 1 },
-    'quadrado':             { H: 288, sw: 106, fw: 102, cw: 104, jw: 101, chw: 50, rTesta: 0.6, rMaca: 0.9,  rMand: 0.18, rQueixo: 0.4 },
-    'retangular':           { H: 334, sw: 100, fw: 94,  cw: 95,  jw: 92,  chw: 45, rTesta: 0.6, rMaca: 0.9,  rMand: 0.22, rQueixo: 0.45 },
-    'triangular':           { H: 300, sw: 92,  fw: 76,  cw: 96,  jw: 108, chw: 52, rTesta: 0.8, rMaca: 0.9,  rMand: 0.3,  rQueixo: 0.45 },
-    'triangular-invertido': { H: 302, sw: 113, fw: 110, cw: 104, jw: 70,  chw: 12, rTesta: 0.7, rMaca: 0.9,  rMand: 0.9,  rQueixo: 0.7 },
-    'losango':              { H: 306, sw: 92,  fw: 79,  cw: 113, jw: 72,  chw: 13, rTesta: 0.9, rMaca: 0.42, rMand: 0.85, rQueixo: 0.6 },
-    'hexagonal-base-reta':  { H: 300, sw: 95,  fw: 84,  cw: 111, jw: 82,  chw: 34, rTesta: 0.8, rMaca: 0.4,  rMand: 0.55, rQueixo: 0.25 },
-    'trapezoidal':          { H: 296, sw: 98,  fw: 87,  cw: 100, jw: 107, chw: 49, rTesta: 0.7, rMaca: 0.9,  rMand: 0.3,  rQueixo: 0.4 },
-    'pentagonal':           { H: 300, sw: 88,  fw: 84,  cw: 108, jw: 96,  chw: 42, rTesta: 0.6, rMaca: 0.55, rMand: 0.4,  rQueixo: 0.35, topo: 0.55 }
+    'oval':       { H: 306, sw: 104, fw: 95,  cw: 99,  jw: 79,  chw: 22, rTesta: 1,   rMaca: 1,    rMand: 1,    rQueixo: 1 },
+    'redondo':    { H: 284, sw: 110, fw: 101, cw: 111, jw: 99,  chw: 34, rTesta: 1,   rMaca: 1,    rMand: 1,    rQueixo: 1 },
+    'quadrado':   { H: 288, sw: 106, fw: 102, cw: 104, jw: 101, chw: 50, rTesta: 0.6, rMaca: 0.9,  rMand: 0.18, rQueixo: 0.4 },
+    'retangular': { H: 334, sw: 100, fw: 94,  cw: 95,  jw: 92,  chw: 45, rTesta: 0.6, rMaca: 0.9,  rMand: 0.22, rQueixo: 0.45 },
+    'triangular': { H: 300, sw: 92,  fw: 76,  cw: 96,  jw: 108, chw: 52, rTesta: 0.8, rMaca: 0.9,  rMand: 0.3,  rQueixo: 0.45 },
+    'diamante':   { H: 306, sw: 92,  fw: 79,  cw: 113, jw: 72,  chw: 13, rTesta: 0.9, rMaca: 0.42, rMand: 0.85, rQueixo: 0.6 },
+    'coracao':    { H: 302, sw: 113, fw: 110, cw: 104, jw: 70,  chw: 12, rTesta: 0.7, rMaca: 0.9,  rMand: 0.9,  rQueixo: 0.7 }
   };
 
   function modelo(slug) {
@@ -708,40 +706,127 @@
   }
 
   /* ===========================================================================
-     DIAGRAMA 1 — FORMATO DO ROSTO
-     A cabeça sem cabelo, com o traçado geométrico em dourado por cima. O
-     traçado nasce dos MESMOS marcos do contorno — por isso encaixa.
+     DIAGRAMA 1 — FORMATO DO ROSTO, sobre o modelo 3D
+     -------------------------------------------------------------------------
+     A imagem é o render frontal do modelo 3D daquele formato; as linhas vêm
+     das medidas tiradas da própria malha (assets/rostos/rostos3d.js). Nada é
+     posicionado no olho: a linha da testa está onde a testa do modelo é
+     medida, o traçado passa pelos pontos medidos.
+
+     Cada formato destaca as larguras que o definem. No triangular a testa é
+     medida no alto (onde ela afina) e a base na parte mais larga do terço
+     inferior; no diamante, o alto da testa — é o estreitamento que o define.
   =========================================================================== */
-  function tracadoGeometrico(slug, m) {
-    var f = m.f, H = m.H, y0 = 0.145 * H;
-    var P = {
-      'quadrado':             [[-f.fw, y0], [f.fw, y0], [f.jw, 0.985 * H], [-f.jw, 0.985 * H]],
-      'retangular':           [[-f.fw, y0], [f.fw, y0], [f.jw, 0.985 * H], [-f.jw, 0.985 * H]],
-      'triangular':           [[-f.fw * 0.86, y0], [f.fw * 0.86, y0], [f.jw + 2, 0.985 * H], [-f.jw - 2, 0.985 * H]],
-      'triangular-invertido': [[-f.fw, y0], [f.fw, y0], [0, H]],
-      'losango':              [[0, 0.06 * H], [f.cw + 3, 0.575 * H], [0, H], [-f.cw - 3, 0.575 * H]],
-      'hexagonal-base-reta':  [[-f.fw * 0.72, y0], [f.fw * 0.72, y0], [f.cw + 3, 0.575 * H], [f.chw + 6, H], [-f.chw - 6, H], [-f.cw - 3, 0.575 * H]],
-      'trapezoidal':          [[-f.fw * 0.95, y0], [f.fw * 0.95, y0], [f.jw + 2, 0.98 * H], [-f.jw - 2, 0.98 * H]],
-      'pentagonal':           [[0, 0.02 * H], [f.cw + 3, 0.45 * H], [f.jw, 0.985 * H], [-f.jw, 0.985 * H], [-f.cw - 3, 0.45 * H]]
-    }[slug];
-    var estilo = '" fill="' + MARCA + '" fill-opacity="0.1" stroke="' + MARCA + '" stroke-width="3.2" stroke-linejoin="round"';
-    if (!P) {
-      var cy = (y0 + H) / 2, ry = (H - y0) / 2 + 4;
-      return '<ellipse cx="0" cy="' + r1(cy) + '" rx="' + r1(f.cw + 4) + '" ry="' + r1(ry) + estilo + '/>';
+  /* Sobre a pele, linha escura com halo claro (creme some no bege); os
+     rótulos ficam no fundo grafite, em creme. */
+  var OURO_3D = '#d4bc82', CREME = '#f4ead0', MEDIDA = '#3b2f22';
+  var LARGURAS = {
+    padrao:     [['testa', 'TESTA'], ['macas', 'MAÇÃS'], ['mandibula', 'MANDÍBULA']],
+    triangular: [['testaTopo', 'TESTA'], ['macas', 'MAÇÃS'], ['inferior', 'MANDÍBULA']],
+    diamante:   [['testaTopo', 'TESTA'], ['macas', 'MAÇÃS'], ['mandibula', 'MANDÍBULA']]
+  };
+
+  /* Elipse ajustada às medidas (mínimos quadrados): passa pela linha do
+     cabelo, pelo mento e o mais perto possível de cada largura medida. */
+  function elipseAjustada(m) {
+    var pts = ['testaTopo', 'testa', 'macas', 'inferior', 'mandibula', 'queixoBase'].map(function (k) {
+      return { x: m[k].w / 2, y: m[k].y };
+    });
+    var cy = (m.cabelo + m.queixo) / 2, ry = (m.queixo - m.cabelo) / 2;
+    var num = 0, den = 0;
+    pts.forEach(function (p) {
+      var u = 1 - Math.pow((p.y - cy) / ry, 2);
+      if (u > 0.05) { num += p.x * p.x * u; den += u * u; }
+    });
+    return { cx: m.cx, cy: cy, rx: Math.sqrt(num / den), ry: ry };
+  }
+
+  function formaGeometrica(slug, m) {
+    var cx = m.cx, t = m.cabelo, b = m.queixo;
+    function h(o) { return o.w / 2; }
+    if (slug === 'quadrado' || slug === 'retangular') {
+      return [[cx - h(m.testa), t], [cx + h(m.testa), t], [cx + h(m.mandibula), b], [cx - h(m.mandibula), b]];
     }
-    var g = '<polygon points="' + P.map(function (p) { return r1(p[0]) + ',' + r1(p[1]); }).join(' ') + estilo + '/>';
-    P.forEach(function (p) { g += '<circle cx="' + r1(p[0]) + '" cy="' + r1(p[1]) + '" r="5" fill="' + MARCA + '"/>'; });
-    return g;
+    if (slug === 'triangular') {
+      return [[cx - h(m.testaTopo), t], [cx + h(m.testaTopo), t], [cx + h(m.inferior), b], [cx - h(m.inferior), b]];
+    }
+    if (slug === 'diamante') {
+      return [[cx, t], [cx + h(m.macas), m.macas.y], [cx, b], [cx - h(m.macas), m.macas.y]];
+    }
+    if (slug === 'coracao') {
+      /* testa larga, maçãs e o queixo em ponta: o "coração" invertido */
+      return [[cx - h(m.testa), t], [cx + h(m.testa), t], [cx + h(m.macas), m.macas.y], [cx, b], [cx - h(m.macas), m.macas.y]];
+    }
+    return null;   /* oval e redondo: elipse */
   }
 
   function formatoRosto(rosto) {
+    var R = G3D();
     var slug = rosto && rosto.slug ? rosto.slug : 'oval';
-    /* cabelo curto e neutro: sem ele a cabeça parecia usar uma touca; curto,
-       não esconde a testa, que é parte da leitura do formato */
-    var c = cabecaFrontal(slug, { topo: 2.5, lateral: 0.8, direcao: 'tras' }, 'limpo');
-    var H = c.m.H, topo = c.cab ? c.cab.topoY : 0;
-    var conteudo = c.svg + tracadoGeometrico(slug, c.m);
-    return envolver('-178 ' + r1(topo - 22) + ' 356 ' + r1(H + 96 - topo + 22), 'Traçado geométrico do formato de rosto', conteudo);
+    var m = R && R.rostos[slug];
+    if (!m) return '';
+    var W = R.largura, H = R.altura, g = '';
+
+    /* traçado geométrico */
+    var P = formaGeometrica(slug, m);
+    var sombra = ' fill="none" stroke="#0c0b09" stroke-opacity="0.45" stroke-width="11" stroke-linejoin="round"';
+    var ouro = ' fill="' + OURO_3D + '" fill-opacity="0.07" stroke="' + OURO_3D + '" stroke-width="5" stroke-linejoin="round"';
+    if (P) {
+      var pts = P.map(function (p) { return r1(p[0]) + ',' + r1(p[1]); }).join(' ');
+      g += '<polygon points="' + pts + '"' + sombra + '/><polygon points="' + pts + '"' + ouro + '/>';
+      P.forEach(function (p) {
+        g += '<circle cx="' + r1(p[0]) + '" cy="' + r1(p[1]) + '" r="9" fill="' + OURO_3D + '" stroke="#0c0b09" stroke-opacity="0.5" stroke-width="3"/>';
+      });
+    } else {
+      var e = elipseAjustada(m);
+      var el = '<ellipse cx="' + r1(e.cx) + '" cy="' + r1(e.cy) + '" rx="' + r1(e.rx) + '" ry="' + r1(e.ry) + '"';
+      g += el + sombra + '/>' + el + ouro + '/>';
+    }
+
+    /* larguras que definem o formato */
+    var rotulos = [];
+    (LARGURAS[slug] || LARGURAS.padrao).forEach(function (par) {
+      var o = m[par[0]], x1 = m.cx - o.w / 2, x2 = m.cx + o.w / 2;
+      g += '<line x1="' + r1(x1) + '" y1="' + r1(o.y) + '" x2="' + r1(x2) + '" y2="' + r1(o.y) + '" stroke="#fbf5e6" stroke-opacity="0.55" stroke-width="8"/>';
+      g += '<line x1="' + r1(x1) + '" y1="' + r1(o.y) + '" x2="' + r1(x2) + '" y2="' + r1(o.y) + '" stroke="' + MEDIDA + '" stroke-width="3.2"/>';
+      [x1, x2].forEach(function (x) {
+        g += '<line x1="' + r1(x) + '" y1="' + r1(o.y - 14) + '" x2="' + r1(x) + '" y2="' + r1(o.y + 14) + '" stroke="' + MEDIDA + '" stroke-width="3.6" stroke-linecap="round"/>';
+      });
+      rotulos.push({ y: o.y, xFim: x2, texto: par[1] });
+    });
+
+    /* comprimento: da linha do cabelo ao mento, pelo eixo do rosto */
+    g += '<line x1="' + r1(m.cx) + '" y1="' + r1(m.cabelo) + '" x2="' + r1(m.cx) + '" y2="' + r1(m.queixo) +
+         '" stroke="' + MEDIDA + '" stroke-width="2.6" stroke-dasharray="10 9" opacity="0.8"/>';
+    [m.cabelo, m.queixo].forEach(function (y) {
+      g += '<line x1="' + r1(m.cx - 22) + '" y1="' + r1(y) + '" x2="' + r1(m.cx + 22) + '" y2="' + r1(y) + '" stroke="' + MEDIDA + '" stroke-width="3.6" stroke-linecap="round"/>';
+    });
+    rotulos.unshift({ y: m.cabelo, xFim: m.cx + 22, texto: 'COMPRIMENTO' });
+
+    /* rótulos na margem direita, sem se encostarem */
+    var xr = 760, ultimo = -Infinity;
+    rotulos.sort(function (a, b) { return a.y - b.y; }).forEach(function (r) {
+      var yEt = Math.max(r.y, ultimo + 58);
+      ultimo = yEt;
+      g += '<polyline points="' + r1(r.xFim + 10) + ',' + r1(r.y) + ' ' + r1(xr - 40) + ',' + r1(r.y) + ' ' + r1(xr - 12) + ',' + r1(yEt) +
+           '" fill="none" stroke="' + CREME + '" stroke-width="1.6" opacity="0.6"/>';
+      g += '<text x="' + xr + '" y="' + r1(yEt + 8) + '" font-family="' + FONTE + '" font-size="26" font-weight="700" letter-spacing="2.4" fill="' + CREME + '">' + esc(r.texto) + '</text>';
+    });
+
+    return '<div class="rosto3d">' +
+      '<img class="rosto3d__img" src="assets/rostos/rosto_' + slug + '.jpg" alt="Modelo 3D do rosto ' + esc(slug) + '">' +
+      '<svg class="rosto3d__linhas" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Linhas do formato de rosto">' + g + '</svg>' +
+      '</div>';
+  }
+
+  /* proporção comprimento : largura das maçãs do modelo, para a legenda */
+  function proporcaoRosto(slug) {
+    var R = G3D(), m = R && R.rostos[slug];
+    return m ? m.L / m.macas.w : null;
+  }
+
+  function G3D() {
+    return (typeof self !== 'undefined' && self.DossieRostos3D) || null;
   }
 
   /* ===========================================================================
@@ -1148,6 +1233,7 @@
 
   return {
     formatoRosto: formatoRosto,
+    proporcaoRosto: proporcaoRosto,
     medidasFrontal: medidasFrontal,
     medidasPerfil: medidasPerfil,
     desenhoBarba: desenhoBarba,

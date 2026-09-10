@@ -174,20 +174,29 @@
       '</div>');
   }
 
-  /* 03 — ANÁLISE FACIAL */
+  /* 03 — ANÁLISE FACIAL, em duas páginas: o formato (modelo 3D com as
+     linhas) e o que ele pede no corte */
   function pgRosto(f) {
     var r = C.acharRosto(f.rosto) || C.ROSTOS[0];
+    var prop = D.proporcaoRosto(r.slug);
     return pagina('pg--rosto', '' +
       tituloSecao('03 · Análise facial', 'O que mais se aproxima') +
       '<h3 class="rosto__nome">' + esc(r.nome) + '</h3>' +
-      '<div class="rosto__dupla">' +
-        '<div class="rosto__diagrama">' + D.formatoRosto(r) + '</div>' +
-        foto(f.fotos && f.fotos.cliente, 'Análise presencial', 'foto--retrato') +
-      '</div>' +
+      D.formatoRosto(r) +
+      '<p class="rosto__legenda">Modelo de referência do formato' +
+        (prop ? ' · comprimento ' + prop.toFixed(2).replace('.', ',') + ' × a largura das maçãs' : '') + '</p>' +
       '<div class="corpo corpo--menor">' + paragrafos(r.descricao) + '</div>' +
-      bloco('Comunica', r.comunica) +
+      bloco('Comunica', r.comunica));
+  }
+
+  function pgRosto2(f) {
+    var r = C.acharRosto(f.rosto) || C.ROSTOS[0];
+    return pagina('pg--rosto2', '' +
+      tituloSecao('03 · Análise facial', 'O que o seu rosto pede') +
+      foto(f.fotos && f.fotos.cliente, 'Análise presencial', 'foto--faixa') +
       bloco('Estratégia de corte', r.estrategia) +
       bloco('Barba', r.barba) +
+      bloco('O que evitar', r.evitar, 'bloco--evitar') +
       (f.rostoNota ? bloco('Observação da consultoria', f.rostoNota, 'bloco--nota') : ''));
   }
 
@@ -335,6 +344,7 @@
       pgDirecao(f),
       pgExecucao(f),
       pgRosto(f),
+      pgRosto2(f),
       pgCabelo(f),
       pgProjeto(f),
       pgProjeto2(f),

@@ -300,16 +300,14 @@
   /* ===========================================================================
      2. FORMATOS DE ROSTO
      ---------------------------------------------------------------------------
-     `poligono` são os pontos do traçado geométrico desenhado sobre a silhueta
-     do rosto no diagrama (viewBox 0 0 200 240). É o mesmo recurso que o Wagner
-     já usa em consultoria — só que aqui o desenho é vetorial e sempre nítido.
+     Os sete formatos dos modelos 3D do Wagner (visagismo_todas_juntas.blend).
+     A imagem de cada um e as linhas desenhadas sobre ela ficam em
+     assets/rostos/ — as linhas saem das medidas da própria malha 3D.
   =========================================================================== */
   var ROSTOS = [
     {
       slug: 'oval',
       nome: 'Rosto Oval',
-      poligono: null,
-      elipse: { cx: 100, cy: 128, rx: 74, ry: 108 },
       descricao:
         'Considerado o formato de referência do visagismo: comprimento cerca de uma vez e meia a largura, ' +
         'testa levemente mais larga que o queixo e transições curvas, sem ângulos marcados.',
@@ -326,8 +324,6 @@
     {
       slug: 'redondo',
       nome: 'Rosto Redondo',
-      poligono: null,
-      elipse: { cx: 100, cy: 130, rx: 81, ry: 88 },
       descricao:
         'Largura e comprimento próximos, maçãs do rosto como ponto mais largo, mandíbula pouco angulada e ' +
         'contornos predominantemente curvos.',
@@ -345,7 +341,6 @@
     {
       slug: 'quadrado',
       nome: 'Rosto Quadrado',
-      poligono: '28,36 172,36 169,224 31,224',
       descricao:
         'Testa larga, mandíbula marcada e de mesma largura da testa, com ângulos bem definidos nos quatro ' +
         'cantos. Comprimento e largura próximos.',
@@ -361,8 +356,7 @@
     },
     {
       slug: 'retangular',
-      nome: 'Rosto Retangular (Oblongo)',
-      poligono: '38,26 162,26 160,232 40,232',
+      nome: 'Rosto Retangular',
       descricao:
         'Mesma angulação do rosto quadrado, porém nitidamente mais comprido que largo. Testa alta e ' +
         'mandíbula reta.',
@@ -377,8 +371,7 @@
     },
     {
       slug: 'triangular',
-      nome: 'Rosto Triangular (Base Larga)',
-      poligono: '60,34 140,34 180,224 20,224',
+      nome: 'Rosto Triangular',
       descricao:
         'Testa estreita e mandíbula larga, com a maior largura na base do rosto. A linha do contorno abre ' +
         'de cima para baixo.',
@@ -392,26 +385,8 @@
       evitar: 'Corte chapado no topo com laterais volumosas — inverte a proporção no sentido errado.'
     },
     {
-      slug: 'triangular-invertido',
-      nome: 'Rosto Triangular Invertido',
-      poligono: '22,40 178,40 100,234',
-      descricao:
-        'Testa larga, maçãs do rosto pronunciadas e queixo estreito e afinado. A linha do contorno fecha ' +
-        'de cima para baixo.',
-      comunica:
-        'Intelectualidade e agudeza. O peso na parte superior transmite raciocínio — pode parecer frágil ' +
-        'na base.',
-      estrategia:
-        'Reduzir a largura do topo e dar corpo à base: laterais controladas na altura da testa, sem volume ' +
-        'excessivo em cima, e comprimento que acompanhe a linha da mandíbula.',
-      barba:
-        'Barba cheia no queixo é o recurso mais eficaz deste formato — cria largura onde o rosto afina.',
-      evitar: 'Topete muito volumoso e rosto totalmente limpo, que deixam o queixo ainda mais estreito.'
-    },
-    {
-      slug: 'losango',
-      nome: 'Rosto Losango (Diamante)',
-      poligono: '100,22 182,128 100,236 18,128',
+      slug: 'diamante',
+      nome: 'Rosto Diamante',
       descricao:
         'Testa e queixo estreitos com maçãs do rosto largas e altas — o ponto mais largo fica no meio do ' +
         'rosto, criando os dois ângulos que dão nome ao formato.',
@@ -425,57 +400,20 @@
       evitar: 'Laterais volumosas na altura das maçãs, que exageram o ângulo central.'
     },
     {
-      slug: 'hexagonal-base-reta',
-      nome: 'Rosto Hexagonal de Base Reta',
-      poligono: '64,28 136,28 182,118 144,224 56,224 18,118',
+      slug: 'coracao',
+      nome: 'Rosto Coração',
       descricao:
-        'Característico por possuir o osso zigomático — também conhecido como maçã do rosto — mais ' +
-        'pronunciado da face. Não possui o ângulo de mandíbula muito marcado, porém o mento (queixo) ' +
-        'possui a base reta. A linha inclinada que chama atenção para o mento é responsável por comunicar ' +
-        'vontade.',
+        'Testa larga, maçãs do rosto marcadas e queixo estreito, que afina em ponta. A linha do contorno ' +
+        'fecha de cima para baixo, desenhando um coração.',
       comunica:
-        'Transmite a mensagem de uma pessoa que impõe sua vontade. A base reta do queixo afirma decisão, ' +
-        'enquanto a maçã pronunciada dá presença ao terço médio do rosto.',
+        'Inteligência e sensibilidade. O peso na parte de cima transmite raciocínio e expressão — sem ' +
+        'cuidado, a base estreita pode parecer frágil.',
       estrategia:
-        'Preservar e valorizar a base reta do mento, controlando o volume na altura das maçãs. Topo com ' +
-        'forma definida e laterais mais curtas na região do osso zigomático, para que o olhar termine na ' +
-        'linha do queixo.',
+        'Reduzir a largura do alto e dar corpo à base: laterais controladas na altura da testa, sem volume ' +
+        'excessivo em cima, e comprimento que acompanhe a linha da mandíbula.',
       barba:
-        'Barba com linha do pescoço quadrada, acompanhando e reforçando a base reta do mento. Comprimento ' +
-        'menor nas laterais para não somar volume às maçãs.',
-      evitar: 'Volume lateral na altura das maçãs e contorno arredondado no queixo, que apaga a base reta.'
-    },
-    {
-      slug: 'trapezoidal',
-      nome: 'Rosto Trapezoidal',
-      poligono: '52,34 148,34 180,218 20,218',
-      descricao:
-        'Testa de largura média e mandíbula larga e reta, com laterais que abrem em linha contínua da testa ' +
-        'até a base. Contorno inferior horizontal e marcado.',
-      comunica:
-        'Solidez e comando. É um dos formatos de leitura mais imediata de autoridade, pela horizontal forte ' +
-        'na base.',
-      estrategia:
-        'Não competir com a base: manter o topo com forma definida e altura moderada, laterais curtas e ' +
-        'contorno limpo. O rosto já entrega a força — o corte precisa organizar, não somar.',
-      barba: 'Barba curta e uniforme com contorno reto. Comprimento excessivo alarga demais a base.',
-      evitar: 'Barba cheia e comprida somada a laterais volumosas — pesa a metade inferior do rosto.'
-    },
-    {
-      slug: 'pentagonal',
-      nome: 'Rosto Pentagonal',
-      poligono: '100,20 180,92 152,226 48,226 20,92',
-      descricao:
-        'Testa que afina em direção ao topo formando um ângulo superior, maçãs largas e mandíbula reta com ' +
-        'queixo de base marcada.',
-      comunica:
-        'Individualidade e caráter. É um formato de traço forte e pouco comum, que sustenta bem imagens ' +
-        'de personalidade marcante.',
-      estrategia:
-        'Suavizar o ângulo superior com volume e textura na região frontal, mantendo a base do rosto limpa ' +
-        'e bem contornada.',
-      barba: 'Barba curta e definida acompanhando a mandíbula, sem preencher as maçãs.',
-      evitar: 'Cabelo puxado totalmente para trás, que expõe e acentua o ângulo do topo da testa.'
+        'Barba cheia no queixo é o recurso mais eficaz deste formato — cria largura exatamente onde o rosto afina.',
+      evitar: 'Topete muito volumoso e rosto totalmente limpo, que deixam o queixo ainda mais estreito.'
     }
   ];
 

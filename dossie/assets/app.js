@@ -209,10 +209,10 @@
     var r = C.acharRosto(ficha.rosto) || C.ROSTOS[0];
     return '<div class="secao" data-secao="rosto">' +
       '<h3>Análise facial</h3>' +
-      '<p class="secao__dica">O desenho do rosto muda conforme o formato: testa, maçã do rosto, mandíbula e queixo.</p>' +
+      '<p class="secao__dica">Cada formato tem o seu modelo 3D. As linhas mostram as larguras e o comprimento que definem o formato.</p>' +
       '<div class="campo"><label for="f-rosto">Formato do rosto</label>' +
         '<select id="f-rosto" data-campo="rosto">' + opcoes(C.ROSTOS, ficha.rosto) + '</select></div>' +
-      '<div class="miniatura" id="mini-rosto">' + D.formatoRosto(r) + '</div>' +
+      '<div class="miniatura miniatura--3d" id="mini-rosto">' + D.formatoRosto(r) + '</div>' +
       '<div class="previa" id="previa-rosto"><b>Comunica</b>' + esc(r.comunica) + '</div>' +
       '<div class="campo"><label for="f-rostoNota">Observação da consultoria</label>' +
         '<textarea id="f-rostoNota" data-campo="rostoNota" placeholder="Ex.: assimetria leve no lado direito da mandíbula, compensada pelo caimento do topo.">' +
@@ -820,6 +820,9 @@
           tela.getContext('2d').drawImage(img, 0, 0, tela.width, tela.height);
           var png = document.createElement('img');
           png.src = tela.toDataURL('image/png');
+          /* a classe leva junto o posicionamento — as linhas do rosto 3D
+             ficam por cima da foto, não embaixo dela */
+          if (svg.getAttribute('class')) png.className = svg.getAttribute('class');
           png.style.width = w + 'px'; png.style.height = h + 'px'; png.style.display = 'block';
           png.onload = function () { svg.replaceWith(png); ok(); };
           png.onerror = function () { ok(); };
@@ -912,6 +915,8 @@
     /* Se a página recarregou no meio do atendimento, a ficha volta. */
     R.ler().then(function (salva) {
       ficha = salva ? Object.assign(fichaNova(), salva) : fichaNova();
+      /* ficha começada antes da troca para os 7 formatos 3D */
+      if (!C.acharRosto(ficha.rosto)) ficha.rosto = 'oval';
       montarFormulario();
       atualizarPreview();
       if (salva && (salva.nome || Object.keys(salva.fotos || {}).length)) {
