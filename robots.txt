@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Ferramenta interna de consultoria — não deve aparecer em busca.
+Disallow: /dossie/
+
 Sitemap: https://owagneralvessvisagista.com/sitemap.xml

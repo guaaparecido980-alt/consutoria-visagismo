@@ -1,0 +1,466 @@
+/* =============================================================================
+   DOSSIÊ DE VISAGISMO — FOLHA DE ESTILO DAS PÁGINAS
+   -----------------------------------------------------------------------------
+   Estas regras valem para o documento que o cliente recebe. A interface do
+   sistema fica em `app.css`.
+
+   Nada aqui depende do tamanho da janela: a página tem 1440 x 810 px fixos e é
+   apenas reduzida por `transform: scale()` na pré-visualização. É isso que faz
+   o PDF sair idêntico à tela.
+============================================================================= */
+
+:root {
+  --tinta:      #14120f;
+  --grafite:    #1e1b16;
+  --grafite-2:  #2a261f;
+  --ouro:       #a08c5c;
+  --ouro-claro: #c4ad76;
+  --bege:       #f1e4bc;
+  --papel:      #f7f4ed;
+  --papel-2:    #ede8dd;
+  --texto:      #262319;
+  --texto-2:    #5d564a;
+  --texto-3:    #8b8375;
+  --linha:      #d9d2c3;
+
+  --serif: "Playfair Display", "Times New Roman", serif;
+  --sans:  "Inter", -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+/* ===========================================================================
+   PÁGINA
+=========================================================================== */
+.pg {
+  position: relative;
+  width: 1440px;
+  height: 810px;
+  overflow: hidden;
+  background: var(--papel);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.62;
+  font-weight: 400;
+  box-sizing: border-box;
+  padding: 74px 96px 78px;
+  display: block;
+}
+.pg *, .pg *::before, .pg *::after { box-sizing: border-box; }
+
+/* Os resets abaixo usam :where() de propósito: especificidade ZERO. Sem isso,
+   `.pg p { margin }` venceria de `.capa__cliente { margin }` e todo espaçamento
+   de componente seria silenciosamente achatado. */
+:where(.pg) :where(p) { margin: 0 0 14px; }
+:where(.pg) :where(p:last-child) { margin-bottom: 0; }
+:where(.pg) :where(h1, h2, h3) { margin: 0; font-weight: 400; }
+
+/* textura de papel discreta, para a página não parecer um slide de escritório */
+.pg::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(160,140,92,.055), transparent 55%),
+    radial-gradient(circle at 88% 92%, rgba(160,140,92,.04), transparent 50%);
+  pointer-events: none;
+}
+
+.pg__rodape {
+  position: absolute;
+  left: 96px; right: 96px; bottom: 34px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--texto-3);
+  border-top: 1px solid var(--linha);
+  padding-top: 13px;
+}
+.pg__num { font-family: var(--serif); font-size: 15px; letter-spacing: .06em; color: var(--ouro); }
+
+/* ===========================================================================
+   CABEÇALHO DE SEÇÃO
+=========================================================================== */
+.sec { margin-bottom: 30px; }
+.sec__kicker {
+  display: block;
+  font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ouro); font-weight: 600; margin-bottom: 10px;
+}
+.sec__titulo {
+  font-family: var(--serif);
+  font-size: 47px; line-height: 1.06; letter-spacing: -.012em;
+  color: var(--tinta);
+}
+.sec__regua {
+  display: block; width: 66px; height: 2px; margin-top: 17px;
+  background: linear-gradient(90deg, var(--ouro), rgba(160,140,92,0));
+}
+
+.rotulo {
+  display: block;
+  font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--ouro); font-weight: 600; margin-bottom: 7px;
+}
+.corpo { font-size: 17px; line-height: 1.66; color: var(--texto); }
+.corpo--nota { color: var(--texto-2); font-size: 15.5px; margin-top: 14px; }
+.corpo--manuscrito {
+  margin-top: 16px; padding-left: 17px;
+  border-left: 2px solid var(--ouro);
+  font-style: italic; color: var(--texto-2); font-size: 15.5px;
+}
+.bloco { margin-top: 18px; }
+.bloco p { font-size: 15.5px; line-height: 1.6; color: var(--texto-2); }
+.bloco--nota {
+  background: var(--papel-2); padding: 15px 18px; border-radius: 3px;
+}
+
+/* ===========================================================================
+   FOTOS
+=========================================================================== */
+.foto { margin: 0; position: relative; overflow: hidden; background: var(--papel-2); }
+.foto img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.foto figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 22px 16px 10px;
+  background: linear-gradient(transparent, rgba(20,18,15,.82));
+  color: var(--bege);
+  font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+}
+.foto--vazia { border: 1px dashed var(--linha); background: transparent; }
+.foto__placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--texto-3); font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+  text-align: center; padding: 12px;
+}
+
+/* ===========================================================================
+   01 · CAPA
+=========================================================================== */
+.pg--capa {
+  background:
+    radial-gradient(circle at 78% 24%, #2c2820 0%, transparent 58%),
+    linear-gradient(118deg, #16140f 0%, #221e18 48%, #100e0b 100%);
+  color: var(--bege);
+  padding: 0;
+}
+.pg--capa::before {
+  background:
+    repeating-linear-gradient(90deg, rgba(160,140,92,.05) 0 1px, transparent 1px 62px);
+  opacity: .5;
+}
+.capa__retrato {
+  position: absolute; left: 88px; top: 62px;
+  width: 452px; height: 686px;
+  overflow: hidden;
+  box-shadow: 0 34px 78px rgba(0,0,0,.55);
+}
+.capa__retrato::after {
+  content: ""; position: absolute; inset: 0;
+  border: 1px solid rgba(193,171,118,.42);
+  outline: 1px solid rgba(193,171,118,.16); outline-offset: 11px;
+}
+.capa__retrato img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+
+.capa__texto {
+  position: absolute; left: 626px; top: 168px; right: 92px;
+}
+.capa__kicker {
+  display: block; font-family: var(--serif); font-style: italic;
+  font-size: 40px; color: var(--ouro-claro); letter-spacing: .01em; margin-bottom: 2px;
+}
+.capa__titulo {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 106px; line-height: .96; letter-spacing: .045em;
+  color: #fbf6ea;
+  text-shadow: 0 0 46px rgba(241,228,188,.24);
+}
+.capa__regua {
+  display: block; width: 168px; height: 1px; margin: 34px 0 40px;
+  background: linear-gradient(90deg, var(--ouro-claro), rgba(160,140,92,0));
+}
+.capa__cliente {
+  font-family: var(--serif); font-size: 44px; line-height: 1.14;
+  color: #fbf6ea; margin: 0 0 6px;
+}
+.capa__profissao {
+  font-size: 15px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--ouro-claro); margin: 0 0 22px;
+}
+.capa__data {
+  font-size: 13.5px; letter-spacing: .12em; color: rgba(241,228,188,.6); margin: 0;
+}
+.capa__assinatura {
+  position: absolute; left: 626px; bottom: 74px;
+  font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(241,228,188,.5);
+}
+
+/* ===========================================================================
+   02 · SUMÁRIO
+=========================================================================== */
+.sum {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px 62px;
+}
+.sum__item { display: flex; gap: 18px; align-items: flex-start; }
+.sum__n {
+  font-family: var(--serif); font-size: 26px; color: var(--ouro);
+  line-height: 1; min-width: 38px; padding-top: 3px;
+}
+.sum__item h3 {
+  font-family: var(--serif); font-size: 22px; color: var(--tinta); margin-bottom: 2px;
+}
+.sum__item p { font-size: 14.5px; color: var(--texto-2); line-height: 1.5; margin: 0; }
+.sum__nota {
+  position: absolute; left: 96px; right: 96px; bottom: 94px;
+  font-family: var(--serif); font-style: italic; font-size: 19px;
+  color: var(--texto-2); border-top: 1px solid var(--linha); padding-top: 20px;
+}
+
+/* ===========================================================================
+   03 · PERFIL COMPORTAMENTAL
+=========================================================================== */
+.pg--perfil { display: grid; grid-template-columns: 1fr 370px; gap: 66px; align-items: start; }
+.perfil__col { min-width: 0; }
+.perfil__aside {
+  background: var(--grafite); color: var(--bege);
+  padding: 42px 36px; height: 620px;
+  display: flex; flex-direction: column;
+  position: relative;
+}
+.perfil__aside::after {
+  content: ""; position: absolute; inset: 12px;
+  border: 1px solid rgba(193,171,118,.2); pointer-events: none;
+}
+.perfil__aside .rotulo { color: var(--ouro-claro); margin-top: auto; }
+.emblema { width: 92px; height: 92px; color: var(--ouro-claro); margin-bottom: 26px; }
+.emblema svg { width: 100%; height: 100%; }
+.perfil__temperamento {
+  font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--ouro-claro); margin-bottom: 10px;
+}
+.perfil__essencia {
+  font-family: var(--serif); font-style: italic; font-size: 25px;
+  line-height: 1.28; color: #fbf6ea;
+}
+.chaves { list-style: none; margin: 0; padding: 0; }
+.chaves li {
+  font-family: var(--serif); font-size: 25px; color: #fbf6ea;
+  padding: 9px 0; border-bottom: 1px solid rgba(193,171,118,.2);
+}
+.chaves li:last-child { border-bottom: 0; }
+
+/* ===========================================================================
+   04 · DIREÇÃO DE IMAGEM
+=========================================================================== */
+.direcao__topo {
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: 46px;
+  padding-bottom: 24px; border-bottom: 1px solid var(--linha); margin-bottom: 24px;
+}
+.direcao__linha strong {
+  display: block; font-family: var(--serif); font-weight: 400;
+  font-size: 29px; color: var(--tinta); margin-bottom: 8px;
+}
+.direcao__linha p { font-size: 15.5px; color: var(--texto-2); line-height: 1.58; }
+.direcao__objetivo { background: var(--papel-2); padding: 22px 24px; }
+.destaque {
+  font-family: var(--serif); font-style: italic; font-size: 21px;
+  line-height: 1.42; color: var(--tinta);
+}
+.direcao__grade { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 48px; }
+.direcao__grade .bloco { margin-top: 0; }
+.direcao__grade .bloco p { font-size: 15px; line-height: 1.55; }
+
+/* ===========================================================================
+   05 · ANÁLISE FACIAL
+=========================================================================== */
+.rosto__grade {
+  display: grid; grid-template-columns: 292px 1fr 302px; gap: 40px; align-items: start;
+}
+.rosto__diagrama {
+  background: var(--papel-2); padding: 14px; height: 352px;
+  display: flex; align-items: center; justify-content: center;
+}
+.rosto__diagrama svg { width: 100%; height: 100%; }
+.rosto__texto h3 {
+  font-family: var(--serif); font-size: 27px; font-style: italic;
+  color: var(--tinta); margin-bottom: 12px;
+}
+.rosto__texto .corpo { font-size: 15.5px; }
+.rosto__texto .bloco { margin-top: 15px; }
+.rosto__texto .bloco p { font-size: 14.5px; line-height: 1.55; }
+.rosto__foto .foto { height: 470px; }
+.foto--retrato img { object-position: 50% 30%; }
+
+/* ===========================================================================
+   06 · ESTRUTURA DO FIO
+=========================================================================== */
+.cabelo__grade { display: grid; grid-template-columns: 1fr 480px; gap: 56px; align-items: start; }
+.cabelo__texto h3 { font-family: var(--serif); font-size: 34px; color: var(--tinta); margin-bottom: 14px; }
+.cabelo__grupo {
+  font-family: var(--sans); font-size: 11px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--ouro); vertical-align: middle;
+  margin-left: 10px; border: 1px solid var(--ouro); padding: 4px 10px; border-radius: 999px;
+}
+.cabelo__foto .foto { height: 500px; }
+
+/* ===========================================================================
+   07 · PROJETO TÉCNICO
+   Os diagramas são o assunto da página: ocupam a faixa superior inteira.
+   A ficha de medidas vira uma tarja horizontal abaixo deles.
+=========================================================================== */
+.projeto__diagramas {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+  margin-bottom: 26px;
+}
+.diagrama {
+  background: var(--papel-2); padding: 10px 6px; height: 330px;
+  display: flex; align-items: center; justify-content: center;
+}
+.diagrama svg { width: 100%; height: 100%; }
+
+.projeto__base {
+  display: grid; grid-template-columns: 470px 1fr; gap: 44px; align-items: start;
+  border-top: 1px solid var(--linha); padding-top: 20px;
+}
+.cotas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.cota { text-align: center; }
+.cota__nome {
+  display: block; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--texto-3); margin-bottom: 5px;
+}
+.cota__valor {
+  display: block; font-family: var(--serif); font-weight: 400;
+  font-size: 27px; color: var(--tinta); line-height: 1;
+}
+.cota__valor em { font-family: var(--sans); font-style: normal; font-size: 12px; color: var(--texto-3); }
+
+.projeto__tecnicas { grid-column: 2; grid-row: 1; }
+.tecnicas {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px;
+}
+.tecnicas li {
+  font-size: 14px; color: var(--texto-2); padding: 4px 0 4px 17px; position: relative;
+}
+.tecnicas li::before {
+  content: ""; position: absolute; left: 0; top: 12px;
+  width: 7px; height: 1px; background: var(--ouro);
+}
+.projeto__nota {
+  grid-column: 1 / -1;
+  font-family: var(--serif); font-style: italic; font-size: 16px;
+  color: var(--texto-2); margin-top: 6px;
+}
+
+/* ===========================================================================
+   08 · PROPOSTA
+=========================================================================== */
+.proposta__corpo {
+  column-count: 2; column-gap: 62px;
+  font-size: 18px; line-height: 1.72; color: var(--texto);
+  max-width: 1180px;
+}
+.proposta__corpo p { margin: 0 0 16px; }
+.proposta__corpo p:first-child::first-letter {
+  font-family: var(--serif); font-size: 62px; line-height: .82;
+  float: left; margin: 6px 12px 0 0; color: var(--ouro);
+}
+.proposta__obs {
+  position: absolute; left: 96px; right: 96px; bottom: 94px;
+  border-top: 1px solid var(--linha); padding-top: 16px;
+}
+.proposta__obs .corpo { font-size: 14.5px; color: var(--texto-2); }
+
+/* ===========================================================================
+   09 · REFERÊNCIAS VISUAIS
+=========================================================================== */
+.ref__grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.ref__grade .foto { height: 452px; }
+.ref__nota {
+  margin-top: 24px; font-family: var(--serif); font-style: italic;
+  font-size: 17px; color: var(--texto-2); max-width: 900px;
+}
+
+/* ===========================================================================
+   10 e 11 · ANTES E DEPOIS
+=========================================================================== */
+.pg--ad { padding: 0; background: var(--tinta); }
+.ad__par { display: grid; grid-template-columns: 1fr 1fr; height: 100%; gap: 3px; }
+.ad__lado { position: relative; overflow: hidden; background: var(--grafite); }
+.ad__lado .foto { height: 100%; background: var(--grafite); }
+.ad__lado .foto--vazia { border-color: rgba(193,171,118,.3); }
+.ad__lado .foto__placeholder { color: rgba(241,228,188,.45); }
+.foto--cheia img { object-position: 50% 28%; }
+.ad__tag {
+  position: absolute; left: 40px; top: 40px;
+  font-size: 11px; letter-spacing: .32em; font-weight: 600;
+  color: var(--bege); background: rgba(20,18,15,.66);
+  border: 1px solid rgba(193,171,118,.42);
+  padding: 9px 18px; backdrop-filter: blur(2px);
+}
+.ad__tag--depois { background: rgba(160,140,92,.9); border-color: var(--ouro-claro); color: #14120f; }
+.ad__tarja {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 46px 40px 24px;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+  background: linear-gradient(transparent, rgba(20,18,15,.92) 58%);
+  font-size: 10.5px; letter-spacing: .24em; text-transform: uppercase;
+}
+.ad__marca, .ad__num { color: rgba(241,228,188,.55); flex: none; }
+.ad__num { font-family: var(--serif); font-size: 15px; letter-spacing: .06em; color: var(--ouro-claro); }
+.ad__titulo { color: var(--bege); letter-spacing: .3em; text-align: center; }
+
+/* ===========================================================================
+   12 · MANUTENÇÃO
+=========================================================================== */
+.man__grade { display: grid; grid-template-columns: 1fr 400px; gap: 62px; align-items: start; }
+.rotina { list-style: none; margin: 0; padding: 0; }
+.rotina li {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 14px 0; border-bottom: 1px solid var(--linha);
+}
+.rotina li:last-child { border-bottom: 0; }
+.rot__n { font-family: var(--serif); font-size: 20px; color: var(--ouro); min-width: 32px; }
+.rotina p { font-size: 16px; color: var(--texto); line-height: 1.55; margin: 0; }
+.man__aside { background: var(--papel-2); padding: 30px 30px 34px; }
+.produtos { list-style: none; margin: 0 0 26px; padding: 0; }
+.produtos li { padding: 10px 0; border-bottom: 1px solid var(--linha); }
+.produtos li:last-child { border-bottom: 0; }
+.produtos strong {
+  display: block; font-family: var(--serif); font-weight: 400;
+  font-size: 19px; color: var(--tinta);
+}
+.produtos span { font-size: 13.5px; color: var(--texto-2); }
+.man__retorno { border-top: 2px solid var(--ouro); padding-top: 18px; }
+.man__retorno p { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--tinta); }
+
+/* ===========================================================================
+   13 · CONTRACAPA
+=========================================================================== */
+.pg--final { padding: 0; background: var(--tinta); color: var(--bege); }
+.final__fundo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 68% 22%;
+}
+.final__veu {
+  position: absolute; inset: 0;
+  background: linear-gradient(96deg, rgba(12,11,9,.95) 0%, rgba(12,11,9,.86) 30%, rgba(12,11,9,.30) 56%, rgba(12,11,9,0) 76%);
+}
+.final__texto { position: absolute; left: 96px; top: 108px; width: 620px; }
+.final__marca {
+  font-family: var(--serif); font-weight: 400;
+  font-size: 62px; letter-spacing: .3em; color: #fbf6ea; margin-bottom: 90px;
+}
+.final__frase { display: flex; flex-direction: column; gap: 9px; margin-bottom: 54px; }
+.final__frase span {
+  font-size: 22px; font-weight: 500; letter-spacing: .045em; line-height: 1.4;
+  color: #fbf6ea;
+}
+.final__obrigado {
+  font-family: var(--serif); font-style: italic; font-size: 30px;
+  color: var(--ouro-claro); margin-bottom: 44px;
+}
+.final__assinatura {
+  font-size: 11px; letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(241,228,188,.55);
+}
