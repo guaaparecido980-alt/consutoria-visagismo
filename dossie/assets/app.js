@@ -245,7 +245,7 @@
       '<h3>Projeto técnico</h3>' +
       '<p class="secao__dica">O desenho acompanha o que você preenche: o comprimento muda o volume, ' +
       'a direção muda o penteado e a barba é recortada no formato deste rosto.</p>' +
-      '<div class="miniatura" id="mini-medidas">' + D.medidasFrontal(m, ficha.rosto, ficha.barbaDesenho) + '</div>' +
+      '<div class="miniatura miniatura--3d" id="mini-medidas">' + (D.medidasFrontal3D(m, ficha.rosto, ficha.barbaDesenho) || D.medidasFrontal(m, ficha.rosto, ficha.barbaDesenho)) + '</div>' +
       '<div class="quadra">' +
         campoMedida('topo', 'Topo (cm)', m.topo) +
         campoMedida('franja', 'Frente (cm)', m.franja) +
@@ -379,7 +379,7 @@
     var mr = $('#mini-rosto'), mm = $('#mini-medidas'), pr = $('#previa-rosto');
     if (mr) mr.innerHTML = D.formatoRosto(r);
     if (pr) pr.innerHTML = '<b>Comunica</b>' + esc(r.comunica);
-    if (mm) mm.innerHTML = D.medidasFrontal(ficha.medidas || {}, ficha.rosto, ficha.barbaDesenho);
+    if (mm) mm.innerHTML = D.medidasFrontal3D(ficha.medidas || {}, ficha.rosto, ficha.barbaDesenho) || D.medidasFrontal(ficha.medidas || {}, ficha.rosto, ficha.barbaDesenho);
   }
 
   /* =========================================================================

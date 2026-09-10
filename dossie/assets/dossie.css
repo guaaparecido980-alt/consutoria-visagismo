@@ -277,6 +277,9 @@
 .diagrama--alto { height: 880px; }
 .projeto__par { display: flex; flex-direction: column; gap: 22px; }
 .projeto__par .diagrama { height: 640px; }
+/* desenhos de medidas sobre o 3D: fundo grafite da própria imagem, sem moldura clara */
+.diagrama--3d { background: #1e1b16; padding: 0; }
+.diagrama--3d .rosto3d { width: auto; height: 100%; max-width: 100%; aspect-ratio: 1000 / 896; }
 
 .cotas {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;

@@ -232,7 +232,7 @@
 
     return pagina('pg--projeto', '' +
       tituloSecao('05 · Projeto técnico', 'As medidas do seu corte') +
-      '<div class="diagrama diagrama--alto">' + D.medidasFrontal(m, f.rosto, f.barbaDesenho) + '</div>' +
+      '<div class="diagrama diagrama--alto diagrama--3d">' + (D.medidasFrontal3D(m, f.rosto, f.barbaDesenho) || D.medidasFrontal(m, f.rosto, f.barbaDesenho)) + '</div>' +
       '<div class="cotas">' + cotas + '</div>' +
       '<p class="projeto__nota">Leve esta página a qualquer barbeiro: as medidas estão no desenho.</p>');
   }
@@ -244,8 +244,8 @@
     return pagina('pg--projeto2', '' +
       tituloSecao('05 · Projeto técnico', 'Direção do fio e barba') +
       '<div class="projeto__par">' +
-        '<div class="diagrama">' + D.medidasPerfil(m, f.rosto, f.barbaDesenho) + '</div>' +
-        '<div class="diagrama">' + D.desenhoBarba(f.barbaDesenho, f.rosto, m) + '</div>' +
+        '<div class="diagrama diagrama--3d">' + (D.medidasPerfil3D(m, f.rosto, f.barbaDesenho) || D.medidasPerfil(m, f.rosto, f.barbaDesenho)) + '</div>' +
+        '<div class="diagrama diagrama--3d">' + (D.desenhoBarba3D(f.barbaDesenho, f.rosto, m) || D.desenhoBarba(f.barbaDesenho, f.rosto, m)) + '</div>' +
       '</div>' +
       (tecnicas.length
         ? '<div class="projeto__tecnicas"><span class="rotulo">Técnicas aplicadas</span>' +

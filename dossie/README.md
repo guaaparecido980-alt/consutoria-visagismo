@@ -80,8 +80,13 @@ depois de mexer nos modelos: `automacao/rostos-3d/gerar.ps1` (ver o LEIA-ME de l
 
 ## Os desenhos técnicos
 
-Gerados na hora, em vetor, a partir da ficha (`assets/diagramas.js`). Não
-existe um rosto padrão: a cabeça é construída a cada vez.
+Nas páginas de medidas (projeto técnico) o rosto é o **modelo 3D do formato
+escolhido**, de frente e de perfil. O cabelo e a barba são desenhados por cima,
+apoiados no contorno real daquele crânio (medido na malha): a direção do fio,
+as medidas e o desenho da barba mudam o desenho. Se faltar o 3D de algum
+formato, o sistema volta ao desenho vetorial abaixo.
+
+O desenho vetorial (`assets/diagramas.js`) também é construído a cada vez:
 
 - **Formato do rosto** muda o contorno — testa, maçã do rosto, mandíbula e
   queixo. Um rosto quadrado tem quina na mandíbula; um oval, só curva.
