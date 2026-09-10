@@ -1,9 +1,12 @@
 /* =============================================================================
    DOSSIÊ DE VISAGISMO — APLICAÇÃO
    -----------------------------------------------------------------------------
-   Painel de clientes, editor da ficha, pré-visualização ao vivo e exportação
-   do PDF. Sem framework e sem build: o arquivo roda direto do navegador em
-   qualquer hospedagem estática.
+   Um atendimento por vez: o Wagner preenche a ficha, gera o PDF, salva no
+   celular e começa o próximo cliente do zero. Nenhum cliente fica guardado
+   no sistema — ver `rascunho.js` para a única exceção (a ficha em andamento).
+
+   Sem framework e sem build: roda direto do navegador em qualquer hospedagem
+   estática.
 ============================================================================= */
 (function () {
   'use strict';
@@ -11,28 +14,28 @@
   var C = window.DossieConteudo;
   var D = window.DossieDiagramas;
   var S = window.DossieSlides;
-  var DB = window.DossieDB;
+  var R = window.DossieRascunho;
 
   var $  = function (s, raiz) { return (raiz || document).querySelector(s); };
   var $$ = function (s, raiz) { return Array.prototype.slice.call((raiz || document).querySelectorAll(s)); };
 
-  var ficha = null;             /* ficha aberta no editor                    */
+  var LARG = S.LARGURA, ALT = S.ALTURA;   /* 1080 x 1920 */
+  var ficha = null;
   var salvamentoPendente = null;
   var escalaPreview = 1;
-  var armazenamentoOk = true;   /* vira false se o navegador bloquear o banco */
-  var modoArmazenamento = null; /* 'nuvem' ou 'local', decidido por db.js      */
+  var totalPaginas = 0;
 
   /* =========================================================================
      FICHA EM BRANCO
   ========================================================================= */
-  function fichaNova() {
+  function hojeISO() {
     var hoje = new Date();
-    var iso = hoje.getFullYear() + '-' +
-              String(hoje.getMonth() + 1).padStart(2, '0') + '-' +
-              String(hoje.getDate()).padStart(2, '0');
+    return hoje.getFullYear() + '-' + String(hoje.getMonth() + 1).padStart(2, '0') + '-' +
+           String(hoje.getDate()).padStart(2, '0');
+  }
+  function fichaNova() {
     return {
-      id: DB.novoId(),
-      nome: '', profissao: '', data: iso,
+      nome: '', profissao: '', data: hojeISO(),
       perfil: 'rei', perfilNota: '',
       rosto: 'oval', rostoNota: '',
       cabelo: '2b', densidade: 'media', couro: 'normal',
@@ -69,259 +72,31 @@
   function nomeArquivo(f) {
     var base = (f.nome || 'cliente').normalize('NFD').replace(/[̀-ͯ]/g, '')
       .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
-    return 'dossie-visagismo-' + (base || 'cliente') + '-' + (f.data || '') + '.pdf';
+    return 'dossie-visagismo-' + (base || 'cliente') + '-' + (f.data || hojeISO()) + '.pdf';
   }
 
-  /* ---------------------------------------------------------------------------
-     ENTREGA DE ARQUIVO
-     Hospedado no site do Wagner, baixar um arquivo é um link comum. Publicado
-     como página do claude.ai, a página não tem permissão de baixar nada
-     sozinha: precisa pedir pela API do visualizador, que mostra uma
-     confirmação ao visitante. Este helper cobre os dois casos, então o mesmo
-     código roda nos dois lugares sem versão separada.
-  --------------------------------------------------------------------------- */
-  var canalDownload;   /* promessa memoizada: resolve a API ou null */
-
-  function obterCanal() {
-    if (canalDownload) return canalDownload;
-    canalDownload = (window.claude && typeof window.claude.use === 'function')
-      ? Promise.resolve(window.claude.use('downloads')).catch(function () { return null; })
-      : Promise.resolve(null);
-    return canalDownload;
-  }
-
-  function entregarArquivo(nomeDoArquivo, conteudo, tipoMime) {
-    return obterCanal().then(function (canal) {
-      if (canal && typeof canal.save === 'function') {
-        return canal.save({ filename: nomeDoArquivo, data: conteudo }).then(function () {
-          return 'entregue';
-        }, function (erro) {
-          var codigo = erro && erro.code;
-          if (codigo === 'declined') return 'recusado';   /* o visitante disse não */
-          throw erro;
-        });
-      }
-
-      /* Sem a API: link comum, o caminho normal do site hospedado. */
-      var blob = (conteudo instanceof Blob) ? conteudo : new Blob([conteudo], { type: tipoMime });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = nomeDoArquivo;
-      a.click();
-      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-      return 'baixado';
-    });
-  }
-
-  /* Redimensiona a foto antes de guardar. Uma foto de celular tem 4 a 8 MB;
-     depois disso fica com 200 a 400 KB, sem diferença visível no PDF.
-     Devolve um Blob: quem decide se ele vira arquivo na nuvem ou dado
-     embutido é a camada de armazenamento. */
+  /* Redimensiona a foto antes de usar. Uma foto de celular tem 4 a 8 MB;
+     depois disso fica com 200 a 400 KB, sem diferença visível no PDF. */
   function prepararImagem(arquivo, ladoMax) {
     return new Promise(function (ok, erro) {
-      var leitor = new FileReader();
-      leitor.onerror = function () { erro(new Error('Não consegui ler o arquivo.')); };
-      leitor.onload = function () {
-        var img = new Image();
-        img.onerror = function () { erro(new Error('Arquivo de imagem inválido.')); };
-        img.onload = function () {
-          var max = ladoMax || 1600;
-          var escala = Math.min(1, max / Math.max(img.width, img.height));
-          var l = Math.round(img.width * escala);
-          var a = Math.round(img.height * escala);
-          var tela = document.createElement('canvas');
-          tela.width = l; tela.height = a;
-          var ctx = tela.getContext('2d');
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, l, a);
-          ctx.drawImage(img, 0, 0, l, a);
-          tela.toBlob(function (blob) {
-            if (blob) ok(blob);
-            else erro(new Error('Não consegui processar essa imagem.'));
-          }, 'image/jpeg', 0.86);
-        };
-        img.src = leitor.result;
+      var url = URL.createObjectURL(arquivo);
+      var img = new Image();
+      img.onerror = function () { URL.revokeObjectURL(url); erro(new Error('Arquivo de imagem inválido.')); };
+      img.onload = function () {
+        var max = ladoMax || 1600;
+        var escala = Math.min(1, max / Math.max(img.width, img.height));
+        var l = Math.round(img.width * escala), a = Math.round(img.height * escala);
+        var tela = document.createElement('canvas');
+        tela.width = l; tela.height = a;
+        var ctx = tela.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, l, a);
+        ctx.drawImage(img, 0, 0, l, a);
+        URL.revokeObjectURL(url);
+        ok(tela.toDataURL('image/jpeg', 0.86));
       };
-      leitor.readAsDataURL(arquivo);
+      img.src = url;
     });
-  }
-
-  /* =========================================================================
-     ROTEAMENTO SIMPLES ENTRE AS DUAS TELAS
-  ========================================================================= */
-  function mostrarPainel() {
-    ficha = null;
-    $('#tela-editor').classList.add('oculto');
-    $('#tela-painel').classList.remove('oculto');
-    $('#acoes-painel').classList.remove('oculto');
-    document.title = 'Dossiê de Visagismo · Wagner Alves';
-    renderPainel();
-  }
-
-  function abrirEditor(f) {
-    ficha = f;
-    $('#tela-painel').classList.add('oculto');
-    $('#tela-editor').classList.remove('oculto');
-    $('#acoes-painel').classList.add('oculto');
-    document.title = (f.nome || 'Nova ficha') + ' · Dossiê de Visagismo';
-    montarFormulario();
-    atualizarPreview();
-  }
-
-  /* =========================================================================
-     PAINEL DE CLIENTES
-  ========================================================================= */
-  var filtroBusca = '';
-  var pedidoPainel = 0;     /* ver comentário em renderPainel() */
-  var pedidoAbertura = 0;   /* idem, para a abertura de uma ficha        */
-
-  /* Cada chamada recebe um número de ordem e só desenha se ainda for a mais
-     recente. Sem isso, a primeira listagem (que ainda está abrindo o banco, e
-     por isso demora) pode resolver DEPOIS de uma listagem posterior e repintar
-     a tela com o resultado velho — foi exatamente assim que o painel voltava
-     vazio logo após salvar uma ficha. */
-  function renderPainel() {
-    var meuPedido = ++pedidoPainel;
-
-    DB.listar().catch(function (e) {
-      if (meuPedido !== pedidoPainel) return null;
-      armazenamentoOk = false;
-      $('#contagem').textContent = 'Sem acesso ao armazenamento';
-      $('#lista-clientes').className = '';
-      $('#lista-clientes').innerHTML =
-        '<div class="vazio"><h2>Este navegador não está guardando as fichas</h2>' +
-        '<p>' + esc(e && e.message ? e.message : DB.ERRO_INDISPONIVEL) + '</p>' +
-        '<button class="btn btn--ouro" data-acao="novo">Criar uma ficha mesmo assim</button></div>';
-      return null;
-    }).then(function (fichas) {
-      if (!fichas || meuPedido !== pedidoPainel) return;
-      var alvo = $('#lista-clientes');
-      var visiveis = fichas.filter(function (f) {
-        if (!filtroBusca) return true;
-        return (f.nome || '').toLowerCase().indexOf(filtroBusca.toLowerCase()) !== -1;
-      });
-
-      var quantas = fichas.length === 0 ? 'Nenhuma ficha ainda' :
-                    fichas.length === 1 ? '1 ficha guardada' :
-                    fichas.length + ' fichas guardadas';
-      var onde = modoArmazenamento === 'nuvem'
-        ? ' · na nuvem, abre em qualquer aparelho'
-        : modoArmazenamento === 'local' ? ' · neste computador' : '';
-      $('#contagem').textContent = quantas + onde;
-
-      if (!visiveis.length) {
-        alvo.className = '';
-        alvo.innerHTML = '<div class="vazio">' +
-          '<h2>' + (filtroBusca ? 'Nenhum cliente com esse nome' : 'Nenhuma ficha por aqui ainda') + '</h2>' +
-          '<p>' + (filtroBusca
-            ? 'Tente outro trecho do nome ou limpe a busca.'
-            : 'Cada ficha vira um dossiê completo em PDF: perfil comportamental, análise facial, medidas do corte, referências e antes e depois.') +
-          '</p>' +
-          (filtroBusca ? '' : '<button class="btn btn--ouro" data-acao="novo">Criar a primeira ficha</button>') +
-          '</div>';
-        return;
-      }
-
-      alvo.className = 'lista';
-      alvo.innerHTML = visiveis.map(function (f) {
-        var p = C.acharPerfil(f.perfil);
-        var r = C.acharRosto(f.rosto);
-        var c = C.acharCabelo(f.cabelo);
-        var qtdFotos = Object.keys(f.fotos || {}).filter(function (k) { return f.fotos[k]; }).length;
-        return '<button class="cartao" data-id="' + esc(f.id) + '">' +
-          '<span class="cartao__apagar" role="button" tabindex="0" data-apagar="' + esc(f.id) +
-            '" title="Apagar ficha" aria-label="Apagar ficha de ' + esc(f.nome || 'cliente') + '">✕</span>' +
-          '<h3 class="cartao__nome">' + esc(f.nome || 'Sem nome') + '</h3>' +
-          '<p class="cartao__meta">' + esc(S.dataExtenso(f.data) || '—') +
-            (f.profissao ? ' · ' + esc(f.profissao) : '') + '</p>' +
-          '<span class="cartao__tags">' +
-            (p ? '<span class="tag tag--perfil">' + esc(p.nome) + '</span>' : '') +
-            (r ? '<span class="tag">' + esc(r.nome.replace('Rosto ', '')) + '</span>' : '') +
-            (c ? '<span class="tag">' + esc(c.nome) + '</span>' : '') +
-            '<span class="tag">' + qtdFotos + '/8 fotos</span>' +
-          '</span>' +
-          '</button>';
-      }).join('');
-    });
-  }
-
-  function ligarPainel() {
-    $('#lista-clientes').addEventListener('click', function (ev) {
-      var apagar = ev.target.closest('[data-apagar]');
-      if (apagar) {
-        ev.stopPropagation();
-        var id = apagar.getAttribute('data-apagar');
-        DB.ler(id).then(function (f) {
-          var nome = (f && f.nome) ? f.nome : 'esta ficha';
-          if (window.confirm('Apagar a ficha de ' + nome + '? Isso não pode ser desfeito.')) {
-            DB.remover(id).then(function () { avisar('Ficha apagada.'); renderPainel(); });
-          }
-        });
-        return;
-      }
-      if (ev.target.closest('[data-acao="novo"]')) { abrirEditor(fichaNova()); return; }
-      var cartao = ev.target.closest('.cartao');
-      if (cartao) {
-        /* Mesmo cuidado do renderPainel: dois cliques rápidos não podem fazer
-           a ficha mais lenta sobrescrever a que o Wagner acabou de abrir. */
-        var meuPedido = ++pedidoAbertura;
-        DB.ler(cartao.getAttribute('data-id')).then(function (f) {
-          if (f && meuPedido === pedidoAbertura) abrirEditor(f);
-        });
-      }
-    });
-
-    $('#btn-novo').addEventListener('click', function () { abrirEditor(fichaNova()); });
-    $('#busca').addEventListener('input', function (ev) {
-      filtroBusca = ev.target.value.trim();
-      renderPainel();
-    });
-
-    $('#btn-backup').addEventListener('click', exportarBackup);
-    $('#arq-restaurar').addEventListener('change', restaurarBackup);
-  }
-
-  /* =========================================================================
-     BACKUP — a ficha vive no navegador, então a saída precisa ser fácil
-  ========================================================================= */
-  function exportarBackup() {
-    DB.listar().then(function (fichas) {
-      if (!fichas.length) { avisar('Não há fichas para salvar ainda.', true); return; }
-      avisar('Montando o backup…');
-      var nome = 'backup-dossies-' + new Date().toISOString().slice(0, 10) + '.json';
-
-      DB.empacotarParaBackup(fichas).then(function (completas) {
-        var conteudo = JSON.stringify({ versao: 1, fichas: completas }, null, 2);
-        return entregarArquivo(nome, conteudo, 'application/json');
-      }).then(function (resultado) {
-        if (resultado === 'recusado') return;
-        avisar(fichas.length + ' ficha(s), com as fotos, salvas no backup.');
-      }).catch(function () {
-        avisar('Não consegui montar o arquivo de backup.', true);
-      });
-    });
-  }
-
-  function restaurarBackup(ev) {
-    var arquivo = ev.target.files && ev.target.files[0];
-    if (!arquivo) return;
-    var leitor = new FileReader();
-    leitor.onload = function () {
-      try {
-        var dados = JSON.parse(leitor.result);
-        var fichas = dados.fichas || dados;
-        if (!Array.isArray(fichas)) throw new Error('formato');
-        DB.importar(fichas).then(function (n) {
-          avisar(n + ' ficha(s) restauradas.');
-          renderPainel();
-        });
-      } catch (e) {
-        avisar('Esse arquivo não é um backup válido do dossiê.', true);
-      }
-      ev.target.value = '';
-    };
-    leitor.readAsText(arquivo);
   }
 
   /* =========================================================================
@@ -347,14 +122,10 @@
   }
 
   function montarFormulario() {
-    $('#nome-editor').textContent = ficha.nome || 'Nova ficha';
-    $('#meta-editor').textContent = ficha.criadoEm
-      ? 'Criada em ' + new Date(ficha.criadoEm).toLocaleDateString('pt-BR')
-      : 'Ficha ainda não salva';
-
-    $('#passos').innerHTML = PASSOS.map(function (p) {
+    $('#nome-editor').textContent = ficha.nome || 'Novo cliente';
+    $('#passos').innerHTML = PASSOS.map(function (p, i) {
       return '<button class="passo" role="tab" data-passo="' + p.id + '" aria-selected="' +
-             (p.id === passoAtivo) + '">' + esc(p.nome) + '</button>';
+             (p.id === passoAtivo) + '"><span>' + (i + 1) + '</span>' + esc(p.nome) + '</button>';
     }).join('');
 
     $('#secoes').innerHTML =
@@ -364,10 +135,20 @@
     trocarPasso(passoAtivo);
   }
 
+  /* Rodapé de cada etapa: no celular o caminho natural é ir descendo e
+     tocando em "Próxima", sem voltar ao topo para achar as abas. */
+  function rodapeEtapa(id) {
+    var i = PASSOS.map(function (p) { return p.id; }).indexOf(id);
+    var prox = PASSOS[i + 1];
+    return '<div class="etapa__rodape">' +
+      (prox
+        ? '<button type="button" class="btn btn--ouro btn--largo" data-ir="' + prox.id + '">Próxima: ' + esc(prox.nome) + ' →</button>'
+        : '<button type="button" class="btn btn--ouro btn--largo" data-acao="gerar">Gerar o PDF do dossiê</button>') +
+      '</div>';
+  }
+
   function trocarPasso(id) {
     passoAtivo = id;
-    /* Trocar de etapa é intenção de EDITAR: se a prévia estava aberta no
-       celular, ela sai da frente sozinha. */
     var editor = $('.editor');
     if (editor && editor.classList.contains('editor--previa')) {
       editor.classList.remove('editor--previa');
@@ -379,10 +160,6 @@
     $$('#secoes .secao').forEach(function (s) {
       s.setAttribute('data-ativa', String(s.getAttribute('data-secao') === id));
     });
-    /* Antes daqui, trocar de etapa arrastava a prévia (e no celular a página
-       inteira) até a página correspondente. Quem clica numa etapa quer EDITAR,
-       não navegar no documento — a tela saía de baixo do dedo antes de dar
-       tempo de mexer em nada. A navegação do dossiê agora é só pelas setas. */
     $('#secoes').scrollTop = 0;
   }
 
@@ -392,12 +169,13 @@
       '<h3>Dados do cliente</h3>' +
       '<p class="secao__dica">Aparecem na capa do dossiê.</p>' +
       '<div class="campo"><label for="f-nome">Nome completo</label>' +
-        '<input type="text" id="f-nome" data-campo="nome" value="' + esc(ficha.nome) + '" placeholder="Ex.: Alemax Nunes"></div>' +
+        '<input type="text" id="f-nome" data-campo="nome" value="' + esc(ficha.nome) + '" placeholder="Ex.: Alemax Nunes" autocomplete="off"></div>' +
       '<div class="campo"><label for="f-prof">Profissão ou cargo</label>' +
         '<input type="text" id="f-prof" data-campo="profissao" value="' + esc(ficha.profissao) + '" placeholder="Ex.: Empresário">' +
         '<p class="campo__ajuda">Opcional. Entra na capa, abaixo do nome.</p></div>' +
       '<div class="campo"><label for="f-data">Data da consultoria</label>' +
         '<input type="date" id="f-data" data-campo="data" value="' + esc(ficha.data) + '"></div>' +
+      rodapeEtapa('cliente') +
       '</div>';
   }
 
@@ -423,6 +201,7 @@
         '<textarea id="f-perfilNota" data-campo="perfilNota" placeholder="Ex.: perfil de Rei com forte traço analítico no ambiente de trabalho.">' +
         esc(ficha.perfilNota) + '</textarea>' +
         '<p class="campo__ajuda">Opcional. Entra na página do perfil, destacada em itálico.</p></div>' +
+      rodapeEtapa('perfil') +
       '</div>';
   }
 
@@ -430,13 +209,15 @@
     var r = C.acharRosto(ficha.rosto) || C.ROSTOS[0];
     return '<div class="secao" data-secao="rosto">' +
       '<h3>Análise facial</h3>' +
-      '<p class="secao__dica">O traçado geométrico é desenhado automaticamente sobre a silhueta.</p>' +
+      '<p class="secao__dica">O desenho do rosto muda conforme o formato: testa, maçã do rosto, mandíbula e queixo.</p>' +
       '<div class="campo"><label for="f-rosto">Formato do rosto</label>' +
         '<select id="f-rosto" data-campo="rosto">' + opcoes(C.ROSTOS, ficha.rosto) + '</select></div>' +
+      '<div class="miniatura" id="mini-rosto">' + D.formatoRosto(r) + '</div>' +
       '<div class="previa" id="previa-rosto"><b>Comunica</b>' + esc(r.comunica) + '</div>' +
       '<div class="campo"><label for="f-rostoNota">Observação da consultoria</label>' +
         '<textarea id="f-rostoNota" data-campo="rostoNota" placeholder="Ex.: assimetria leve no lado direito da mandíbula, compensada pelo caimento do topo.">' +
         esc(ficha.rostoNota) + '</textarea></div>' +
+      rodapeEtapa('rosto') +
       '</div>';
   }
 
@@ -454,6 +235,7 @@
         '<div class="campo"><label for="f-couro">Couro cabeludo</label>' +
           '<select id="f-couro" data-campo="couro">' + opcoes(C.COUROS, ficha.couro) + '</select></div>' +
       '</div>' +
+      rodapeEtapa('cabelo') +
       '</div>';
   }
 
@@ -461,11 +243,12 @@
     var m = ficha.medidas || {};
     return '<div class="secao" data-secao="medidas">' +
       '<h3>Projeto técnico</h3>' +
-      '<p class="secao__dica">As medidas entram escritas dentro do diagrama — é a página que o ' +
-      'cliente leva para qualquer barbeiro reproduzir o corte.</p>' +
+      '<p class="secao__dica">O desenho acompanha o que você preenche: o comprimento muda o volume, ' +
+      'a direção muda o penteado e a barba é recortada no formato deste rosto.</p>' +
+      '<div class="miniatura" id="mini-medidas">' + D.medidasFrontal(m, ficha.rosto, ficha.barbaDesenho) + '</div>' +
       '<div class="quadra">' +
         campoMedida('topo', 'Topo (cm)', m.topo) +
-        campoMedida('franja', 'Frente / franja (cm)', m.franja) +
+        campoMedida('franja', 'Frente (cm)', m.franja) +
         campoMedida('lateral', 'Laterais (cm)', m.lateral) +
         campoMedida('nuca', 'Nuca (cm)', m.nuca) +
       '</div>' +
@@ -473,29 +256,28 @@
         '<div class="campo"><label for="f-direcao">Direção do fio</label>' +
           '<select id="f-direcao" data-medida="direcao">' +
           D.listaDirecoes().map(function (d) {
-            return '<option value="' + d.slug + '"' + (d.slug === m.direcao ? ' selected' : '') + '>' +
-                   esc(d.nome) + '</option>';
+            return '<option value="' + d.slug + '"' + (d.slug === m.direcao ? ' selected' : '') + '>' + esc(d.nome) + '</option>';
           }).join('') + '</select></div>' +
         '<div class="campo"><label for="f-barbaMm">Barba (mm)</label>' +
-          '<input type="number" step="0.5" min="0" id="f-barbaMm" data-medida="barbaMm" value="' +
+          '<input type="number" inputmode="decimal" step="0.5" min="0" id="f-barbaMm" data-medida="barbaMm" value="' +
           esc(m.barbaMm) + '" placeholder="Ex.: 3"></div>' +
       '</div>' +
       '<div class="campo"><label for="f-barbaDesenho">Desenho da barba</label>' +
         '<select id="f-barbaDesenho" data-campo="barbaDesenho">' +
         D.listaBarbas().map(function (b) {
-          return '<option value="' + b.slug + '"' + (b.slug === ficha.barbaDesenho ? ' selected' : '') + '>' +
-                 esc(b.nome) + '</option>';
+          return '<option value="' + b.slug + '"' + (b.slug === ficha.barbaDesenho ? ' selected' : '') + '>' + esc(b.nome) + '</option>';
         }).join('') + '</select></div>' +
       '<div class="campo"><label for="f-tecnicas">Técnicas aplicadas</label>' +
-        '<textarea id="f-tecnicas" data-campo="tecnicas" placeholder="Uma técnica por linha. Ex.:&#10;Navalha nas laterais&#10;Tesoura desfiando no topo&#10;Deep cut nas pontas">' +
+        '<textarea id="f-tecnicas" data-campo="tecnicas" placeholder="Uma técnica por linha. Ex.:&#10;Navalha nas laterais&#10;Tesoura desfiando no topo">' +
         esc(ficha.tecnicas) + '</textarea>' +
-        '<p class="campo__ajuda">Uma por linha. Viram a lista da página de projeto técnico.</p></div>' +
+        '<p class="campo__ajuda">Uma por linha. Entram na página de direção do fio e barba.</p></div>' +
+      rodapeEtapa('medidas') +
       '</div>';
   }
 
   function campoMedida(chave, rotulo, valor) {
     return '<div class="campo"><label for="f-' + chave + '">' + esc(rotulo) + '</label>' +
-      '<input type="number" step="0.5" min="0" id="f-' + chave + '" data-medida="' + chave +
+      '<input type="number" inputmode="decimal" step="0.5" min="0" id="f-' + chave + '" data-medida="' + chave +
       '" value="' + esc(valor) + '"></div>';
   }
 
@@ -516,11 +298,12 @@
       '<div class="campo"><label for="f-refNota">Legenda das referências visuais</label>' +
         '<textarea id="f-refNota" data-campo="refNota" placeholder="Deixe em branco para usar o texto padrão.">' +
         esc(ficha.refNota) + '</textarea></div>' +
+      rodapeEtapa('proposta') +
       '</div>';
   }
 
   var SLOTS = [
-    { chave: 'cliente',      rotulo: 'Foto do cliente',   dica: 'Frontal, usada na análise facial e na estrutura do fio.' },
+    { chave: 'cliente',      rotulo: 'Foto do cliente',   dica: 'De frente. Usada na análise facial e no tipo de cabelo.' },
     { chave: 'ref1',         rotulo: 'Referência 01',     dica: 'Direção estética.' },
     { chave: 'ref2',         rotulo: 'Referência 02',     dica: 'Direção estética.' },
     { chave: 'ref3',         rotulo: 'Referência 03',     dica: 'Direção estética.' },
@@ -533,36 +316,24 @@
   function secaoFotos() {
     var ft = ficha.fotos || {};
     var slots = SLOTS.map(function (s) {
-      var src = DB.srcFoto(ft[s.chave]);
+      var src = ft[s.chave];
       return '<div class="slot' + (src ? ' slot--preenchido' : '') + '" data-slot="' + s.chave +
              '" role="button" tabindex="0" aria-label="' + esc(s.rotulo) + '">' +
              (src
                ? '<img src="' + esc(src) + '" alt="' + esc(s.rotulo) + '">' +
                  '<button class="slot__limpar" data-limpar="' + s.chave + '" title="Remover foto" aria-label="Remover ' + esc(s.rotulo) + '">✕</button>'
-               : '<div class="slot__vazio"><b>' + esc(s.rotulo) + '</b>' + esc(s.dica || 'Clique para enviar') + '</div>') +
+               : '<div class="slot__vazio"><b>' + esc(s.rotulo) + '</b>' + esc(s.dica || 'Toque para enviar') + '</div>') +
              '<span class="slot__rotulo">' + esc(s.rotulo) + '</span>' +
              '</div>';
     }).join('');
 
     return '<div class="secao" data-secao="fotos">' +
       '<h3>Fotos</h3>' +
-      '<p class="secao__dica">' + esc(textoDestinoDasFotos()) + '</p>' +
+      '<p class="secao__dica">Toque num quadro para tirar a foto ou escolher da galeria. ' +
+      'As fotos ficam só neste aparelho e são apagadas ao começar o próximo cliente.</p>' +
       '<div class="fotos">' + slots + '</div>' +
+      rodapeEtapa('fotos') +
       '</div>';
-  }
-
-  /* O destino das fotos muda conforme o modo; a tela não pode prometer o que
-     não é verdade naquele momento. */
-  function textoDestinoDasFotos() {
-    if (modoArmazenamento === 'nuvem') {
-      return 'As fotos vão para a sua conta, junto da ficha — por isso a foto que você ' +
-             'envia pelo celular aparece no computador. São redimensionadas ao serem escolhidas.';
-    }
-    if (modoArmazenamento === 'local') {
-      return 'As fotos ficam guardadas apenas neste aparelho — não são enviadas para ' +
-             'nenhum servidor. São redimensionadas ao serem escolhidas.';
-    }
-    return 'As fotos são redimensionadas automaticamente ao serem escolhidas.';
   }
 
   function secaoManutencao() {
@@ -597,12 +368,58 @@
         '<input type="text" id="f-retorno" data-campo="retorno" value="' + esc(ficha.retorno) +
         '" placeholder="' + esc(p.manutencao) + '">' +
         '<p class="campo__ajuda">Em branco, usa o intervalo próprio do perfil ' + esc(p.nome) + '.</p></div>' +
+      rodapeEtapa('manutencao') +
       '</div>';
+  }
+
+  /* As miniaturas do formulário redesenham na hora: é ali que o Wagner vê
+     que trocar o formato ou a direção muda o desenho de verdade. */
+  function atualizarMiniaturas() {
+    var r = C.acharRosto(ficha.rosto) || C.ROSTOS[0];
+    var mr = $('#mini-rosto'), mm = $('#mini-medidas'), pr = $('#previa-rosto');
+    if (mr) mr.innerHTML = D.formatoRosto(r);
+    if (pr) pr.innerHTML = '<b>Comunica</b>' + esc(r.comunica);
+    if (mm) mm.innerHTML = D.medidasFrontal(ficha.medidas || {}, ficha.rosto, ficha.barbaDesenho);
   }
 
   /* =========================================================================
      EVENTOS DO FORMULÁRIO
   ========================================================================= */
+  function aoMudar(alvo) {
+    var campo = alvo.getAttribute('data-campo');
+    if (campo) {
+      ficha[campo] = alvo.value;
+      if (campo === 'nome') $('#nome-editor').textContent = alvo.value || 'Novo cliente';
+      if (campo === 'rosto' || campo === 'barbaDesenho') atualizarMiniaturas();
+      agendarSalvar(); atualizarPreview();
+      return;
+    }
+    var medida = alvo.getAttribute('data-medida');
+    if (medida) {
+      ficha.medidas = ficha.medidas || {};
+      ficha.medidas[medida] = alvo.value;
+      atualizarMiniaturas();
+      agendarSalvar(); atualizarPreview();
+      return;
+    }
+    var ir = alvo.getAttribute('data-rotina');
+    if (ir !== null) {
+      garantirRotina();
+      ficha.rotina[Number(ir)] = alvo.value;
+      agendarSalvar(); atualizarPreview();
+      return;
+    }
+    var ipn = alvo.getAttribute('data-produto-nome');
+    var ipu = alvo.getAttribute('data-produto-uso');
+    if (ipn !== null || ipu !== null) {
+      var idx = Number(ipn !== null ? ipn : ipu);
+      ficha.produtos = ficha.produtos || [];
+      ficha.produtos[idx] = ficha.produtos[idx] || { nome: '', uso: '' };
+      ficha.produtos[idx][ipn !== null ? 'nome' : 'uso'] = alvo.value;
+      agendarSalvar(); atualizarPreview();
+    }
+  }
+
   function ligarEditor() {
     $('#passos').addEventListener('click', function (ev) {
       var b = ev.target.closest('[data-passo]');
@@ -610,62 +427,25 @@
     });
 
     var secoes = $('#secoes');
-
     secoes.addEventListener('input', function (ev) {
-      var alvo = ev.target;
-      var campo = alvo.getAttribute('data-campo');
-      if (campo) {
-        ficha[campo] = alvo.value;
-        if (campo === 'nome') $('#nome-editor').textContent = alvo.value || 'Nova ficha';
-        if (campo === 'rosto') atualizarPreviaRosto();
-        if (campo === 'cabelo') { /* a rotina só é refeita a pedido, para não apagar edições */ }
-        agendarSalvar();
-        atualizarPreview();
-        return;
-      }
-      var medida = alvo.getAttribute('data-medida');
-      if (medida) {
-        ficha.medidas = ficha.medidas || {};
-        ficha.medidas[medida] = alvo.value;
-        agendarSalvar(); atualizarPreview();
-        return;
-      }
-      var ir = alvo.getAttribute('data-rotina');
-      if (ir !== null) {
-        garantirRotina();
-        ficha.rotina[Number(ir)] = alvo.value;
-        agendarSalvar(); atualizarPreview();
-        return;
-      }
-      var ipn = alvo.getAttribute('data-produto-nome');
-      var ipu = alvo.getAttribute('data-produto-uso');
-      if (ipn !== null || ipu !== null) {
-        var idx = Number(ipn !== null ? ipn : ipu);
-        ficha.produtos = ficha.produtos || [];
-        ficha.produtos[idx] = ficha.produtos[idx] || { nome: '', uso: '' };
-        ficha.produtos[idx][ipn !== null ? 'nome' : 'uso'] = alvo.value;
-        agendarSalvar(); atualizarPreview();
-      }
+      if (ev.target.tagName !== 'SELECT') aoMudar(ev.target);
     });
-
+    /* selects disparam change, não input, em alguns navegadores */
     secoes.addEventListener('change', function (ev) {
-      /* selects disparam change, não input, em alguns navegadores */
-      if (ev.target.tagName === 'SELECT') {
-        var campo = ev.target.getAttribute('data-campo');
-        var medida = ev.target.getAttribute('data-medida');
-        if (campo) { ficha[campo] = ev.target.value; if (campo === 'rosto') atualizarPreviaRosto(); }
-        if (medida) { ficha.medidas = ficha.medidas || {}; ficha.medidas[medida] = ev.target.value; }
-        agendarSalvar(); atualizarPreview();
-      }
+      if (ev.target.tagName === 'SELECT') aoMudar(ev.target);
     });
 
     secoes.addEventListener('click', function (ev) {
       var perfilBtn = ev.target.closest('[data-perfil]');
       if (perfilBtn) { escolherPerfil(perfilBtn.getAttribute('data-perfil')); return; }
 
+      var ir = ev.target.closest('[data-ir]');
+      if (ir) { trocarPasso(ir.getAttribute('data-ir')); window.scrollTo(0, 0); return; }
+
       var acao = ev.target.closest('[data-acao]');
       if (acao) {
         var nome = acao.getAttribute('data-acao');
+        if (nome === 'gerar') { gerarPDF(); }
         if (nome === 'usar-modelo') {
           var p = C.acharPerfil(ficha.perfil) || C.PERFIS[0];
           ficha.proposta = p.proposta;
@@ -722,20 +502,15 @@
       if (slot) { ev.preventDefault(); pedirFoto(slot.getAttribute('data-slot')); }
     });
 
-    $('#btn-voltar').addEventListener('click', function () {
-      salvarAgora().then(mostrarPainel);
-    });
-    $('#btn-salvar').addEventListener('click', function () {
-      salvarAgora().then(function () { avisar('Ficha salva.'); });
-    });
-    $('#btn-pdf').addEventListener('click', exportarPDF);
+    $('#btn-novo').addEventListener('click', novoCliente);
+    $('#btn-pdf').addEventListener('click', gerarPDF);
 
     /* No celular a tela mostra a ficha OU o dossiê; este botão alterna. */
     $('#btn-alternar').addEventListener('click', function () {
       var editor = $('.editor');
       var vendoPrevia = editor.classList.toggle('editor--previa');
       this.textContent = vendoPrevia ? 'Ver ficha' : 'Ver dossiê';
-      if (vendoPrevia) ajustarEscala();
+      if (vendoPrevia) { ajustarEscala(); encaixarPaginas($('#palco')); }
     });
     $('#btn-anterior').addEventListener('click', function () { navegar(-1); });
     $('#btn-proxima').addEventListener('click', function () { navegar(1); });
@@ -748,24 +523,14 @@
   function escolherPerfil(slug) {
     var anterior = C.acharPerfil(ficha.perfil);
     ficha.perfil = slug;
-    var novo = C.acharPerfil(slug);
-
     /* Se a proposta ainda é exatamente o modelo do perfil anterior, ela é
        trocada pelo modelo do novo perfil. Se o Wagner já escreveu algo próprio,
        o texto dele é preservado — trocar seria destruir trabalho. */
-    if (novo && (!ficha.proposta || (anterior && ficha.proposta === anterior.proposta))) {
-      ficha.proposta = '';
-    }
+    if (!ficha.proposta || (anterior && ficha.proposta === anterior.proposta)) ficha.proposta = '';
     montarFormulario();
     trocarPasso('perfil');
     agendarSalvar();
     atualizarPreview();
-  }
-
-  function atualizarPreviaRosto() {
-    var r = C.acharRosto(ficha.rosto);
-    var el = $('#previa-rosto');
-    if (r && el) el.innerHTML = '<b>Comunica</b>' + esc(r.comunica);
   }
 
   function pedirFoto(chave) {
@@ -775,12 +540,10 @@
     entrada.addEventListener('change', function () {
       var arquivo = entrada.files && entrada.files[0];
       if (!arquivo) return;
-      avisar('Enviando a foto…');
-      prepararImagem(arquivo, 1600).then(function (blob) {
-        return DB.guardarFoto(blob);
-      }).then(function (referencia) {
+      avisar('Preparando a foto…');
+      prepararImagem(arquivo, 1600).then(function (dataURL) {
         ficha.fotos = ficha.fotos || {};
-        ficha.fotos[chave] = referencia;
+        ficha.fotos[chave] = dataURL;
         montarFormulario();
         trocarPasso('fotos');
         atualizarPreview();
@@ -794,30 +557,33 @@
     entrada.click();
   }
 
+  function novoCliente() {
+    var temAlgo = ficha && (ficha.nome || Object.keys(ficha.fotos || {}).length);
+    if (temAlgo && !window.confirm('Começar um novo cliente? A ficha de ' + (ficha.nome || 'agora') +
+        ' será apagada deste aparelho. Se ainda não salvou o PDF, gere antes.')) return;
+    R.apagar().then(function () {
+      ficha = fichaNova();
+      passoAtivo = 'cliente';
+      paginaAtual = 1;
+      montarFormulario();
+      atualizarPreview();
+      $('#palco').scrollTop = 0;
+      window.scrollTo(0, 0);
+      avisar('Ficha em branco. Pode começar o próximo cliente.');
+    });
+  }
+
   /* =========================================================================
-     SALVAMENTO
+     RASCUNHO — ver rascunho.js
   ========================================================================= */
   function agendarSalvar() {
     clearTimeout(salvamentoPendente);
-    if (!armazenamentoOk) { $('#estado-salvo').textContent = 'Não salvo'; return; }
-    $('#estado-salvo').textContent = 'Salvando…';
-    salvamentoPendente = setTimeout(salvarAgora, 700);
+    salvamentoPendente = setTimeout(salvarAgora, 600);
   }
-
   function salvarAgora() {
     clearTimeout(salvamentoPendente);
     if (!ficha) return Promise.resolve();
-    if (!armazenamentoOk) { $('#estado-salvo').textContent = 'Não salvo'; return Promise.resolve(); }
-
-    return DB.salvar(ficha).then(function () {
-      $('#estado-salvo').textContent = 'Salvo';
-    }).catch(function (e) {
-      /* Uma vez que o navegador recusou o banco, ele vai recusar sempre: marca
-         o estado e para de tentar, em vez de repetir o erro a cada tecla. */
-      armazenamentoOk = false;
-      $('#estado-salvo').textContent = 'Não salvo';
-      avisar(e && e.message ? e.message : 'Não consegui salvar a ficha neste navegador.', true);
-    });
+    return R.salvar(ficha).catch(function () { /* sem rascunho, a ficha segue na tela */ });
   }
 
   /* =========================================================================
@@ -830,45 +596,36 @@
     /* Remontar o dossiê zera a rolagem do palco. Sem guardar e devolver a
        posição, a prévia pulava para a primeira página a cada tecla digitada. */
     var posicao = palco.scrollTop;
-
     var paginas = S.montar(ficha);
+    totalPaginas = paginas.length;
     palco.innerHTML = paginas.map(function (html) {
       return '<div class="moldura__caixa"><div class="moldura">' + html + '</div></div>';
     }).join('');
-    palco.dataset.escalado = '';   /* conteúdo novo: força remedir */
+    palco.dataset.escalado = '';
     ajustarEscala();
+    encaixarPaginas(palco);
     palco.scrollTop = posicao;
-
     $('#conta-paginas').textContent = paginas.length + ' páginas';
     marcarPagina();
   }
 
-  /* A página do dossiê tem 1440 px fixos e é reduzida por `scale()` para caber
-     na coluna da prévia. A caixa em volta recebe o tamanho JÁ reduzido, senão
-     ela continuaria ocupando 1440 px e empurraria a página para fora da tela. */
+  /* A página tem 1080 px fixos e é reduzida por `scale()` para caber na
+     coluna da prévia. A caixa em volta recebe o tamanho JÁ reduzido. */
   function ajustarEscala() {
     var palco = $('#palco');
-    var largura = palco.clientWidth - 52;          /* 26 px de respiro de cada lado */
-    if (largura <= 0) return;                      /* ainda sem layout: tenta depois */
-
-    var nova = Math.min(1, largura / 1440);
+    var largura = palco.clientWidth - 40;
+    if (largura <= 0) return;
+    var nova = Math.min(0.62, largura / LARG);
     if (Math.abs(nova - escalaPreview) < 0.001 && palco.dataset.escalado === '1') return;
     escalaPreview = nova;
     palco.dataset.escalado = '1';
-
-    $$('.moldura', palco).forEach(function (m) {
-      m.style.transform = 'scale(' + escalaPreview + ')';
-    });
+    $$('.moldura', palco).forEach(function (m) { m.style.transform = 'scale(' + escalaPreview + ')'; });
     $$('.moldura__caixa', palco).forEach(function (c) {
-      c.style.width = Math.round(1440 * escalaPreview) + 'px';
-      c.style.height = Math.round(810 * escalaPreview) + 'px';
+      c.style.width = Math.round(LARG * escalaPreview) + 'px';
+      c.style.height = Math.round(ALT * escalaPreview) + 'px';
     });
   }
 
-  /* O ResizeObserver existe porque a primeira medida pode acontecer antes de o
-     navegador terminar de posicionar as duas colunas do editor — nesse instante
-     a coluna da prévia ainda não tem a largura final e a página sairia cortada.
-     Observando o elemento, a escala se corrige sozinha assim que ele assenta. */
   function observarPalco() {
     var palco = $('#palco');
     if (typeof ResizeObserver === 'function') {
@@ -878,40 +635,60 @@
     }
   }
 
-  /* Rola apenas o palco da prévia, nunca a página inteira: `scrollIntoView`
-     arrastava o documento junto e, no celular, jogava o formulário para fora
-     da tela. */
   function irParaPagina(n) {
-    paginaAtual = Math.max(1, Math.min(13, n));
+    paginaAtual = Math.max(1, Math.min(totalPaginas, n));
     var palco = $('#palco');
     var alvo = $$('#palco .moldura__caixa')[paginaAtual - 1];
-    if (alvo) {
-      palco.scrollTo({ top: alvo.offsetTop - palco.offsetTop, behavior: 'smooth' });
-    }
+    if (alvo) palco.scrollTo({ top: alvo.offsetTop - palco.offsetTop - 16, behavior: 'smooth' });
     marcarPagina();
   }
-
   function navegar(passo) { irParaPagina(paginaAtual + passo); }
-
   function marcarPagina() {
-    $('#indice-pagina').textContent = 'Página ' + paginaAtual + ' de 13';
+    $('#indice-pagina').textContent = 'Página ' + paginaAtual + ' de ' + totalPaginas;
     $('#btn-anterior').disabled = paginaAtual <= 1;
-    $('#btn-proxima').disabled = paginaAtual >= 13;
+    $('#btn-proxima').disabled = paginaAtual >= totalPaginas;
+  }
+
+  /* =========================================================================
+     ENCAIXE DO TEXTO
+     Uma proposta ou observação longa não pode ser cortada no pé da página.
+     Se o miolo transborda, o fator --k da página desce aos poucos (até 78%)
+     até caber. Só mexe na página que precisa — as outras ficam no tamanho
+     cheio, que é o de leitura confortável no celular.
+  ========================================================================= */
+  function encaixarPaginas(raiz) {
+    $$('.pg', raiz).forEach(function (pg) {
+      var miolo = $('.pg__miolo', pg);
+      if (!miolo || !miolo.clientHeight) return;
+      var k = 1;
+      pg.style.setProperty('--k', '1');
+      while (miolo.scrollHeight > miolo.clientHeight + 2 && k > 0.78) {
+        k = Math.round((k - 0.03) * 100) / 100;
+        pg.style.setProperty('--k', String(k));
+      }
+    });
   }
 
   /* =========================================================================
      EXPORTAÇÃO DO PDF
      -------------------------------------------------------------------------
-     Cada página é fotografada com html2canvas em escala 2 e colada em uma
-     folha 16:9 do jsPDF. É o caminho que garante que o PDF fique idêntico ao
-     que aparece na tela, com as fotos e os diagramas no lugar.
+     Cada página é montada fora da tela em tamanho real, fotografada com
+     html2canvas e colada numa folha em pé do jsPDF.
+
+     Dois cuidados que o PDF anterior não tinha:
+       1. FOTOS — o html2canvas ignora `object-fit: cover` e estica a foto
+          até preencher a caixa (rostos achatados). Antes da captura, cada
+          foto é recortada no tamanho exato da sua caixa.
+       2. DIAGRAMAS — cada desenho é convertido em imagem na resolução final,
+          para sair nítido mesmo com zoom.
   ========================================================================= */
-  function exportarPDF() {
+  var ESCALA = 1.4;   /* 1080 px → 1512 px de largura: nítido em qualquer celular */
+
+  function gerarPDF() {
     if (!window.jspdf || !window.html2canvas) {
-      avisar('As bibliotecas de PDF não carregaram. Verifique a conexão e recarregue a página.', true);
+      avisar('As bibliotecas de PDF não carregaram. Verifique a internet e recarregue a página.', true);
       return;
     }
-    if (!ficha) { avisar('Abra uma ficha antes de gerar o dossiê.', true); return; }
     if (!ficha.nome) {
       avisar('Preencha o nome do cliente antes de gerar o PDF.', true);
       trocarPasso('cliente');
@@ -926,39 +703,27 @@
       '<div class="progresso__trilho"><div class="progresso__barra" id="progresso-barra"></div></div>';
     document.body.appendChild(caixa);
 
-    /* As páginas são montadas fora da tela, em tamanho real — renderizar a
-       versão reduzida do preview produziria um PDF borrado. */
     var oficina = document.createElement('div');
-    oficina.style.cssText = 'position:fixed;left:-20000px;top:0;width:1440px;';
+    oficina.className = 'oficina';
     oficina.innerHTML = S.montar(ficha).join('');
     document.body.appendChild(oficina);
-
     var paginas = $$('.pg', oficina);
 
-    /* Folha de 960 x 540 pt: o formato 16:9 de apresentação (13,33 x 7,5 pol).
-       Cada página é fotografada a 1440 x 810 CSS px em escala 2 — ou seja
-       2880 x 1620 px reais — o que dá 216 dpi na folha. Sobra resolução tanto
-       para a tela quanto para impressão. */
-    var LARGURA = 960, ALTURA = 540;
-    var pdf = new window.jspdf.jsPDF({ orientation: 'landscape', unit: 'pt', format: [LARGURA, ALTURA] });
+    /* Folha de 540 x 960 pt: 9:16, a proporção da própria página. */
+    var pdf = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'pt', format: [540, 960], compress: true });
 
-    var fontesProntas = document.fonts && document.fonts.ready
-      ? document.fonts.ready : Promise.resolve();
-
-    fontesProntas
+    carregarFontes()
       .then(function () { return esperarImagens(oficina); })
+      .then(function () { encaixarPaginas(oficina); })
+      .then(function () { return recortarFotos(oficina); })
+      .then(function () { return rasterizarDiagramas(oficina); })
       .then(function () { return processar(0); })
       .then(function () {
         $('#progresso-texto').textContent = 'Fechando o arquivo…';
         $('#progresso-barra').style.width = '100%';
-        return entregarArquivo(nomeArquivo(ficha), pdf.output('blob'), 'application/pdf');
-      })
-      .then(function (resultado) {
+        var blob = pdf.output('blob');
         limpar();
-        if (resultado === 'recusado') return;
-        avisar(resultado === 'entregue'
-          ? 'Dossiê gerado e salvo.'
-          : 'Dossiê gerado. O download começou.');
+        mostrarEntrega(blob, nomeArquivo(ficha));
       })
       .catch(function (e) {
         limpar();
@@ -969,74 +734,188 @@
       if (i >= paginas.length) return Promise.resolve();
       $('#progresso-texto').textContent = 'Montando a página ' + (i + 1) + ' de ' + paginas.length + '…';
       $('#progresso-barra').style.width = ((i / paginas.length) * 100) + '%';
-
       return window.html2canvas(paginas[i], {
-        scale: 2, useCORS: true, backgroundColor: '#f7f4ed',
-        width: 1440, height: 810, windowWidth: 1440, windowHeight: 810,
+        scale: ESCALA, useCORS: true, backgroundColor: '#f7f4ed',
+        width: LARG, height: ALT, windowWidth: LARG, windowHeight: ALT,
         logging: false
       }).then(function (tela) {
-        var img = tela.toDataURL('image/jpeg', 0.92);
-        if (i > 0) pdf.addPage([LARGURA, ALTURA], 'landscape');
-        pdf.addImage(img, 'JPEG', 0, 0, LARGURA, ALTURA, undefined, 'FAST');
+        var img = tela.toDataURL('image/jpeg', 0.84);
+        if (i > 0) pdf.addPage([540, 960], 'portrait');
+        pdf.addImage(img, 'JPEG', 0, 0, 540, 960, undefined, 'FAST');
+        tela.width = tela.height = 0;   /* devolve a memória já — celular tem pouca */
         return processar(i + 1);
       });
     }
 
-    function limpar() {
-      oficina.remove();
-      caixa.remove();
-    }
+    function limpar() { oficina.remove(); caixa.remove(); }
+  }
+
+  function carregarFontes() {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    var pesos = ['400 34px Inter', '500 34px Inter', '600 34px Inter',
+                 '400 40px "Playfair Display"', '700 40px "Playfair Display"', 'italic 400 40px "Playfair Display"'];
+    return Promise.all(pesos.map(function (p) { return document.fonts.load(p).catch(function () {}); }))
+      .then(function () { return document.fonts.ready; });
   }
 
   /* html2canvas não espera as imagens carregarem sozinho. */
   function esperarImagens(raiz) {
-    var imgs = $$('img', raiz);
-    return Promise.all(imgs.map(function (img) {
+    return Promise.all($$('img', raiz).map(function (img) {
       if (img.complete && img.naturalWidth) return Promise.resolve();
       return new Promise(function (ok) {
         img.addEventListener('load', ok, { once: true });
         img.addEventListener('error', ok, { once: true });
-        setTimeout(ok, 6000);
+        setTimeout(ok, 8000);
       });
     }));
+  }
+
+  /* Recorta cada foto no tamanho exato da caixa, respeitando o enquadramento
+     (object-position) definido no CSS. Depois disso a imagem já tem a
+     proporção da caixa, e o html2canvas não tem mais o que esticar. */
+  function recortarFotos(raiz) {
+    return Promise.all($$('img[data-cobrir]', raiz).map(function (img) {
+      var w = img.clientWidth, h = img.clientHeight;
+      var iw = img.naturalWidth, ih = img.naturalHeight;
+      if (!w || !h || !iw || !ih) return null;
+      var pos = getComputedStyle(img).objectPosition.split(' ');
+      var px = pos[0] && pos[0].indexOf('%') > 0 ? parseFloat(pos[0]) / 100 : 0.5;
+      var py = pos[1] && pos[1].indexOf('%') > 0 ? parseFloat(pos[1]) / 100 : 0.5;
+      var esc = Math.max(w / iw, h / ih);
+      var sw = w / esc, sh = h / esc;
+      var sx = (iw - sw) * px, sy = (ih - sh) * py;
+      var tela = document.createElement('canvas');
+      tela.width = Math.round(w * ESCALA);
+      tela.height = Math.round(h * ESCALA);
+      var ctx = tela.getContext('2d');
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, tela.width, tela.height);
+      return new Promise(function (ok) {
+        img.addEventListener('load', ok, { once: true });
+        img.addEventListener('error', ok, { once: true });
+        img.style.objectFit = 'fill';
+        img.src = tela.toDataURL('image/jpeg', 0.9);
+      });
+    }));
+  }
+
+  /* Converte cada SVG num PNG já na resolução final. Deixado para o
+     html2canvas, o desenho é rasterizado no tamanho de tela e ampliado —
+     sai com o traço borrado. */
+  function rasterizarDiagramas(raiz) {
+    return Promise.all($$('.pg svg', raiz).map(function (svg) {
+      var w = svg.clientWidth || svg.getBoundingClientRect().width;
+      var h = svg.clientHeight || svg.getBoundingClientRect().height;
+      if (!w || !h) return null;
+      var copia = svg.cloneNode(true);
+      copia.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      copia.setAttribute('width', Math.round(w * ESCALA));
+      copia.setAttribute('height', Math.round(h * ESCALA));
+      var dados = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(copia));
+      return new Promise(function (ok) {
+        var img = new Image();
+        img.onload = function () {
+          var tela = document.createElement('canvas');
+          tela.width = Math.round(w * ESCALA); tela.height = Math.round(h * ESCALA);
+          tela.getContext('2d').drawImage(img, 0, 0, tela.width, tela.height);
+          var png = document.createElement('img');
+          png.src = tela.toDataURL('image/png');
+          png.style.width = w + 'px'; png.style.height = h + 'px'; png.style.display = 'block';
+          png.onload = function () { svg.replaceWith(png); ok(); };
+          png.onerror = function () { ok(); };
+        };
+        img.onerror = function () { ok(); };   /* sem conversão, o SVG segue como está */
+        img.src = dados;
+      });
+    }));
+  }
+
+  /* =========================================================================
+     ENTREGA DO ARQUIVO
+     O PDF fica pronto na memória e a tela final oferece os botões. O toque
+     no botão é o que libera o download (e o compartilhamento) no celular —
+     disparado sozinho, depois de segundos gerando, o navegador bloqueia e o
+     que sobra é um link. Era esse o "só manda um link".
+  ========================================================================= */
+  var urlAtual = null;
+
+  function mostrarEntrega(blob, nome) {
+    if (urlAtual) URL.revokeObjectURL(urlAtual);
+    urlAtual = URL.createObjectURL(blob);
+    var arquivo = null;
+    try { arquivo = new File([blob], nome, { type: 'application/pdf' }); } catch (e) { arquivo = null; }
+    var podeCompartilhar = !!(arquivo && navigator.canShare && navigator.canShare({ files: [arquivo] }));
+    var mb = (blob.size / 1048576).toFixed(1).replace('.', ',');
+    var ua = navigator.userAgent || '';
+    var navegadorInterno = /Instagram|FBAN|FBAV|Line\/|WhatsApp/i.test(ua);
+
+    var tela = document.createElement('div');
+    tela.className = 'entrega';
+    tela.setAttribute('role', 'dialog');
+    tela.setAttribute('aria-modal', 'true');
+    tela.innerHTML =
+      '<div class="entrega__caixa">' +
+        '<span class="entrega__selo">Dossiê pronto</span>' +
+        '<h2>' + esc(ficha.nome) + '</h2>' +
+        '<p class="entrega__arquivo">' + esc(nome) + ' · ' + mb + ' MB · ' + totalPaginas + ' páginas</p>' +
+        '<a class="btn btn--ouro btn--largo btn--alto" id="entrega-baixar" href="' + urlAtual + '" download="' + esc(nome) + '">Salvar o PDF no celular</a>' +
+        (podeCompartilhar
+          ? '<button class="btn btn--largo btn--alto" id="entrega-enviar">Enviar para o cliente (WhatsApp…)</button>'
+          : '') +
+        (navegadorInterno
+          ? '<p class="entrega__dica">Você abriu o sistema dentro de outro aplicativo. Se o PDF não baixar, ' +
+            'toque nos três pontinhos e escolha <b>Abrir no navegador</b>.</p>'
+          : '<p class="entrega__dica">No iPhone o arquivo vai para <b>Arquivos › Downloads</b>. ' +
+            'No Android, para a pasta <b>Downloads</b>.</p>') +
+        '<div class="entrega__fim">' +
+          '<button class="btn btn--fantasma" id="entrega-voltar">Voltar à ficha</button>' +
+          '<button class="btn" id="entrega-novo">Começar novo cliente</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(tela);
+
+    $('#entrega-baixar', tela).addEventListener('click', function () {
+      setTimeout(function () { avisar('PDF salvo. Confira em Downloads.'); }, 600);
+    });
+    var enviar = $('#entrega-enviar', tela);
+    if (enviar) {
+      enviar.addEventListener('click', function () {
+        navigator.share({ files: [arquivo], title: 'Dossiê de Visagismo — ' + ficha.nome })
+          .catch(function (e) { if (e && e.name !== 'AbortError') avisar('Não consegui abrir o compartilhamento.', true); });
+      });
+    }
+    $('#entrega-voltar', tela).addEventListener('click', function () { tela.remove(); });
+    $('#entrega-novo', tela).addEventListener('click', function () {
+      tela.remove();
+      novoCliente();
+    });
   }
 
   /* =========================================================================
      INÍCIO
   ========================================================================= */
   function iniciar() {
-    ligarPainel();
     ligarEditor();
-    mostrarPainel();
-
-    /* A escolha entre nuvem e navegador leva um instante (a página publicada
-       responde depois do primeiro ciclo). Assim que chegar, o painel repinta
-       para dizer onde as fichas estão sendo guardadas. */
-    DB.pronto().then(function (info) {
-      modoArmazenamento = info.modo;
-      if (info.modo === 'nuvem' && !info.fotosOk) {
-        avisar('Nesta janela dá para editar as fichas, mas não enviar fotos.', true);
-      }
-      if (ficha === null) renderPainel();
-    }).catch(function () { /* o próprio painel já reporta a falha */ });
-
     observarPalco();
 
     $('#palco').addEventListener('scroll', function () {
       var caixas = $$('#palco .moldura__caixa');
       var topo = $('#palco').scrollTop;
       for (var i = 0; i < caixas.length; i++) {
-        if (caixas[i].offsetTop + caixas[i].offsetHeight > topo + 80) {
+        if (caixas[i].offsetTop + caixas[i].offsetHeight > topo + 120) {
           if (paginaAtual !== i + 1) { paginaAtual = i + 1; marcarPagina(); }
           break;
         }
       }
     });
 
-    window.addEventListener('beforeunload', function (ev) {
-      if (ficha && armazenamentoOk && $('#estado-salvo').textContent === 'Salvando…') {
-        ev.preventDefault();
-        ev.returnValue = '';
+    /* Se a página recarregou no meio do atendimento, a ficha volta. */
+    R.ler().then(function (salva) {
+      ficha = salva ? Object.assign(fichaNova(), salva) : fichaNova();
+      montarFormulario();
+      atualizarPreview();
+      if (salva && (salva.nome || Object.keys(salva.fotos || {}).length)) {
+        avisar('Continuando a ficha de ' + (salva.nome || 'cliente sem nome') + '.');
       }
     });
   }

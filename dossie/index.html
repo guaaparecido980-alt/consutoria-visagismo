@@ -6,10 +6,11 @@
 <title>Dossiê de Visagismo · Wagner Alves</title>
 <meta name="description" content="Sistema de análise e emissão do dossiê de consultoria de visagismo masculino de Wagner Alves.">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#17140f">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/dossie.css">
 <link rel="stylesheet" href="assets/app.css">
@@ -21,65 +22,35 @@
     <b>WAGNER ALVES</b>
     <span>Dossiê de Visagismo</span>
   </div>
-
-  <!-- ações do painel -->
-  <div id="acoes-painel" class="acoes">
-    <button class="btn" id="btn-backup" title="Baixar um arquivo com todas as fichas">Backup</button>
-    <label class="btn" for="arq-restaurar">Restaurar</label>
-    <input type="file" id="arq-restaurar" accept="application/json" class="oculto">
-    <button class="btn btn--ouro" id="btn-novo">+ Nova ficha</button>
+  <div class="acoes">
+    <button class="btn" id="btn-novo" title="Apaga a ficha atual e começa em branco">Novo cliente</button>
+    <button class="btn btn--ouro" id="btn-pdf">Gerar PDF</button>
   </div>
 </header>
 
-<!-- =========================================================================
-     TELA 1 — PAINEL DE CLIENTES
-========================================================================== -->
-<main id="tela-painel">
-  <div class="painel">
-    <div class="painel__cabeca">
-      <div>
-        <h1>Fichas de consultoria</h1>
-        <p id="contagem">Carregando…</p>
-      </div>
-      <input type="search" class="busca" id="busca" placeholder="Buscar pelo nome…" aria-label="Buscar cliente pelo nome">
+<main class="editor">
+
+  <!-- coluna da esquerda: a ficha -->
+  <div class="forma">
+    <div class="forma__cabeca">
+      <h2 id="nome-editor">Novo cliente</h2>
+      <button class="btn btn--alternar" id="btn-alternar">Ver dossiê</button>
     </div>
-    <div id="lista-clientes"></div>
+    <div class="passos" id="passos" role="tablist"></div>
+    <div id="secoes"></div>
   </div>
-</main>
 
-<!-- =========================================================================
-     TELA 2 — EDITOR
-========================================================================== -->
-<main id="tela-editor" class="oculto">
-  <div class="editor">
-
-    <!-- coluna da esquerda: a ficha -->
-    <div class="forma">
-      <div class="forma__cabeca">
-        <h2 id="nome-editor">Nova ficha</h2>
-        <p id="meta-editor"></p>
-      </div>
-      <div class="passos" id="passos" role="tablist"></div>
-      <div id="secoes"></div>
+  <!-- coluna da direita: o dossiê -->
+  <div class="visor">
+    <div class="visor__barra">
+      <span class="visor__conta" id="indice-pagina">Página 1</span>
+      <span class="visor__conta visor__conta--leve" id="conta-paginas"></span>
+      <button class="btn btn--pequeno" id="btn-anterior" aria-label="Página anterior">↑</button>
+      <button class="btn btn--pequeno" id="btn-proxima" aria-label="Próxima página">↓</button>
     </div>
-
-    <!-- coluna da direita: o dossiê -->
-    <div class="visor">
-      <div class="visor__barra">
-        <button class="btn btn--fantasma" id="btn-voltar">← Fichas</button>
-        <button class="btn btn--alternar" id="btn-alternar">Ver dossiê</button>
-        <span class="visor__conta" id="indice-pagina">Página 1 de 13</span>
-        <span class="visor__conta" id="conta-paginas"></span>
-        <span class="visor__conta" id="estado-salvo">Salvo</span>
-        <button class="btn btn--pequeno" id="btn-anterior" aria-label="Página anterior">↑</button>
-        <button class="btn btn--pequeno" id="btn-proxima" aria-label="Próxima página">↓</button>
-        <button class="btn" id="btn-salvar">Salvar</button>
-        <button class="btn btn--ouro" id="btn-pdf">Gerar dossiê em PDF</button>
-      </div>
-      <div class="visor__palco" id="palco"></div>
-    </div>
-
+    <div class="visor__palco" id="palco"></div>
   </div>
+
 </main>
 
 <!-- Bibliotecas de exportação. Versões fixas, para o comportamento não mudar
@@ -90,7 +61,7 @@
 <script src="assets/conteudo.js"></script>
 <script src="assets/diagramas.js"></script>
 <script src="assets/slides.js"></script>
-<script src="assets/db.js"></script>
+<script src="assets/rascunho.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>
