@@ -170,6 +170,12 @@ a { color: #c4ad76; }
   border: 0; border-radius: 4px; background: rgba(16,14,11,.82); color: #cbc0a5;
   cursor: pointer; display: grid; place-items: center;
 }
+.slot__editar {
+  position: absolute; left: 8px; right: 8px; bottom: 30px; height: 38px;
+  border: 0; border-radius: 4px; background: #a08c5c; color: #14120f;
+  font: 600 13px/1 inherit; font-family: inherit; cursor: pointer;
+}
+.slot__editar:hover { background: #b89f68; }
 .slot__limpar:hover { background: #4a2019; color: #f0c8bc; }
 
 /* lista de linhas editáveis (rotina, produtos) */
@@ -216,6 +222,38 @@ a { color: #c4ad76; }
 .progresso p { margin: 0; color: #cbc0a5; font-size: 15px; letter-spacing: .04em; text-align: center; }
 .progresso__trilho { width: min(320px, 100%); height: 3px; background: #2b261d; border-radius: 2px; overflow: hidden; }
 .progresso__barra { height: 100%; width: 0; background: #a08c5c; transition: width .2s; }
+
+/* editor de foto: enquadrar, aproximar, girar */
+.edfoto {
+  position: fixed; inset: 0; z-index: 95;
+  background: #0b0a08; color: #cbc0a5;
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+}
+.edfoto__topo { display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.edfoto__topo b { font-weight: 600; color: #f4ecd9; font-size: 15px; }
+.edfoto__topo span { font-size: 12px; color: #8b826d; }
+.edfoto__palco { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.edfoto__quadro {
+  position: relative; overflow: hidden; background: #1e1b16;
+  aspect-ratio: var(--prop);
+  width: min(100%, calc((100dvh - 250px) * var(--prop)));
+  max-height: 100%;
+  outline: 2px solid #a08c5c;
+  touch-action: none; cursor: grab; user-select: none;
+}
+.edfoto__quadro:active { cursor: grabbing; }
+.edfoto__quadro img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+/* guia dos terços: só ajuda a posicionar, não sai no PDF */
+.edfoto__guia {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, transparent 33.2%, rgba(255,255,255,.28) 33.3%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,.28) 66.6%, transparent 66.8%),
+    linear-gradient(to bottom, transparent 33.2%, rgba(255,255,255,.28) 33.3%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,.28) 66.6%, transparent 66.8%);
+}
+.edfoto__ctrl { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.edfoto__ctrl input[type=range] { flex: 1; max-width: 360px; accent-color: #a08c5c; }
+.edfoto__rodape { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
 /* tela final: o PDF pronto */
 .entrega {

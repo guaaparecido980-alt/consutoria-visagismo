@@ -43,16 +43,29 @@
     return Number(partes[2]) + ' de ' + meses[Number(partes[1]) - 1] + ' de ' + partes[0];
   }
 
+  function enquadre(f, chave) { return (f.enquadre && f.enquadre[chave]) || null; }
+
   /* Moldura de foto: mostra a imagem quando existe e um marcador discreto
      quando ainda não foi enviada — assim a pré-visualização nunca "quebra".
      `data-cobrir` marca a imagem para ser recortada na exportação: o
      html2canvas ignora `object-fit: cover` e ESTICAVA a foto para caber na
      caixa — era o que deixava os rostos achatados no PDF. */
-  function foto(src, legenda, classe) {
+  function foto(src, legenda, classe, enq) {
     var cls = 'foto ' + (classe || '');
     if (src) {
+      /* Enquadramento escolhido no editor de foto: ponto de foco (x, y em 0–1)
+         e zoom. A mesma conta é usada na pré-visualização (CSS) e no recorte
+         do PDF, então o que se vê é o que sai. */
+      var estilo = '', zoom = 1;
+      if (enq) {
+        var ex = Math.round(Math.min(1, Math.max(0, enq.x == null ? .5 : enq.x)) * 1000) / 10;
+        var ey = Math.round(Math.min(1, Math.max(0, enq.y == null ? .3 : enq.y)) * 1000) / 10;
+        zoom = Math.min(4, Math.max(1, Number(enq.z) || 1));
+        estilo = ' style="object-position:' + ex + '% ' + ey + '%;transform-origin:' + ex + '% ' + ey + '%' +
+                 (zoom > 1 ? ';transform:scale(' + zoom + ')' : '') + '"';
+      }
       return '<figure class="' + cls + '">' +
-             '<img data-cobrir src="' + esc(src) + '" alt="' + esc(legenda || '') + '">' +
+             '<img data-cobrir data-zoom="' + zoom + '"' + estilo + ' src="' + esc(src) + '" alt="' + esc(legenda || '') + '">' +
              (legenda ? '<figcaption>' + esc(legenda) + '</figcaption>' : '') +
              '</figure>';
     }
@@ -193,7 +206,7 @@
     var r = C.acharRosto(f.rosto) || C.ROSTOS[0];
     return pagina('pg--rosto2', '' +
       tituloSecao('03 · Análise facial', 'O que o seu rosto pede') +
-      foto(f.fotos && f.fotos.cliente, 'Análise presencial', 'foto--faixa') +
+      foto(f.fotos && f.fotos.cliente, 'Análise presencial', 'foto--faixa', enquadre(f, 'cliente')) +
       bloco('Estratégia de corte', r.estrategia) +
       bloco('Barba', r.barba) +
       bloco('O que evitar', r.evitar, 'bloco--evitar') +
@@ -208,7 +221,7 @@
     return pagina('pg--cabelo', '' +
       tituloSecao('04 · Estrutura do fio', 'Tipo de cabelo') +
       '<h3 class="cabelo__tipo">' + esc(c.nome) + ' <span class="cabelo__grupo">' + esc(c.grupo) + '</span></h3>' +
-      foto(f.fotos && f.fotos.cliente, 'Estrutura observada', 'foto--faixa') +
+      foto(f.fotos && f.fotos.cliente, 'Estrutura observada', 'foto--faixa', enquadre(f, 'cliente')) +
       '<div class="corpo corpo--menor">' + paragrafos(c.descricao) + '</div>' +
       bloco('Manejo técnico', c.manejo) +
       (dens ? bloco(dens.nome, dens.nota) : '') +
@@ -241,7 +254,8 @@
   function pgProjeto2(f) {
     var m = (f.medidas || {});
     var tecnicas = (f.tecnicas || '').split(/[\r\n]+/).map(function (t) { return t.trim(); }).filter(Boolean);
-    return pagina('pg--projeto2', '' +
+    /* Com a lista de técnicas os diagramas encolhem, senão a lista cai fora da página. */
+    return pagina('pg--projeto2' + (tecnicas.length ? ' pg--com-tecnicas' : ''), '' +
       tituloSecao('05 · Projeto técnico', 'Direção do fio e barba') +
       '<div class="projeto__par">' +
         '<div class="diagrama diagrama--3d">' + (D.medidasPerfil3D(m, f.rosto, f.barbaDesenho) || D.medidasPerfil(m, f.rosto, f.barbaDesenho)) + '</div>' +
@@ -271,9 +285,9 @@
     return pagina('pg--referencias', '' +
       tituloSecao('07 · Referências visuais', 'A direção estética escolhida') +
       '<div class="ref__grade">' +
-        foto(ft.ref1, 'Referência 01', 'ref__grande') +
-        foto(ft.ref2, 'Referência 02') +
-        foto(ft.ref3, 'Referência 03') +
+        foto(ft.ref1, 'Referência 01', 'ref__grande', enquadre(f, 'ref1')) +
+        foto(ft.ref2, 'Referência 02', '', enquadre(f, 'ref2')) +
+        foto(ft.ref3, 'Referência 03', '', enquadre(f, 'ref3')) +
       '</div>' +
       '<p class="ref__nota">' + esc(f.refNota ||
         'As referências indicam direção de forma, linha e acabamento — não uma cópia. ' +
@@ -288,8 +302,8 @@
       rodape: false,
       html: function (n) {
         return '<section class="pg pg--ad" data-pg="' + n + '">' +
-          '<div class="ad__lado">' + foto(ft[antes], null, 'foto--cheia') + '<span class="ad__tag">ANTES</span></div>' +
-          '<div class="ad__lado">' + foto(ft[depois], null, 'foto--cheia') + '<span class="ad__tag ad__tag--depois">DEPOIS</span></div>' +
+          '<div class="ad__lado">' + foto(ft[antes], null, 'foto--cheia', enquadre(f, antes)) + '<span class="ad__tag">ANTES</span></div>' +
+          '<div class="ad__lado">' + foto(ft[depois], null, 'foto--cheia', enquadre(f, depois)) + '<span class="ad__tag ad__tag--depois">DEPOIS</span></div>' +
           '<div class="ad__tarja">' +
             '<span class="ad__titulo">' + esc(titulo) + '</span>' +
             '<span class="ad__num">' + String(n).padStart(2, '0') + '</span>' +

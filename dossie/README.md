@@ -61,6 +61,7 @@ atendimento. Nada vai para servidor nenhum.
 - **16 páginas**: capa, sumário, perfil, direção de imagem (2), análise facial (2),
   estrutura do fio, projeto técnico (2), proposta, referências, antes e depois
   (2), manutenção e contracapa.
+- **Editor de foto.** Na etapa Fotos, tocar numa foto já enviada abre o editor: arrastar move, pinça (ou controle/roda do mouse) aproxima, há girar, centralizar e trocar. O quadro do editor tem a proporção exata do quadro no dossiê, e o que aparece ali é o que sai no PDF. Nada é gravado até tocar em Salvar.
 - **Fotos recortadas, não esticadas.** Cada foto é recortada no tamanho exato do
   seu quadro antes de ir para o PDF — o gerador de PDF ignorava o enquadramento
   e achatava os rostos.

@@ -44,7 +44,8 @@
       tecnicas: '',
       proposta: '', observacoes: '', refNota: '',
       rotina: [], produtos: [{ nome: '', uso: '' }], retorno: '',
-      fotos: {}
+      fotos: {},
+      enquadre: {}   /* por foto: { x, y, z } = ponto de foco e zoom, do editor de foto */
     };
   }
 
@@ -321,7 +322,8 @@
              '" role="button" tabindex="0" aria-label="' + esc(s.rotulo) + '">' +
              (src
                ? '<img src="' + esc(src) + '" alt="' + esc(s.rotulo) + '">' +
-                 '<button class="slot__limpar" data-limpar="' + s.chave + '" title="Remover foto" aria-label="Remover ' + esc(s.rotulo) + '">✕</button>'
+                 '<button type="button" class="slot__limpar" data-limpar="' + s.chave + '" title="Remover foto" aria-label="Remover ' + esc(s.rotulo) + '">✕</button>' +
+                 '<button type="button" class="slot__editar" data-editar="' + s.chave + '">✎ Editar foto</button>'
                : '<div class="slot__vazio"><b>' + esc(s.rotulo) + '</b>' + esc(s.dica || 'Toque para enviar') + '</div>') +
              '<span class="slot__rotulo">' + esc(s.rotulo) + '</span>' +
              '</div>';
@@ -329,7 +331,8 @@
 
     return '<div class="secao" data-secao="fotos">' +
       '<h3>Fotos</h3>' +
-      '<p class="secao__dica">Toque num quadro para tirar a foto ou escolher da galeria. ' +
+      '<p class="secao__dica">Toque num quadro vazio para tirar a foto ou escolher da galeria. ' +
+      'Toque numa foto já enviada para <b>enquadrar</b>: arraste, aproxime e gire até o rosto ficar certo. ' +
       'As fotos ficam só neste aparelho e são apagadas ao começar o próximo cliente.</p>' +
       '<div class="fotos">' + slots + '</div>' +
       rodapeEtapa('fotos') +
@@ -488,18 +491,26 @@
       if (limpar) {
         ev.stopPropagation();
         delete ficha.fotos[limpar.getAttribute('data-limpar')];
+        if (ficha.enquadre) delete ficha.enquadre[limpar.getAttribute('data-limpar')];
         montarFormulario(); trocarPasso('fotos'); agendarSalvar(); atualizarPreview();
         return;
       }
 
+      var editar = ev.target.closest('[data-editar]');
+      if (editar) {
+        ev.stopPropagation();
+        abrirEditorFoto(editar.getAttribute('data-editar'));
+        return;
+      }
+
       var slot = ev.target.closest('[data-slot]');
-      if (slot) pedirFoto(slot.getAttribute('data-slot'));
+      if (slot) abrirSlot(slot.getAttribute('data-slot'));
     });
 
     secoes.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Enter' && ev.key !== ' ') return;
       var slot = ev.target.closest('[data-slot]');
-      if (slot) { ev.preventDefault(); pedirFoto(slot.getAttribute('data-slot')); }
+      if (slot) { ev.preventDefault(); abrirSlot(slot.getAttribute('data-slot')); }
     });
 
     $('#btn-novo').addEventListener('click', novoCliente);
@@ -533,7 +544,13 @@
     atualizarPreview();
   }
 
-  function pedirFoto(chave) {
+  /* Quadro vazio: escolhe a foto e já abre o editor. Quadro cheio: só o editor. */
+  function abrirSlot(chave) {
+    if (ficha.fotos && ficha.fotos[chave]) abrirEditorFoto(chave);
+    else pedirFoto(chave);
+  }
+
+  function pedirFoto(chave, aoEscolher) {
     var entrada = document.createElement('input');
     entrada.type = 'file';
     entrada.accept = 'image/*';
@@ -542,19 +559,180 @@
       if (!arquivo) return;
       avisar('Preparando a foto…');
       prepararImagem(arquivo, 1600).then(function (dataURL) {
-        ficha.fotos = ficha.fotos || {};
-        ficha.fotos[chave] = dataURL;
-        montarFormulario();
-        trocarPasso('fotos');
-        atualizarPreview();
-        return salvarAgora();
-      }).then(function () {
-        avisar('Foto adicionada.');
+        if (aoEscolher) aoEscolher(dataURL);
+        else abrirEditorFoto(chave, dataURL);
       }).catch(function (e) {
         avisar(e && e.message ? e.message : 'Não consegui carregar essa imagem.', true);
       });
     });
     entrada.click();
+  }
+
+  /* =========================================================================
+     EDITOR DE FOTO
+     Enquadra a foto na proporção EXATA do quadro em que ela aparece no dossiê.
+     Arrastar move, pinça / controle / roda do mouse dá zoom, e há girar.
+     A conta é a mesma da prévia e do recorte do PDF (ponto de foco + zoom),
+     então o que se vê aqui é o que sai. Nada é gravado até tocar em Salvar.
+  ========================================================================= */
+  var QUADROS = {   /* largura / altura do quadro no dossiê */
+    cliente: 900 / 610, ref1: 900 / 580, ref2: 440 / 470, ref3: 440 / 470,
+    antesFrente: 1080 / 957, depoisFrente: 1080 / 957,
+    antesPerfil: 1080 / 957, depoisPerfil: 1080 / 957
+  };
+
+  function abrirEditorFoto(chave, srcNova) {
+    var slotInfo = SLOTS.filter(function (s) { return s.chave === chave; })[0] || { rotulo: 'Foto' };
+    var src = srcNova || ficha.fotos[chave];
+    var salvo = (ficha.enquadre && ficha.enquadre[chave]) || {};
+    var e = srcNova ? { x: .5, y: .3, z: 1 }
+                    : { x: salvo.x == null ? .5 : salvo.x, y: salvo.y == null ? .3 : salvo.y, z: salvo.z || 1 };
+    var proporcao = QUADROS[chave] || 1;
+
+    var tela = document.createElement('div');
+    tela.className = 'edfoto';
+    tela.setAttribute('role', 'dialog');
+    tela.setAttribute('aria-modal', 'true');
+    tela.innerHTML =
+      '<div class="edfoto__topo"><b>' + esc(slotInfo.rotulo) + '</b>' +
+        '<span>Arraste para mover · pinça ou controle para aproximar</span></div>' +
+      '<div class="edfoto__palco"><div class="edfoto__quadro" style="--prop:' + proporcao + '">' +
+        '<img alt="" draggable="false"><div class="edfoto__guia"></div></div></div>' +
+      '<div class="edfoto__ctrl">' +
+        '<button type="button" class="btn btn--pequeno" data-z="-">−</button>' +
+        '<input type="range" min="1" max="4" step="0.01" aria-label="Zoom">' +
+        '<button type="button" class="btn btn--pequeno" data-z="+">+</button>' +
+      '</div>' +
+      '<div class="edfoto__ctrl edfoto__ctrl--acoes">' +
+        '<button type="button" class="btn btn--pequeno" data-a="girar">↻ Girar</button>' +
+        '<button type="button" class="btn btn--pequeno" data-a="centro">Centralizar</button>' +
+        '<button type="button" class="btn btn--pequeno" data-a="trocar">Trocar foto</button>' +
+      '</div>' +
+      '<div class="edfoto__rodape">' +
+        '<button type="button" class="btn btn--alto" data-a="cancelar">Cancelar</button>' +
+        '<button type="button" class="btn btn--ouro btn--alto" data-a="salvar">Salvar</button>' +
+      '</div>';
+    document.body.appendChild(tela);
+    var overflowAnterior = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    var quadro = tela.querySelector('.edfoto__quadro');
+    var img = tela.querySelector('img');
+    var slider = tela.querySelector('input[type=range]');
+
+    function limitar() {
+      e.z = Math.min(4, Math.max(1, e.z));
+      e.x = Math.min(1, Math.max(0, e.x));
+      e.y = Math.min(1, Math.max(0, e.y));
+    }
+    function aplicar() {
+      limitar();
+      var pos = (e.x * 100) + '% ' + (e.y * 100) + '%';
+      img.style.objectPosition = pos;
+      img.style.transformOrigin = pos;
+      img.style.transform = 'scale(' + e.z + ')';
+      slider.value = e.z;
+    }
+    img.addEventListener('load', aplicar);
+    img.src = src;
+    aplicar();
+
+    /* medidas da janela de origem: quanto da foto cabe no quadro */
+    function folga() {
+      var W = quadro.clientWidth, H = quadro.clientHeight;
+      var iw = img.naturalWidth || 1, ih = img.naturalHeight || 1;
+      var px = Math.max(W / iw, H / ih) * e.z;   /* pixels de tela por pixel da foto */
+      return { px: px, sx: iw - W / px, sy: ih - H / px };
+    }
+
+    /* arrastar (1 dedo) e pinça (2 dedos) */
+    var dedos = {}, ultimo = null, distIni = 0, zIni = 1;
+    function ponto(ev) { return { x: ev.clientX, y: ev.clientY }; }
+    function distancia() {
+      var p = Object.keys(dedos).map(function (k) { return dedos[k]; });
+      return Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y);
+    }
+    quadro.addEventListener('pointerdown', function (ev) {
+      quadro.setPointerCapture(ev.pointerId);
+      dedos[ev.pointerId] = ponto(ev);
+      if (Object.keys(dedos).length === 2) { distIni = distancia(); zIni = e.z; }
+      ultimo = ponto(ev);
+    });
+    quadro.addEventListener('pointermove', function (ev) {
+      if (!dedos[ev.pointerId]) return;
+      dedos[ev.pointerId] = ponto(ev);
+      var n = Object.keys(dedos).length;
+      if (n >= 2) {
+        if (distIni) { e.z = zIni * (distancia() / distIni); aplicar(); }
+        return;
+      }
+      var f = folga();
+      var dx = ev.clientX - ultimo.x, dy = ev.clientY - ultimo.y;
+      ultimo = ponto(ev);
+      if (f.sx > 0.5) e.x -= (dx / f.px) / f.sx;
+      if (f.sy > 0.5) e.y -= (dy / f.px) / f.sy;
+      aplicar();
+    });
+    function soltar(ev) {
+      delete dedos[ev.pointerId];
+      var restantes = Object.keys(dedos);
+      ultimo = restantes.length ? dedos[restantes[0]] : null;
+    }
+    quadro.addEventListener('pointerup', soltar);
+    quadro.addEventListener('pointercancel', soltar);
+    quadro.addEventListener('wheel', function (ev) {
+      ev.preventDefault();
+      e.z *= ev.deltaY < 0 ? 1.08 : 1 / 1.08;
+      aplicar();
+    }, { passive: false });
+    slider.addEventListener('input', function () { e.z = parseFloat(slider.value); aplicar(); });
+
+    function girar() {
+      var tela2 = document.createElement('canvas');
+      var iw = img.naturalWidth, ih = img.naturalHeight;
+      tela2.width = ih; tela2.height = iw;
+      var ctx = tela2.getContext('2d');
+      ctx.translate(ih, 0); ctx.rotate(Math.PI / 2);
+      ctx.drawImage(img, 0, 0);
+      src = tela2.toDataURL('image/jpeg', 0.9);
+      e.x = .5; e.y = .3;
+      img.src = src;
+    }
+
+    function fechar() {
+      document.removeEventListener('keydown', teclas);
+      document.body.style.overflow = overflowAnterior;
+      tela.remove();
+    }
+    function salvar() {
+      limitar();
+      ficha.fotos = ficha.fotos || {};
+      ficha.enquadre = ficha.enquadre || {};
+      ficha.fotos[chave] = src;
+      ficha.enquadre[chave] = { x: Math.round(e.x * 1000) / 1000, y: Math.round(e.y * 1000) / 1000, z: Math.round(e.z * 100) / 100 };
+      fechar();
+      montarFormulario();
+      trocarPasso('fotos');
+      atualizarPreview();
+      salvarAgora().then(function () { avisar('Foto salva.'); })
+        .catch(function () { avisar('Foto ajustada, mas não consegui gravar o rascunho.', true); });
+    }
+    function teclas(ev) { if (ev.key === 'Escape') fechar(); }
+    document.addEventListener('keydown', teclas);
+
+    tela.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button');
+      if (!b) return;
+      var z = b.getAttribute('data-z'), a = b.getAttribute('data-a');
+      if (z) { e.z += z === '+' ? 0.25 : -0.25; aplicar(); }
+      else if (a === 'girar') girar();
+      else if (a === 'centro') { e.x = .5; e.y = .5; e.z = 1; aplicar(); }
+      else if (a === 'trocar') {
+        pedirFoto(chave, function (nova) { src = nova; e.x = .5; e.y = .3; e.z = 1; img.src = src; aplicar(); avisar('Foto trocada. Toque em Salvar.'); });
+      }
+      else if (a === 'cancelar') fechar();
+      else if (a === 'salvar') salvar();
+    });
   }
 
   function novoCliente() {
@@ -781,8 +959,9 @@
       var pos = getComputedStyle(img).objectPosition.split(' ');
       var px = pos[0] && pos[0].indexOf('%') > 0 ? parseFloat(pos[0]) / 100 : 0.5;
       var py = pos[1] && pos[1].indexOf('%') > 0 ? parseFloat(pos[1]) / 100 : 0.5;
+      var zoom = Math.max(1, parseFloat(img.getAttribute('data-zoom')) || 1);
       var esc = Math.max(w / iw, h / ih);
-      var sw = w / esc, sh = h / esc;
+      var sw = w / esc / zoom, sh = h / esc / zoom;
       var sx = (iw - sw) * px, sy = (ih - sh) * py;
       var tela = document.createElement('canvas');
       tela.width = Math.round(w * ESCALA);
@@ -794,6 +973,7 @@
         img.addEventListener('load', ok, { once: true });
         img.addEventListener('error', ok, { once: true });
         img.style.objectFit = 'fill';
+        img.style.transform = 'none';   /* o zoom já foi aplicado no recorte */
         img.src = tela.toDataURL('image/jpeg', 0.9);
       });
     }));
