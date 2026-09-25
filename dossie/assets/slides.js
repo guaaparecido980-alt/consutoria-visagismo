@@ -21,6 +21,7 @@
   var G = (typeof self !== 'undefined') ? self : this;
   var C = G.DossieConteudo;
   var D = G.DossieDiagramas;
+  var L = G.DossieLinhas;   /* desenhos só de linhas (formato, medidas, barba) */
 
   var LARGURA = 1080, ALTURA = 1920;
 
@@ -187,16 +188,16 @@
       '</div>');
   }
 
-  /* 03 — ANÁLISE FACIAL, em duas páginas: o formato (modelo 3D com as
-     linhas) e o que ele pede no corte */
+  /* 03 — ANÁLISE FACIAL, em duas páginas: o formato (desenho em linhas
+     com as medidas) e o que ele pede no corte */
   function pgRosto(f) {
     var r = C.acharRosto(f.rosto) || C.ROSTOS[0];
-    var prop = D.proporcaoRosto(r.slug);
+    var prop = L.proporcaoRosto(r.slug);
     return pagina('pg--rosto', '' +
       tituloSecao('03 · Análise facial', 'O que mais se aproxima') +
       '<h3 class="rosto__nome">' + esc(r.nome) + '</h3>' +
-      D.formatoRosto(r) +
-      '<p class="rosto__legenda">Modelo de referência do formato' +
+      L.formatoRosto(r) +
+      '<p class="rosto__legenda">Formato de referência' +
         (prop ? ' · comprimento ' + prop.toFixed(2).replace('.', ',') + ' × a largura das maçãs' : '') + '</p>' +
       '<div class="corpo corpo--menor">' + paragrafos(r.descricao) + '</div>' +
       bloco('Comunica', r.comunica));
@@ -245,7 +246,7 @@
 
     return pagina('pg--projeto', '' +
       tituloSecao('05 · Projeto técnico', 'As medidas do seu corte') +
-      '<div class="diagrama diagrama--alto diagrama--3d">' + (D.medidasFrontal3D(m, f.rosto, f.barbaDesenho) || D.medidasFrontal(m, f.rosto, f.barbaDesenho)) + '</div>' +
+      '<div class="diagrama diagrama--alto diagrama--3d">' + L.medidasFrontal(m, f.rosto, f.barbaDesenho) + '</div>' +
       '<div class="cotas">' + cotas + '</div>' +
       '<p class="projeto__nota">Leve esta página a qualquer barbeiro: as medidas estão no desenho.</p>');
   }
@@ -258,8 +259,8 @@
     return pagina('pg--projeto2' + (tecnicas.length ? ' pg--com-tecnicas' : ''), '' +
       tituloSecao('05 · Projeto técnico', 'Direção do fio e barba') +
       '<div class="projeto__par">' +
-        '<div class="diagrama diagrama--3d">' + (D.medidasPerfil3D(m, f.rosto, f.barbaDesenho) || D.medidasPerfil(m, f.rosto, f.barbaDesenho)) + '</div>' +
-        '<div class="diagrama diagrama--3d">' + (D.desenhoBarba3D(f.barbaDesenho, f.rosto, m) || D.desenhoBarba(f.barbaDesenho, f.rosto, m)) + '</div>' +
+        '<div class="diagrama diagrama--3d">' + L.medidasPerfil(m, f.rosto, f.barbaDesenho) + '</div>' +
+        '<div class="diagrama diagrama--3d">' + L.desenhoBarba(f.barbaDesenho, f.rosto, m) + '</div>' +
       '</div>' +
       (tecnicas.length
         ? '<div class="projeto__tecnicas"><span class="rotulo">Técnicas aplicadas</span>' +

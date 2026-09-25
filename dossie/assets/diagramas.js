@@ -592,7 +592,7 @@
     g += pelos(dForma, forma, tom, ids, 'barba');
     g += '<path d="' + dForma + '" fill="none" stroke="#1b1713" stroke-width="1.1" opacity="0.55" stroke-linejoin="round"/>';
 
-    return { svg: g, pescocoSvg: pescocoSvg, b: b, bochecha: bochecha, pescocoY: pescocoY, destaque: destaque };
+    return { svg: g, pescocoSvg: pescocoSvg, b: b, bochecha: bochecha, pescocoY: pescocoY, destaque: destaque, forma: forma };
   }
 
   /* Preenchimento de pelo: tom de base + fios curtos desenhados um a um,
@@ -1596,6 +1596,15 @@
     linhasGestalt: linhasGestalt,
     listaBarbas: listaBarbas,
     listaDirecoes: listaDirecoes,
-    nomeBarba: nomeBarba
+    nomeBarba: nomeBarba,
+    /* geometria compartilhada com linhas.js (desenho só de linhas) */
+    interno: {
+      FORMAS: FORMAS, BARBAS: BARBAS, DIRECOES: DIRECOES,
+      modelo: modelo, modeloPerfil: modeloPerfil, medidasCabelo: medidasCabelo,
+      barba: barba, definicoes: definicoes,
+      amostrar: amostrar, caminho: caminho, deslocar: deslocar,
+      linhaPts: linhaPts, poligono: poligono,
+      limitar: limitar, num: num, r1: r1, esc: esc
+    }
   };
 });

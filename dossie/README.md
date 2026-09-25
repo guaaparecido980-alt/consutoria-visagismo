@@ -44,7 +44,7 @@ atendimento. Nada vai para servidor nenhum.
 |---|---|
 | **Cliente** | Nome, profissão e data — vão para a capa |
 | **Perfil** | Rei, Guerreiro, Mago ou Amante |
-| **Rosto** | Formato entre os 7 modelos 3D: oval, redondo, quadrado, retangular, triangular, diamante e coração |
+| **Rosto** | Formato entre os 7 formatos (desenho em linhas): oval, redondo, quadrado, retangular, triangular, diamante e coração |
 | **Cabelo** | Tipo 1A a 4C, densidade e couro cabeludo |
 | **Medidas** | Topo, frente, laterais, nuca, barba, direção do fio e desenho da barba |
 | **Proposta** | Texto técnico do atendimento (vem pré-escrito pelo perfil) |
@@ -71,37 +71,24 @@ atendimento. Nada vai para servidor nenhum.
 
 ---
 
-## A análise facial em 3D
+## Os desenhos: só linhas
 
-A página do formato do rosto mostra o **modelo 3D** daquele formato, renderizado
-no Blender, com as linhas por cima: o traçado geométrico em dourado e as
-larguras de testa, maçãs e mandíbula, mais o comprimento. As linhas não são
-desenhadas no olho — saem de medidas tiradas da própria malha 3D. Para refazer
-depois de mexer nos modelos: `automacao/rostos-3d/gerar.ps1` (ver o LEIA-ME de lá).
+Todos os desenhos do dossiê (formato do rosto, medidas do corte, direção do fio
+e barba) são **traço fino em creme e dourado sobre grafite**, como uma prancha
+técnica. A cabeça é sempre "nua": o cabelo aparece só como o **contorno do
+modelo escolhido**, desenhado por cima, com as mechas mostrando a direção.
 
-## Os desenhos técnicos
+- **Formato do rosto**: contorno do formato, figura geométrica por cima e as
+  larguras de testa, maçãs e mandíbula em % da largura das maçãs, mais o
+  comprimento (× a largura das maçãs).
+- **Medidas do corte**: topo, frente e laterais em cota; no perfil, a nuca e a
+  direção do fio (seta).
+- **Barba**: só o contorno da área, com linha da bochecha, linha do pescoço e
+  comprimento.
 
-Nas páginas de medidas (projeto técnico) o rosto é o **modelo 3D do formato
-escolhido**, de frente e de perfil. O cabelo e a barba são desenhados por cima,
-apoiados no contorno real daquele crânio (medido na malha): a direção do fio,
-as medidas e o desenho da barba mudam o desenho. Se faltar o 3D de algum
-formato, o sistema volta ao desenho vetorial abaixo.
-
-O desenho vetorial (`assets/diagramas.js`) também é construído a cada vez:
-
-- **Formato do rosto** muda o contorno — testa, maçã do rosto, mandíbula e
-  queixo. Um rosto quadrado tem quina na mandíbula; um oval, só curva.
-- **Direção do fio** muda o penteado: para trás, lateral com risca, franja
-  para a frente ou topete para cima — de frente e de perfil.
-- **Medidas** mudam o volume: topo mais alto, laterais mais cheias ou batidas,
-  franja mais longa, nuca.
-- **Desenho da barba** é recortado no contorno daquele rosto, com linha da
-  bochecha e do pescoço marcadas.
-
-As medidas em centímetros aparecem **escritas dentro do desenho** — o cliente
-leva a página a qualquer barbeiro para reproduzir o corte.
-
----
+O código está em `assets/linhas.js` (o que desenha) e `assets/diagramas.js`
+(a geometria: formatos, perfil, medidas do cabelo e área da barba). Os modelos
+3D antigos (`assets/rostos/`) não são mais usados.
 
 ## O perfil comanda o dossiê inteiro
 
@@ -145,12 +132,13 @@ dossie/
 └── assets/
     ├── conteudo.js         TODO o texto: perfis, rostos, cabelos, rotinas
     ├── diagramas.js        os desenhos técnicos em SVG
+    ├── linhas.js           desenhos só de linhas (formato, medidas, barba)
     ├── slides.js           monta as páginas do dossiê
     ├── rascunho.js         guarda só a ficha em andamento
     ├── app.js              ficha, prévia e geração do PDF
     ├── dossie.css          estilo do documento entregue ao cliente
     ├── app.css             estilo da ferramenta que o Wagner opera
-    ├── rostos/             os 7 rostos 3D e as medidas das linhas
+    ├── rostos/             (antigo) rostos 3D, não usados mais
     ├── wagner-capa.jpg     retrato da capa
     └── wagner-final.jpg    retrato da contracapa
 ```
