@@ -210,10 +210,9 @@
     var r = C.acharRosto(ficha.rosto) || C.ROSTOS[0];
     return '<div class="secao" data-secao="rosto">' +
       '<h3>Análise facial</h3>' +
-      '<p class="secao__dica">Cada formato tem o seu modelo 3D. As linhas mostram as larguras e o comprimento que definem o formato.</p>' +
+      '<p class="secao__dica">A imagem do formato do rosto você escolhe na etapa <b>Fotos</b> (quadro “Formato do rosto”).</p>' +
       '<div class="campo"><label for="f-rosto">Formato do rosto</label>' +
         '<select id="f-rosto" data-campo="rosto">' + opcoes(C.ROSTOS, ficha.rosto) + '</select></div>' +
-      '<div class="miniatura miniatura--3d" id="mini-rosto">' + D.formatoRosto(r) + '</div>' +
       '<div class="previa" id="previa-rosto"><b>Comunica</b>' + esc(r.comunica) + '</div>' +
       '<div class="campo"><label for="f-rostoNota">Observação da consultoria</label>' +
         '<textarea id="f-rostoNota" data-campo="rostoNota" placeholder="Ex.: assimetria leve no lado direito da mandíbula, compensada pelo caimento do topo.">' +
@@ -244,9 +243,7 @@
     var m = ficha.medidas || {};
     return '<div class="secao" data-secao="medidas">' +
       '<h3>Projeto técnico</h3>' +
-      '<p class="secao__dica">O desenho acompanha o que você preenche: o comprimento muda o volume, ' +
-      'a direção muda o penteado e a barba é recortada no formato deste rosto.</p>' +
-      '<div class="miniatura miniatura--3d" id="mini-medidas">' + (D.medidasFrontal3D(m, ficha.rosto, ficha.barbaDesenho) || D.medidasFrontal(m, ficha.rosto, ficha.barbaDesenho)) + '</div>' +
+      '<p class="secao__dica">As imagens desta parte (medidas de frente, perfil e barba) você escolhe na etapa <b>Fotos</b>.</p>' +
       '<div class="quadra">' +
         campoMedida('topo', 'Topo (cm)', m.topo) +
         campoMedida('franja', 'Frente (cm)', m.franja) +
@@ -305,6 +302,10 @@
 
   var SLOTS = [
     { chave: 'cliente',      rotulo: 'Foto do cliente',   dica: 'De frente. Usada na análise facial e no tipo de cabelo.' },
+    { chave: 'formato',      rotulo: 'Formato do rosto',  dica: 'Página 03 · a imagem do formato do rosto.' },
+    { chave: 'projetoFrente',rotulo: 'Medidas — de frente', dica: 'Página 05 · imagem das medidas do corte.' },
+    { chave: 'projetoPerfil',rotulo: 'Direção do fio — perfil', dica: 'Página 05 · imagem de perfil.' },
+    { chave: 'projetoBarba', rotulo: 'Desenho da barba',  dica: 'Página 05 · imagem da barba.' },
     { chave: 'ref1',         rotulo: 'Referência 01',     dica: 'Direção estética.' },
     { chave: 'ref2',         rotulo: 'Referência 02',     dica: 'Direção estética.' },
     { chave: 'ref3',         rotulo: 'Referência 03',     dica: 'Direção estética.' },
@@ -576,7 +577,8 @@
      então o que se vê aqui é o que sai. Nada é gravado até tocar em Salvar.
   ========================================================================= */
   var QUADROS = {   /* largura / altura do quadro no dossiê */
-    cliente: 900 / 610, ref1: 900 / 580, ref2: 440 / 470, ref3: 440 / 470,
+    cliente: 900 / 610, formato: 900 / 806, projetoFrente: 900 / 880,
+    projetoPerfil: 900 / 640, projetoBarba: 900 / 640, ref1: 900 / 580, ref2: 440 / 470, ref3: 440 / 470,
     antesFrente: 1080 / 957, depoisFrente: 1080 / 957,
     antesPerfil: 1080 / 957, depoisPerfil: 1080 / 957
   };
@@ -1057,7 +1059,26 @@
       '</div>';
     document.body.appendChild(tela);
 
-    $('#entrega-baixar', tela).addEventListener('click', function () {
+    $('#entrega-baixar', tela).addEventListener('click', function (ev) {
+      /* Aberto pelo link do claude.ai a página roda isolada e o <a download>
+         é bloqueado: lá o arquivo sai pelo canal de downloads da plataforma.
+         Aberto direto do computador, o link comum funciona. */
+      if (window.claude && typeof window.claude.use === 'function') {
+        ev.preventDefault();
+        Promise.resolve(window.claude.use('downloads')).catch(function () { return null; })
+          .then(function (dl) {
+            if (!dl) { avisar('Download indisponível nesta tela.', true); return; }
+            return dl.save({ filename: nome, data: blob }).then(function () {
+              avisar('PDF salvo. Confira em Downloads.');
+            }, function (e) {
+              var c = e && e.code;
+              if (c === 'declined') return;
+              avisar(c === 'rate_limited' ? 'Já tem uma confirmação aberta. Responda ela primeiro.'
+                                          : 'Não consegui salvar o PDF aqui.', true);
+            });
+          });
+        return;
+      }
       setTimeout(function () { avisar('PDF salvo. Confira em Downloads.'); }, 600);
     });
     var enviar = $('#entrega-enviar', tela);

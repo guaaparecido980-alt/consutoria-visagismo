@@ -196,7 +196,7 @@
     return pagina('pg--rosto', '' +
       tituloSecao('03 · Análise facial', 'O que mais se aproxima') +
       '<h3 class="rosto__nome">' + esc(r.nome) + '</h3>' +
-      L.formatoRosto(r) +
+      foto(f.fotos && f.fotos.formato, 'Formato do rosto', 'foto--formato', enquadre(f, 'formato')) +
       '<p class="rosto__legenda">Formato de referência' +
         (prop ? ' · comprimento ' + prop.toFixed(2).replace('.', ',') + ' × a largura das maçãs' : '') + '</p>' +
       '<div class="corpo corpo--menor">' + paragrafos(r.descricao) + '</div>' +
@@ -246,21 +246,21 @@
 
     return pagina('pg--projeto', '' +
       tituloSecao('05 · Projeto técnico', 'As medidas do seu corte') +
-      '<div class="diagrama diagrama--alto diagrama--3d">' + L.medidasFrontal(m, f.rosto, f.barbaDesenho) + '</div>' +
+      foto(f.fotos && f.fotos.projetoFrente, 'Medidas — de frente', 'foto--projeto-alto', enquadre(f, 'projetoFrente')) +
       '<div class="cotas">' + cotas + '</div>' +
-      '<p class="projeto__nota">Leve esta página a qualquer barbeiro: as medidas estão no desenho.</p>');
+      '<p class="projeto__nota">Leve esta página a qualquer barbeiro: as medidas estão na imagem.</p>');
   }
 
   /* 05 — PROJETO TÉCNICO: direção do fio e barba */
   function pgProjeto2(f) {
     var m = (f.medidas || {});
     var tecnicas = (f.tecnicas || '').split(/[\r\n]+/).map(function (t) { return t.trim(); }).filter(Boolean);
-    /* Com a lista de técnicas os diagramas encolhem, senão a lista cai fora da página. */
+    /* Com a lista de técnicas as fotos encolhem, senão a lista cai fora da página. */
     return pagina('pg--projeto2' + (tecnicas.length ? ' pg--com-tecnicas' : ''), '' +
       tituloSecao('05 · Projeto técnico', 'Direção do fio e barba') +
       '<div class="projeto__par">' +
-        '<div class="diagrama diagrama--3d">' + L.medidasPerfil(m, f.rosto, f.barbaDesenho) + '</div>' +
-        '<div class="diagrama diagrama--3d">' + L.desenhoBarba(f.barbaDesenho, f.rosto, m) + '</div>' +
+        foto(f.fotos && f.fotos.projetoPerfil, 'Direção do fio — de perfil', 'foto--projeto', enquadre(f, 'projetoPerfil')) +
+        foto(f.fotos && f.fotos.projetoBarba, 'Desenho da barba', 'foto--projeto', enquadre(f, 'projetoBarba')) +
       '</div>' +
       (tecnicas.length
         ? '<div class="projeto__tecnicas"><span class="rotulo">Técnicas aplicadas</span>' +

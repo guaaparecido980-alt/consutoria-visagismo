@@ -256,6 +256,8 @@
 .rosto__legenda { margin: 16px 0 34px; font-size: 21px; letter-spacing: .08em; color: var(--texto-3); }
 .pg--rosto .bloco, .pg--rosto2 .bloco { margin-top: calc(34px * var(--k)); }
 .pg--rosto2 .foto--faixa { height: 640px; }
+/* foto escolhida pelo Wagner no lugar do antigo desenho do formato */
+.foto--formato { height: 806px; }
 
 /* ===========================================================================
    04 · ESTRUTURA DO FIO
@@ -278,6 +280,10 @@
 .projeto__par { display: flex; flex-direction: column; gap: 22px; }
 .projeto__par .diagrama { height: 640px; }
 .pg--com-tecnicas .projeto__par .diagrama { height: 460px; }
+/* fotos escolhidas pelo Wagner no lugar dos antigos desenhos de medidas */
+.foto--projeto-alto { height: 880px; }
+.projeto__par .foto--projeto { height: 640px; }
+.pg--com-tecnicas .projeto__par .foto--projeto { height: 460px; }
 .pg--com-tecnicas .projeto__tecnicas { margin-top: 30px; }
 /* desenhos de medidas sobre o 3D: fundo grafite da própria imagem, sem moldura clara */
 .diagrama--3d { background: #1e1b16; padding: 0; }
