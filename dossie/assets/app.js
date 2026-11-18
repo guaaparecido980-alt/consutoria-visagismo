@@ -108,7 +108,7 @@
     { id: 'perfil',     nome: 'Perfil' },
     { id: 'rosto',      nome: 'Rosto' },
     { id: 'cabelo',     nome: 'Cabelo' },
-    { id: 'medidas',    nome: 'Medidas' },
+    { id: 'medidas',    nome: 'Projeto' },
     { id: 'proposta',   nome: 'Proposta' },
     { id: 'fotos',      nome: 'Fotos' },
     { id: 'manutencao', nome: 'Manutenção' }
@@ -210,9 +210,10 @@
     var r = C.acharRosto(ficha.rosto) || C.ROSTOS[0];
     return '<div class="secao" data-secao="rosto">' +
       '<h3>Análise facial</h3>' +
-      '<p class="secao__dica">A imagem do formato do rosto você escolhe na etapa <b>Fotos</b> (quadro “Formato do rosto”).</p>' +
+      '<p class="secao__dica">Escolha a imagem do formato do rosto. Ela entra na página 03 do dossiê.</p>' +
       '<div class="campo"><label for="f-rosto">Formato do rosto</label>' +
         '<select id="f-rosto" data-campo="rosto">' + opcoes(C.ROSTOS, ficha.rosto) + '</select></div>' +
+      '<div class="fotos fotos--etapa">' + slotsDaEtapa('rosto') + '</div>' +
       '<div class="previa" id="previa-rosto"><b>Comunica</b>' + esc(r.comunica) + '</div>' +
       '<div class="campo"><label for="f-rostoNota">Observação da consultoria</label>' +
         '<textarea id="f-rostoNota" data-campo="rostoNota" placeholder="Ex.: assimetria leve no lado direito da mandíbula, compensada pelo caimento do topo.">' +
@@ -240,26 +241,14 @@
   }
 
   function secaoMedidas() {
-    var m = ficha.medidas || {};
     return '<div class="secao" data-secao="medidas">' +
       '<h3>Projeto técnico</h3>' +
-      '<p class="secao__dica">As imagens desta parte (medidas de frente, perfil e barba) você escolhe na etapa <b>Fotos</b>.</p>' +
-      '<div class="quadra">' +
-        campoMedida('topo', 'Topo (cm)', m.topo) +
-        campoMedida('franja', 'Frente (cm)', m.franja) +
-        campoMedida('lateral', 'Laterais (cm)', m.lateral) +
-        campoMedida('nuca', 'Nuca (cm)', m.nuca) +
-      '</div>' +
-      '<div class="dupla">' +
-        '<div class="campo"><label for="f-direcao">Direção do fio</label>' +
-          '<select id="f-direcao" data-medida="direcao">' +
-          D.listaDirecoes().map(function (d) {
-            return '<option value="' + d.slug + '"' + (d.slug === m.direcao ? ' selected' : '') + '>' + esc(d.nome) + '</option>';
-          }).join('') + '</select></div>' +
-        '<div class="campo"><label for="f-barbaMm">Barba (mm)</label>' +
-          '<input type="number" inputmode="decimal" step="0.5" min="0" id="f-barbaMm" data-medida="barbaMm" value="' +
-          esc(m.barbaMm) + '" placeholder="Ex.: 3"></div>' +
-      '</div>' +
+      '<p class="secao__dica">Escolha as imagens do projeto e escreva a sua observação. Entram na página 05 do dossiê.</p>' +
+      '<div class="fotos fotos--etapa">' + slotsDaEtapa('medidas') + '</div>' +
+      '<div class="campo"><label for="f-projetoNota">Observação</label>' +
+        '<textarea id="f-projetoNota" data-campo="projetoNota" placeholder="Ex.: topo com 6 cm e textura, laterais em degradê baixo, nuca limpa.">' +
+        esc(ficha.projetoNota) + '</textarea>' +
+        '<p class="campo__ajuda">Aparece abaixo da imagem de frente, na página do projeto.</p></div>' +
       '<div class="campo"><label for="f-barbaDesenho">Desenho da barba</label>' +
         '<select id="f-barbaDesenho" data-campo="barbaDesenho">' +
         D.listaBarbas().map(function (b) {
@@ -302,10 +291,10 @@
 
   var SLOTS = [
     { chave: 'cliente',      rotulo: 'Foto do cliente',   dica: 'De frente. Usada na análise facial e no tipo de cabelo.' },
-    { chave: 'formato',      rotulo: 'Formato do rosto',  dica: 'Página 03 · a imagem do formato do rosto.' },
-    { chave: 'projetoFrente',rotulo: 'Medidas — de frente', dica: 'Página 05 · imagem das medidas do corte.' },
-    { chave: 'projetoPerfil',rotulo: 'Direção do fio — perfil', dica: 'Página 05 · imagem de perfil.' },
-    { chave: 'projetoBarba', rotulo: 'Desenho da barba',  dica: 'Página 05 · imagem da barba.' },
+    { chave: 'formato',      rotulo: 'Formato do rosto',  dica: 'Toque para escolher a imagem.', etapa: 'rosto' },
+    { chave: 'projetoFrente',rotulo: 'Projeto — de frente', dica: 'Toque para escolher a imagem.', etapa: 'medidas' },
+    { chave: 'projetoPerfil',rotulo: 'Projeto — de perfil', dica: 'Toque para escolher a imagem.', etapa: 'medidas' },
+    { chave: 'projetoBarba', rotulo: 'Desenho da barba',  dica: 'Toque para escolher a imagem.', etapa: 'medidas' },
     { chave: 'ref1',         rotulo: 'Referência 01',     dica: 'Direção estética.' },
     { chave: 'ref2',         rotulo: 'Referência 02',     dica: 'Direção estética.' },
     { chave: 'ref3',         rotulo: 'Referência 03',     dica: 'Direção estética.' },
@@ -315,10 +304,18 @@
     { chave: 'depoisPerfil', rotulo: 'Depois — de perfil',dica: '' }
   ];
 
-  function secaoFotos() {
-    var ft = ficha.fotos || {};
-    var slots = SLOTS.map(function (s) {
-      var src = ft[s.chave];
+  /* Etapa onde o quadro aparece: os quadros do formato e do projeto ficam
+     dentro das próprias etapas (Rosto e Medidas); o resto, em Fotos. */
+  function etapaDoSlot(chave) {
+    var s = SLOTS.filter(function (x) { return x.chave === chave; })[0];
+    return (s && s.etapa) || 'fotos';
+  }
+  function slotsDaEtapa(etapa) {
+    return SLOTS.filter(function (s) { return (s.etapa || 'fotos') === etapa; }).map(htmlSlot).join('');
+  }
+
+  function htmlSlot(s) {
+      var src = (ficha.fotos || {})[s.chave];
       return '<div class="slot' + (src ? ' slot--preenchido' : '') + '" data-slot="' + s.chave +
              '" role="button" tabindex="0" aria-label="' + esc(s.rotulo) + '">' +
              (src
@@ -328,8 +325,10 @@
                : '<div class="slot__vazio"><b>' + esc(s.rotulo) + '</b>' + esc(s.dica || 'Toque para enviar') + '</div>') +
              '<span class="slot__rotulo">' + esc(s.rotulo) + '</span>' +
              '</div>';
-    }).join('');
+  }
 
+  function secaoFotos() {
+    var slots = slotsDaEtapa('fotos');
     return '<div class="secao" data-secao="fotos">' +
       '<h3>Fotos</h3>' +
       '<p class="secao__dica">Toque num quadro vazio para tirar a foto ou escolher da galeria. ' +
@@ -493,7 +492,7 @@
         ev.stopPropagation();
         delete ficha.fotos[limpar.getAttribute('data-limpar')];
         if (ficha.enquadre) delete ficha.enquadre[limpar.getAttribute('data-limpar')];
-        montarFormulario(); trocarPasso('fotos'); agendarSalvar(); atualizarPreview();
+        montarFormulario(); trocarPasso(etapaDoSlot(limpar.getAttribute('data-limpar'))); agendarSalvar(); atualizarPreview();
         return;
       }
 
@@ -577,7 +576,7 @@
      então o que se vê aqui é o que sai. Nada é gravado até tocar em Salvar.
   ========================================================================= */
   var QUADROS = {   /* largura / altura do quadro no dossiê */
-    cliente: 900 / 610, formato: 900 / 806, projetoFrente: 900 / 880,
+    cliente: 900 / 610, formato: 900 / 806, projetoFrente: 900 / 1000,
     projetoPerfil: 900 / 640, projetoBarba: 900 / 640, ref1: 900 / 580, ref2: 440 / 470, ref3: 440 / 470,
     antesFrente: 1080 / 957, depoisFrente: 1080 / 957,
     antesPerfil: 1080 / 957, depoisPerfil: 1080 / 957
@@ -714,7 +713,7 @@
       ficha.enquadre[chave] = { x: Math.round(e.x * 1000) / 1000, y: Math.round(e.y * 1000) / 1000, z: Math.round(e.z * 100) / 100 };
       fechar();
       montarFormulario();
-      trocarPasso('fotos');
+      trocarPasso(etapaDoSlot(chave));
       atualizarPreview();
       salvarAgora().then(function () { avisar('Foto salva.'); })
         .catch(function () { avisar('Foto ajustada, mas não consegui gravar o rascunho.', true); });

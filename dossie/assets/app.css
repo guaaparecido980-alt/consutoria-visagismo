@@ -149,6 +149,7 @@ a { color: #c4ad76; }
 
 /* fotos */
 .fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fotos--etapa { margin-bottom: 18px; }
 .slot {
   border: 1px dashed #352e23; border-radius: 4px; overflow: hidden;
   background: #1b1811; position: relative; aspect-ratio: 3 / 4;

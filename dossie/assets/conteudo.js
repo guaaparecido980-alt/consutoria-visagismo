@@ -531,7 +531,7 @@
     { n: '02', titulo: 'Direção de Imagem', desc: 'O que a sua imagem precisa comunicar — e por quê.' },
     { n: '03', titulo: 'Análise Facial', desc: 'A leitura geométrica do seu rosto e o que ela pede.' },
     { n: '04', titulo: 'Estrutura do Fio', desc: 'Tipo, densidade e comportamento do seu cabelo.' },
-    { n: '05', titulo: 'Projeto Técnico', desc: 'As medidas exatas do corte, em diagrama.' },
+    { n: '05', titulo: 'Projeto Técnico', desc: 'As imagens do corte e da barba, com as observações.' },
     { n: '06', titulo: 'Proposta', desc: 'O que foi executado e a razão técnica de cada decisão.' },
     { n: '07', titulo: 'Referências Visuais', desc: 'A direção estética escolhida para você.' },
     { n: '08', titulo: 'Antes e Depois', desc: 'O resultado, de frente e de perfil.' },

@@ -281,7 +281,8 @@
 .projeto__par .diagrama { height: 640px; }
 .pg--com-tecnicas .projeto__par .diagrama { height: 460px; }
 /* fotos escolhidas pelo Wagner no lugar dos antigos desenhos de medidas */
-.foto--projeto-alto { height: 880px; }
+.foto--projeto-alto { height: 1000px; }
+.projeto__obs { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--linha); }
 .projeto__par .foto--projeto { height: 640px; }
 .pg--com-tecnicas .projeto__par .foto--projeto { height: 460px; }
 .pg--com-tecnicas .projeto__tecnicas { margin-top: 30px; }

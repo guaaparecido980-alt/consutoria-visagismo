@@ -229,37 +229,25 @@
       (couro ? bloco('Couro cabeludo ' + couro.nome.toLowerCase(), couro.nota) : ''));
   }
 
-  /* 05 — PROJETO TÉCNICO: medidas (vista frontal) */
+  /* 05 — PROJETO TÉCNICO: imagem de frente + observação do Wagner */
   function pgProjeto(f) {
-    var m = (f.medidas || {});
-    var cotas = [
-      ['Topo', m.topo, 'cm'], ['Frente', m.franja, 'cm'],
-      ['Laterais', m.lateral, 'cm'], ['Nuca', m.nuca, 'cm'],
-      ['Barba', m.barbaMm, 'mm']
-    ].map(function (l) {
-      return '<div class="cota">' +
-             '<span class="cota__nome">' + esc(l[0]) + '</span>' +
-             '<strong class="cota__valor">' +
-             (l[1] ? esc(String(l[1]).replace('.', ',')) + '<em>' + l[2] + '</em>' : '—') +
-             '</strong></div>';
-    }).join('');
-
     return pagina('pg--projeto', '' +
-      tituloSecao('05 · Projeto técnico', 'As medidas do seu corte') +
-      foto(f.fotos && f.fotos.projetoFrente, 'Medidas — de frente', 'foto--projeto-alto', enquadre(f, 'projetoFrente')) +
-      '<div class="cotas">' + cotas + '</div>' +
-      '<p class="projeto__nota">Leve esta página a qualquer barbeiro: as medidas estão na imagem.</p>');
+      tituloSecao('05 · Projeto técnico', 'O projeto do seu corte') +
+      foto(f.fotos && f.fotos.projetoFrente, 'Projeto — de frente', 'foto--projeto-alto', enquadre(f, 'projetoFrente')) +
+      (f.projetoNota && f.projetoNota.trim()
+        ? '<div class="projeto__obs"><span class="rotulo">Observação</span>' +
+          '<div class="corpo corpo--menor">' + paragrafos(f.projetoNota) + '</div></div>'
+        : ''));
   }
 
   /* 05 — PROJETO TÉCNICO: direção do fio e barba */
   function pgProjeto2(f) {
-    var m = (f.medidas || {});
     var tecnicas = (f.tecnicas || '').split(/[\r\n]+/).map(function (t) { return t.trim(); }).filter(Boolean);
     /* Com a lista de técnicas as fotos encolhem, senão a lista cai fora da página. */
     return pagina('pg--projeto2' + (tecnicas.length ? ' pg--com-tecnicas' : ''), '' +
       tituloSecao('05 · Projeto técnico', 'Direção do fio e barba') +
       '<div class="projeto__par">' +
-        foto(f.fotos && f.fotos.projetoPerfil, 'Direção do fio — de perfil', 'foto--projeto', enquadre(f, 'projetoPerfil')) +
+        foto(f.fotos && f.fotos.projetoPerfil, 'Projeto — de perfil', 'foto--projeto', enquadre(f, 'projetoPerfil')) +
         foto(f.fotos && f.fotos.projetoBarba, 'Desenho da barba', 'foto--projeto', enquadre(f, 'projetoBarba')) +
       '</div>' +
       (tecnicas.length
