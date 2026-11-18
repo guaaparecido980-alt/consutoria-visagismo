@@ -243,21 +243,16 @@
   function secaoMedidas() {
     return '<div class="secao" data-secao="medidas">' +
       '<h3>Projeto técnico</h3>' +
-      '<p class="secao__dica">Escolha as imagens do projeto e escreva a sua observação. Entram na página 05 do dossiê.</p>' +
+      '<p class="secao__dica">Três fotos montadas por você, a observação e as técnicas aplicadas. Tudo entra na página 05 do dossiê.</p>' +
       '<div class="fotos fotos--etapa">' + slotsDaEtapa('medidas') + '</div>' +
       '<div class="campo"><label for="f-projetoNota">Observação</label>' +
         '<textarea id="f-projetoNota" data-campo="projetoNota" placeholder="Ex.: topo com 6 cm e textura, laterais em degradê baixo, nuca limpa.">' +
         esc(ficha.projetoNota) + '</textarea>' +
-        '<p class="campo__ajuda">Aparece abaixo da imagem de frente, na página do projeto.</p></div>' +
-      '<div class="campo"><label for="f-barbaDesenho">Desenho da barba</label>' +
-        '<select id="f-barbaDesenho" data-campo="barbaDesenho">' +
-        D.listaBarbas().map(function (b) {
-          return '<option value="' + b.slug + '"' + (b.slug === ficha.barbaDesenho ? ' selected' : '') + '>' + esc(b.nome) + '</option>';
-        }).join('') + '</select></div>' +
+        '<p class="campo__ajuda">Aparece abaixo da Foto 01.</p></div>' +
       '<div class="campo"><label for="f-tecnicas">Técnicas aplicadas</label>' +
         '<textarea id="f-tecnicas" data-campo="tecnicas" placeholder="Uma técnica por linha. Ex.:&#10;Navalha nas laterais&#10;Tesoura desfiando no topo">' +
         esc(ficha.tecnicas) + '</textarea>' +
-        '<p class="campo__ajuda">Uma por linha. Entram na página de direção do fio e barba.</p></div>' +
+        '<p class="campo__ajuda">Uma por linha. Aparecem abaixo das Fotos 02 e 03.</p></div>' +
       rodapeEtapa('medidas') +
       '</div>';
   }
@@ -292,9 +287,9 @@
   var SLOTS = [
     { chave: 'cliente',      rotulo: 'Foto do cliente',   dica: 'De frente. Usada na análise facial e no tipo de cabelo.' },
     { chave: 'formato',      rotulo: 'Formato do rosto',  dica: 'Toque para escolher a imagem.', etapa: 'rosto' },
-    { chave: 'projetoFrente',rotulo: 'Projeto — de frente', dica: 'Toque para escolher a imagem.', etapa: 'medidas' },
-    { chave: 'projetoPerfil',rotulo: 'Projeto — de perfil', dica: 'Toque para escolher a imagem.', etapa: 'medidas' },
-    { chave: 'projetoBarba', rotulo: 'Desenho da barba',  dica: 'Toque para escolher a imagem.', etapa: 'medidas' },
+    { chave: 'projetoFrente',rotulo: 'Foto 01', dica: 'Página 05 · imagem grande, acima da observação.', etapa: 'medidas' },
+    { chave: 'projetoPerfil',rotulo: 'Foto 02', dica: 'Página 05 · segunda página, em cima.', etapa: 'medidas' },
+    { chave: 'projetoBarba', rotulo: 'Foto 03', dica: 'Página 05 · segunda página, embaixo.', etapa: 'medidas' },
     { chave: 'ref1',         rotulo: 'Referência 01',     dica: 'Direção estética.' },
     { chave: 'ref2',         rotulo: 'Referência 02',     dica: 'Direção estética.' },
     { chave: 'ref3',         rotulo: 'Referência 03',     dica: 'Direção estética.' },

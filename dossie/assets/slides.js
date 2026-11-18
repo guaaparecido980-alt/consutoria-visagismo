@@ -67,7 +67,7 @@
       }
       return '<figure class="' + cls + '">' +
              '<img data-cobrir data-zoom="' + zoom + '"' + estilo + ' src="' + esc(src) + '" alt="' + esc(legenda || '') + '">' +
-             (legenda ? '<figcaption>' + esc(legenda) + '</figcaption>' : '') +
+             (legenda && cls.indexOf('foto--sem-legenda') < 0 ? '<figcaption>' + esc(legenda) + '</figcaption>' : '') +
              '</figure>';
     }
     return '<figure class="' + cls + ' foto--vazia">' +
@@ -233,7 +233,7 @@
   function pgProjeto(f) {
     return pagina('pg--projeto', '' +
       tituloSecao('05 · Projeto técnico', 'O projeto do seu corte') +
-      foto(f.fotos && f.fotos.projetoFrente, 'Projeto — de frente', 'foto--projeto-alto', enquadre(f, 'projetoFrente')) +
+      foto(f.fotos && f.fotos.projetoFrente, 'Foto 01', 'foto--projeto-alto foto--sem-legenda', enquadre(f, 'projetoFrente')) +
       (f.projetoNota && f.projetoNota.trim()
         ? '<div class="projeto__obs"><span class="rotulo">Observação</span>' +
           '<div class="corpo corpo--menor">' + paragrafos(f.projetoNota) + '</div></div>'
@@ -245,15 +245,15 @@
     var tecnicas = (f.tecnicas || '').split(/[\r\n]+/).map(function (t) { return t.trim(); }).filter(Boolean);
     /* Com a lista de técnicas as fotos encolhem, senão a lista cai fora da página. */
     return pagina('pg--projeto2' + (tecnicas.length ? ' pg--com-tecnicas' : ''), '' +
-      tituloSecao('05 · Projeto técnico', 'Direção do fio e barba') +
+      tituloSecao('05 · Projeto técnico', 'O projeto em detalhe') +
       '<div class="projeto__par">' +
-        foto(f.fotos && f.fotos.projetoPerfil, 'Projeto — de perfil', 'foto--projeto', enquadre(f, 'projetoPerfil')) +
-        foto(f.fotos && f.fotos.projetoBarba, 'Desenho da barba', 'foto--projeto', enquadre(f, 'projetoBarba')) +
+        foto(f.fotos && f.fotos.projetoPerfil, 'Foto 02', 'foto--projeto foto--sem-legenda', enquadre(f, 'projetoPerfil')) +
+        foto(f.fotos && f.fotos.projetoBarba, 'Foto 03', 'foto--projeto foto--sem-legenda', enquadre(f, 'projetoBarba')) +
       '</div>' +
       (tecnicas.length
         ? '<div class="projeto__tecnicas"><span class="rotulo">Técnicas aplicadas</span>' +
           '<ul class="tecnicas">' + tecnicas.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>'
-        : '<p class="projeto__nota">' + esc(D.nomeBarba(f.barbaDesenho)) + '.</p>'));
+        : ''));
   }
 
   /* 06 — PROPOSTA */
