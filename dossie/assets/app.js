@@ -1126,6 +1126,34 @@
     });
   }
 
+  /* =========================================================================
+     ATUALIZAÇÃO AUTOMÁTICA
+     O celular guarda uma cópia da página e pode continuar mostrando a versão
+     antiga depois de uma atualização do site. Aqui a página pergunta ao
+     servidor (sem cache) qual é a versão atual e, se mudou, recarrega uma vez.
+     A ficha em andamento está no aparelho (rascunho.js) e volta sozinha.
+  ========================================================================= */
+  function checarVersao() {
+    if (!/^https?:$/.test(location.protocol) || window.top !== window || !window.fetch) return;
+    var meta = document.querySelector('meta[name="dossie-versao"]');
+    var atual = meta && meta.getAttribute('content');
+    if (!atual) return;
+    fetch(location.pathname + '?checar=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.text() : ''; })
+      .then(function (t) {
+        var m = /name="dossie-versao" content="([^"]+)"/.exec(t || '');
+        if (!m || m[1] === atual) return;
+        var chave = 'dossie-recarregou-' + m[1];
+        try { if (sessionStorage.getItem(chave)) return; sessionStorage.setItem(chave, '1'); } catch (e) {}
+        location.replace(location.pathname + '?v=' + encodeURIComponent(m[1]));
+      })
+      .catch(function () {});
+  }
+  checarVersao();
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') checarVersao();
+  });
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', iniciar);
   } else {
